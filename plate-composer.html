@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Compose a plate from recipes in The Kitchen Table." />
+  <title>Plate Composer | The Kitchen Table</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">The Kitchen Table</a>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="index.html#recipes">Recipes</a>
+        <a href="index.html#categories">Categories</a>
+        <a href="index.html#about">About</a>
+        <a href="plate-composer.html" aria-current="page">Plate Composer</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section plate-composer-page">
+    <div class="container">
+      <p class="eyebrow">BUILD A MEAL VISUALLY</p>
+      <h1 class="composer-title">Compose a Plate</h1>
+      <p class="recipe-intro composer-intro">Choose one to four recipes. The composer will build a single image-generation brief for one coherent plated meal containing all of your selections.</p>
+
+      <div class="composer-grid">
+        <section class="composer-panel">
+          <div class="composer-heading-row">
+            <div>
+              <h2>Select recipes</h2>
+              <p class="muted-copy">Choose up to four dishes.</p>
+            </div>
+            <div class="selection-counter"><span id="selectedCount">0</span>/4 selected</div>
+          </div>
+
+          <div class="composer-recipe-list" id="composerRecipeList">
+            <label class="composer-recipe-card">
+              <input type="checkbox" value="New Orleans Shrimp & Corn Bisque" data-image="assets/new-orleans-shrimp-corn-bisque.png">
+              <img src="assets/new-orleans-shrimp-corn-bisque.png" alt="New Orleans Shrimp and Corn Bisque">
+              <span><strong>New Orleans Shrimp & Corn Bisque</strong><small>Seafood · Soup</small></span>
+            </label>
+
+            <label class="composer-recipe-card">
+              <input type="checkbox" value="Mediterranean Lemon Shallot Chicken with Fresh Herbs" data-image="assets/mediterranean-lemon-shallot-chicken.png">
+              <img src="assets/mediterranean-lemon-shallot-chicken.png" alt="Mediterranean Lemon Shallot Chicken">
+              <span><strong>Mediterranean Lemon Shallot Chicken</strong><small>Chicken · Mediterranean</small></span>
+            </label>
+
+            <label class="composer-recipe-card">
+              <input type="checkbox" value="Roasted Hasselback Root Vegetable & Zucchini Bake" data-image="assets/roasted-hasselback-vegetable-bake.png">
+              <img src="assets/roasted-hasselback-vegetable-bake.png" alt="Roasted Hasselback Vegetable Bake">
+              <span><strong>Roasted Hasselback Vegetable Bake</strong><small>Vegetable · Side</small></span>
+            </label>
+
+            <label class="composer-recipe-card">
+              <input type="checkbox" value="Moo Shu Chicken" data-image="assets/moo-shu-chicken.png">
+              <img src="assets/moo-shu-chicken.png" alt="Moo Shu Chicken">
+              <span><strong>Moo Shu Chicken</strong><small>Chicken · Asian</small></span>
+            </label>
+          </div>
+
+          <div class="composer-options">
+            <label>
+              <span>Presentation</span>
+              <select id="presentation">
+                <option value="elegant restaurant-style individual dinner plate">Elegant restaurant plate</option>
+                <option value="warm rustic farmhouse individual dinner plate">Rustic farmhouse plate</option>
+                <option value="casual family dinner plate">Casual family plate</option>
+                <option value="refined French country dinner plate">French country plate</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Portion style</span>
+              <select id="portionStyle">
+                <option value="balanced individual portions with each selected dish clearly visible">Balanced portions</option>
+                <option value="small tasting portions arranged harmoniously">Tasting portions</option>
+                <option value="generous dinner portions without overcrowding the plate">Generous portions</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Background</span>
+              <select id="backgroundStyle">
+                <option value="soft natural daylight on a neutral linen table">Natural daylight</option>
+                <option value="warm French farmhouse table with subtle rustic styling">French farmhouse</option>
+                <option value="clean studio food photography on a pale stone surface">Clean studio</option>
+              </select>
+            </label>
+          </div>
+
+          <button id="composeButton" class="button primary composer-button" disabled>Generate Plate</button>
+          <p class="composer-note">The secure AI image-generation connection is the next step. This page is already prepared to send the selected recipes and presentation settings to that service without exposing an API key in the website.</p>
+        </section>
+
+        <aside class="composer-preview">
+          <p class="eyebrow">PLATE PREVIEW</p>
+          <div id="platePreview" class="plate-preview-stage">
+            <div class="empty-plate">
+              <div class="plate-ring"></div>
+              <p>Select 1–4 recipes to compose your plate.</p>
+            </div>
+          </div>
+          <div id="selectedDishNames" class="selected-dish-names"></div>
+
+          <div id="generationStatus" class="generation-status" hidden>
+            <strong>Image generation connection not enabled yet.</strong>
+            <p>Your selections are ready. Once the secure backend is connected, this button will generate the composed plate image here.</p>
+          </div>
+
+          <details class="prompt-preview">
+            <summary>View image-generation brief</summary>
+            <p id="promptText">Select at least one recipe to create the brief.</p>
+          </details>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+  (() => {
+    const checks = [...document.querySelectorAll('.composer-recipe-card input[type="checkbox"]')];
+    const count = document.getElementById('selectedCount');
+    const button = document.getElementById('composeButton');
+    const preview = document.getElementById('platePreview');
+    const names = document.getElementById('selectedDishNames');
+    const promptText = document.getElementById('promptText');
+    const status = document.getElementById('generationStatus');
+    const presentation = document.getElementById('presentation');
+    const portion = document.getElementById('portionStyle');
+    const background = document.getElementById('backgroundStyle');
+
+    function selected() {
+      return checks.filter(c => c.checked);
+    }
+
+    function makePrompt(items) {
+      if (!items.length) return 'Select at least one recipe to create the brief.';
+      const dishNames = items.map(x => x.value);
+      return 'Create a photorealistic food photograph of one coherent composed dinner plate featuring exactly these dishes: ' +
+        dishNames.join('; ') + '. Use ' + portion.value + '. Present the food as an ' +
+        presentation.value + '. Photograph it with ' + background.value +
+        '. Each dish must remain visually recognizable and distinct, but the overall plate should feel intentionally composed by a professional chef. No text, labels, menus, hands, people, duplicate dishes, or extra foods not implied by the selected recipes. Use realistic serving proportions, appetizing textures, natural garnish, and professional editorial food photography.';
+    }
+
+    function refresh() {
+      let items = selected();
+      if (items.length > 4) {
+        const last = items[items.length - 1];
+        last.checked = false;
+        items = selected();
+      }
+
+      checks.forEach(c => c.disabled = !c.checked && items.length >= 4);
+      count.textContent = items.length;
+      button.disabled = items.length === 0;
+      promptText.textContent = makePrompt(items);
+      status.hidden = true;
+
+      if (!items.length) {
+        preview.innerHTML = '<div class="empty-plate"><div class="plate-ring"></div><p>Select 1–4 recipes to compose your plate.</p></div>';
+        names.innerHTML = '';
+        return;
+      }
+
+      preview.innerHTML = '<div class="selected-image-grid count-' + items.length + '">' +
+        items.map(i => '<img src="' + i.dataset.image + '" alt="' + i.value.replace(/"/g,'&quot;') + '">').join('') +
+        '</div>';
+      names.innerHTML = items.map(i => '<span>' + i.value + '</span>').join('');
+    }
+
+    checks.forEach(c => c.addEventListener('change', refresh));
+    [presentation, portion, background].forEach(el => el.addEventListener('change', refresh));
+    button.addEventListener('click', () => {
+      status.hidden = false;
+      status.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+    refresh();
+  })();
+  </script>
+</body>
+</html>
