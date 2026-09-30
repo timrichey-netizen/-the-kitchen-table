@@ -372,3 +372,36 @@ const VELOUTE_DAUGHTER_LINKS = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">VELOUTÉ DAUGHTER SAUCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('')+'<a class="text-link" href="veloute-sauce.html">See Velouté and all daughter sauces →</a>';
   anchor.insertAdjacentElement("afterend",wrap);
 })();
+
+const HOLLANDAISE_DAUGHTER_LINKS = {
+  "florentine-steak-balsamic-rosemary.html":[["BÉARNAISE","The classic tarragon-shallot Hollandaise derivative for steak.","bearnaise-sauce.html"],["CHORON","Tomato-enriched Béarnaise for a brighter steak sauce.","choron-sauce.html"],["FOYOT","Béarnaise enriched with meat glaze for an especially savory steak sauce.","foyot-sauce.html"]],
+  "bife-de-chorizo-chimichurri.html":[["BÉARNAISE","Optional classical sauce alternative for strip steak.","bearnaise-sauce.html"],["CHORON","Optional tomato-tarragon variation for grilled beef.","choron-sauce.html"],["FOYOT","Optional meat-glaze Béarnaise for a richer presentation.","foyot-sauce.html"]],
+  "asado-argentino.html":[["BÉARNAISE","Optional French-style sauce for the steak portions.","bearnaise-sauce.html"],["FOYOT","Optional rich sauce for grilled beef cuts.","foyot-sauce.html"]],
+  "asado-uruguayo.html":[["BÉARNAISE","Optional classical sauce for grilled beef.","bearnaise-sauce.html"],["FOYOT","Optional rich Béarnaise derivative for steaks.","foyot-sauce.html"]],
+  "pork-chop-milanese.html":[["DIJON HOLLANDAISE","Optional mustard-Hollandaise pairing for pork.","dijon-hollandaise.html"],["NOISETTE","Brown-butter Hollandaise pairs well with crisp pork cutlets.","noisette-hollandaise.html"]],
+  "veal-piccata.html":[["DIJON HOLLANDAISE","Optional mustard-Hollandaise variation for veal.","dijon-hollandaise.html"],["NOISETTE","Brown-butter Hollandaise complements veal and lemon.","noisette-hollandaise.html"]],
+  "herb-crusted-salmon.html":[["MOUSSELINE","Lightened Hollandaise is especially good with delicate salmon.","mousseline-hollandaise.html"],["MALTAISE","Blood-orange Hollandaise adds a citrus pairing for salmon.","maltaise-sauce.html"],["DIJON HOLLANDAISE","Optional mustard-Hollandaise pairing.","dijon-hollandaise.html"],["NOISETTE","Nutty browned-butter Hollandaise pairs naturally with roasted salmon.","noisette-hollandaise.html"]],
+  "lemon-stuffed-grilled-branzino.html":[["MOUSSELINE","Airy Hollandaise is a delicate pairing for branzino.","mousseline-hollandaise.html"],["MALTAISE","Blood-orange Hollandaise works as a bright citrus pairing.","maltaise-sauce.html"],["NOISETTE","Brown-butter Hollandaise adds nutty richness to grilled fish.","noisette-hollandaise.html"]],
+  "swordfish-sicilian-style.html":[["MALTAISE","Blood-orange Hollandaise is an optional citrus-forward pairing for swordfish.","maltaise-sauce.html"],["DIJON HOLLANDAISE","Optional mustard-Hollandaise for seared swordfish.","dijon-hollandaise.html"]],
+  "blackened-redfish.html":[["MOUSSELINE","Light Hollandaise softens the heat of blackened fish.","mousseline-hollandaise.html"],["DIJON HOLLANDAISE","Mustard-Hollandaise adds tangy richness.","dijon-hollandaise.html"],["NOISETTE","Brown-butter Hollandaise complements the toasted spice crust.","noisette-hollandaise.html"]],
+  "shrimp-piccata-skewers.html":[["MOUSSELINE","Lightened Hollandaise is a refined shellfish pairing.","mousseline-hollandaise.html"],["MALTAISE","Blood-orange Hollandaise gives shrimp a bright citrus counterpoint.","maltaise-sauce.html"]],
+  "venetian-shrimp-polenta.html":[["MOUSSELINE","Optional airy Hollandaise for shrimp.","mousseline-hollandaise.html"],["NOISETTE","Brown-butter Hollandaise complements shrimp and polenta.","noisette-hollandaise.html"]],
+  "buttery-shrimp-peas-potatoes.html":[["NOISETTE","Brown-butter Hollandaise echoes the buttery shrimp and potatoes.","noisette-hollandaise.html"],["DIJON HOLLANDAISE","Optional mustard-Hollandaise variation.","dijon-hollandaise.html"]],
+  "roasted-broccoli-lemon-almonds.html":[["MOUSSELINE","Light Hollandaise is an optional vegetable sauce.","mousseline-hollandaise.html"],["MALTAISE","Citrus Hollandaise pairs well with roasted broccoli.","maltaise-sauce.html"],["NOISETTE","Brown-butter Hollandaise complements toasted almonds.","noisette-hollandaise.html"]],
+  "roasted-cauliflower.html":[["MOUSSELINE","Airy Hollandaise is an optional classical vegetable sauce.","mousseline-hollandaise.html"],["NOISETTE","Brown-butter Hollandaise pairs especially well with roasted cauliflower.","noisette-hollandaise.html"]],
+  "baked-cauliflower.html":[["DIJON HOLLANDAISE","Optional mustard-Hollandaise for baked cauliflower.","dijon-hollandaise.html"],["NOISETTE","Brown-butter Hollandaise adds nutty richness.","noisette-hollandaise.html"]],
+  "mediterranean-lemon-shallot-chicken.html":[["DIJON HOLLANDAISE","Optional mustard-Hollandaise pairing for chicken.","dijon-hollandaise.html"],["MALTAISE","Optional citrus Hollandaise pairing.","maltaise-sauce.html"]],
+  "pollo-a-la-parrilla.html":[["BÉARNAISE","Optional herb-forward Hollandaise derivative for grilled chicken.","bearnaise-sauce.html"],["DIJON HOLLANDAISE","Optional mustard-Hollandaise pairing.","dijon-hollandaise.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=HOLLANDAISE_DAUGHTER_LINKS[p];
+  if(!refs || !refs.length || document.querySelector(".hollandaise-daughter-tip")) return;
+  const anchor=document.querySelector(".veloute-daughter-tip") || document.querySelector(".daughter-sauce-tip") || document.querySelector(".mother-sauce-tip") || document.querySelector(".print-button");
+  if(!anchor) return;
+  const wrap=document.createElement("div");
+  wrap.className="hollandaise-daughter-tip";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fff8e8";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">HOLLANDAISE DAUGHTER SAUCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('')+'<a class="text-link" href="hollandaise-sauce.html">See Hollandaise and all daughter sauces →</a>';
+  anchor.insertAdjacentElement("afterend",wrap);
+})();
