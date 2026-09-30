@@ -33,6 +33,26 @@ var recipes=[
 {title:'Roasted Zucchini with Lemon and Thyme',url:'roasted-zucchini-lemon-thyme.html',role:'veg',type:'roasted',cuisine:'Mediterranean',tags:['zucchini','lemon']},
 {title:'Baked Cauliflower',url:'baked-cauliflower.html',role:'veg',type:'roasted',cuisine:'Any',tags:['cauliflower']}
 ];
+var planningIndex={
+'mediterranean-lemon-shallot-chicken.html':{moods:['light','elegant','mediterranean','healthy'],ingredients:['chicken'],effort:'moderate',avoid:[],occasions:['weeknight','family','date','entertaining']},
+'sage-mushroom-chicken-skillet.html':{moods:['comfort','rustic','hearty'],ingredients:['chicken','mushroom'],effort:'moderate',avoid:['mushroom'],occasions:['weeknight','family']},
+'veal-piccata.html':{moods:['light','elegant','italian'],ingredients:['veal'],effort:'quick',avoid:[],occasions:['date','entertaining','special']},
+'boeuf-bourguignon.html':{moods:['comfort','hearty','french','rustic'],ingredients:['beef'],effort:'slow',avoid:[],occasions:['family','entertaining','special','holiday']},
+'pork-chop-milanese.html':{moods:['comfort','italian'],ingredients:['pork'],effort:'moderate',avoid:['no-pork'],occasions:['weeknight','family']},
+'shrimp-piccata-skewers.html':{moods:['light','mediterranean','elegant'],ingredients:['shrimp','shellfish'],effort:'quick',avoid:['shellfish-free'],occasions:['weeknight','date','outdoor']},
+'shrimp-saganaki.html':{moods:['mediterranean','hearty','rustic'],ingredients:['shrimp','shellfish','cheese'],effort:'moderate',avoid:['shellfish-free','dairy-free'],occasions:['family','entertaining']},
+'lemon-stuffed-grilled-branzino.html':{moods:['light','mediterranean','elegant','healthy'],ingredients:['fish'],effort:'moderate',avoid:[],occasions:['date','entertaining','outdoor','special']},
+'herb-crusted-salmon.html':{moods:['light','healthy','elegant'],ingredients:['fish'],effort:'quick',avoid:[],occasions:['weeknight','date','family']},
+'shrimp-herb-stir-fry.html':{moods:['light','healthy','spicy'],ingredients:['shrimp','shellfish'],effort:'quick',avoid:['shellfish-free'],occasions:['weeknight']},
+'spaghetti-carbonara.html':{moods:['comfort','hearty','italian','indulgent'],ingredients:['pasta','eggs','pork','cheese'],effort:'quick',avoid:['no-pork','dairy-free','gluten-free'],occasions:['weeknight','date']},
+'pasta-cacio-e-pepe.html':{moods:['comfort','italian','indulgent'],ingredients:['pasta','cheese'],effort:'quick',avoid:['dairy-free','gluten-free'],occasions:['weeknight','date']},
+'pasta-alla-norma.html':{moods:['italian','mediterranean','rustic'],ingredients:['pasta','vegetables','cheese'],effort:'moderate',avoid:['dairy-free','gluten-free'],occasions:['family','weeknight']},
+'miso-mushroom-leek-pasta.html':{moods:['comfort','rustic'],ingredients:['pasta','mushroom'],effort:'quick',avoid:['mushroom','gluten-free'],occasions:['weeknight']},
+'creamy-seafood-risotto.html':{moods:['elegant','indulgent','italian'],ingredients:['rice','shrimp','shellfish','fish','cheese'],effort:'project',avoid:['shellfish-free','dairy-free'],occasions:['date','entertaining','special']},
+'zucchini-risotto-shrimp.html':{moods:['light','italian','mediterranean'],ingredients:['rice','shrimp','shellfish','vegetables'],effort:'moderate',avoid:['shellfish-free','dairy-free'],occasions:['family','date']},
+'zucchini-lasagna.html':{moods:['comfort','italian','healthy'],ingredients:['vegetables','cheese','eggs'],effort:'project',avoid:['dairy-free'],occasions:['family']}
+};
+
 var pairingDishes=[
 {title:'Elegant Roasted Potato Stacks',url:'elegant-roasted-potato-stacks.html',kind:'side',cuisines:['French','Italian','Mediterranean'],tags:['beef','chicken','pork','veal','fish']},
 {title:'Pasta Aglio e Olio',url:'pasta-aglio-e-olio.html',kind:'side',cuisines:['Italian','Mediterranean'],tags:['chicken','veal','fish','shrimp']},
@@ -103,7 +123,7 @@ var recipeIndex={
 'baked-cauliflower.html':{proteins:['cheese'],prep:['low-carb','bake','roast']}
 };
 
-var state={proteins:[],prepStyles:[],cuisine:'Any',mainType:'any',sideType:'any',vegType:'any'};
+var state={mood:[],mainIngredients:[],effort:'any',restrictions:[],occasion:'weeknight',dessert:'surprise',avoidText:'',custom:{}};
 var steps=[].slice.call(document.querySelectorAll('.planner-step')),back=document.getElementById('plannerBack'),next=document.getElementById('plannerNext'),card=document.getElementById('plannerCard'),results=document.getElementById('plannerResults'),progress=document.getElementById('plannerProgressBar'),step=0;
 document.querySelectorAll('.planner-options').forEach(function(group){var key=group.dataset.key,multi=group.classList.contains('multi');group.querySelectorAll('button').forEach(function(button){button.addEventListener('click',function(){if(multi){button.classList.toggle('selected');state[key]=[].slice.call(group.querySelectorAll('button.selected')).map(function(b){return b.dataset.value;});}else{group.querySelectorAll('button').forEach(function(b){b.classList.remove('selected');});button.classList.add('selected');state[key]=button.dataset.value;}});});});
 function showStep(){steps.forEach(function(el,i){el.classList.toggle('active',i===step);});back.disabled=step===0;next.textContent=step===steps.length-1?'Build my meal':'Next';progress.style.width=((step+1)/steps.length*100)+'%';}
@@ -115,7 +135,7 @@ function score(r,role,type){
   if(r.cuisine==='Any')n+=1;
 
   var idx=recipeIndex[r.url]||{proteins:[],prep:[]};
-  state.proteins.forEach(function(p){if(idx.proteins.indexOf(p)>=0)n+=4;});
+  state.mainIngredients.forEach(function(p){if(idx.proteins.indexOf(p)>=0)n+=4;});
   state.prepStyles.forEach(function(p){if(idx.prep.indexOf(p)>=0)n+=3;});
 
   return n;
@@ -130,7 +150,7 @@ function pairingScore(item,main){
   if(item.cuisines.indexOf(cuisine)>=0)n+=5;
   if(cuisine==='Any')n+=1;
   mainTags(main).forEach(function(tag){if(item.tags.indexOf(tag)>=0)n+=3;});
-  state.proteins.forEach(function(tag){if(item.tags.indexOf(tag)>=0)n+=1;});
+  state.mainIngredients.forEach(function(tag){if(item.tags.indexOf(tag)>=0)n+=1;});
   return n;
 }
 function topPairings(kind,main,count){
@@ -149,12 +169,47 @@ function renderPairings(main){
   document.getElementById('pairingVegetables').innerHTML=links(topPairings('vegetable',main,3));
   document.getElementById('pairingSalads').innerHTML=links(topPairings('salad',main,3));
 
-  var cuisine=(main&&main.cuisine)||state.cuisine||'Any';
-  var desserts=dessertRecipes[cuisine]||dessertRecipes.Any;
-  document.getElementById('pairingDesserts').innerHTML=desserts.map(function(d){
+  var desserts=dessertChoices();
+  document.getElementById('pairingDesserts').innerHTML=desserts.length?desserts.map(function(d){
     return '<a class="pairing-item" href="'+d.url+'"><span>'+d.title+'</span><small>View recipe →</small></a>';
-  }).join('');
+  }).join(''):'<div class="pairing-item pairing-suggestion"><span>No dessert selected</span></div>';
 }
-function buildMeal(){var main=pick('main',state.mainType),side=pick('side',state.sideType,[main&&main.url]),veg=pick('veg',state.vegType,[main&&main.url,side&&side.url]),meal=[['Main',main],['Side',side],['Vegetable / Salad',veg]];document.getElementById('plannerSummary').textContent=(state.cuisine==='Any'?'A mixed-cuisine meal':'A '+state.cuisine+'-leaning meal')+(state.proteins.length?' built around '+state.proteins.join(', ')+'.':'.')+(state.prepStyles.length?' Preferred style: '+state.prepStyles.join(', ')+'.':'');document.getElementById('plannedMealGrid').innerHTML=meal.map(function(item){return'<article class="planned-dish"><p class="eyebrow">'+item[0]+'</p><h3>'+item[1].title+'</h3><a class="text-link" href="'+item[1].url+'">View recipe →</a></article>';}).join('');renderPairings(main);card.hidden=true;results.hidden=false;results.scrollIntoView({behavior:'smooth',block:'start'});}
+function dessertChoices(){
+  var all=[
+    {title:'Tiramisu',url:'tiramisu.html',type:'creamy'},
+    {title:'Crème Brûlée',url:'creme-brulee.html',type:'creamy'},
+    {title:'Chocolate Lava Cake',url:'chocolate-lava-cake.html',type:'chocolate'},
+    {title:'Apple Crumble',url:'apple-crumble.html',type:'fruit'},
+    {title:'Lemon Squares',url:'lemon-squares.html',type:'lemon'},
+    {title:'Brownies',url:'brownies.html',type:'chocolate'},
+    {title:'Key Lime Pie',url:'key-lime-pie.html',type:'pie'},
+    {title:'Classic American Apple Pie',url:'classic-american-apple-pie.html',type:'pie'},
+    {title:'Peach Pie',url:'peach-pie.html',type:'pie'}
+  ];
+  if(state.dessert==='none')return[];
+  if(state.dessert==='surprise')return all.slice(0,3);
+  if(state.dessert==='cake')return all.filter(function(x){return x.title.toLowerCase().indexOf('cake')>=0;}).slice(0,3);
+  return all.filter(function(x){return x.type===state.dessert;}).slice(0,3);
+}
+function readCustomize(){
+  state.avoidText=(document.getElementById('avoidText')||{}).value||'';
+  state.custom={
+    drinks:(document.getElementById('customDrinks')||{}).value||'',
+    appetizer:(document.getElementById('customAppetizer')||{}).value||'',
+    extraSide:(document.getElementById('customExtraSide')||{}).value||'',
+    cheese:(document.getElementById('customCheese')||{}).value||'',
+    afterDrink:(document.getElementById('customAfterDrink')||{}).value||'',
+    presentation:(document.getElementById('customPresentation')||{}).value||'',
+    people:(document.getElementById('customPeople')||{}).value||'',
+    budget:(document.getElementById('customBudget')||{}).value||'',
+    pantry:(document.getElementById('customPantry')||{}).value||'',
+    equipment:(document.getElementById('customEquipment')||{}).value||''
+  };
+}
+function buildMeal(){readCustomize();var main=pick('main',state.mainType),side=pick('side',state.sideType,[main&&main.url]),veg=pick('veg',state.vegType,[main&&main.url,side&&side.url]),meal=[['Main',main],['Side',side],['Vegetable / Salad',veg]];document.getElementById('plannerSummary').textContent=
+  (state.mood.length?'Mood: '+state.mood.join(', ')+'. ':'')+
+  (state.mainIngredients.length?'Main ingredients: '+state.mainIngredients.join(', ')+'. ':'')+
+  (state.effort!=='any'?'Effort: '+state.effort+'. ':'')+
+  'Meal type: '+state.occasion+'.';document.getElementById('plannedMealGrid').innerHTML=meal.map(function(item){return'<article class="planned-dish"><p class="eyebrow">'+item[0]+'</p><h3>'+item[1].title+'</h3><a class="text-link" href="'+item[1].url+'">View recipe →</a></article>';}).join('');renderPairings(main);card.hidden=true;results.hidden=false;results.scrollIntoView({behavior:'smooth',block:'start'});}
 next.addEventListener('click',function(){if(step<steps.length-1){step++;showStep();}else buildMeal();});back.addEventListener('click',function(){if(step>0){step--;showStep();}});document.getElementById('plannerRestart').addEventListener('click',function(){step=0;card.hidden=false;results.hidden=true;showStep();window.scrollTo({top:0,behavior:'smooth'});});showStep();
 })();
