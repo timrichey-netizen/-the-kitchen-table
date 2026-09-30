@@ -5,6 +5,15 @@ const ALLOWED_ORIGINS=new Set([
 ]);
 
 const RECIPES={
+  "shrimp-herb-stir-fry":{name:"Shrimp & Herb Stir-Fry",visual:"vibrant shrimp and herb stir-fry with plump shrimp, snap peas, red bell pepper, onion, garlic, cilantro, basil and mint"},
+  "roasted-eggplant-cherry-tomatoes":{name:"Roasted Eggplant & Cherry Tomatoes",visual:"roasted eggplant and blistered cherry tomatoes with garlic, basil, olive oil and caramelized edges"},
+  "zucchini-lasagna":{name:"Zucchini “Lasagna”",visual:"zucchini lasagna slice with thin zucchini ribbons, ricotta, tomato sauce, melted mozzarella and fresh basil"},
+  "sage-mushroom-chicken-skillet":{name:"Sage & Mushroom Chicken Skillet",visual:"golden chicken breast in a sage mushroom skillet with browned mushrooms, shallots and glossy pan sauce"},
+  "roasted-green-beans-parmesan":{name:"Roasted Green Beans with Parmesan",visual:"charred roasted green beans with finely grated Parmesan, garlic and crisp browned edges"},
+  "sauteed-spinach-garlic":{name:"Sautéed Spinach with Garlic",visual:"glossy sautéed spinach with golden garlic slices, olive oil and a fresh green finish"},
+  "lemon-tomatillo-salsa-verde":{name:"Lemon & Tomatillo Salsa Verde",visual:"bright green tomatillo salsa verde with lemon, cilantro, green chile and visible roasted tomatillo texture"},
+  "fish-stock":{name:"Fish Stock",visual:"clear golden homemade fish stock in a pot with white fish bones, fennel, onion, celery, herbs and peppercorns nearby"},
+  "roasted-zucchini-lemon-thyme":{name:"Roasted Zucchini with Lemon and Thyme",visual:"roasted zucchini spears with deep golden edges, lemon zest, fresh thyme and olive oil"},
   "baked-cauliflower":{name:"Baked Cauliflower",visual:"golden baked cauliflower gratin with tender florets, creamy cheese sauce, browned breadcrumb crust and thyme"},
   "roasted-tomato-caprese-salad":{name:"Roasted Tomato Caprese Salad",visual:"roasted tomato Caprese salad with blistered red and yellow tomatoes, fresh mozzarella, basil, olive oil and balsamic"},
   "spicy-garlic-butter-shrimp-lime-chili-dip":{name:"Spicy Garlic Butter Shrimp with Lime Chili Dip",visual:"spicy garlic butter shrimp with charred edges, red chile, cilantro, lime wedge and a small ramekin of creamy lime chili dip"},
