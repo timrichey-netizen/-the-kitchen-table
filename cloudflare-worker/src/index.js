@@ -49,6 +49,15 @@ const PLATE_TYPES={
   "french-faience":"traditional French faience dinner plate with subtle blue detailing"
 };
 
+const PLATE_SHAPES={
+  round:"round plate",
+  oval:"oval plate",
+  square:"square plate with gently softened corners",
+  rectangular:"rectangular plate with clean modern proportions",
+  organic:"organic free-form artisan plate with an irregular natural edge",
+  "rimmed-round":"round plate with a broad defined rim"
+};
+
 const requestBuckets=new Map();
 
 function cors(origin){
@@ -75,7 +84,7 @@ function rateLimit(ip){
   if(recent.length>=max){requestBuckets.set(ip,recent);return false;}
   recent.push(now);requestBuckets.set(ip,recent);return true;
 }
-function promptFor(ids,presentation,portion,background,plateType){
+function promptFor(ids,presentation,portion,background,plateType,plateShape){
   const chosen=ids.map(id=>RECIPES[id]);
   return [
     "Create one photorealistic editorial food photograph of a SINGLE individual dinner plate.",
@@ -87,6 +96,7 @@ function promptFor(ids,presentation,portion,background,plateType){
     `Portioning: ${PORTIONS[portion]}.`,
     `Setting: ${BACKGROUNDS[background]}.`,
     `Plate type: ${PLATE_TYPES[plateType]}.`,
+    `Plate shape: ${PLATE_SHAPES[plateShape]}.`,
     "",
     "Composition requirements:",
     "- Make every selected dish visually recognizable and distinct while forming one coherent plate.",
@@ -133,6 +143,7 @@ export default{
     const portion=PORTIONS[body.portionStyle]?body.portionStyle:"balanced";
     const background=BACKGROUNDS[body.backgroundStyle]?body.backgroundStyle:"natural";
     const plateType=PLATE_TYPES[body.plateType]?body.plateType:"white-porcelain";
+    const plateShape=PLATE_SHAPES[body.plateShape]?body.plateShape:"round";
 
     const api=await fetch("https://api.openai.com/v1/images/generations",{
       method:"POST",
@@ -142,7 +153,7 @@ export default{
       },
       body:JSON.stringify({
         model:"gpt-image-2.5-flare",
-        prompt:promptFor(ids,presentation,portion,background,plateType),
+        prompt:promptFor(ids,presentation,portion,background,plateType,plateShape),
         size:"1536x1024",
         quality:"high",
         output_format:"jpeg",
