@@ -45,7 +45,7 @@ const dynamicRecipeIds=new Set([
 'fettuccine-alfredo','pasta-e-ceci','rigatoni-pecorino-crispy-guanciale','rigatoni-pork-ragu-ricotta','penne-arrabbiata',
 'bucatini-amatriciana','spaghetti-shrimp-lemon-mint-pecorino','osso-buco-red-wine','eggplant-parmesan',
 'lemon-stuffed-grilled-branzino','creamy-seafood-risotto','florentine-steak-balsamic-rosemary','pasta-alla-norma',
-'pork-chop-milanese','gnocchi-alla-sorrentina','cioppino','spaghetti-with-mussels','butternut-squash-ravioli-brown-butter-sage'
+'pork-chop-milanese','gnocchi-alla-sorrentina','cioppino','spaghetti-with-mussels','butternut-squash-ravioli-brown-butter-sage','bolognese-meat-sauce'
 ]);
 document.querySelectorAll('img[src^="assets/"]').forEach(img=>{
   const m=img.getAttribute('src').match(/^assets\/(.+)\.png$/);
