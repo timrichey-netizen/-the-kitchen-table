@@ -140,3 +140,47 @@ populateCuisineFilter();
 updateRecipes();
 
 // Recipe images are served only from local GitHub Pages assets.
+
+
+const FEATURED_MAINS = [
+  {title:'Mediterranean Lemon Shallot Chicken',slug:'mediterranean-lemon-shallot-chicken',description:'Bright, savory chicken with lemon, shallots, capers, and fresh herbs.'},
+  {title:'Moo Shu Chicken',slug:'moo-shu-chicken',description:'Tender chicken with vegetables, mushrooms, egg, hoisin, and warm pancakes.'},
+  {title:'Boeuf Bourguignon',slug:'boeuf-bourguignon',description:'Classic French beef slowly braised in red wine with mushrooms, pearl onions, and herbs.'},
+  {title:'Balsamic and Rosemary-Marinated Florentine Steak',slug:'florentine-steak-balsamic-rosemary',description:'A thick-cut Florentine-style steak with balsamic, rosemary, garlic, and olive oil.'},
+  {title:'Pork Chop Milanese',slug:'pork-chop-milanese',description:'Crisp, golden breaded pork chop with lemon and a peppery arugula salad.'},
+  {title:'Veal Piccata',slug:'veal-piccata',description:'Thin veal cutlets in a bright lemon-butter sauce with capers and parsley.'},
+  {title:'Osso Buco with Red Wine',slug:'osso-buco-red-wine',description:'Slow-braised veal shanks in red wine, tomato, aromatics, and herbs.'},
+  {title:'Stracotto di Fassona Piemontese',slug:'stracotto-di-fassona-piemontese',description:'Piedmontese-style beef slowly braised in red wine with vegetables and herbs.'},
+  {title:'Herb-Crusted Salmon',slug:'herb-crusted-salmon',description:'Roasted salmon with a crisp herb, garlic, and breadcrumb crust.'},
+  {title:'Lemon-Stuffed Grilled Branzino',slug:'lemon-stuffed-grilled-branzino',description:'Whole branzino stuffed with lemon and herbs and grilled until crisp-skinned.'},
+  {title:'Swordfish Sicilian-Style',slug:'swordfish-sicilian-style',description:'Seared swordfish with cherry tomatoes, olives, capers, garlic, and lemon.'},
+  {title:'Shrimp Saganaki',slug:'shrimp-saganaki',description:'Greek-style shrimp baked in garlicky tomato sauce with feta and fresh herbs.'},
+  {title:'Shrimp Piccata Skewers',slug:'shrimp-piccata-skewers',description:'Grilled shrimp skewers finished with bright lemon-caper piccata butter.'},
+  {title:'Cajun Garlic Butter Shrimp',slug:'cajun-garlic-butter-shrimp',description:'Juicy shrimp seared with Cajun seasoning and finished in garlicky browned butter.'},
+  {title:'Shrimp & Herb Stir-Fry',slug:'shrimp-herb-stir-fry',description:'A fast stir-fry with shrimp, snap peas, peppers, garlic, and fresh herbs.'},
+  {title:'Creamy Seafood Risotto',slug:'creamy-seafood-risotto',description:'Silky Arborio rice with shrimp, scallops, mussels, white wine, and seafood stock.'},
+  {title:'Zucchini Risotto with Shrimp',slug:'zucchini-risotto-shrimp',description:'Creamy risotto with tender zucchini, sautéed shrimp, lemon, and herbs.'},
+  {title:'Spaghetti Carbonara',slug:'spaghetti-carbonara',description:'Traditional Roman carbonara with guanciale, egg, Pecorino Romano, and black pepper.'},
+  {title:'Rigatoni with Pork Ragù and Fresh Ricotta',slug:'rigatoni-pork-ragu-ricotta',description:'Slow-simmered pork ragù with rigatoni and cool, creamy fresh ricotta.'},
+  {title:'Zucchini “Lasagna”',slug:'zucchini-lasagna',description:'A lighter lasagna layered with zucchini, ricotta, tomato sauce, mozzarella, and basil.'}
+];
+
+function setRecipeOfTheDay() {
+  const image = document.getElementById('featuredRecipeImage');
+  const title = document.getElementById('featuredRecipeTitle');
+  const description = document.getElementById('featuredRecipeDescription');
+  const link = document.getElementById('featuredRecipeLink');
+  if (!image || !title || !description || !link || !FEATURED_MAINS.length) return;
+
+  const now = new Date();
+  const dayKey = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+  const recipe = FEATURED_MAINS[((dayKey % FEATURED_MAINS.length) + FEATURED_MAINS.length) % FEATURED_MAINS.length];
+
+  image.src = 'assets/' + recipe.slug + '.png';
+  image.alt = recipe.title;
+  title.textContent = recipe.title;
+  description.textContent = recipe.description;
+  link.href = recipe.slug + '.html';
+}
+
+setRecipeOfTheDay();
