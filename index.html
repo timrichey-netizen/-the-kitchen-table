@@ -9,6 +9,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <script data-home-scroll-guard>
+    (function () {
+      var shouldStayAtTop = !window.location.hash || window.location.hash === '#top';
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      if (!shouldStayAtTop) return;
+      function keepTop() { window.scrollTo(0, 0); }
+      keepTop();
+      document.addEventListener('DOMContentLoaded', keepTop, { once: true });
+      window.addEventListener('load', function () {
+        keepTop();
+        setTimeout(keepTop, 50);
+        setTimeout(keepTop, 250);
+      }, { once: true });
+      window.addEventListener('pageshow', keepTop);
+    })();
+  </script>
 </head>
 <body>
   <header class="site-header">
