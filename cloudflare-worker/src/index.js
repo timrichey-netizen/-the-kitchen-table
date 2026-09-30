@@ -5,6 +5,15 @@ const ALLOWED_ORIGINS=new Set([
 ]);
 
 const RECIPES={
+  "buttery-shrimp-peas-potatoes":{name:"Buttery Shrimp with Peas and Potatoes",visual:"plump buttery shrimp with golden baby potatoes and bright green peas in garlic herb butter, finished with parsley and lemon"},
+  "boeuf-bourguignon":{name:"Boeuf Bourguignon",visual:"classic boeuf bourguignon with tender beef chunks, glossy red wine sauce, mushrooms, pearl onions, carrots and thyme"},
+  "spicy-cajun-shrimp-corn-chowder":{name:"Spicy Cajun-Style Shrimp & Corn Chowder",visual:"creamy spicy Cajun shrimp and corn chowder with shrimp, sweet corn, potatoes, celery, herbs and warm paprika color"},
+  "shrimp-shell-sauce":{name:"Shrimp Shell Sauce",visual:"silky concentrated coral-colored shrimp shell sauce in a small white sauce boat, glossy and rich, with subtle shrimp shells and herbs nearby"},
+  "cajun-seasoning-mix":{name:"Cajun Seasoning Mix",visual:"rustic ceramic bowl filled with vibrant homemade Cajun seasoning blend, red paprika, black pepper, dried herbs and garlic granules"},
+  "miso-mushroom-leek-pasta":{name:"Miso Mushroom and Leek Pasta",visual:"silky miso mushroom and leek pasta with browned mixed mushrooms, tender leeks, glossy noodles, green onion and sesame"},
+  "salsa-criolla":{name:"Salsa Criolla",visual:"bright salsa criolla of thin red onion, red pepper, tomato, cilantro and lime in a rustic bowl"},
+  "cajun-garlic-butter-shrimp":{name:"Cajun Garlic Butter Shrimp",visual:"Cajun garlic butter shrimp, deeply seared and glossy with browned butter, minced garlic, parsley and lemon wedges"},
+  "spinach-salad-bagna-cauda":{name:"Spinach Salad with Bagna Càuda Dressing",visual:"fresh baby spinach salad with warm bagna cauda anchovy garlic dressing, thin radish slices and shaved Parmigiano-Reggiano"},
   "bolognese-meat-sauce":{name:"Bolognese Meat Sauce",visual:"rustic tagliatelle coated in rich traditional Bolognese meat ragù with finely diced soffritto and Parmigiano-Reggiano"},
   "ricotta-parmesan-gnudi":{name:"Ricotta and Parmesan Gnudi",visual:"delicate ricotta and Parmesan gnudi with spinach flecks, brown butter, crisp sage and finely grated cheese"},
   "pasta-ncasciata":{name:"Pasta ’Ncasciata",visual:"rustic Sicilian baked pasta slice with rigatoni, eggplant, meat ragù, tomato, melted cheese and browned top"},
