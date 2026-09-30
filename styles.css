@@ -79,3 +79,10 @@
 .cuisine-filters{margin-top:12px;padding-top:2px;border-top:1px solid transparent}
 .cuisine-filter{border:1px solid var(--line);background:#fff;color:var(--text);font:inherit;font-weight:700;padding:9px 14px;border-radius:999px;cursor:pointer}
 .cuisine-filter:hover,.cuisine-filter.active{background:var(--text);color:#fff;border-color:var(--text)}
+
+.filter-group{margin-top:14px}
+.filter-group-label{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.primary-filter-group{margin-top:10px;padding:14px 0 10px;border-top:1px solid var(--line)}
+.primary-filter-group .cuisine-filter{padding:10px 16px}
+.secondary-filter-group{margin-top:6px}
+.secondary-filter-group .filter{padding:8px 13px;font-size:.92rem}
