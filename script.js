@@ -16,10 +16,22 @@ if (menuButton && nav) {
 const cards = [...document.querySelectorAll('.recipe-card')];
 const search = document.getElementById('recipeSearch');
 const cuisineFiltersWrap = document.getElementById('cuisineFilters');
+const asianSubcuisineGroup = document.getElementById('asianSubcuisineGroup');
+const asianSubcuisineFilters = document.getElementById('asianSubcuisineFilters');
 const filters = [...document.querySelectorAll('.filter')];
 const noResults = document.getElementById('noResults');
 let activeFilter = 'all';
 let activeCuisine = 'all';
+let activeAsianSubcuisine = 'all';
+
+const ASIAN_SUBCUISINES = [
+  ['Chinese', ['chinese','moo shu','mandarin']],
+  ['Japanese', ['japanese','miso']],
+  ['Korean', ['korean','gochujang','kimchi']],
+  ['Thai', ['thai','pad thai','lemongrass']],
+  ['Vietnamese', ['vietnamese','pho','banh','nuoc cham']],
+  ['Fusion', ['fusion','asian-inspired','stir-fry']]
+];
 
 const CUISINES = [
   ['Italian', ['italian','roman','sicilian','venetian','piedmont','campanian']],
@@ -29,8 +41,7 @@ const CUISINES = [
   ['Mediterranean', ['mediterranean']],
   ['Cajun / Creole', ['cajun','creole','new orleans']],
   ['Latin American', ['latin','criolla','tomatillo']],
-  ['Chinese', ['chinese','moo shu','mandarin']],
-  ['Japanese / Fusion', ['miso','japanese','fusion']],
+  ['Asian', ['asian','chinese','moo shu','mandarin','japanese','miso','korean','gochujang','thai','vietnamese','fusion','stir-fry']],
   ['American', ['american','san francisco']]
 ];
 
@@ -44,6 +55,37 @@ function detectCuisine(card) {
     if (terms.some(term => text.includes(term))) return label;
   }
   return '';
+}
+
+function detectAsianSubcuisine(card) {
+  const text = cardHaystack(card);
+  for (const [label, terms] of ASIAN_SUBCUISINES) {
+    if (terms.some(term => text.includes(term))) return label;
+  }
+  return '';
+}
+
+function populateAsianSubcuisines() {
+  if (!asianSubcuisineFilters) return;
+  const asianCards = cards.filter(card => detectCuisine(card) === 'Asian');
+  const represented = [...new Set(asianCards.map(detectAsianSubcuisine).filter(Boolean))]
+    .sort((a,b) => a.localeCompare(b));
+
+  asianSubcuisineFilters.innerHTML =
+    '<button class="cuisine-filter active" data-asian="all">All Asian</button>' +
+    represented.map(name =>
+      `<button class="cuisine-filter" data-asian="${name}">${name}</button>`
+    ).join('');
+
+  asianSubcuisineFilters.querySelectorAll('.cuisine-filter').forEach(button => {
+    button.addEventListener('click', () => {
+      asianSubcuisineFilters.querySelectorAll('.cuisine-filter')
+        .forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+      activeAsianSubcuisine = button.dataset.asian || 'all';
+      updateRecipes();
+    });
+  });
 }
 
 function populateCuisineFilter() {
@@ -63,6 +105,12 @@ function populateCuisineFilter() {
         .forEach(b => b.classList.remove('active'));
       button.classList.add('active');
       activeCuisine = button.dataset.cuisine || 'all';
+      activeAsianSubcuisine = 'all';
+
+      if (asianSubcuisineGroup) {
+        asianSubcuisineGroup.hidden = activeCuisine !== 'Asian';
+      }
+      if (activeCuisine === 'Asian') populateAsianSubcuisines();
 
       // Cuisine is the primary filter: reset food type to All when cuisine changes.
       activeFilter = 'all';
@@ -116,8 +164,13 @@ function updateRecipes() {
     const cuisine = detectCuisine(card);
     const matchesCategory = matchesBroadCategory(card, activeFilter);
     const matchesCuisine = activeCuisine === 'all' || cuisine === activeCuisine;
+    const asianSubcuisine = detectAsianSubcuisine(card);
+    const matchesAsianSubcuisine =
+      activeCuisine !== 'Asian' ||
+      activeAsianSubcuisine === 'all' ||
+      asianSubcuisine === activeAsianSubcuisine;
     const matchesSearch = !q || haystack.includes(q);
-    const show = matchesCategory && matchesCuisine && matchesSearch;
+    const show = matchesCategory && matchesCuisine && matchesAsianSubcuisine && matchesSearch;
 
     card.hidden = !show;
     if (show) visible++;
@@ -137,6 +190,7 @@ filters.forEach(button => button.addEventListener('click', () => {
 }));
 
 populateCuisineFilter();
+populateAsianSubcuisines();
 updateRecipes();
 
 // Recipe images are served only from local GitHub Pages assets.
