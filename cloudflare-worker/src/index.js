@@ -5,6 +5,16 @@ const ALLOWED_ORIGINS=new Set([
 ]);
 
 const RECIPES={
+  "bolognese-meat-sauce":{name:"Bolognese Meat Sauce",visual:"rustic tagliatelle coated in rich traditional Bolognese meat ragù with finely diced soffritto and Parmigiano-Reggiano"},
+  "ricotta-parmesan-gnudi":{name:"Ricotta and Parmesan Gnudi",visual:"delicate ricotta and Parmesan gnudi with spinach flecks, brown butter, crisp sage and finely grated cheese"},
+  "pasta-ncasciata":{name:"Pasta ’Ncasciata",visual:"rustic Sicilian baked pasta slice with rigatoni, eggplant, meat ragù, tomato, melted cheese and browned top"},
+  "zucchini-risotto-shrimp":{name:"Zucchini Risotto with Shrimp",visual:"creamy zucchini risotto with plump pink shrimp, fresh parsley, lemon zest and tender green zucchini"},
+  "veal-piccata":{name:"Veal Piccata",visual:"golden veal piccata cutlets with glossy lemon butter sauce, capers, parsley and lemon slices"},
+  "pasta-aglio-e-olio":{name:"Pasta Aglio e Olio",visual:"rustic spaghetti aglio e olio with golden garlic slices, olive oil sheen, red chile flakes and parsley"},
+  "tuscan-white-bean-soup":{name:"Tuscan White Bean Soup",visual:"rustic Tuscan white bean soup with cannellini beans, dark kale, tomato, celery, herbs and olive oil"},
+  "venetian-shrimp-polenta":{name:"Venetian Shrimp with Polenta",visual:"Venetian-style shrimp with garlic and white-wine pan sauce over creamy golden polenta, parsley and diced tomato"},
+  "swordfish-sicilian-style":{name:"Swordfish Sicilian-Style",visual:"seared swordfish steak Sicilian style with cherry tomatoes, Kalamata olives, capers, garlic, lemon and parsley"},
+  "stracotto-di-fassona-piemontese":{name:"Stracotto di Fassona Piemontese",visual:"Piedmontese red-wine braised beef, deeply tender and glossy, with rich dark sauce, root vegetables, rosemary and thyme"},
   "shrimp-piccata-skewers":{name:"Shrimp Piccata Skewers",visual:"grilled shrimp skewers glazed with lemon-caper piccata butter, parsley and charred lemon"},
   "spaghetti-carbonara":{name:"Spaghetti Carbonara",visual:"glossy traditional spaghetti carbonara with crisp guanciale, Pecorino Romano and black pepper, no cream"},
   "pasta-cacio-e-pepe":{name:"Pasta Cacio e Pepe",visual:"creamy glossy cacio e pepe with long pasta, Pecorino Romano and abundant black pepper"},
