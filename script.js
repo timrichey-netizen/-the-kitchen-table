@@ -12,7 +12,7 @@ if (menuButton && nav) {
 
 const cards = [...document.querySelectorAll('.recipe-card')];
 const search = document.getElementById('recipeSearch');
-const cuisineFilter = document.getElementById('cuisineFilter');
+const cuisineFiltersWrap = document.getElementById('cuisineFilters');
 const filters = [...document.querySelectorAll('.filter')];
 const noResults = document.getElementById('noResults');
 let activeFilter = 'all';
@@ -44,11 +44,25 @@ function detectCuisine(card) {
 }
 
 function populateCuisineFilter() {
-  if (!cuisineFilter) return;
+  if (!cuisineFiltersWrap) return;
   const cuisines = [...new Set(cards.map(detectCuisine).filter(Boolean))]
     .sort((a,b) => a.localeCompare(b));
-  cuisineFilter.innerHTML = '<option value="all">All cuisines</option>' +
-    cuisines.map(name => `<option value="${name}">${name}</option>`).join('');
+
+  cuisineFiltersWrap.innerHTML =
+    '<button class="cuisine-filter active" data-cuisine="all">All cuisines</button>' +
+    cuisines.map(name =>
+      `<button class="cuisine-filter" data-cuisine="${name}">${name}</button>`
+    ).join('');
+
+  cuisineFiltersWrap.querySelectorAll('.cuisine-filter').forEach(button => {
+    button.addEventListener('click', () => {
+      cuisineFiltersWrap.querySelectorAll('.cuisine-filter')
+        .forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+      activeCuisine = button.dataset.cuisine || 'all';
+      updateRecipes();
+    });
+  });
 }
 
 function matchesBroadCategory(card, filter) {
@@ -62,7 +76,10 @@ function matchesBroadCategory(card, filter) {
              /steak|chicken|pork|veal|osso buco|stracotto|boeuf|bolognese|ragù|ragu/.test(text);
     case 'pasta':
       return categories.includes('pasta') ||
-             /spaghetti|rigatoni|fettuccine|bucatini|gnocchi|ravioli|pasta|carbonara|risotto/.test(text);
+             /spaghetti|rigatoni|fettuccine|bucatini|gnocchi|ravioli|pasta|carbonara/.test(text);
+    case 'rice':
+      return categories.includes('rice') ||
+             /risotto|rice|cauliflower rice/.test(text);
     case 'seafood':
       return categories.includes('seafood') ||
              /shrimp|salmon|branzino|swordfish|mussels|cioppino/.test(text);
@@ -101,10 +118,6 @@ function updateRecipes() {
 
 search?.addEventListener('input', updateRecipes);
 
-cuisineFilter?.addEventListener('change', () => {
-  activeCuisine = cuisineFilter.value || 'all';
-  updateRecipes();
-});
 
 filters.forEach(button => button.addEventListener('click', () => {
   filters.forEach(b => b.classList.remove('active'));
