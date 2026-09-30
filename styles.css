@@ -125,3 +125,8 @@ a.pairing-item:hover span{text-decoration:underline}
 .pairing-suggestion{cursor:default}
 @media(max-width:900px){.pairing-index-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.pairing-index-grid{grid-template-columns:1fr}}
+
+.dessert-sprite{background-image:url('assets/dessert-recipe-sprite.png');background-repeat:no-repeat;background-size:300% 300%;background-color:#f4e9dc}
+.recipe-photo.dessert-sprite{display:block;width:100%;height:220px}
+.recipe-feature-image.dessert-sprite{width:100%;height:min(62vw,620px);border-radius:22px;box-shadow:var(--shadow)}
+.dessert-thumb{width:88px;height:78px;border-radius:12px;background-size:300% 300%;flex:0 0 auto}

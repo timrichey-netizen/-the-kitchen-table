@@ -105,6 +105,8 @@ function matchesBroadCategory(card, filter) {
     case 'extras':
       return categories.includes('sauce') || categories.includes('seasoning') ||
              /seasoning|sauce|salsa|stock|fresh pasta/.test(text);
+    case 'dessert':
+      return categories.includes('dessert') || /tiramisu|brûlée|brulee|lava cake|crumble|lemon square|brownie|pie/.test(text);
     default:
       return true;
   }

@@ -49,6 +49,17 @@ var pairingDishes=[
 {title:'Salsa Criolla',url:'salsa-criolla.html',kind:'salad',cuisines:['Latin-Inspired'],tags:['beef','chicken','fish','shrimp']}
 ];
 
+var dessertRecipes={
+'Italian':[{title:'Tiramisu',url:'tiramisu.html'}],
+'French':[{title:'Crème Brûlée',url:'creme-brulee.html'},{title:'Chocolate Lava Cake',url:'chocolate-lava-cake.html'}],
+'Mediterranean':[{title:'Lemon Squares',url:'lemon-squares.html'},{title:'Key Lime Pie',url:'key-lime-pie.html'}],
+'Greek':[{title:'Lemon Squares',url:'lemon-squares.html'}],
+'Cajun / Creole':[{title:'Classic American Apple Pie',url:'classic-american-apple-pie.html'},{title:'Brownies',url:'brownies.html'}],
+'Asian-Inspired':[{title:'Key Lime Pie',url:'key-lime-pie.html'},{title:'Lemon Squares',url:'lemon-squares.html'}],
+'Latin-Inspired':[{title:'Key Lime Pie',url:'key-lime-pie.html'},{title:'Peach Pie',url:'peach-pie.html'}],
+'Any':[{title:'Apple Crumble',url:'apple-crumble.html'},{title:'Brownies',url:'brownies.html'},{title:'Classic American Apple Pie',url:'classic-american-apple-pie.html'}]
+};
+
 var dessertPairings={
 'Italian':['Tiramisu','Panna Cotta with Berries','Lemon Sorbet'],
 'French':['Tarte Tatin','Chocolate Mousse','Crème Brûlée'],
@@ -95,9 +106,9 @@ function renderPairings(main){
   document.getElementById('pairingSalads').innerHTML=links(topPairings('salad',main,3));
 
   var cuisine=(main&&main.cuisine)||state.cuisine||'Any';
-  var desserts=dessertPairings[cuisine]||dessertPairings.Any;
-  document.getElementById('pairingDesserts').innerHTML=desserts.map(function(name){
-    return '<div class="pairing-item pairing-suggestion"><span>'+name+'</span><small>Suggested dessert</small></div>';
+  var desserts=dessertRecipes[cuisine]||dessertRecipes.Any;
+  document.getElementById('pairingDesserts').innerHTML=desserts.map(function(d){
+    return '<a class="pairing-item" href="'+d.url+'"><span>'+d.title+'</span><small>View recipe →</small></a>';
   }).join('');
 }
 function buildMeal(){var main=pick('main',state.mainType),side=pick('side',state.sideType,[main&&main.url]),veg=pick('veg',state.vegType,[main&&main.url,side&&side.url]),meal=[['Main',main],['Side',side],['Vegetable / Salad',veg]];document.getElementById('plannerSummary').textContent=(state.cuisine==='Any'?'A mixed-cuisine meal':'A '+state.cuisine+'-leaning meal')+(state.ingredients.length?' built around '+state.ingredients.join(', ')+'.':'.');document.getElementById('plannedMealGrid').innerHTML=meal.map(function(item){return'<article class="planned-dish"><p class="eyebrow">'+item[0]+'</p><h3>'+item[1].title+'</h3><a class="text-link" href="'+item[1].url+'">View recipe →</a></article>';}).join('');renderPairings(main);card.hidden=true;results.hidden=false;results.scrollIntoView({behavior:'smooth',block:'start'});}
