@@ -65,3 +65,13 @@
 .generated-plate-image{width:100%;height:100%;object-fit:cover;display:block}
 .generation-status.working{background:#f5f0e8;border-color:#ddd0bd}.generation-status.success{background:#eef7ed;border-color:#bcd7b8}.generation-status.error{background:#fff0ed;border-color:#e5b8ae}
 @media(max-width:760px){.backend-setup{grid-template-columns:1fr}.backend-controls{flex-direction:column;align-items:stretch}.backend-status{grid-column:auto}}
+
+/* Simplified recipe filters */
+.recipe-search-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.recipe-search-controls .search-wrap{min-width:min(320px,70vw)}
+.cuisine-wrap select{appearance:auto;border:1px solid var(--line);background:#fff;color:var(--text);font:inherit;padding:11px 38px 11px 14px;border-radius:999px;min-width:170px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+@media(max-width:700px){
+  .recipe-search-controls{width:100%}
+  .recipe-search-controls .search-wrap,.cuisine-wrap,.cuisine-wrap select{width:100%}
+}
