@@ -60,6 +60,11 @@ function populateCuisineFilter() {
         .forEach(b => b.classList.remove('active'));
       button.classList.add('active');
       activeCuisine = button.dataset.cuisine || 'all';
+
+      // Cuisine is the primary filter: reset food type to All when cuisine changes.
+      activeFilter = 'all';
+      filters.forEach(b => b.classList.toggle('active', (b.dataset.filter || 'all') === 'all'));
+
       updateRecipes();
     });
   });
