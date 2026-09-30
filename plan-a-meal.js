@@ -33,12 +33,73 @@ var recipes=[
 {title:'Roasted Zucchini with Lemon and Thyme',url:'roasted-zucchini-lemon-thyme.html',role:'veg',type:'roasted',cuisine:'Mediterranean',tags:['zucchini','lemon']},
 {title:'Baked Cauliflower',url:'baked-cauliflower.html',role:'veg',type:'roasted',cuisine:'Any',tags:['cauliflower']}
 ];
+var pairingDishes=[
+{title:'Elegant Roasted Potato Stacks',url:'elegant-roasted-potato-stacks.html',kind:'side',cuisines:['French','Italian','Mediterranean'],tags:['beef','chicken','pork','veal','fish']},
+{title:'Pasta Aglio e Olio',url:'pasta-aglio-e-olio.html',kind:'side',cuisines:['Italian','Mediterranean'],tags:['chicken','veal','fish','shrimp']},
+{title:'Tomatillo-Avocado Salsa over Cauliflower Rice',url:'tomatillo-avocado-salsa-cauliflower-rice.html',kind:'side',cuisines:['Latin-Inspired'],tags:['shrimp','fish','chicken']},
+{title:'Roasted Hasselback Vegetable Bake',url:'roasted-hasselback-vegetable-bake.html',kind:'side',cuisines:['French','Mediterranean','Italian'],tags:['beef','chicken','pork','veal']},
+{title:'Roasted Zucchini with Lemon and Thyme',url:'roasted-zucchini-lemon-thyme.html',kind:'vegetable',cuisines:['Mediterranean','Italian','Greek'],tags:['chicken','fish','shrimp','veal']},
+{title:'Roasted Broccoli with Lemon & Almonds',url:'roasted-broccoli-lemon-almonds.html',kind:'vegetable',cuisines:['Mediterranean','Italian'],tags:['chicken','fish','shrimp','pork']},
+{title:'Roasted Green Beans with Parmesan',url:'roasted-green-beans-parmesan.html',kind:'vegetable',cuisines:['Italian','French'],tags:['beef','chicken','pork','veal']},
+{title:'Sautéed Spinach with Garlic',url:'sauteed-spinach-garlic.html',kind:'vegetable',cuisines:['Italian','Mediterranean','Greek'],tags:['beef','chicken','veal','fish','shrimp']},
+{title:'Roasted Eggplant & Cherry Tomatoes',url:'roasted-eggplant-cherry-tomatoes.html',kind:'vegetable',cuisines:['Italian','Mediterranean','Greek'],tags:['chicken','fish','shrimp','pasta']},
+{title:'Baked Cauliflower',url:'baked-cauliflower.html',kind:'vegetable',cuisines:['French','Italian'],tags:['beef','chicken','pork']},
+{title:'Spinach Salad with Bagna Càuda Dressing',url:'spinach-salad-bagna-cauda.html',kind:'salad',cuisines:['Italian'],tags:['beef','chicken','pork','veal','pasta']},
+{title:'Roasted Tomato Caprese Salad',url:'roasted-tomato-caprese-salad.html',kind:'salad',cuisines:['Italian','Mediterranean'],tags:['chicken','fish','shrimp','pasta']},
+{title:'Salsa Criolla',url:'salsa-criolla.html',kind:'salad',cuisines:['Latin-Inspired'],tags:['beef','chicken','fish','shrimp']}
+];
+
+var dessertPairings={
+'Italian':['Tiramisu','Panna Cotta with Berries','Lemon Sorbet'],
+'French':['Tarte Tatin','Chocolate Mousse','Crème Brûlée'],
+'Mediterranean':['Lemon Olive-Oil Cake','Fresh Berries with Mascarpone','Honey Yogurt with Walnuts'],
+'Greek':['Baklava','Greek Yogurt with Honey and Walnuts','Orange Semolina Cake'],
+'Cajun / Creole':['Bread Pudding with Bourbon Sauce','Bananas Foster','Pecan Praline Ice Cream'],
+'Asian-Inspired':['Mango with Coconut Cream','Ginger Ice Cream','Sesame Shortbread'],
+'Latin-Inspired':['Flan','Tres Leches Cake','Cinnamon-Chocolate Pots de Crème'],
+'Any':['Seasonal Fruit Tart','Vanilla Panna Cotta','Dark Chocolate Mousse']
+};
+
 var state={ingredients:[],cuisine:'Any',mainType:'any',sideType:'any',vegType:'any'};
 var steps=[].slice.call(document.querySelectorAll('.planner-step')),back=document.getElementById('plannerBack'),next=document.getElementById('plannerNext'),card=document.getElementById('plannerCard'),results=document.getElementById('plannerResults'),progress=document.getElementById('plannerProgressBar'),step=0;
 document.querySelectorAll('.planner-options').forEach(function(group){var key=group.dataset.key,multi=group.classList.contains('multi');group.querySelectorAll('button').forEach(function(button){button.addEventListener('click',function(){if(multi){button.classList.toggle('selected');state[key]=[].slice.call(group.querySelectorAll('button.selected')).map(function(b){return b.dataset.value;});}else{group.querySelectorAll('button').forEach(function(b){b.classList.remove('selected');});button.classList.add('selected');state[key]=button.dataset.value;}});});});
 function showStep(){steps.forEach(function(el,i){el.classList.toggle('active',i===step);});back.disabled=step===0;next.textContent=step===steps.length-1?'Build my meal':'Next';progress.style.width=((step+1)/steps.length*100)+'%';}
 function score(r,role,type){var n=0;if(r.role!==role)return-999;if(type!=='any'&&r.type===type)n+=5;if(state.cuisine!=='Any'&&r.cuisine===state.cuisine)n+=4;if(r.cuisine==='Any')n+=1;state.ingredients.forEach(function(t){if(r.tags.indexOf(t)>=0)n+=3;});return n;}
 function pick(role,type,excluded){excluded=excluded||[];var ranked=recipes.filter(function(r){return excluded.indexOf(r.url)<0;}).map(function(r){return{r:r,s:score(r,role,type)};}).filter(function(x){return x.s>-999;}).sort(function(a,b){return b.s-a.s||a.r.title.localeCompare(b.r.title);});return ranked.length?ranked[0].r:null;}
-function buildMeal(){var main=pick('main',state.mainType),side=pick('side',state.sideType,[main&&main.url]),veg=pick('veg',state.vegType,[main&&main.url,side&&side.url]),meal=[['Main',main],['Side',side],['Vegetable / Salad',veg]];document.getElementById('plannerSummary').textContent=(state.cuisine==='Any'?'A mixed-cuisine meal':'A '+state.cuisine+'-leaning meal')+(state.ingredients.length?' built around '+state.ingredients.join(', ')+'.':'.');document.getElementById('plannedMealGrid').innerHTML=meal.map(function(item){return'<article class="planned-dish"><p class="eyebrow">'+item[0]+'</p><h3>'+item[1].title+'</h3><a class="text-link" href="'+item[1].url+'">View recipe →</a></article>';}).join('');card.hidden=true;results.hidden=false;results.scrollIntoView({behavior:'smooth',block:'start'});}
+function mainTags(main){
+  return (main&&main.tags)||[];
+}
+function pairingScore(item,main){
+  var n=0;
+  var cuisine=main&&main.cuisine?main.cuisine:state.cuisine;
+  if(item.cuisines.indexOf(cuisine)>=0)n+=5;
+  if(cuisine==='Any')n+=1;
+  mainTags(main).forEach(function(tag){if(item.tags.indexOf(tag)>=0)n+=3;});
+  state.ingredients.forEach(function(tag){if(item.tags.indexOf(tag)>=0)n+=1;});
+  return n;
+}
+function topPairings(kind,main,count){
+  return pairingDishes.filter(function(x){return x.kind===kind;})
+    .map(function(x){return{x:x,s:pairingScore(x,main)};})
+    .sort(function(a,b){return b.s-a.s||a.x.title.localeCompare(b.x.title);})
+    .slice(0,count).map(function(x){return x.x;});
+}
+function renderPairings(main){
+  function links(items){
+    return items.map(function(x){
+      return '<a class="pairing-item" href="'+x.url+'"><span>'+x.title+'</span><small>View recipe →</small></a>';
+    }).join('');
+  }
+  document.getElementById('pairingSides').innerHTML=links(topPairings('side',main,3));
+  document.getElementById('pairingVegetables').innerHTML=links(topPairings('vegetable',main,3));
+  document.getElementById('pairingSalads').innerHTML=links(topPairings('salad',main,3));
+
+  var cuisine=(main&&main.cuisine)||state.cuisine||'Any';
+  var desserts=dessertPairings[cuisine]||dessertPairings.Any;
+  document.getElementById('pairingDesserts').innerHTML=desserts.map(function(name){
+    return '<div class="pairing-item pairing-suggestion"><span>'+name+'</span><small>Suggested dessert</small></div>';
+  }).join('');
+}
+function buildMeal(){var main=pick('main',state.mainType),side=pick('side',state.sideType,[main&&main.url]),veg=pick('veg',state.vegType,[main&&main.url,side&&side.url]),meal=[['Main',main],['Side',side],['Vegetable / Salad',veg]];document.getElementById('plannerSummary').textContent=(state.cuisine==='Any'?'A mixed-cuisine meal':'A '+state.cuisine+'-leaning meal')+(state.ingredients.length?' built around '+state.ingredients.join(', ')+'.':'.');document.getElementById('plannedMealGrid').innerHTML=meal.map(function(item){return'<article class="planned-dish"><p class="eyebrow">'+item[0]+'</p><h3>'+item[1].title+'</h3><a class="text-link" href="'+item[1].url+'">View recipe →</a></article>';}).join('');renderPairings(main);card.hidden=true;results.hidden=false;results.scrollIntoView({behavior:'smooth',block:'start'});}
 next.addEventListener('click',function(){if(step<steps.length-1){step++;showStep();}else buildMeal();});back.addEventListener('click',function(){if(step>0){step--;showStep();}});document.getElementById('plannerRestart').addEventListener('click',function(){step=0;card.hidden=false;results.hidden=true;showStep();window.scrollTo({top:0,behavior:'smooth'});});showStep();
 })();
