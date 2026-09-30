@@ -36,6 +36,7 @@ const ASIAN_SUBCUISINES = [
 const CUISINES = [
   ['Italian', ['italian','roman','sicilian','venetian','piedmont','campanian']],
   ['French', ['french','bourguignon']],
+  ['Swiss', ['swiss','zurich','zürich','rosti','rösti','fondue']],
   ['Belgian', ['belgian','moules-frites','frites']],
   ['Spanish', ['spanish','catalan','basque']],
   ['Greek', ['greek','saganaki']],
