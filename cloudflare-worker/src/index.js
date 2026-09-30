@@ -5,6 +5,29 @@ const ALLOWED_ORIGINS=new Set([
 ]);
 
 const RECIPES={
+  "shrimp-piccata-skewers":{name:"Shrimp Piccata Skewers",visual:"grilled shrimp skewers glazed with lemon-caper piccata butter, parsley and charred lemon"},
+  "spaghetti-carbonara":{name:"Spaghetti Carbonara",visual:"glossy traditional spaghetti carbonara with crisp guanciale, Pecorino Romano and black pepper, no cream"},
+  "pasta-cacio-e-pepe":{name:"Pasta Cacio e Pepe",visual:"creamy glossy cacio e pepe with long pasta, Pecorino Romano and abundant black pepper"},
+  "rigatoni-amatriciana":{name:"Rigatoni Amatriciana",visual:"rigatoni amatriciana in tomato sauce with crisp guanciale and Pecorino Romano"},
+  "perciatelli-alla-gricia":{name:"Perciatelli alla Gricia",visual:"perciatelli alla gricia with glossy strands, crisp guanciale, Pecorino Romano and black pepper"},
+  "fettuccine-alfredo":{name:"Fettuccine Alfredo",visual:"silky fettuccine Alfredo coated only in butter and Parmigiano-Reggiano, no heavy cream"},
+  "pasta-e-ceci":{name:"Pasta e Ceci",visual:"rustic pasta e ceci with small pasta, chickpeas, rosemary and a creamy brothy texture"},
+  "rigatoni-pecorino-crispy-guanciale":{name:"Rigatoni with Pecorino and Crispy Guanciale",visual:"rigatoni coated in creamy Pecorino sauce topped with crisp golden guanciale"},
+  "rigatoni-pork-ragu-ricotta":{name:"Rigatoni with Pork Ragù and Fresh Ricotta",visual:"rigatoni with rich pork ragù, dollops of fresh ricotta and Parmigiano-Reggiano"},
+  "penne-arrabbiata":{name:"Penne all’Arrabbiata",visual:"penne all'arrabbiata in vivid spicy tomato sauce with garlic, chile and parsley"},
+  "bucatini-amatriciana":{name:"Bucatini Amatriciana",visual:"bucatini amatriciana with tomato sauce, crisp guanciale and Pecorino Romano"},
+  "spaghetti-shrimp-lemon-mint-pecorino":{name:"Spaghetti with Shrimp, Lemon, Mint, and Pecorino",visual:"spaghetti with pink shrimp, lemon, fresh mint and finely grated Pecorino Romano"},
+  "osso-buco-red-wine":{name:"Osso Buco with Red Wine",visual:"braised osso buco veal shank with glossy red-wine sauce, vegetables and fresh gremolata"},
+  "eggplant-parmesan":{name:"Eggplant Parmesan",visual:"individual square of eggplant Parmesan with layered eggplant, tomato, melted mozzarella, Parmigiano and basil"},
+  "lemon-stuffed-grilled-branzino":{name:"Lemon-Stuffed Grilled Branzino",visual:"whole grilled branzino with crisp skin stuffed with lemon slices, garlic and fresh herbs"},
+  "creamy-seafood-risotto":{name:"Creamy Seafood Risotto",visual:"creamy seafood risotto with Arborio rice, shrimp, scallops, mussels, parsley and lemon zest"},
+  "florentine-steak-balsamic-rosemary":{name:"Balsamic and Rosemary-Marinated Florentine Steak",visual:"sliced Florentine-style porterhouse steak, deeply charred, rosy center, balsamic rosemary glaze and herbs"},
+  "pasta-alla-norma":{name:"Pasta alla Norma",visual:"Sicilian pasta alla Norma with tomato sauce, golden eggplant, basil and shaved ricotta salata"},
+  "pork-chop-milanese":{name:"Pork Chop Milanese",visual:"golden crisp pork chop Milanese with arugula salad, shaved Parmesan and lemon"},
+  "gnocchi-alla-sorrentina":{name:"Gnocchi alla Sorrentina",visual:"gnocchi alla Sorrentina bubbling with tomato sauce, melted mozzarella, Parmigiano and basil"},
+  "cioppino":{name:"Cioppino",visual:"rustic cioppino seafood stew with mussels, clams, shrimp and fish in a tomato wine broth"},
+  "spaghetti-with-mussels":{name:"Spaghetti with Mussels",visual:"spaghetti with open mussels, garlic, white wine, parsley, lemon and glossy briny sauce"},
+  "butternut-squash-ravioli-brown-butter-sage":{name:"Butternut Squash Ravioli with Brown Butter and Sage",visual:"butternut squash ravioli in glossy brown butter with crisp sage and Parmigiano-Reggiano"},
   "shrimp-bisque":{
     name:"New Orleans Shrimp & Corn Bisque",
     visual:"a small ramekin or shallow cup of creamy New Orleans shrimp and corn bisque with visible shrimp, sweet corn, green onion and parsley"
