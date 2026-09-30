@@ -28,7 +28,7 @@
     <div class="container">
       <p class="eyebrow">BUILD A MEAL VISUALLY</p>
       <h1 class="composer-title">Compose a Plate</h1>
-      <p class="recipe-intro composer-intro">Choose one to four recipes. The composer will build a single image-generation brief for one coherent plated meal containing all of your selections.</p>
+      <p class="recipe-intro composer-intro">Choose one to four recipes and generate one photorealistic image of the composed plate.</p>\n\n      <div class="backend-setup" id="backendSetup"><div><strong>Image generator backend</strong><p>Paste your Cloudflare Worker URL once after deployment. It is saved only in this browser.</p></div><div class="backend-controls"><input id="workerUrl" type="url" placeholder="https://the-kitchen-table-plate-generator.YOUR-SUBDOMAIN.workers.dev" autocomplete="off"><button id="saveWorkerUrl" class="button secondary" type="button">Save &amp; Test</button></div><div id="backendStatus" class="backend-status" aria-live="polite"></div></div>
 
       <div class="composer-grid">
         <section class="composer-panel">
@@ -42,25 +42,25 @@
 
           <div class="composer-recipe-list" id="composerRecipeList">
             <label class="composer-recipe-card">
-              <input type="checkbox" value="New Orleans Shrimp & Corn Bisque" data-image="assets/new-orleans-shrimp-corn-bisque.png">
+              <input type="checkbox" value="shrimp-bisque" data-label="New Orleans Shrimp & Corn Bisque" data-image="assets/new-orleans-shrimp-corn-bisque.png">
               <img src="assets/new-orleans-shrimp-corn-bisque.png" alt="New Orleans Shrimp and Corn Bisque">
               <span><strong>New Orleans Shrimp & Corn Bisque</strong><small>Seafood · Soup</small></span>
             </label>
 
             <label class="composer-recipe-card">
-              <input type="checkbox" value="Mediterranean Lemon Shallot Chicken with Fresh Herbs" data-image="assets/mediterranean-lemon-shallot-chicken.png">
+              <input type="checkbox" value="lemon-chicken" data-label="Mediterranean Lemon Shallot Chicken with Fresh Herbs" data-image="assets/mediterranean-lemon-shallot-chicken.png">
               <img src="assets/mediterranean-lemon-shallot-chicken.png" alt="Mediterranean Lemon Shallot Chicken">
               <span><strong>Mediterranean Lemon Shallot Chicken</strong><small>Chicken · Mediterranean</small></span>
             </label>
 
             <label class="composer-recipe-card">
-              <input type="checkbox" value="Roasted Hasselback Root Vegetable & Zucchini Bake" data-image="assets/roasted-hasselback-vegetable-bake.png">
+              <input type="checkbox" value="hasselback-vegetables" data-label="Roasted Hasselback Root Vegetable & Zucchini Bake" data-image="assets/roasted-hasselback-vegetable-bake.png">
               <img src="assets/roasted-hasselback-vegetable-bake.png" alt="Roasted Hasselback Vegetable Bake">
               <span><strong>Roasted Hasselback Vegetable Bake</strong><small>Vegetable · Side</small></span>
             </label>
 
             <label class="composer-recipe-card">
-              <input type="checkbox" value="Moo Shu Chicken" data-image="assets/moo-shu-chicken.png">
+              <input type="checkbox" value="moo-shu-chicken" data-label="Moo Shu Chicken" data-image="assets/moo-shu-chicken.png">
               <img src="assets/moo-shu-chicken.png" alt="Moo Shu Chicken">
               <span><strong>Moo Shu Chicken</strong><small>Chicken · Asian</small></span>
             </label>
@@ -70,34 +70,34 @@
             <label>
               <span>Presentation</span>
               <select id="presentation">
-                <option value="elegant restaurant-style individual dinner plate">Elegant restaurant plate</option>
-                <option value="warm rustic farmhouse individual dinner plate">Rustic farmhouse plate</option>
-                <option value="casual family dinner plate">Casual family plate</option>
-                <option value="refined French country dinner plate">French country plate</option>
+                <option value="elegant">Elegant restaurant plate</option>
+                <option value="rustic">Rustic farmhouse plate</option>
+                <option value="casual">Casual family plate</option>
+                <option value="french-country">French country plate</option>
               </select>
             </label>
 
             <label>
               <span>Portion style</span>
               <select id="portionStyle">
-                <option value="balanced individual portions with each selected dish clearly visible">Balanced portions</option>
-                <option value="small tasting portions arranged harmoniously">Tasting portions</option>
-                <option value="generous dinner portions without overcrowding the plate">Generous portions</option>
+                <option value="balanced">Balanced portions</option>
+                <option value="tasting">Tasting portions</option>
+                <option value="generous">Generous portions</option>
               </select>
             </label>
 
             <label>
               <span>Background</span>
               <select id="backgroundStyle">
-                <option value="soft natural daylight on a neutral linen table">Natural daylight</option>
-                <option value="warm French farmhouse table with subtle rustic styling">French farmhouse</option>
-                <option value="clean studio food photography on a pale stone surface">Clean studio</option>
+                <option value="natural">Natural daylight</option>
+                <option value="farmhouse">French farmhouse</option>
+                <option value="studio">Clean studio</option>
               </select>
             </label>
           </div>
 
           <button id="composeButton" class="button primary composer-button" disabled>Generate Plate</button>
-          <p class="composer-note">The secure AI image-generation connection is the next step. This page is already prepared to send the selected recipes and presentation settings to that service without exposing an API key in the website.</p>
+          <p class="composer-note">Generation can take up to a couple of minutes. Keep this page open while the image is being created.</p>
         </section>
 
         <aside class="composer-preview">
@@ -126,65 +126,113 @@
 
   <script src="script.js"></script>
   <script>
-  (() => {
-    const checks = [...document.querySelectorAll('.composer-recipe-card input[type="checkbox"]')];
-    const count = document.getElementById('selectedCount');
-    const button = document.getElementById('composeButton');
-    const preview = document.getElementById('platePreview');
-    const names = document.getElementById('selectedDishNames');
-    const promptText = document.getElementById('promptText');
-    const status = document.getElementById('generationStatus');
-    const presentation = document.getElementById('presentation');
-    const portion = document.getElementById('portionStyle');
-    const background = document.getElementById('backgroundStyle');
+(() => {
+  const STORAGE_KEY='kitchenTableWorkerUrl';
+  const checks=[...document.querySelectorAll('.composer-recipe-card input[type="checkbox"]')];
+  const count=document.getElementById('selectedCount');
+  const button=document.getElementById('composeButton');
+  const preview=document.getElementById('platePreview');
+  const names=document.getElementById('selectedDishNames');
+  const promptText=document.getElementById('promptText');
+  const status=document.getElementById('generationStatus');
+  const presentation=document.getElementById('presentation');
+  const portion=document.getElementById('portionStyle');
+  const background=document.getElementById('backgroundStyle');
+  const workerInput=document.getElementById('workerUrl');
+  const saveWorkerButton=document.getElementById('saveWorkerUrl');
+  const backendStatus=document.getElementById('backendStatus');
 
-    function selected() {
-      return checks.filter(c => c.checked);
+  let workerBaseUrl=normalizeWorkerUrl(localStorage.getItem(STORAGE_KEY)||'');
+  workerInput.value=workerBaseUrl;
+
+  function normalizeWorkerUrl(v){return String(v||'').trim().replace(/\\/+$/,'').replace(/\\/generate-plate$/,'');}
+  function selected(){return checks.filter(c=>c.checked);}
+  function setStatus(kind,title,message){
+    status.hidden=false;
+    status.className='generation-status '+(kind||'');
+    status.innerHTML='<strong>'+title+'</strong>'+(message?'<p>'+message+'</p>':'');
+  }
+  function refresh(){
+    let items=selected();
+    if(items.length>4){items[items.length-1].checked=false;items=selected();}
+    checks.forEach(c=>c.disabled=!c.checked&&items.length>=4);
+    count.textContent=items.length;
+    button.disabled=items.length===0;
+    promptText.textContent=items.length?'One composed plate containing: '+items.map(i=>i.dataset.label).join('; ')+'.':'Select at least one recipe to create the brief.';
+    if(!items.length){
+      preview.innerHTML='<div class="empty-plate"><div class="plate-ring"></div><p>Select 1–4 recipes to compose your plate.</p></div>';
+      names.innerHTML='';
+      return;
     }
-
-    function makePrompt(items) {
-      if (!items.length) return 'Select at least one recipe to create the brief.';
-      const dishNames = items.map(x => x.value);
-      return 'Create a photorealistic food photograph of one coherent composed dinner plate featuring exactly these dishes: ' +
-        dishNames.join('; ') + '. Use ' + portion.value + '. Present the food as an ' +
-        presentation.value + '. Photograph it with ' + background.value +
-        '. Each dish must remain visually recognizable and distinct, but the overall plate should feel intentionally composed by a professional chef. No text, labels, menus, hands, people, duplicate dishes, or extra foods not implied by the selected recipes. Use realistic serving proportions, appetizing textures, natural garnish, and professional editorial food photography.';
+    preview.innerHTML='<div class="selected-image-grid count-'+items.length+'">'+items.map(i=>'<img src="'+i.dataset.image+'" alt="'+i.dataset.label.replace(/"/g,'&quot;')+'">').join('')+'</div>';
+    names.innerHTML=items.map(i=>'<span>'+i.dataset.label+'</span>').join('');
+  }
+  async function testBackend(url){
+    backendStatus.textContent='Testing connection…';
+    backendStatus.className='backend-status testing';
+    try{
+      const response=await fetch(url+'/health',{cache:'no-store'});
+      const data=await response.json();
+      if(!response.ok||!data.ok) throw new Error('Health check failed');
+      backendStatus.textContent='Connected to Cloudflare Worker.';
+      backendStatus.className='backend-status connected';
+    }catch(e){
+      backendStatus.textContent='Could not connect. Check the Worker URL and deployment.';
+      backendStatus.className='backend-status error';
     }
-
-    function refresh() {
-      let items = selected();
-      if (items.length > 4) {
-        const last = items[items.length - 1];
-        last.checked = false;
-        items = selected();
-      }
-
-      checks.forEach(c => c.disabled = !c.checked && items.length >= 4);
-      count.textContent = items.length;
-      button.disabled = items.length === 0;
-      promptText.textContent = makePrompt(items);
-      status.hidden = true;
-
-      if (!items.length) {
-        preview.innerHTML = '<div class="empty-plate"><div class="plate-ring"></div><p>Select 1–4 recipes to compose your plate.</p></div>';
-        names.innerHTML = '';
-        return;
-      }
-
-      preview.innerHTML = '<div class="selected-image-grid count-' + items.length + '">' +
-        items.map(i => '<img src="' + i.dataset.image + '" alt="' + i.value.replace(/"/g,'&quot;') + '">').join('') +
-        '</div>';
-      names.innerHTML = items.map(i => '<span>' + i.value + '</span>').join('');
+  }
+  saveWorkerButton.addEventListener('click',async()=>{
+    const url=normalizeWorkerUrl(workerInput.value);
+    if(!/^https:\\/\\//i.test(url)){
+      backendStatus.textContent='Enter a valid https:// Worker URL.';
+      backendStatus.className='backend-status error';
+      return;
     }
-
-    checks.forEach(c => c.addEventListener('change', refresh));
-    [presentation, portion, background].forEach(el => el.addEventListener('change', refresh));
-    button.addEventListener('click', () => {
-      status.hidden = false;
-      status.scrollIntoView({behavior:'smooth', block:'nearest'});
-    });
-    refresh();
-  })();
-  </script>
+    workerBaseUrl=url;
+    workerInput.value=url;
+    localStorage.setItem(STORAGE_KEY,url);
+    await testBackend(url);
+  });
+  checks.forEach(c=>c.addEventListener('change',refresh));
+  [presentation,portion,background].forEach(el=>el.addEventListener('change',refresh));
+  button.addEventListener('click',async()=>{
+    const items=selected();
+    if(!items.length)return;
+    if(!workerBaseUrl){
+      setStatus('error','Cloudflare Worker URL required.','Paste the deployed Worker URL above and choose Save & Test.');
+      document.getElementById('backendSetup').scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
+    button.disabled=true; button.textContent='Generating…';
+    setStatus('working','Generating your plate…','This may take up to a couple of minutes.');
+    try{
+      const controller=new AbortController();
+      const timeout=setTimeout(()=>controller.abort(),150000);
+      const response=await fetch(workerBaseUrl+'/generate-plate',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        signal:controller.signal,
+        body:JSON.stringify({
+          recipes:items.map(i=>i.value),
+          presentation:presentation.value,
+          portionStyle:portion.value,
+          backgroundStyle:background.value
+        })
+      });
+      clearTimeout(timeout);
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok)throw new Error(data.error||'Image generation failed.');
+      preview.innerHTML='<img class="generated-plate-image" src="data:'+(data.mimeType||'image/jpeg')+';base64,'+data.imageBase64+'" alt="AI-generated composed plate">';
+      setStatus('success','Plate generated.','Change selections or styles to create another version.');
+    }catch(error){
+      setStatus('error','Could not generate the plate.',error.name==='AbortError'?'The request timed out. Please try again.':(error.message||'Image generation failed.'));
+    }finally{
+      button.disabled=false; button.textContent='Generate Plate';
+    }
+  });
+  if(workerBaseUrl)testBackend(workerBaseUrl);
+  refresh();
+})();
+</script>
 </body>
 </html>
