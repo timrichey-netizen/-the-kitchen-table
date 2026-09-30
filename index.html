@@ -65,11 +65,16 @@
           </div>
         </div>
 
-        <div id="cuisineFilters" class="filters cuisine-filters" aria-label="Cuisine filters">
-          <button class="cuisine-filter active" data-cuisine="all">All cuisines</button>
+        <div class="filter-group primary-filter-group">
+          <div class="filter-group-label">Cuisine</div>
+          <div id="cuisineFilters" class="filters cuisine-filters" aria-label="Cuisine filters">
+            <button class="cuisine-filter active" data-cuisine="all">All cuisines</button>
+          </div>
         </div>
 
-        <div id="categories" class="filters" aria-label="Recipe categories">
+        <div class="filter-group secondary-filter-group">
+          <div class="filter-group-label">Food type</div>
+          <div id="categories" class="filters" aria-label="Recipe categories">
           <button class="filter active" data-filter="all">All</button>
           <button class="filter" data-filter="meat">Meat</button>
           <button class="filter" data-filter="pasta">Pasta</button>
@@ -78,6 +83,7 @@
           <button class="filter" data-filter="vegetables">Vegetables &amp; Sides</button>
           <button class="filter" data-filter="soups-salads">Soups &amp; Salads</button>
           <button class="filter" data-filter="extras">Extras</button>
+          </div>
         </div>
 
         <div class="recipe-grid" id="recipeGrid">
