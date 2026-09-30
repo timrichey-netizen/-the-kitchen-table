@@ -334,3 +334,41 @@ const BECHAMEL_DAUGHTER_LINKS = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">BÉCHAMEL DAUGHTER SAUCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('')+'<a class="text-link" href="bechamel-sauce.html">See Béchamel and all daughter sauces →</a>';
   anchor.insertAdjacentElement("afterend",wrap);
 })();
+
+const VELOUTE_DAUGHTER_LINKS = {
+  "mediterranean-lemon-shallot-chicken.html":[["SUPRÊME","Optional cream-finished chicken velouté pairing.","supreme-sauce.html"],["VENETIAN SAUCE","Herb-forward velouté pairing with shallot and tarragon.","venetian-sauce-veloute.html"]],
+  "sage-mushroom-chicken-skillet.html":[["SUPRÊME","Optional classical cream sauce for chicken.","supreme-sauce.html"],["POULETTE","Mushroom, lemon, and parsley make this especially compatible.","poulette-sauce.html"]],
+  "pollo-a-la-parrilla.html":[["SUPRÊME","Optional classical cream sauce for grilled chicken.","supreme-sauce.html"],["HUNGARIAN SAUCE","Paprika and onion make a complementary velouté variation.","hungarian-sauce-veloute.html"]],
+  "arroz-con-pollo-uruguayo.html":[["HUNGARIAN SAUCE","Optional paprika-and-onion velouté variation for chicken.","hungarian-sauce-veloute.html"]],
+  "veal-piccata.html":[["ALLEMANDE","Veal velouté with egg yolk, cream, and lemon is a close classical pairing.","allemande-sauce.html"],["POULETTE","Optional mushroom-and-lemon velouté sauce.","poulette-sauce.html"]],
+  "zurich-style-veal-creamy-mushroom-sauce.html":[["ALLEMANDE","Related veal velouté technique finished with cream and lemon.","allemande-sauce.html"],["POULETTE","Mushroom-based velouté variation pairs naturally with this dish.","poulette-sauce.html"]],
+  "osso-buco-red-wine.html":[["ALLEMANDE","Optional classical veal-sauce alternative for a lighter presentation.","allemande-sauce.html"]],
+  "herb-crusted-salmon.html":[["NORMANDE","Optional enriched fish-velouté pairing.","normande-sauce.html"],["BERCY","White wine, shallot, lemon, and parsley complement salmon.","bercy-sauce.html"],["VENETIAN SAUCE","Optional herb-forward fish velouté pairing.","venetian-sauce-veloute.html"]],
+  "lemon-stuffed-grilled-branzino.html":[["NORMANDE","Optional rich fish-velouté pairing.","normande-sauce.html"],["BERCY","Classic white-wine and shallot sauce for delicate fish.","bercy-sauce.html"],["VENETIAN SAUCE","Tarragon and chervil make a delicate fish pairing.","venetian-sauce-veloute.html"]],
+  "swordfish-sicilian-style.html":[["BERCY","Optional white-wine, shallot, lemon, and parsley pairing.","bercy-sauce.html"],["AURORA","Optional tomato-enriched velouté variation.","aurora-sauce.html"]],
+  "white-wine-garlic-mussels.html":[["BERCY","Related shallot-and-white-wine fish-sauce technique.","bercy-sauce.html"]],
+  "moules-marinieres.html":[["BERCY","Closely related white-wine and shallot flavor profile.","bercy-sauce.html"]],
+  "shrimp-piccata-skewers.html":[["BERCY","Lemon, white wine, shallot, and parsley make a natural seafood pairing.","bercy-sauce.html"]],
+  "venetian-shrimp-polenta.html":[["VENETIAN SAUCE","The tarragon-shallot velouté variation is a fitting optional pairing.","venetian-sauce-veloute.html"],["BERCY","White wine and shallot complement shrimp.","bercy-sauce.html"]],
+  "creamy-seafood-risotto.html":[["NORMANDE","Optional fish-velouté enrichment for a more classical seafood presentation.","normande-sauce.html"]],
+  "zucchini-risotto-shrimp.html":[["NORMANDE","Optional enriched fish-velouté pairing.","normande-sauce.html"]],
+  "new-orleans-shrimp-corn-bisque.html":[["NORMANDE","Related fish-stock, cream, and liaison technique.","normande-sauce.html"],["AURORA","Optional tomato-enriched velouté variation.","aurora-sauce.html"]],
+  "shrimp-creole.html":[["AURORA","Tomato-enriched velouté is a classical cousin to this tomato-based shrimp sauce.","aurora-sauce.html"]],
+  "jambalaya.html":[["HUNGARIAN SAUCE","Optional paprika-forward velouté pairing for chicken and sausage elements.","hungarian-sauce-veloute.html"]],
+  "chicken-and-andouille-gumbo.html":[["HUNGARIAN SAUCE","Paprika-and-onion velouté is a related savory sauce profile.","hungarian-sauce-veloute.html"]],
+  "crawfish-etouffee.html":[["AURORA","Optional tomato-enriched velouté variation for shellfish.","aurora-sauce.html"],["NORMANDE","Optional rich fish-velouté pairing for crawfish.","normande-sauce.html"]],
+  "blackened-redfish.html":[["BERCY","Bright white-wine and shallot sauce is a classic counterpoint to blackened fish.","bercy-sauce.html"],["NORMANDE","Optional richer fish-velouté pairing.","normande-sauce.html"]],
+  "miso-mushroom-leek-pasta.html":[["POULETTE","Related mushroom-forward velouté technique; use as an optional French-style variation.","poulette-sauce.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=VELOUTE_DAUGHTER_LINKS[p];
+  if(!refs || !refs.length || document.querySelector(".veloute-daughter-tip")) return;
+  const anchor=document.querySelector(".daughter-sauce-tip") || document.querySelector(".mother-sauce-tip") || document.querySelector(".print-button");
+  if(!anchor) return;
+  const wrap=document.createElement("div");
+  wrap.className="veloute-daughter-tip";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#f6fafc";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">VELOUTÉ DAUGHTER SAUCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('')+'<a class="text-link" href="veloute-sauce.html">See Velouté and all daughter sauces →</a>';
+  anchor.insertAdjacentElement("afterend",wrap);
+})();
