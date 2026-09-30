@@ -1,10 +1,5 @@
-// Keep a normal page load anchored on the opening image.
+// Browser scroll restoration is handled early on the homepage in index.html.
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-window.addEventListener('pageshow', () => {
-  if (!location.hash || location.hash === '#top') {
-    requestAnimationFrame(() => window.scrollTo(0, 0));
-  }
-});
 
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
