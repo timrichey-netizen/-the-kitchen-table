@@ -140,3 +140,8 @@ a.pairing-item:hover span{text-decoration:underline}
 .planner-customize-grid label{display:block}
 .planner-customize-grid .custom-wide{grid-column:1/-1}
 @media(max-width:700px){.planner-customize-grid{grid-template-columns:1fr}.planner-customize-grid .custom-wide{grid-column:auto}}
+
+.asian-subcuisine-group{margin-top:4px;padding:12px 0 4px;border-top:1px dashed var(--line)}
+.asian-subcuisine-group[hidden]{display:none}
+.asian-subcuisine-group .filter-group-label{color:var(--accent-dark)}
+.asian-subcuisine-group .cuisine-filter{padding:8px 13px;font-size:.92rem}
