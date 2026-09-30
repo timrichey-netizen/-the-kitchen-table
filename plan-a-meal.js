@@ -130,13 +130,27 @@ function showStep(){steps.forEach(function(el,i){el.classList.toggle('active',i=
 function score(r,role,type){
   var n=0;
   if(r.role!==role)return-999;
-  if(type!=='any'&&r.type===type)n+=5;
-  if(state.cuisine!=='Any'&&r.cuisine===state.cuisine)n+=4;
-  if(r.cuisine==='Any')n+=1;
 
   var idx=recipeIndex[r.url]||{proteins:[],prep:[]};
-  state.mainIngredients.forEach(function(p){if(idx.proteins.indexOf(p)>=0)n+=4;});
-  state.prepStyles.forEach(function(p){if(idx.prep.indexOf(p)>=0)n+=3;});
+  var plan=planningIndex[r.url]||{moods:[],ingredients:[],effort:'any',avoid:[],occasions:[]};
+
+  if(type && type!=='any' && r.type===type)n+=5;
+  if(r.cuisine==='Any')n+=1;
+
+  if(role==='main'){
+    state.mood.forEach(function(m){if(plan.moods.indexOf(m)>=0)n+=4;});
+    state.mainIngredients.forEach(function(p){
+      if(plan.ingredients.indexOf(p)>=0 || idx.proteins.indexOf(p)>=0)n+=5;
+    });
+    if(state.effort && state.effort!=='any' && plan.effort===state.effort)n+=4;
+    if(state.occasion && plan.occasions.indexOf(state.occasion)>=0)n+=3;
+
+    var blocked=false;
+    state.restrictions.forEach(function(x){
+      if(plan.avoid.indexOf(x)>=0)blocked=true;
+    });
+    if(blocked)return-999;
+  }
 
   return n;
 }
