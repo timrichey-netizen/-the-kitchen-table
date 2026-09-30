@@ -134,32 +134,4 @@ filters.forEach(button => button.addEventListener('click', () => {
 populateCuisineFilter();
 updateRecipes();
 
-const KITCHEN_TABLE_WORKER='https://the-kitchen-table-plate-generator.the-kitchen-table.workers.dev';
-
-function workerRecipeImageUrl(slug) {
-  return KITCHEN_TABLE_WORKER + '/recipe-image?id=' + encodeURIComponent(slug);
-}
-
-function enableRecipeImageFallback(img) {
-  const original = img.getAttribute('src') || '';
-  const match = original.match(/^assets\/(.+)\.png$/);
-  if (!match) return;
-
-  const slug = match[1];
-  const loadWorkerImage = () => {
-    if (img.dataset.workerFallback === '1') return;
-    img.dataset.workerFallback = '1';
-    img.style.display = '';
-    img.style.visibility = '';
-    img.src = workerRecipeImageUrl(slug);
-  };
-
-  img.addEventListener('error', loadWorkerImage);
-
-  // Covers images that failed before this script attached its listener.
-  if (img.complete && img.naturalWidth === 0) {
-    loadWorkerImage();
-  }
-}
-
-document.querySelectorAll('img[src^="assets/"]').forEach(enableRecipeImageFallback);
+// Recipe images are served only from local GitHub Pages assets.

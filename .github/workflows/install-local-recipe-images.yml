@@ -1,0 +1,64 @@
+name: Install local recipe images
+
+on:
+  push:
+    paths:
+      - ".local-image-loader/**"
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check loader asset
+        id: check
+        run: |
+          if [ -f .local-image-loader/recipe-sprite.jpg ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Pillow
+        if: steps.check.outputs.ready == 'true'
+        run: python -m pip install pillow
+
+      - name: Create local recipe images
+        if: steps.check.outputs.ready == 'true'
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+
+          slugs = ["new-orleans-shrimp-corn-bisque","roasted-hasselback-vegetable-bake","mediterranean-lemon-shallot-chicken","moo-shu-chicken","rigatoni-pecorino-crispy-guanciale","shrimp-piccata-skewers","florentine-steak-balsamic-rosemary","spaghetti-carbonara","bucatini-amatriciana","butternut-squash-ravioli-brown-butter-sage","rigatoni-amatriciana","cioppino","pasta-alla-norma","rigatoni-pork-ragu-ricotta","lemon-stuffed-grilled-branzino","spaghetti-shrimp-lemon-mint-pecorino","pasta-cacio-e-pepe","penne-arrabbiata","osso-buco-red-wine","pasta-e-ceci","creamy-seafood-risotto","gnocchi-alla-sorrentina","eggplant-parmesan","perciatelli-alla-gricia","fettuccine-alfredo","pork-chop-milanese","spaghetti-with-mussels","bolognese-meat-sauce","ricotta-parmesan-gnudi","pasta-ncasciata","zucchini-risotto-shrimp","veal-piccata","pasta-aglio-e-olio","tuscan-white-bean-soup","venetian-shrimp-polenta","swordfish-sicilian-style","stracotto-di-fassona-piemontese","buttery-shrimp-peas-potatoes","boeuf-bourguignon","spicy-cajun-shrimp-corn-chowder","shrimp-shell-sauce","cajun-seasoning-mix","miso-mushroom-leek-pasta","salsa-criolla","cajun-garlic-butter-shrimp","spinach-salad-bagna-cauda","baked-cauliflower","roasted-tomato-caprese-salad","spicy-garlic-butter-shrimp-lime-chili-dip","shrimp-saganaki","fresh-pasta-hard-soft-flour","elegant-roasted-potato-stacks","herb-crusted-salmon","roasted-broccoli-lemon-almonds","tomatillo-avocado-salsa-cauliflower-rice","shrimp-herb-stir-fry","roasted-eggplant-cherry-tomatoes","zucchini-lasagna","sage-mushroom-chicken-skillet","roasted-green-beans-parmesan","sauteed-spinach-garlic","lemon-tomatillo-salsa-verde","fish-stock","roasted-zucchini-lemon-thyme"]
+          cols = 8
+          sheet = Image.open(".local-image-loader/recipe-sprite.jpg").convert("RGB")
+          tile_w = sheet.width // cols
+          tile_h = sheet.height // 8
+          out = Path("assets")
+          out.mkdir(exist_ok=True)
+
+          for i, slug in enumerate(slugs):
+              col, row = i % cols, i // cols
+              crop = sheet.crop((
+                  col * tile_w,
+                  row * tile_h,
+                  (col + 1) * tile_w,
+                  (row + 1) * tile_h
+              ))
+              crop.save(out / f"{slug}.png", "PNG", optimize=True)
+          PY
+
+      - name: Commit local images
+        if: steps.check.outputs.ready == 'true'
+        run: |
+          rm -rf .local-image-loader
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets .local-image-loader
+          git commit -m "Install local recipe images"
+          git push
