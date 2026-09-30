@@ -107,6 +107,25 @@ function rateLimit(ip){
   if(recent.length>=max){requestBuckets.set(ip,recent);return false;}
   recent.push(now);requestBuckets.set(ip,recent);return true;
 }
+function singleDishPrompt(id){
+  const r=RECIPES[id];
+  return [
+    "Create one photorealistic editorial food photograph of a SINGLE individual plated portion.",
+    "Dish: "+r.name+".",
+    "Appearance: "+r.visual+".",
+    "Use a tasteful neutral ceramic plate or bowl appropriate to the dish.",
+    "Warm natural restaurant light, realistic texture, appetizing but believable presentation.",
+    "No text, labels, menus, hands, people, logos, duplicate plates, or unrelated foods.",
+    "Landscape composition suitable for a recipe website card and recipe hero image."
+  ].join("\n");
+}
+function base64Bytes(b64){
+  const bin=atob(b64);
+  const bytes=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+  return bytes;
+}
+
 function promptFor(ids,presentation,portion,background,plateType,plateShape){
   const chosen=ids.map(id=>RECIPES[id]);
   return [
@@ -133,7 +152,7 @@ function promptFor(ids,presentation,portion,background,plateType,plateShape){
 }
 
 export default{
-  async fetch(request,env){
+  async fetch(request,env,ctx){
     const origin=request.headers.get("Origin")||"";
     const url=new URL(request.url);
 
@@ -144,6 +163,49 @@ export default{
 
     if(request.method==="GET"&&url.pathname==="/health"){
       return response({ok:true,service:"the-kitchen-table-plate-generator"},200,origin);
+    }
+
+    if(request.method==="GET"&&url.pathname==="/recipe-image"){
+      const id=url.searchParams.get("id");
+      if(!id||!RECIPES[id]) return response({error:"Unknown recipe."},404,origin);
+      if(!env.OPENAI_API_KEY) return response({error:"Server is missing OPENAI_API_KEY."},500,origin);
+
+      const cache=caches.default;
+      const cacheKey=new Request(url.toString(),{method:"GET"});
+      const cached=await cache.match(cacheKey);
+      if(cached) return cached;
+
+      const api=await fetch("https://api.openai.com/v1/images/generations",{
+        method:"POST",
+        headers:{
+          "Authorization":`Bearer ${env.OPENAI_API_KEY}`,
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          model:"gpt-image-2.5-flare",
+          prompt:singleDishPrompt(id),
+          size:"1536x1024",
+          quality:"high",
+          output_format:"jpeg",
+          output_compression:85,
+          n:1
+        })
+      });
+      const result=await api.json();
+      if(!api.ok) return response({error:result?.error?.message||"Image generation failed."},502,origin);
+      const b64=result?.data?.[0]?.b64_json;
+      if(!b64) return response({error:"No image was returned."},502,origin);
+
+      const img=new Response(base64Bytes(b64),{
+        status:200,
+        headers:{
+          "Content-Type":"image/jpeg",
+          "Cache-Control":"public, max-age=31536000, immutable",
+          "Access-Control-Allow-Origin":"*"
+        }
+      });
+      ctx.waitUntil(cache.put(cacheKey,img.clone()));
+      return img;
     }
 
     if(request.method!=="POST"||url.pathname!=="/generate-plate"){
