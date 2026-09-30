@@ -39,7 +39,21 @@
 <div class="planner-controls"><button class="button secondary" id="plannerBack" type="button" disabled>Back</button><button class="button primary" id="plannerNext" type="button">Next</button></div>
 </section>
 
-<section class="planner-results" id="plannerResults" hidden><p class="eyebrow">YOUR MEAL</p><h2>A Kitchen Table menu for you.</h2><p id="plannerSummary" class="recipe-intro"></p><div class="planned-meal-grid" id="plannedMealGrid"></div><div class="planner-result-actions"><button class="button secondary" id="plannerRestart" type="button">Plan another meal</button><a class="button primary" href="plate-composer.html">Compose this visually</a></div></section>
+<section class="planner-results" id="plannerResults" hidden><p class="eyebrow">YOUR MEAL</p><h2>A Kitchen Table menu for you.</h2><p id="plannerSummary" class="recipe-intro"></p><div class="planned-meal-grid" id="plannedMealGrid"></div>
+    <section class="pairing-index" id="pairingIndex">
+      <div class="pairing-index-heading">
+        <p class="eyebrow">PAIRING INDEX</p>
+        <h2>More dishes that work with your main.</h2>
+        <p class="muted-copy">Choose alternatives or add another course.</p>
+      </div>
+      <div class="pairing-index-grid">
+        <div class="pairing-column"><h3>Sides</h3><div id="pairingSides"></div></div>
+        <div class="pairing-column"><h3>Vegetables</h3><div id="pairingVegetables"></div></div>
+        <div class="pairing-column"><h3>Salads</h3><div id="pairingSalads"></div></div>
+        <div class="pairing-column"><h3>Desserts</h3><div id="pairingDesserts"></div></div>
+      </div>
+    </section>
+    <div class="planner-result-actions"><button class="button secondary" id="plannerRestart" type="button">Plan another meal</button><a class="button primary" href="plate-composer.html">Compose this visually</a></div></section>
 </div></main>
 
 <footer class="footer"><div class="container footer-wrap"><p>© <span id="year"></span> The Kitchen Table</p><a href="index.html#recipes">All recipes</a></div></footer>
