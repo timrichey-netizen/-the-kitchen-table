@@ -105,6 +105,18 @@
                 <option value="french-faience">French faience plate</option>
               </select>
             </label>
+
+            <label>
+              <span>Plate shape</span>
+              <select id="plateShape">
+                <option value="round">Round</option>
+                <option value="oval">Oval</option>
+                <option value="square">Square</option>
+                <option value="rectangular">Rectangular</option>
+                <option value="organic">Organic free-form</option>
+                <option value="rimmed-round">Wide-rimmed round</option>
+              </select>
+            </label>
           </div>
 
           <button id="composeButton" class="button primary composer-button" disabled>Generate Plate</button>
@@ -150,6 +162,7 @@
   const portion=document.getElementById('portionStyle');
   const background=document.getElementById('backgroundStyle');
   const plateType=document.getElementById('plateType');
+  const plateShape=document.getElementById('plateShape');
 
   const DEFAULT_WORKER_URL='https://the-kitchen-table-plate-generator.the-kitchen-table.workers.dev';
   let workerBaseUrl=normalizeWorkerUrl(localStorage.getItem(STORAGE_KEY)||DEFAULT_WORKER_URL);
@@ -182,7 +195,7 @@
     names.innerHTML=items.map(i=>'<span>'+i.dataset.label+'</span>').join('');
   }
   checks.forEach(c=>c.addEventListener('change',refresh));
-  [presentation,portion,background,plateType].forEach(el=>el.addEventListener('change',refresh));
+  [presentation,portion,background,plateType,plateShape].forEach(el=>el.addEventListener('change',refresh));
   button.addEventListener('click',async()=>{
     const items=selected();
     if(!items.length)return;
