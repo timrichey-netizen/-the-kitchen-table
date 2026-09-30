@@ -57,9 +57,9 @@ function matchesBroadCategory(card, filter) {
   const text = cardHaystack(card);
 
   switch (filter) {
-    case 'mains':
-      return /(dinner|chicken|beef|pork|veal)/.test(categories) ||
-             /steak|chicken|pork chop|osso buco|stracotto|boeuf/.test(text);
+    case 'meat':
+      return /(chicken|beef|pork|veal)/.test(categories) ||
+             /steak|chicken|pork|veal|osso buco|stracotto|boeuf|bolognese|ragù|ragu/.test(text);
     case 'pasta':
       return categories.includes('pasta') ||
              /spaghetti|rigatoni|fettuccine|bucatini|gnocchi|ravioli|pasta|carbonara|risotto/.test(text);
