@@ -34,6 +34,7 @@ const ASIAN_SUBCUISINES = [
 ];
 
 const CUISINES = [
+  ['Uruguayan', ['uruguayan','uruguay','chivito','gramajo','caruso','puchero','pamplona']],
   ['Italian', ['italian','roman','sicilian','venetian','piedmont','campanian']],
   ['French', ['french','bourguignon']],
   ['British', ['british','sticky toffee','spotted dick','bread pudding']],
