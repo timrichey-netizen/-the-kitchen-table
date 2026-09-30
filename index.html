@@ -57,19 +57,28 @@
             <p class="eyebrow">RECIPE COLLECTION</p>
             <h2>Find something delicious.</h2>
           </div>
-          <label class="search-wrap">
-            <span class="sr-only">Search recipes</span>
-            <input id="recipeSearch" type="search" placeholder="Search recipes…" autocomplete="off" />
-          </label>
+          <div class="recipe-search-controls">
+            <label class="search-wrap">
+              <span class="sr-only">Search recipes</span>
+              <input id="recipeSearch" type="search" placeholder="Search recipes…" autocomplete="off" />
+            </label>
+            <label class="cuisine-wrap">
+              <span class="sr-only">Filter by cuisine</span>
+              <select id="cuisineFilter" aria-label="Filter recipes by cuisine">
+                <option value="all">All cuisines</option>
+              </select>
+            </label>
+          </div>
         </div>
 
         <div id="categories" class="filters" aria-label="Recipe categories">
           <button class="filter active" data-filter="all">All</button>
-          <button class="filter" data-filter="soup">Soups</button>
+          <button class="filter" data-filter="mains">Mains</button>
+          <button class="filter" data-filter="pasta">Pasta</button>
           <button class="filter" data-filter="seafood">Seafood</button>
-          <button class="filter" data-filter="dinner">Dinner</button>
-          <button class="filter" data-filter="chicken">Chicken</button>
-          <button class="filter" data-filter="vegetable">Vegetables</button><button class="filter" data-filter="pasta">Pasta</button><button class="filter" data-filter="italian">Italian</button><button class="filter" data-filter="beef">Beef</button><button class="filter" data-filter="pork">Pork</button><button class="filter" data-filter="salad">Salads</button><button class="filter" data-filter="sauce">Sauces</button><button class="filter" data-filter="seasoning">Seasonings</button>
+          <button class="filter" data-filter="vegetables">Vegetables &amp; Sides</button>
+          <button class="filter" data-filter="soups-salads">Soups &amp; Salads</button>
+          <button class="filter" data-filter="extras">Extras</button>
         </div>
 
         <div class="recipe-grid" id="recipeGrid">
