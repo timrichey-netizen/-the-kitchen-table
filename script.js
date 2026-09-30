@@ -1,3 +1,11 @@
+// Keep a normal page load anchored on the opening image.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('pageshow', () => {
+  if (!location.hash || location.hash === '#top') {
+    requestAnimationFrame(() => window.scrollTo(0, 0));
+  }
+});
+
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
 
