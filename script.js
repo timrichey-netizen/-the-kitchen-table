@@ -38,3 +38,19 @@ filters.forEach(button => button.addEventListener('click', () => {
   activeFilter = button.dataset.filter || 'all';
   updateRecipes();
 }));
+
+const KITCHEN_TABLE_WORKER='https://the-kitchen-table-plate-generator.the-kitchen-table.workers.dev';
+const dynamicRecipeIds=new Set([
+'shrimp-piccata-skewers','spaghetti-carbonara','pasta-cacio-e-pepe','rigatoni-amatriciana','perciatelli-alla-gricia',
+'fettuccine-alfredo','pasta-e-ceci','rigatoni-pecorino-crispy-guanciale','rigatoni-pork-ragu-ricotta','penne-arrabbiata',
+'bucatini-amatriciana','spaghetti-shrimp-lemon-mint-pecorino','osso-buco-red-wine','eggplant-parmesan',
+'lemon-stuffed-grilled-branzino','creamy-seafood-risotto','florentine-steak-balsamic-rosemary','pasta-alla-norma',
+'pork-chop-milanese','gnocchi-alla-sorrentina','cioppino','spaghetti-with-mussels','butternut-squash-ravioli-brown-butter-sage'
+]);
+document.querySelectorAll('img[src^="assets/"]').forEach(img=>{
+  const m=img.getAttribute('src').match(/^assets\/(.+)\.png$/);
+  if(!m||!dynamicRecipeIds.has(m[1])) return;
+  img.style.display='';
+  img.style.visibility='';
+  img.src=KITCHEN_TABLE_WORKER+'/recipe-image?id='+encodeURIComponent(m[1]);
+});
