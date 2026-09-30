@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "the-kitchen-table-plate-generator",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-30",
+  "workers_dev": true,
+  "preview_urls": true,
+  "secrets": {
+    "required": ["OPENAI_API_KEY"]
+  }
+}
