@@ -54,3 +54,14 @@
 .prompt-preview p{color:var(--muted);font-size:.92rem}
 @media(max-width:900px){.composer-grid{grid-template-columns:1fr}.composer-preview{position:static}.composer-recipe-list{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.composer-recipe-list{grid-template-columns:1fr}.composer-panel,.composer-preview{padding:18px}.plate-preview-stage,.selected-image-grid{min-height:320px;height:320px}.composer-heading-row{flex-direction:column}}
+
+/* Plate Composer backend connection */
+.backend-setup{display:grid;grid-template-columns:minmax(220px,.7fr) minmax(320px,1.3fr);gap:14px 24px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:0 0 28px;box-shadow:0 8px 24px rgba(78,49,32,.06)}
+.backend-setup p{margin:4px 0 0;color:var(--muted);font-size:.9rem}
+.backend-controls{display:flex;gap:10px;align-items:center}
+.backend-controls input{min-width:0;flex:1;padding:11px 13px;border:1px solid var(--line);border-radius:12px;font:inherit}
+.backend-status{grid-column:1/-1;min-height:1.2em;font-size:.88rem;font-weight:700}
+.backend-status.connected{color:#2f6b3a}.backend-status.error{color:#9b3828}.backend-status.testing{color:var(--muted)}
+.generated-plate-image{width:100%;height:100%;object-fit:cover;display:block}
+.generation-status.working{background:#f5f0e8;border-color:#ddd0bd}.generation-status.success{background:#eef7ed;border-color:#bcd7b8}.generation-status.error{background:#fff0ed;border-color:#e5b8ae}
+@media(max-width:760px){.backend-setup{grid-template-columns:1fr}.backend-controls{flex-direction:column;align-items:stretch}.backend-status{grid-column:auto}}
