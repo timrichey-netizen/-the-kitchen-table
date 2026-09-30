@@ -299,3 +299,38 @@ const MOTHER_SAUCE_LINKS = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MOTHER SAUCE CROSS-REFERENCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('')+'<a class="text-link" href="mother-sauces-guide.html">See all five French mother sauces →</a>';
   btn.insertAdjacentElement("afterend",wrap);
 })();
+
+const BECHAMEL_DAUGHTER_LINKS = {
+  "zucchini-lasagna.html":[["MORNAY","Optional cheesy Béchamel variation for the creamy layer.","mornay-sauce.html"],["CRÈME SAUCE","Optional richer white-sauce layer.","creme-sauce.html"]],
+  "eggplant-parmesan.html":[["MORNAY","Optional cheese-sauce variation for a richer baked finish.","mornay-sauce.html"]],
+  "gnocchi-gorgonzola.html":[["MORNAY","Related cheese-sauce technique for a smoother cheese emulsion.","mornay-sauce.html"]],
+  "roasted-broccoli-lemon-almonds.html":[["CHEDDAR CHEESE SAUCE","Optional pairing for roasted broccoli.","cheddar-cheese-sauce.html"],["MORNAY","Optional French cheese-sauce pairing.","mornay-sauce.html"]],
+  "roasted-cauliflower.html":[["CHEDDAR CHEESE SAUCE","Optional pairing for roasted cauliflower.","cheddar-cheese-sauce.html"],["MORNAY","Optional gratin-style sauce.","mornay-sauce.html"]],
+  "baked-cauliflower.html":[["CHEDDAR CHEESE SAUCE","Optional classic cheese-sauce pairing.","cheddar-cheese-sauce.html"],["MORNAY","Optional French cheese-sauce pairing.","mornay-sauce.html"]],
+  "pure-de-papas.html":[["CHEDDAR CHEESE SAUCE","Optional topping for mashed potatoes.","cheddar-cheese-sauce.html"]],
+  "classic-american-hamburger.html":[["CHEDDAR CHEESE SAUCE","Optional pourable cheddar topping.","cheddar-cheese-sauce.html"]],
+  "herb-crusted-salmon.html":[["MUSTARD SAUCE","Dijon Béchamel makes a complementary creamy sauce for salmon.","mustard-sauce-bechamel.html"],["NANTUA","Optional shellfish-enriched classical pairing.","nantua-sauce.html"]],
+  "lemon-stuffed-grilled-branzino.html":[["NANTUA","Optional classical shellfish sauce for delicate fish.","nantua-sauce.html"],["MUSTARD SAUCE","Optional Dijon cream-style pairing.","mustard-sauce-bechamel.html"]],
+  "shrimp-piccata-skewers.html":[["NANTUA","Optional shellfish-on-shellfish classical sauce pairing.","nantua-sauce.html"]],
+  "venetian-shrimp-polenta.html":[["NANTUA","Optional crayfish/shrimp-enriched sauce variation.","nantua-sauce.html"]],
+  "creamy-seafood-risotto.html":[["NANTUA","Related shellfish cream-sauce profile; use sparingly as an optional garnish.","nantua-sauce.html"]],
+  "pork-chop-milanese.html":[["MUSTARD SAUCE","Optional creamy Dijon sauce for pork.","mustard-sauce-bechamel.html"]],
+  "veal-piccata.html":[["MUSTARD SAUCE","Optional creamy mustard variation for veal.","mustard-sauce-bechamel.html"]],
+  "mediterranean-lemon-shallot-chicken.html":[["MUSTARD SAUCE","Optional creamy Dijon pairing for chicken.","mustard-sauce-bechamel.html"],["SOUBISE","Optional onion-forward classical pairing.","soubise-sauce.html"]],
+  "sage-mushroom-chicken-skillet.html":[["CRÈME SAUCE","Optional cream-enriched Béchamel variation for the pan sauce.","creme-sauce.html"]],
+  "zurich-style-veal-creamy-mushroom-sauce.html":[["CRÈME SAUCE","Related classical cream-sauce technique.","creme-sauce.html"],["SOUBISE","Optional onion-enriched variation.","soubise-sauce.html"]],
+  "florentine-steak-balsamic-rosemary.html":[["SOUBISE","Optional mellow onion sauce for steak.","soubise-sauce.html"]],
+  "bife-de-chorizo-chimichurri.html":[["SOUBISE","Optional classical onion sauce alternative to chimichurri.","soubise-sauce.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=BECHAMEL_DAUGHTER_LINKS[p];
+  if(!refs || !refs.length || document.querySelector(".daughter-sauce-tip")) return;
+  const anchor=document.querySelector(".mother-sauce-tip") || document.querySelector(".print-button");
+  if(!anchor) return;
+  const wrap=document.createElement("div");
+  wrap.className="daughter-sauce-tip";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fffaf2";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">BÉCHAMEL DAUGHTER SAUCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('')+'<a class="text-link" href="bechamel-sauce.html">See Béchamel and all daughter sauces →</a>';
+  anchor.insertAdjacentElement("afterend",wrap);
+})();
