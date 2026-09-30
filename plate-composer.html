@@ -29,10 +29,7 @@
       <p class="eyebrow">BUILD A MEAL VISUALLY</p>
       <h1 class="composer-title">Compose a Plate</h1>
       <p class="recipe-intro composer-intro">Choose one to four recipes and generate one photorealistic image of the composed plate.</p>
-
-      <div class="backend-setup" id="backendSetup"><div><strong>Image generator backend</strong><p>Connected to the Kitchen Table Cloudflare image-generation backend.</p></div><div class="backend-controls"><input id="workerUrl" type="url" value="https://the-kitchen-table-plate-generator.the-kitchen-table.workers.dev" autocomplete="off" readonly><button id="saveWorkerUrl" class="button secondary" type="button">Test Connection</button></div><div id="backendStatus" class="backend-status" aria-live="polite"></div></div>
-
-      <div class="composer-grid">
+<div class="composer-grid">
         <section class="composer-panel">
           <div class="composer-heading-row">
             <div>
@@ -140,13 +137,9 @@
   const presentation=document.getElementById('presentation');
   const portion=document.getElementById('portionStyle');
   const background=document.getElementById('backgroundStyle');
-  const workerInput=document.getElementById('workerUrl');
-  const saveWorkerButton=document.getElementById('saveWorkerUrl');
-  const backendStatus=document.getElementById('backendStatus');
 
   const DEFAULT_WORKER_URL='https://the-kitchen-table-plate-generator.the-kitchen-table.workers.dev';
   let workerBaseUrl=normalizeWorkerUrl(localStorage.getItem(STORAGE_KEY)||DEFAULT_WORKER_URL);
-  workerInput.value=workerBaseUrl;
 
   function normalizeWorkerUrl(v){
     let url=String(v||'').trim();
@@ -175,40 +168,13 @@
     preview.innerHTML='<div class="selected-image-grid count-'+items.length+'">'+items.map(i=>'<img src="'+i.dataset.image+'" alt="'+i.dataset.label.replace(/"/g,'&quot;')+'">').join('')+'</div>';
     names.innerHTML=items.map(i=>'<span>'+i.dataset.label+'</span>').join('');
   }
-  async function testBackend(url){
-    backendStatus.textContent='Testing connection…';
-    backendStatus.className='backend-status testing';
-    try{
-      const response=await fetch(url+'/health',{cache:'no-store'});
-      const data=await response.json();
-      if(!response.ok||!data.ok) throw new Error('Health check failed');
-      backendStatus.textContent='Connected to Cloudflare Worker.';
-      backendStatus.className='backend-status connected';
-    }catch(e){
-      backendStatus.textContent='Could not connect. Check the Worker URL and deployment.';
-      backendStatus.className='backend-status error';
-    }
-  }
-  saveWorkerButton.addEventListener('click',async()=>{
-    const url=normalizeWorkerUrl(workerInput.value);
-    if(!url.startsWith('https://')){
-      backendStatus.textContent='Enter a valid https:// Worker URL.';
-      backendStatus.className='backend-status error';
-      return;
-    }
-    workerBaseUrl=url;
-    workerInput.value=url;
-    localStorage.setItem(STORAGE_KEY,url);
-    await testBackend(url);
-  });
   checks.forEach(c=>c.addEventListener('change',refresh));
   [presentation,portion,background].forEach(el=>el.addEventListener('change',refresh));
   button.addEventListener('click',async()=>{
     const items=selected();
     if(!items.length)return;
     if(!workerBaseUrl){
-      setStatus('error','Cloudflare Worker URL required.','Paste the deployed Worker URL above and choose Save & Test.');
-      document.getElementById('backendSetup').scrollIntoView({behavior:'smooth',block:'center'});
+      setStatus('error','Image generator unavailable.','The secure image-generation service is not configured.');
       return;
     }
     button.disabled=true; button.textContent='Generating…';
@@ -238,7 +204,6 @@
       button.disabled=false; button.textContent='Generate Plate';
     }
   });
-  if(workerBaseUrl)testBackend(workerBaseUrl);
   refresh();
 })();
 </script>
