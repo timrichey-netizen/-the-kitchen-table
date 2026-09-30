@@ -48,8 +48,17 @@ const CUISINES = [
   ['American', ['american','san francisco']]
 ];
 
+function normalizeSearchText(value) {
+  return (value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
 function cardHaystack(card) {
-  return `${card.dataset.search || ''} ${card.textContent || ''}`.toLowerCase();
+  return normalizeSearchText(`${card.dataset.search || ''} ${card.textContent || ''}`);
 }
 
 function detectCuisine(card) {
@@ -159,7 +168,8 @@ function matchesBroadCategory(card, filter) {
 }
 
 function updateRecipes() {
-  const q = (search?.value || '').trim().toLowerCase();
+  const q = normalizeSearchText(search?.value || '');
+  const terms = q ? q.split(/\s+/).filter(Boolean) : [];
   let visible = 0;
 
   cards.forEach(card => {
@@ -172,17 +182,32 @@ function updateRecipes() {
       activeCuisine !== 'Asian' ||
       activeAsianSubcuisine === 'all' ||
       asianSubcuisine === activeAsianSubcuisine;
-    const matchesSearch = !q || haystack.includes(q);
+    const matchesSearch = terms.length === 0 || terms.every(term => haystack.includes(term));
     const show = matchesCategory && matchesCuisine && matchesAsianSubcuisine && matchesSearch;
 
     card.hidden = !show;
+    card.style.display = show ? '' : 'none';
     if (show) visible++;
   });
 
   if (noResults) noResults.hidden = visible !== 0;
 }
 
-search?.addEventListener('input', updateRecipes);
+search?.addEventListener('input', () => {
+  // Searching should search the entire cookbook rather than only the currently
+  // selected cuisine or food-type filter.
+  if ((search.value || '').trim()) {
+    activeFilter = 'all';
+    activeCuisine = 'all';
+    activeAsianSubcuisine = 'all';
+    filters.forEach(b => b.classList.toggle('active', (b.dataset.filter || 'all') === 'all'));
+    cuisineFiltersWrap?.querySelectorAll('.cuisine-filter').forEach(b => {
+      b.classList.toggle('active', (b.dataset.cuisine || '') === 'all');
+    });
+    if (asianSubcuisineGroup) asianSubcuisineGroup.hidden = true;
+  }
+  updateRecipes();
+});
 
 
 filters.forEach(button => button.addEventListener('click', () => {
