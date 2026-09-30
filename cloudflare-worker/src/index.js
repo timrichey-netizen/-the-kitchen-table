@@ -5,6 +5,15 @@ const ALLOWED_ORIGINS=new Set([
 ]);
 
 const RECIPES={
+  "baked-cauliflower":{name:"Baked Cauliflower",visual:"golden baked cauliflower gratin with tender florets, creamy cheese sauce, browned breadcrumb crust and thyme"},
+  "roasted-tomato-caprese-salad":{name:"Roasted Tomato Caprese Salad",visual:"roasted tomato Caprese salad with blistered red and yellow tomatoes, fresh mozzarella, basil, olive oil and balsamic"},
+  "spicy-garlic-butter-shrimp-lime-chili-dip":{name:"Spicy Garlic Butter Shrimp with Lime Chili Dip",visual:"spicy garlic butter shrimp with charred edges, red chile, cilantro, lime wedge and a small ramekin of creamy lime chili dip"},
+  "shrimp-saganaki":{name:"Shrimp Saganaki",visual:"Greek shrimp saganaki in rustic skillet with tomato sauce, plump shrimp, crumbled feta, parsley and oregano"},
+  "fresh-pasta-hard-soft-flour":{name:"Fresh Pasta with Hard + Soft Flour",visual:"fresh handmade pasta nests on a floured wooden board, golden egg dough with visible fine flour dusting"},
+  "elegant-roasted-potato-stacks":{name:"Elegant Roasted Potato Stacks",visual:"elegant individual roasted potato stack with thin golden crisp layers, butter sheen and fresh thyme"},
+  "herb-crusted-salmon":{name:"Herb-Crusted Salmon",visual:"roasted salmon fillet with crisp green herb and breadcrumb crust, lemon wedge and fresh dill"},
+  "roasted-broccoli-lemon-almonds":{name:"Roasted Broccoli with Lemon & Almonds",visual:"charred roasted broccoli with lemon zest, toasted sliced almonds and lemon wedge on a neutral ceramic plate"},
+  "tomatillo-avocado-salsa-cauliflower-rice":{name:"Tomatillo-Avocado Salsa over Cauliflower Rice",visual:"cauliflower rice bowl topped generously with chunky roasted tomatillo avocado salsa, red onion, cilantro and lime"},
   "buttery-shrimp-peas-potatoes":{name:"Buttery Shrimp with Peas and Potatoes",visual:"plump buttery shrimp with golden baby potatoes and bright green peas in garlic herb butter, finished with parsley and lemon"},
   "boeuf-bourguignon":{name:"Boeuf Bourguignon",visual:"classic boeuf bourguignon with tender beef chunks, glossy red wine sauce, mushrooms, pearl onions, carrots and thyme"},
   "spicy-cajun-shrimp-corn-chowder":{name:"Spicy Cajun-Style Shrimp & Corn Chowder",visual:"creamy spicy Cajun shrimp and corn chowder with shrimp, sweet corn, potatoes, celery, herbs and warm paprika color"},
