@@ -135,17 +135,31 @@ populateCuisineFilter();
 updateRecipes();
 
 const KITCHEN_TABLE_WORKER='https://the-kitchen-table-plate-generator.the-kitchen-table.workers.dev';
-const dynamicRecipeIds=new Set([
-'shrimp-piccata-skewers','spaghetti-carbonara','pasta-cacio-e-pepe','rigatoni-amatriciana','perciatelli-alla-gricia',
-'fettuccine-alfredo','pasta-e-ceci','rigatoni-pecorino-crispy-guanciale','rigatoni-pork-ragu-ricotta','penne-arrabbiata',
-'bucatini-amatriciana','spaghetti-shrimp-lemon-mint-pecorino','osso-buco-red-wine','eggplant-parmesan',
-'lemon-stuffed-grilled-branzino','creamy-seafood-risotto','florentine-steak-balsamic-rosemary','pasta-alla-norma',
-'pork-chop-milanese','gnocchi-alla-sorrentina','cioppino','spaghetti-with-mussels','butternut-squash-ravioli-brown-butter-sage','bolognese-meat-sauce','shrimp-herb-stir-fry','roasted-eggplant-cherry-tomatoes','zucchini-lasagna','sage-mushroom-chicken-skillet','roasted-green-beans-parmesan','sauteed-spinach-garlic','lemon-tomatillo-salsa-verde','fish-stock','roasted-zucchini-lemon-thyme'
-]);
-document.querySelectorAll('img[src^="assets/"]').forEach(img=>{
-  const m=img.getAttribute('src').match(/^assets\/(.+)\.png$/);
-  if(!m||!dynamicRecipeIds.has(m[1])) return;
-  img.style.display='';
-  img.style.visibility='';
-  img.src=KITCHEN_TABLE_WORKER+'/recipe-image?id='+encodeURIComponent(m[1]);
-});
+
+function workerRecipeImageUrl(slug) {
+  return KITCHEN_TABLE_WORKER + '/recipe-image?id=' + encodeURIComponent(slug);
+}
+
+function enableRecipeImageFallback(img) {
+  const original = img.getAttribute('src') || '';
+  const match = original.match(/^assets\/(.+)\.png$/);
+  if (!match) return;
+
+  const slug = match[1];
+  const loadWorkerImage = () => {
+    if (img.dataset.workerFallback === '1') return;
+    img.dataset.workerFallback = '1';
+    img.style.display = '';
+    img.style.visibility = '';
+    img.src = workerRecipeImageUrl(slug);
+  };
+
+  img.addEventListener('error', loadWorkerImage);
+
+  // Covers images that failed before this script attached its listener.
+  if (img.complete && img.naturalWidth === 0) {
+    loadWorkerImage();
+  }
+}
+
+document.querySelectorAll('img[src^="assets/"]').forEach(enableRecipeImageFallback);
