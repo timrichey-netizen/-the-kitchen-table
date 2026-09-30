@@ -28,7 +28,9 @@
     <div class="container">
       <p class="eyebrow">BUILD A MEAL VISUALLY</p>
       <h1 class="composer-title">Compose a Plate</h1>
-      <p class="recipe-intro composer-intro">Choose one to four recipes and generate one photorealistic image of the composed plate.</p>\n\n      <div class="backend-setup" id="backendSetup"><div><strong>Image generator backend</strong><p>Connected to the Kitchen Table Cloudflare image-generation backend.</p></div><div class="backend-controls"><input id="workerUrl" type="url" placeholder="https://the-kitchen-table-plate-generator.the-kitchen-table.workers.dev" autocomplete="off"><button id="saveWorkerUrl" class="button secondary" type="button">Save &amp; Test</button></div><div id="backendStatus" class="backend-status" aria-live="polite"></div></div>
+      <p class="recipe-intro composer-intro">Choose one to four recipes and generate one photorealistic image of the composed plate.</p>
+
+      <div class="backend-setup" id="backendSetup"><div><strong>Image generator backend</strong><p>Connected to the Kitchen Table Cloudflare image-generation backend.</p></div><div class="backend-controls"><input id="workerUrl" type="url" value="https://the-kitchen-table-plate-generator.the-kitchen-table.workers.dev" autocomplete="off" readonly><button id="saveWorkerUrl" class="button secondary" type="button">Test Connection</button></div><div id="backendStatus" class="backend-status" aria-live="polite"></div></div>
 
       <div class="composer-grid">
         <section class="composer-panel">
@@ -146,7 +148,12 @@
   let workerBaseUrl=normalizeWorkerUrl(localStorage.getItem(STORAGE_KEY)||DEFAULT_WORKER_URL);
   workerInput.value=workerBaseUrl;
 
-  function normalizeWorkerUrl(v){return String(v||'').trim().replace(/\\/+$/,'').replace(/\\/generate-plate$/,'');}
+  function normalizeWorkerUrl(v){
+    let url=String(v||'').trim();
+    while(url.endsWith('/')) url=url.slice(0,-1);
+    if(url.endsWith('/generate-plate')) url=url.slice(0,-15);
+    return url;
+  }
   function selected(){return checks.filter(c=>c.checked);}
   function setStatus(kind,title,message){
     status.hidden=false;
@@ -184,7 +191,7 @@
   }
   saveWorkerButton.addEventListener('click',async()=>{
     const url=normalizeWorkerUrl(workerInput.value);
-    if(!/^https:\\/\\//i.test(url)){
+    if(!url.startsWith('https://')){
       backendStatus.textContent='Enter a valid https:// Worker URL.';
       backendStatus.className='backend-status error';
       return;
