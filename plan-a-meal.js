@@ -71,11 +71,55 @@ var dessertPairings={
 'Any':['Seasonal Fruit Tart','Vanilla Panna Cotta','Dark Chocolate Mousse']
 };
 
-var state={ingredients:[],cuisine:'Any',mainType:'any',sideType:'any',vegType:'any'};
+var recipeIndex={
+'mediterranean-lemon-shallot-chicken.html':{proteins:['chicken'],prep:['low-carb','high-protein','mediterranean','saute','one-pan','quick']},
+'sage-mushroom-chicken-skillet.html':{proteins:['chicken','mushroom'],prep:['low-carb','high-protein','saute','one-pan','quick']},
+'veal-piccata.html':{proteins:['veal'],prep:['low-carb','high-protein','saute','one-pan','quick']},
+'boeuf-bourguignon.html':{proteins:['beef'],prep:['high-protein','braise']},
+'pork-chop-milanese.html':{proteins:['pork'],prep:['high-protein','saute','quick']},
+'shrimp-piccata-skewers.html':{proteins:['shrimp','shellfish'],prep:['low-carb','high-protein','grill','mediterranean','quick']},
+'shrimp-saganaki.html':{proteins:['shrimp','shellfish','cheese'],prep:['low-carb','high-protein','mediterranean','bake','one-pan','quick']},
+'lemon-stuffed-grilled-branzino.html':{proteins:['fish'],prep:['low-carb','high-protein','mediterranean','grill']},
+'herb-crusted-salmon.html':{proteins:['fish'],prep:['low-carb','high-protein','bake','roast','quick','mediterranean']},
+'shrimp-herb-stir-fry.html':{proteins:['shrimp','shellfish'],prep:['low-carb','high-protein','stir-fry','quick','one-pan']},
+'spaghetti-carbonara.html':{proteins:['eggs','pork','cheese'],prep:['high-protein','saute','quick']},
+'pasta-cacio-e-pepe.html':{proteins:['cheese'],prep:['quick']},
+'pasta-alla-norma.html':{proteins:['cheese'],prep:['mediterranean','saute']},
+'miso-mushroom-leek-pasta.html':{proteins:['mushroom','tofu'],prep:['saute','quick']},
+'creamy-seafood-risotto.html':{proteins:['shrimp','shellfish','fish','cheese'],prep:['high-protein','saute']},
+'zucchini-risotto-shrimp.html':{proteins:['shrimp','shellfish','cheese'],prep:['high-protein','mediterranean','saute']},
+'zucchini-lasagna.html':{proteins:['cheese','eggs'],prep:['low-carb','high-protein','bake','mediterranean']},
+'elegant-roasted-potato-stacks.html':{proteins:['cheese'],prep:['bake','roast']},
+'roasted-zucchini-lemon-thyme.html':{proteins:[],prep:['low-carb','mediterranean','roast','quick']},
+'roasted-broccoli-lemon-almonds.html':{proteins:['nuts'],prep:['low-carb','mediterranean','roast','quick']},
+'roasted-green-beans-parmesan.html':{proteins:['cheese'],prep:['low-carb','roast','quick']},
+'pasta-aglio-e-olio.html':{proteins:[],prep:['saute','quick','mediterranean']},
+'tomatillo-avocado-salsa-cauliflower-rice.html':{proteins:[],prep:['low-carb','quick']},
+'lemon-tomatillo-salsa-verde.html':{proteins:[],prep:['low-carb','quick']},
+'spinach-salad-bagna-cauda.html':{proteins:['fish','cheese'],prep:['low-carb','mediterranean','quick']},
+'roasted-tomato-caprese-salad.html':{proteins:['cheese'],prep:['low-carb','mediterranean','roast','quick']},
+'sauteed-spinach-garlic.html':{proteins:[],prep:['low-carb','saute','quick']},
+'roasted-eggplant-cherry-tomatoes.html':{proteins:[],prep:['low-carb','mediterranean','roast']},
+'baked-cauliflower.html':{proteins:['cheese'],prep:['low-carb','bake','roast']}
+};
+
+var state={proteins:[],prepStyles:[],cuisine:'Any',mainType:'any',sideType:'any',vegType:'any'};
 var steps=[].slice.call(document.querySelectorAll('.planner-step')),back=document.getElementById('plannerBack'),next=document.getElementById('plannerNext'),card=document.getElementById('plannerCard'),results=document.getElementById('plannerResults'),progress=document.getElementById('plannerProgressBar'),step=0;
 document.querySelectorAll('.planner-options').forEach(function(group){var key=group.dataset.key,multi=group.classList.contains('multi');group.querySelectorAll('button').forEach(function(button){button.addEventListener('click',function(){if(multi){button.classList.toggle('selected');state[key]=[].slice.call(group.querySelectorAll('button.selected')).map(function(b){return b.dataset.value;});}else{group.querySelectorAll('button').forEach(function(b){b.classList.remove('selected');});button.classList.add('selected');state[key]=button.dataset.value;}});});});
 function showStep(){steps.forEach(function(el,i){el.classList.toggle('active',i===step);});back.disabled=step===0;next.textContent=step===steps.length-1?'Build my meal':'Next';progress.style.width=((step+1)/steps.length*100)+'%';}
-function score(r,role,type){var n=0;if(r.role!==role)return-999;if(type!=='any'&&r.type===type)n+=5;if(state.cuisine!=='Any'&&r.cuisine===state.cuisine)n+=4;if(r.cuisine==='Any')n+=1;state.ingredients.forEach(function(t){if(r.tags.indexOf(t)>=0)n+=3;});return n;}
+function score(r,role,type){
+  var n=0;
+  if(r.role!==role)return-999;
+  if(type!=='any'&&r.type===type)n+=5;
+  if(state.cuisine!=='Any'&&r.cuisine===state.cuisine)n+=4;
+  if(r.cuisine==='Any')n+=1;
+
+  var idx=recipeIndex[r.url]||{proteins:[],prep:[]};
+  state.proteins.forEach(function(p){if(idx.proteins.indexOf(p)>=0)n+=4;});
+  state.prepStyles.forEach(function(p){if(idx.prep.indexOf(p)>=0)n+=3;});
+
+  return n;
+}
 function pick(role,type,excluded){excluded=excluded||[];var ranked=recipes.filter(function(r){return excluded.indexOf(r.url)<0;}).map(function(r){return{r:r,s:score(r,role,type)};}).filter(function(x){return x.s>-999;}).sort(function(a,b){return b.s-a.s||a.r.title.localeCompare(b.r.title);});return ranked.length?ranked[0].r:null;}
 function mainTags(main){
   return (main&&main.tags)||[];
@@ -86,7 +130,7 @@ function pairingScore(item,main){
   if(item.cuisines.indexOf(cuisine)>=0)n+=5;
   if(cuisine==='Any')n+=1;
   mainTags(main).forEach(function(tag){if(item.tags.indexOf(tag)>=0)n+=3;});
-  state.ingredients.forEach(function(tag){if(item.tags.indexOf(tag)>=0)n+=1;});
+  state.proteins.forEach(function(tag){if(item.tags.indexOf(tag)>=0)n+=1;});
   return n;
 }
 function topPairings(kind,main,count){
@@ -111,6 +155,6 @@ function renderPairings(main){
     return '<a class="pairing-item" href="'+d.url+'"><span>'+d.title+'</span><small>View recipe →</small></a>';
   }).join('');
 }
-function buildMeal(){var main=pick('main',state.mainType),side=pick('side',state.sideType,[main&&main.url]),veg=pick('veg',state.vegType,[main&&main.url,side&&side.url]),meal=[['Main',main],['Side',side],['Vegetable / Salad',veg]];document.getElementById('plannerSummary').textContent=(state.cuisine==='Any'?'A mixed-cuisine meal':'A '+state.cuisine+'-leaning meal')+(state.ingredients.length?' built around '+state.ingredients.join(', ')+'.':'.');document.getElementById('plannedMealGrid').innerHTML=meal.map(function(item){return'<article class="planned-dish"><p class="eyebrow">'+item[0]+'</p><h3>'+item[1].title+'</h3><a class="text-link" href="'+item[1].url+'">View recipe →</a></article>';}).join('');renderPairings(main);card.hidden=true;results.hidden=false;results.scrollIntoView({behavior:'smooth',block:'start'});}
+function buildMeal(){var main=pick('main',state.mainType),side=pick('side',state.sideType,[main&&main.url]),veg=pick('veg',state.vegType,[main&&main.url,side&&side.url]),meal=[['Main',main],['Side',side],['Vegetable / Salad',veg]];document.getElementById('plannerSummary').textContent=(state.cuisine==='Any'?'A mixed-cuisine meal':'A '+state.cuisine+'-leaning meal')+(state.proteins.length?' built around '+state.proteins.join(', ')+'.':'.')+(state.prepStyles.length?' Preferred style: '+state.prepStyles.join(', ')+'.':'');document.getElementById('plannedMealGrid').innerHTML=meal.map(function(item){return'<article class="planned-dish"><p class="eyebrow">'+item[0]+'</p><h3>'+item[1].title+'</h3><a class="text-link" href="'+item[1].url+'">View recipe →</a></article>';}).join('');renderPairings(main);card.hidden=true;results.hidden=false;results.scrollIntoView({behavior:'smooth',block:'start'});}
 next.addEventListener('click',function(){if(step<steps.length-1){step++;showStep();}else buildMeal();});back.addEventListener('click',function(){if(step>0){step--;showStep();}});document.getElementById('plannerRestart').addEventListener('click',function(){step=0;card.hidden=false;results.hidden=true;showStep();window.scrollTo({top:0,behavior:'smooth'});});showStep();
 })();
