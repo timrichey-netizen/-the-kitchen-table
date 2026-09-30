@@ -18,72 +18,114 @@
 <section class="planner-card" id="plannerCard">
 <div class="planner-step active" data-step="0">
 <p class="planner-step-count">Question 1 of 6</p>
-<h2>What types of proteins sound good?</h2>
-<p class="muted-copy">Choose as many as you like, including non-meat proteins.</p>
-<div class="planner-options multi" data-key="proteins">
+<h2>What are you in the mood for?</h2>
+<p class="muted-copy">Choose one or several directions.</p>
+<div class="planner-options multi" data-key="mood">
+<button type="button" data-value="comfort">Comfort food</button>
+<button type="button" data-value="light">Light & fresh</button>
+<button type="button" data-value="hearty">Hearty</button>
+<button type="button" data-value="spicy">Spicy</button>
+<button type="button" data-value="elegant">Elegant</button>
+<button type="button" data-value="rustic">Rustic</button>
+<button type="button" data-value="healthy">Healthy</button>
+<button type="button" data-value="indulgent">Indulgent</button>
+<button type="button" data-value="mediterranean">Mediterranean</button>
+<button type="button" data-value="italian">Italian</button>
+<button type="button" data-value="french">French</button>
+<button type="button" data-value="cajun">Cajun / Creole</button>
+</div></div>
+
+<div class="planner-step" data-step="1">
+<p class="planner-step-count">Question 2 of 6</p>
+<h2>What main ingredient would you like?</h2>
+<p class="muted-copy">Pick as many as sound good.</p>
+<div class="planner-options multi" data-key="mainIngredients">
 <button type="button" data-value="chicken">Chicken</button>
 <button type="button" data-value="beef">Beef</button>
 <button type="button" data-value="pork">Pork</button>
 <button type="button" data-value="veal">Veal</button>
-<button type="button" data-value="lamb">Lamb</button>
 <button type="button" data-value="shrimp">Shrimp</button>
 <button type="button" data-value="fish">Fish</button>
 <button type="button" data-value="shellfish">Shellfish</button>
 <button type="button" data-value="eggs">Eggs</button>
 <button type="button" data-value="cheese">Cheese / Dairy</button>
 <button type="button" data-value="beans">Beans / Legumes</button>
-<button type="button" data-value="tofu">Tofu / Soy</button>
 <button type="button" data-value="mushroom">Mushrooms</button>
-<button type="button" data-value="nuts">Nuts / Seeds</button>
-</div></div>
-
-<div class="planner-step" data-step="1">
-<p class="planner-step-count">Question 2 of 6</p>
-<h2>What type of preparation would you like to do?</h2>
-<p class="muted-copy">Choose one or several styles.</p>
-<div class="planner-options multi" data-key="prepStyles">
-<button type="button" data-value="low-carb">Low carb</button>
-<button type="button" data-value="high-protein">High protein</button>
-<button type="button" data-value="mediterranean">Mediterranean</button>
-<button type="button" data-value="grill">BBQ / Grill</button>
-<button type="button" data-value="bake">Baking</button>
-<button type="button" data-value="saute">Sautéing</button>
-<button type="button" data-value="steam">Steaming</button>
-<button type="button" data-value="broil">Broiling</button>
-<button type="button" data-value="quick">Quick & Easy</button>
-<button type="button" data-value="roast">Roasting</button>
-<button type="button" data-value="braise">Slow Braise</button>
-<button type="button" data-value="stir-fry">Stir-Fry</button>
-<button type="button" data-value="one-pan">One-Pan / Skillet</button>
+<button type="button" data-value="vegetables">Vegetables</button>
+<button type="button" data-value="pasta">Pasta</button>
+<button type="button" data-value="rice">Rice</button>
 </div></div>
 
 <div class="planner-step" data-step="2">
 <p class="planner-step-count">Question 3 of 6</p>
-<h2>Which cuisine are you in the mood for?</h2>
-<div class="planner-options single" data-key="cuisine">
-<button type="button" data-value="Italian">Italian</button><button type="button" data-value="French">French</button><button type="button" data-value="Mediterranean">Mediterranean</button><button type="button" data-value="Greek">Greek</button><button type="button" data-value="Cajun / Creole">Cajun / Creole</button><button type="button" data-value="Asian-Inspired">Asian-Inspired</button><button type="button" data-value="Latin-Inspired">Latin-Inspired</button><button type="button" data-value="Any">Surprise me</button>
+<h2>How much time and effort do you want to spend?</h2>
+<div class="planner-options single" data-key="effort">
+<button type="button" data-value="quick">Quick & easy — about 30 minutes</button>
+<button type="button" data-value="moderate">Moderate — about 45–60 minutes</button>
+<button type="button" data-value="project">Cooking project — 1–2 hours</button>
+<button type="button" data-value="slow">Slow cooking / braise — several hours</button>
+<button type="button" data-value="any">No preference</button>
 </div></div>
 
 <div class="planner-step" data-step="3">
 <p class="planner-step-count">Question 4 of 6</p>
-<h2>What kind of main would you like?</h2>
-<div class="planner-options single" data-key="mainType">
-<button type="button" data-value="meat">Meat</button><button type="button" data-value="seafood">Seafood</button><button type="button" data-value="pasta">Pasta</button><button type="button" data-value="rice">Rice / Risotto</button><button type="button" data-value="vegetarian">Vegetarian</button><button type="button" data-value="any">No preference</button>
-</div></div>
+<h2>Any dietary restrictions, allergies, dislikes, or ingredients to avoid?</h2>
+<p class="muted-copy">Choose common restrictions and/or type anything else below.</p>
+<div class="planner-options multi" data-key="restrictions">
+<button type="button" data-value="low-carb">Low carb</button>
+<button type="button" data-value="vegetarian">Vegetarian</button>
+<button type="button" data-value="pescatarian">Pescatarian</button>
+<button type="button" data-value="gluten-free">Gluten-free</button>
+<button type="button" data-value="dairy-free">Dairy-free</button>
+<button type="button" data-value="nut-free">Nut-free</button>
+<button type="button" data-value="shellfish-free">No shellfish</button>
+<button type="button" data-value="no-pork">No pork</button>
+</div>
+<label class="planner-freeform"><span>Anything else to avoid?</span><input id="avoidText" type="text" placeholder="e.g. mushrooms, capers, olives"></label>
+</div>
 
 <div class="planner-step" data-step="4">
 <p class="planner-step-count">Question 5 of 6</p>
-<h2>What kind of side would you like?</h2>
-<div class="planner-options single" data-key="sideType">
-<button type="button" data-value="potato">Potatoes</button><button type="button" data-value="pasta">Pasta</button><button type="button" data-value="rice">Rice</button><button type="button" data-value="vegetable">Vegetable side</button><button type="button" data-value="sauce">Sauce / condiment</button><button type="button" data-value="any">No preference</button>
+<h2>What kind of meal is this?</h2>
+<div class="planner-options single" data-key="occasion">
+<button type="button" data-value="weeknight">Weeknight</button>
+<button type="button" data-value="family">Family dinner</button>
+<button type="button" data-value="date">Date night</button>
+<button type="button" data-value="entertaining">Entertaining</button>
+<button type="button" data-value="special">Special occasion</button>
+<button type="button" data-value="outdoor">Outdoor / patio</button>
+<button type="button" data-value="holiday">Holiday</button>
 </div></div>
 
 <div class="planner-step" data-step="5">
 <p class="planner-step-count">Question 6 of 6</p>
-<h2>Finish with a vegetable or salad.</h2>
-<div class="planner-options single" data-key="vegType">
-<button type="button" data-value="green">Green vegetable</button><button type="button" data-value="roasted">Roasted vegetables</button><button type="button" data-value="salad">Salad</button><button type="button" data-value="tomato">Tomato-based</button><button type="button" data-value="any">No preference</button>
+<h2>Would you like dessert? If so, what kind?</h2>
+<div class="planner-options single" data-key="dessert">
+<button type="button" data-value="none">No dessert</button>
+<button type="button" data-value="chocolate">Chocolate</button>
+<button type="button" data-value="fruit">Fruit</button>
+<button type="button" data-value="lemon">Lemon / citrus</button>
+<button type="button" data-value="creamy">Creamy / custard</button>
+<button type="button" data-value="cake">Cake</button>
+<button type="button" data-value="pie">Pie / tart</button>
+<button type="button" data-value="surprise">Surprise me</button>
 </div></div>
+
+<details class="planner-customize">
+<summary>Customize your meal</summary>
+<div class="planner-customize-grid">
+<label><span>🥂 Drinks</span><select id="customDrinks"><option value="">No preference</option><option>Wine</option><option>Cocktails</option><option>Beer</option><option>Mocktails</option><option>Nonalcoholic pairing</option></select></label>
+<label><span>🥗 Appetizer</span><select id="customAppetizer"><option value="">No preference</option><option>Light starter</option><option>Soup</option><option>Salad</option><option>Finger food</option><option>Substantial appetizer</option></select></label>
+<label><span>🥖 Bread or extra side</span><select id="customExtraSide"><option value="">No preference</option><option>Bread / rolls</option><option>Rice</option><option>Potatoes</option><option>Additional vegetable</option><option>Extra pasta</option></select></label>
+<label><span>🧀 Cheese course</span><select id="customCheese"><option value="">No</option><option>Yes</option></select></label>
+<label><span>☕ After-dinner drink</span><select id="customAfterDrink"><option value="">No preference</option><option>Coffee</option><option>Espresso</option><option>Tea</option><option>Digestif</option><option>Cocktail</option></select></label>
+<label><span>🍽️ Presentation</span><select id="customPresentation"><option value="">No preference</option><option>Casual</option><option>Family-style</option><option>Restaurant-style</option><option>Buffet</option><option>Outdoor dining</option></select></label>
+<label><span>👥 How many people?</span><input id="customPeople" type="number" min="1" max="50" placeholder="4"></label>
+<label><span>💰 Budget</span><select id="customBudget"><option value="">No preference</option><option>Everyday</option><option>Moderate</option><option>Splurge</option></select></label>
+<label class="custom-wide"><span>🛒 Use what you already have?</span><input id="customPantry" type="text" placeholder="List refrigerator or pantry ingredients"></label>
+<label class="custom-wide"><span>🔥 Cooking method / equipment</span><select id="customEquipment"><option value="">No preference</option><option>Grill</option><option>Oven</option><option>Stovetop</option><option>Smoker</option><option>Air fryer</option><option>Slow cooker</option></select></label>
+</div>
+</details>
 
 <div class="planner-controls"><button class="button secondary" id="plannerBack" type="button" disabled>Back</button><button class="button primary" id="plannerNext" type="button">Next</button></div>
 </section>
