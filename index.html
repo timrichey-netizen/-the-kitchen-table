@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A personal recipe collection with favorite dishes, searchable categories, and printable recipe cards." />
+  <title>The Kitchen Table</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section class="opening-page" aria-label="The Kitchen Table welcome page">
+    <img class="opening-image" src="assets/the-kitchen-table-hero.png" alt="A sunlit French country farmhouse table set for a meal in the Normandy countryside, with the words The Kitchen Table and Food Brings People Together." />
+    <a class="opening-explore" href="#recipes" aria-label="Explore recipes"></a>
+  </section>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top">The Kitchen Table</a>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#recipes">Recipes</a>
+        <a href="#categories">Categories</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">A PERSONAL COOKBOOK</p>
+          <h1>Recipes worth making again.</h1>
+          <p class="hero-copy">A growing collection of favorite recipes for family dinners, weekends, holidays, and everything in between.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#recipes">Browse recipes</a>
+            <a class="button secondary" href="#categories">View categories</a>
+          </div>
+        </div>
+        <div class="featured-card">
+          <div class="featured-photo" aria-hidden="true">🍤</div>
+          <p class="eyebrow">FEATURED RECIPE</p>
+          <h2>New Orleans Shrimp & Corn Bisque</h2>
+          <p>Rich, creamy, savory, and packed with Gulf-style flavor.</p>
+          <a href="#shrimp-bisque" class="text-link">View recipe →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="recipes" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">RECIPE COLLECTION</p>
+            <h2>Find something delicious.</h2>
+          </div>
+          <label class="search-wrap">
+            <span class="sr-only">Search recipes</span>
+            <input id="recipeSearch" type="search" placeholder="Search recipes…" autocomplete="off" />
+          </label>
+        </div>
+
+        <div id="categories" class="filters" aria-label="Recipe categories">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="soup">Soups</button>
+          <button class="filter" data-filter="seafood">Seafood</button>
+          <button class="filter" data-filter="dinner">Dinner</button>
+          <button class="filter" data-filter="chicken">Chicken</button>
+          <button class="filter" data-filter="vegetable">Vegetables</button>
+        </div>
+
+        <div class="recipe-grid" id="recipeGrid">
+          <article class="recipe-card" data-category="soup seafood dinner" data-search="new orleans shrimp corn bisque soup seafood cajun creole">
+            <div class="recipe-image shrimp">🍤</div>
+            <div class="recipe-card-body">
+              <div class="recipe-meta"><span>Seafood</span><span>45 min</span></div>
+              <h3>New Orleans Shrimp & Corn Bisque</h3>
+              <p>A creamy Southern-style bisque with shrimp, sweet corn, aromatics, and warm Creole seasoning.</p>
+              <a href="#shrimp-bisque" class="text-link">View recipe →</a>
+            </div>
+          </article>
+
+          <article class="recipe-card" data-category="vegetable dinner" data-search="hasselback root vegetable zucchini bake roasted vegetables dinner">
+            <div class="recipe-image veg">🥕</div>
+            <div class="recipe-card-body">
+              <div class="recipe-meta"><span>Vegetables</span><span>70 min</span></div>
+              <h3>Roasted Hasselback Root Vegetable & Zucchini Bake</h3>
+              <p>Thinly sliced vegetables roasted until tender, caramelized, and crisp at the edges.</p>
+              <a href="#vegetable-bake" class="text-link">View recipe →</a>
+            </div>
+          </article>
+
+          <article class="recipe-card" data-category="chicken dinner" data-search="mediterranean lemon shallot chicken fresh herbs garlic white wine capers chicken dinner">
+            <img class="recipe-photo" src="assets/mediterranean-lemon-shallot-chicken.png" alt="Mediterranean Lemon Shallot Chicken with fresh herbs, lemon, shallots and capers" />
+            <div class="recipe-card-body">
+              <div class="recipe-meta"><span>Chicken · Mediterranean</span><span>45–50 min</span></div>
+              <h3>Mediterranean Lemon Shallot Chicken with Fresh Herbs</h3>
+              <p>Bright, savory chicken with caramelized shallots, garlic, lemon, white wine, capers, and plenty of fresh herbs.</p>
+              <a href="#lemon-shallot-chicken" class="text-link">View recipe →</a>
+            </div>
+          </article>
+
+          <article class="recipe-card" data-category="dinner" data-search="moo shu chicken chinese pancakes dinner cabbage mushrooms">
+            <div class="recipe-image chicken">🥢</div>
+            <div class="recipe-card-body">
+              <div class="recipe-meta"><span>Dinner</span><span>40 min</span></div>
+              <h3>Moo Shu Chicken</h3>
+              <p>Savory chicken, cabbage, mushrooms, egg, and hoisin wrapped in thin Mandarin pancakes.</p>
+              <a href="#moo-shu" class="text-link">View recipe →</a>
+            </div>
+          </article>
+        </div>
+        <p id="noResults" class="no-results" hidden>No recipes found. Try another search.</p>
+      </div>
+    </section>
+
+    <section class="section alt recipe-detail" id="shrimp-bisque">
+      <div class="container recipe-layout">
+        <div>
+          <p class="eyebrow">SOUP · SEAFOOD</p>
+          <h2>New Orleans Shrimp & Corn Bisque</h2>
+          <p class="recipe-intro">Creamy, deeply savory, and slightly sweet from the corn. Serve with crusty French bread and a bright green salad.</p>
+          <div class="stats">
+            <span><strong>Prep</strong> 15 min</span>
+            <span><strong>Cook</strong> 30 min</span>
+            <span><strong>Serves</strong> 6</span>
+          </div>
+          <button class="button secondary print-button" onclick="window.print()">Print recipe</button>
+        </div>
+        <div class="ingredients-panel">
+          <h3>Ingredients</h3>
+          <ul>
+            <li>1 lb peeled and deveined shrimp</li>
+            <li>4 tbsp butter</li>
+            <li>1 small onion, finely diced</li>
+            <li>1 celery stalk, finely diced</li>
+            <li>1 small bell pepper, finely diced</li>
+            <li>2 cloves garlic, minced</li>
+            <li>¼ cup all-purpose flour</li>
+            <li>3 cups seafood or chicken stock</li>
+            <li>2 cups corn kernels</li>
+            <li>1 cup heavy cream</li>
+            <li>1 tsp Creole seasoning, plus more to taste</li>
+            <li>Salt, black pepper, and hot sauce to taste</li>
+            <li>Sliced green onion or parsley for garnish</li>
+          </ul>
+        </div>
+        <div class="instructions-panel">
+          <h3>Directions</h3>
+          <ol>
+            <li>Melt the butter in a heavy pot over medium heat. Add onion, celery, and bell pepper. Cook until softened, about 6–8 minutes.</li>
+            <li>Add garlic and cook for 30 seconds. Sprinkle in the flour and stir continuously for 2–3 minutes.</li>
+            <li>Slowly whisk in the stock. Add corn and Creole seasoning. Bring to a gentle simmer and cook for 10 minutes.</li>
+            <li>Stir in the cream. Add shrimp and simmer just until the shrimp are opaque and cooked through, about 3–5 minutes.</li>
+            <li>Season with salt, pepper, and hot sauce. Garnish with green onion or parsley and serve hot.</li>
+          </ol>
+          <div class="cook-note"><strong>Cook's note:</strong> For a thicker bisque, blend 1–2 cups of the soup before adding the shrimp, then return it to the pot.</div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section alt recipe-detail" id="lemon-shallot-chicken">
+      <div class="container">
+        <img class="recipe-feature-image" src="assets/mediterranean-lemon-shallot-chicken.png" alt="Mediterranean Lemon Shallot Chicken with Fresh Herbs recipe" />
+      </div>
+      <div class="container recipe-layout">
+        <div>
+          <p class="eyebrow">CHICKEN · MEDITERRANEAN</p>
+          <h2>Mediterranean Lemon Shallot Chicken with Fresh Herbs</h2>
+          <p class="recipe-intro">A bright, savory chicken dish with caramelized shallots, garlic, lemon, white wine, and plenty of fresh herbs. The pan sauce is especially good with crusty bread, roasted potatoes, rice, or couscous.</p>
+          <div class="stats"><span><strong>Prep</strong> 15 min</span><span><strong>Cook</strong> 30–35 min</span><span><strong>Serves</strong> 4</span></div>
+          <button class="button secondary print-button" onclick="window.print()">Print recipe</button>
+        </div>
+        <div class="ingredients-panel">
+          <h3>Ingredients</h3>
+          <ul>
+            <li>4 boneless, skinless chicken breasts or 6–8 boneless chicken thighs</li><li>Kosher salt and freshly ground black pepper</li><li>1 teaspoon dried oregano</li><li>½ teaspoon smoked or sweet paprika</li><li>2 tablespoons extra-virgin olive oil</li><li>4 large shallots, thinly sliced</li><li>4 garlic cloves, minced</li><li>½ cup dry white wine</li><li>¾ cup chicken stock</li><li>1 large lemon</li><li>2 tablespoons fresh lemon juice</li><li>1 teaspoon Dijon mustard</li><li>1 tablespoon unsalted butter</li><li>2 tablespoons chopped fresh parsley</li><li>1 tablespoon chopped fresh dill</li><li>1 tablespoon chopped fresh oregano</li><li>1 tablespoon chopped fresh basil</li><li>1 teaspoon fresh thyme leaves</li><li>2 tablespoons capers, drained (optional)</li><li>¼ teaspoon red-pepper flakes (optional)</li>
+          </ul>
+        </div>
+        <div class="instructions-panel">
+          <h3>Preparation</h3>
+          <ol>
+            <li><strong>Season the chicken.</strong> Pat the chicken dry. Season generously with salt, pepper, oregano, and paprika. Zest the lemon and reserve the zest.</li>
+            <li><strong>Brown the chicken.</strong> Heat the olive oil in a large skillet over medium-high heat. Add the chicken and cook until deeply golden, about 4–5 minutes per side. It does not need to be completely cooked through yet. Transfer to a plate.</li>
+            <li><strong>Caramelize the shallots.</strong> Reduce the heat to medium. Add the shallots to the same skillet with a small pinch of salt. Cook for 5–7 minutes, stirring occasionally, until soft and lightly caramelized. Add the garlic and red-pepper flakes and cook for about 30 seconds.</li>
+            <li><strong>Build the lemon-shallot sauce.</strong> Add the white wine and scrape up the browned bits from the bottom of the skillet. Simmer for 2–3 minutes, until reduced by roughly half. Add the chicken stock, Dijon, lemon zest, lemon juice, and capers.</li>
+            <li><strong>Finish the chicken.</strong> Return the chicken and any accumulated juices to the skillet. Reduce the heat to medium-low, cover partially, and simmer for 8–12 minutes, depending on thickness, until the chicken reaches 165°F / 74°C.</li>
+            <li><strong>Add the fresh herbs.</strong> Transfer the chicken to a serving platter. Swirl the butter into the sauce. Remove from the heat and stir in the parsley, dill, oregano, basil, and thyme. Taste and adjust with additional lemon juice, salt, or pepper. Spoon the warm lemon-shallot-herb sauce generously over the chicken.</li>
+          </ol>
+          <div class="cook-note"><strong>Mediterranean variation:</strong> Add a handful of halved Castelvetrano or Kalamata olives with the chicken stock. A few crumbles of feta added just before serving also work beautifully.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section recipe-detail" id="vegetable-bake">
+      <div class="container recipe-layout compact">
+        <div>
+          <p class="eyebrow">VEGETABLES</p>
+          <h2>Roasted Hasselback Root Vegetable & Zucchini Bake</h2>
+          <p class="recipe-intro">A colorful side dish with crisp edges, tender centers, olive oil, garlic, and herbs.</p>
+        </div>
+        <div class="ingredients-panel"><h3>Ingredients</h3><ul><li>2 zucchini</li><li>2 carrots</li><li>2 parsnips</li><li>1 sweet potato</li><li>3 tbsp olive oil</li><li>2 cloves garlic</li><li>Thyme or rosemary</li><li>Salt and pepper</li></ul></div>
+        <div class="instructions-panel"><h3>Directions</h3><ol><li>Heat oven to 400°F.</li><li>Thinly slice vegetables and arrange tightly in a baking dish.</li><li>Brush with olive oil, garlic, herbs, salt, and pepper.</li><li>Cover and bake 35 minutes. Uncover and roast 20–25 minutes more until browned and tender.</li></ol></div>
+      </div>
+    </section>
+
+    <section class="section alt recipe-detail" id="moo-shu">
+      <div class="container recipe-layout compact">
+        <div>
+          <p class="eyebrow">DINNER</p>
+          <h2>Moo Shu Chicken</h2>
+          <p class="recipe-intro">A fast stir-fry of chicken, vegetables, mushrooms, and egg served with hoisin and Mandarin pancakes.</p>
+        </div>
+        <div class="ingredients-panel"><h3>Ingredients</h3><ul><li>1 lb chicken breast, thinly sliced</li><li>3 cups shredded cabbage</li><li>1 cup sliced mushrooms</li><li>2 eggs</li><li>2 green onions</li><li>2 tbsp soy sauce</li><li>1 tbsp sesame oil</li><li>Hoisin sauce</li><li>Mandarin pancakes</li></ul></div>
+        <div class="instructions-panel"><h3>Directions</h3><ol><li>Scramble eggs quickly in a hot wok; remove.</li><li>Stir-fry chicken until nearly cooked.</li><li>Add mushrooms and cabbage and cook until just tender.</li><li>Return eggs to the pan and season with soy sauce and sesame oil.</li><li>Serve in warm pancakes with hoisin sauce.</li></ol></div>
+      </div>
+    </section>
+
+    <section id="about" class="section about-section">
+      <div class="container split">
+        <div><p class="eyebrow">ABOUT THIS COLLECTION</p><h2>Keep the recipes you love in one place.</h2></div>
+        <div><p>This site is designed as a personal digital cookbook. Add family recipes, recipes discovered while traveling, favorite restaurant-inspired dishes, and anything else you want to save.</p><p>Because the site is static, it can be published free with GitHub Pages.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-wrap"><p>© <span id="year"></span> The Kitchen Table</p><a href="#top">Back to top ↑</a></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
