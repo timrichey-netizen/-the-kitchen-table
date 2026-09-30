@@ -267,3 +267,35 @@ function setRecipeOfTheDay() {
 }
 
 setRecipeOfTheDay();
+
+const MOTHER_SAUCE_LINKS = {
+  "zucchini-lasagna.html": [["BÉCHAMEL","Optional classical variation: use béchamel as part of the creamy layer.","bechamel-sauce.html"]],
+  "eggplant-parmesan.html": [["BÉCHAMEL","Optional richer baked variation.","bechamel-sauce.html"],["SAUCE TOMATE","Related tomato-sauce foundation.","sauce-tomate.html"]],
+  "new-orleans-shrimp-corn-bisque.html": [["VELOUTÉ","Related roux-and-stock thickening technique.","veloute-sauce.html"]],
+  "spicy-cajun-shrimp-corn-chowder.html": [["VELOUTÉ","Related stock-and-cream sauce technique.","veloute-sauce.html"]],
+  "boeuf-bourguignon.html": [["ESPAGNOLE","Related classical brown-sauce technique using stock, flour, aromatics, and reduction.","espagnole-sauce.html"]],
+  "stracotto-di-fassona-piemontese.html": [["ESPAGNOLE","Related brown-stock and braising-sauce technique.","espagnole-sauce.html"]],
+  "gnocchi-alla-sorrentina.html": [["SAUCE TOMATE","Related tomato-sauce foundation.","sauce-tomate.html"]],
+  "pasta-alla-norma.html": [["SAUCE TOMATE","Related tomato-sauce foundation.","sauce-tomate.html"]],
+  "penne-arrabbiata.html": [["SAUCE TOMATE","Related tomato-sauce foundation.","sauce-tomate.html"]],
+  "rigatoni-amatriciana.html": [["SAUCE TOMATE","Related tomato-sauce foundation.","sauce-tomate.html"]],
+  "bucatini-amatriciana.html": [["SAUCE TOMATE","Related tomato-sauce foundation.","sauce-tomate.html"]],
+  "milanesa-napolitana.html": [["SAUCE TOMATE","Related tomato-sauce foundation.","sauce-tomate.html"]],
+  "shrimp-saganaki.html": [["SAUCE TOMATE","Related tomato-sauce foundation.","sauce-tomate.html"]],
+  "shrimp-creole.html": [["SAUCE TOMATE","Creole tomato sauce uses a related tomato-and-aromatics foundation.","sauce-tomate.html"]],
+  "noquis-con-tuco.html": [["SAUCE TOMATE","Tuco uses a related long-simmered tomato-sauce foundation.","sauce-tomate.html"]],
+  "herb-crusted-salmon.html": [["HOLLANDAISE","Optional classical pairing for salmon.","hollandaise-sauce.html"]],
+  "lemon-stuffed-grilled-branzino.html": [["HOLLANDAISE","Optional classical pairing for delicate fish.","hollandaise-sauce.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=MOTHER_SAUCE_LINKS[p];
+  if(!refs || !refs.length || document.querySelector(".mother-sauce-tip")) return;
+  const btn=document.querySelector(".print-button");
+  if(!btn) return;
+  const wrap=document.createElement("div");
+  wrap.className="mother-sauce-tip";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#faf7f2";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MOTHER SAUCE CROSS-REFERENCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('')+'<a class="text-link" href="mother-sauces-guide.html">See all five French mother sauces →</a>';
+  btn.insertAdjacentElement("afterend",wrap);
+})();
