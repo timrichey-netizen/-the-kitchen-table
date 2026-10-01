@@ -45,6 +45,45 @@ function addMetricIngredientMeasurements(root) {
     return v + ' ' + unit;
   }
 
+  var dryCupWeights = [
+    [/all[- ]purpose flour|bread flour|cake flour|flour\b/i,120],
+    [/granulated sugar|white sugar|sugar\b/i,200],
+    [/brown sugar/i,220],
+    [/powdered sugar|confectioners'? sugar|icing sugar/i,120],
+    [/rice\b/i,185],
+    [/quinoa\b/i,170],
+    [/oats?|rolled oats/i,90],
+    [/barley\b/i,200],
+    [/couscous\b/i,173],
+    [/cornmeal|polenta|grits/i,160],
+    [/farro\b/i,190],
+    [/bulgur\b/i,140],
+    [/millet\b/i,200],
+    [/buckwheat\b/i,170],
+    [/wild rice/i,160],
+    [/freekeh\b/i,180],
+    [/wheat berries/i,190],
+    [/breadcrumbs?|panko/i,110],
+    [/cocoa powder|cacao powder/i,85],
+    [/cornstarch/i,128],
+    [/baking powder/i,192],
+    [/baking soda/i,220],
+    [/salt\b|kosher salt|sea salt/i,288],
+    [/black pepper|pepper flakes|chili powder|paprika|cumin|turmeric|cayenne|oregano|basil|thyme|rosemary|sage/i,96],
+    [/parmesan|pecorino|grated cheese/i,100],
+    [/shredded cheese|cheddar|mozzarella/i,113],
+    [/nuts?|almonds?|walnuts?|pecans?|peanuts?/i,120],
+    [/seeds?|sesame|sunflower|pumpkin seeds/i,145],
+    [/chocolate chips?|chopped chocolate/i,170]
+  ];
+
+  function dryGramsPerCup(line) {
+    for (var i=0;i<dryCupWeights.length;i++) {
+      if (dryCupWeights[i][0].test(line)) return dryCupWeights[i][1];
+    }
+    return null;
+  }
+
   function metricFor(line) {
     if (/\([^)]*(?:g|kg|ml|mL|l|L)\b[^)]*\)/.test(line)) return null;
     var qtyPattern = '(\\d+\\s+[¼½¾⅓⅔⅛⅜⅝⅞]|\\d+\\s+\\d+\\/\\d+|\\d+\\/\\d+|[¼½¾⅓⅔⅛⅜⅝⅞]|\\d+(?:\\.\\d+)?)';
@@ -54,8 +93,17 @@ function addMetricIngredientMeasurements(root) {
     var q = parseQty(m[1]);
     if (q == null) return null;
     var u = m[2].toLowerCase();
+
     if (/^(lb|lbs|pound|pounds)$/.test(u)) return pretty(q * 453.59237, 'g');
     if (/^(oz|ounce|ounces)$/.test(u)) return pretty(q * 28.349523125, 'g');
+
+    var gramsPerCup = dryGramsPerCup(line);
+    if (gramsPerCup != null) {
+      if (/^(cup|cups)$/.test(u)) return pretty(q * gramsPerCup, 'g');
+      if (/^(tbsp|tablespoon|tablespoons)$/.test(u)) return pretty(q * gramsPerCup / 16, 'g');
+      if (/^(tsp|teaspoon|teaspoons)$/.test(u)) return pretty(q * gramsPerCup / 48, 'g');
+    }
+
     if (/^(qt|quart|quarts)$/.test(u)) return pretty(q * 0.946352946, 'L');
     if (/^(gal|gallon|gallons)$/.test(u)) return pretty(q * 3.785411784, 'L');
     if (/^(cup|cups)$/.test(u)) return pretty(q * 236.5882365, 'mL');
