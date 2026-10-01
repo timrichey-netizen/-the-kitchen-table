@@ -419,3 +419,26 @@ button,a,input,select{touch-action:manipulation}
   .my-meal-actions .button{width:100%}
   .add-to-my-meal{display:block;margin:10px 0 0;width:100%}
 }
+
+
+/* Print only the finalized My Meal ingredient list */
+@media print{
+  body:has(.my-meal-page){padding-top:0!important;background:#fff!important}
+  body:has(.my-meal-page) .site-header,
+  body:has(.my-meal-page) .footer,
+  body:has(.my-meal-page) .my-meal-intro,
+  body:has(.my-meal-page) #myMealBuilder,
+  body:has(.my-meal-page) .finalized-meal-panel > .my-meal-heading,
+  body:has(.my-meal-page) #finalizedMealGrid,
+  body:has(.my-meal-page) .finalized-meal-panel > .my-meal-actions,
+  body:has(.my-meal-page) .ingredient-print-button{display:none!important}
+  body:has(.my-meal-page) .my-meal-page{display:block!important;padding:0!important;background:#fff!important}
+  body:has(.my-meal-page) .my-meal-page > .container{width:100%!important;max-width:none!important}
+  body:has(.my-meal-page) #finalizedMealSection{display:block!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important}
+  body:has(.my-meal-page) #finalMealIngredientPanel{display:block!important;border:0!important;background:#fff!important;padding:0!important;margin:0!important}
+  body:has(.my-meal-page) #finalMealIngredientPanel[hidden]{display:block!important}
+  body:has(.my-meal-page) #finalMealIngredientContent{display:block!important}
+  body:has(.my-meal-page) .ingredient-list-heading{display:block!important;margin-bottom:18px!important}
+  body:has(.my-meal-page) .ingredient-dish-group{break-inside:avoid;page-break-inside:avoid}
+  body:has(.my-meal-page) .ingredient-dish-group ul{columns:1!important}
+}
