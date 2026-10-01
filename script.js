@@ -463,7 +463,10 @@ if (!window.__ktRegionalMetadataObserver) {
         );
       });
     });
-    if (hasRecipeContent) standardizeRegionalMetadata(document);
+    if (hasRecipeContent) {
+      simplifyNamedRegionalLabels(document);
+      standardizeRegionalMetadata(document);
+    }
   });
   window.__ktRegionalMetadataObserver.observe(document.body,{childList:true,subtree:true});
 }
@@ -557,6 +560,27 @@ function normalizeSearchText(value) {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
+}
+
+function simplifyNamedRegionalLabels(root) {
+  const scope=root || document;
+  const namedRegions=[
+    'Pacific Northwest','New England','Midwest','Southwest','Southeast',
+    'Deep South','Gulf Coast','Mid-Atlantic','Rocky Mountain','Great Plains',
+    'Appalachian','Lowcountry','Northeast'
+  ];
+  const regionSet=new Set(namedRegions.map(normalizeSearchText));
+
+  scope.querySelectorAll('.recipe-card, .recipe-detail').forEach(function(container){
+    [...container.querySelectorAll('*')].forEach(function(el){
+      if(el.children.length) return;
+      const raw=(el.textContent||'').trim();
+      const m=raw.match(/^(.+?)\s*\(([^)]+)\)$/);
+      if(!m) return;
+      const region=normalizeSearchText(m[1]);
+      if(regionSet.has(region)) el.textContent=m[1].trim();
+    });
+  });
 }
 
 function standardizeRegionalMetadata(root) {
@@ -722,6 +746,7 @@ function standardizeRegionalMetadata(root) {
 }
 
 function removeRedundantRecipeCardMetadata() {
+  simplifyNamedRegionalLabels(document);
   standardizeRegionalMetadata(document);
 }
 
