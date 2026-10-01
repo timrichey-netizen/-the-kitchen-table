@@ -13,7 +13,7 @@
       'Home':'Inicio','Cooking Guides':'Guías de Cocina','Open guide →':'Abrir guía →','View recipe →':'Ver receta →','View sauce →':'Ver salsa →',
       'Browse recipes':'Explorar recetas','View categories':'Ver categorías','RECIPE OF THE DAY':'RECETA DEL DÍA','A PERSONAL COOKBOOK':'UN RECETARIO PERSONAL',
       'Recipes worth making again.':'Recetas que vale la pena repetir.','Find something delicious.':'Encuentra algo delicioso.','RECIPE COLLECTION':'COLECCIÓN DE RECETAS',
-      'Search recipes…':'Buscar recetas…','All cuisines':'Todas las cocinas','Cuisine':'Cocina','Food type':'Tipo de comida','All':'Todo','Meat':'Carnes','Pasta':'Pasta','Rice':'Arroz','Seafood':'Mariscos','Vegetables & Sides':'Verduras y Guarniciones','Soups & Salads':'Sopas y Ensaladas','Extras':'Extras','Desserts':'Postres',
+      'Search recipes…':'Buscar recetas…','All cuisines':'Todas las cocinas','Cuisine':'Cocina','European':'Europea','European country':'País europeo','All European':'Toda Europa','Italy':'Italia','France':'Francia','United Kingdom':'Reino Unido','Switzerland':'Suiza','Belgium':'Bélgica','Spain':'España','Greece':'Grecia','Food type':'Tipo de comida','All':'Todo','Meat':'Carnes','Pasta':'Pasta','Rice':'Arroz','Seafood':'Mariscos','Vegetables & Sides':'Verduras y Guarniciones','Soups & Salads':'Sopas y Ensaladas','Extras':'Extras','Desserts':'Postres',
       'Ingredients':'Ingredientes','Preparation':'Preparación','Related Recipes':'Recetas Relacionadas','All recipes':'Todas las recetas','Print Recipe':'Imprimir receta','Print recipe':'Imprimir receta',
       'Add to My Meal':'Agregar a Mi Comida','Already in My Meal':'Ya está en Mi Comida','Added to My Meal':'Agregado a Mi Comida',
       'Back to Guides':'Volver a Guías','Back to all recipes':'Volver a todas las recetas','Back to recipes':'Volver a recetas','Cooking Guide':'Guía de Cocina',
@@ -47,7 +47,7 @@
       'Home':'Accueil','Cooking Guides':'Guides de Cuisine','Open guide →':'Ouvrir le guide →','View recipe →':'Voir la recette →','View sauce →':'Voir la sauce →',
       'Browse recipes':'Parcourir les recettes','View categories':'Voir les catégories','RECIPE OF THE DAY':'RECETTE DU JOUR','A PERSONAL COOKBOOK':'UN LIVRE DE RECETTES PERSONNEL',
       'Recipes worth making again.':'Des recettes à refaire encore et encore.','Find something delicious.':'Trouvez quelque chose de délicieux.','RECIPE COLLECTION':'COLLECTION DE RECETTES',
-      'Search recipes…':'Rechercher des recettes…','All cuisines':'Toutes les cuisines','Cuisine':'Cuisine','Food type':'Type de plat','All':'Tout','Meat':'Viandes','Pasta':'Pâtes','Rice':'Riz','Seafood':'Fruits de mer','Vegetables & Sides':'Légumes et Accompagnements','Soups & Salads':'Soupes et Salades','Extras':'Extras','Desserts':'Desserts',
+      'Search recipes…':'Rechercher des recettes…','All cuisines':'Toutes les cuisines','Cuisine':'Cuisine','European':'Européenne','European country':'Pays européen','All European':'Toute l’Europe','Italy':'Italie','France':'France','United Kingdom':'Royaume-Uni','Switzerland':'Suisse','Belgium':'Belgique','Spain':'Espagne','Greece':'Grèce','Food type':'Type de plat','All':'Tout','Meat':'Viandes','Pasta':'Pâtes','Rice':'Riz','Seafood':'Fruits de mer','Vegetables & Sides':'Légumes et Accompagnements','Soups & Salads':'Soupes et Salades','Extras':'Extras','Desserts':'Desserts',
       'Ingredients':'Ingrédients','Preparation':'Préparation','Related Recipes':'Recettes Associées','All recipes':'Toutes les recettes','Print Recipe':'Imprimer la recette','Print recipe':'Imprimer la recette',
       'Add to My Meal':'Ajouter à Mon Repas','Already in My Meal':'Déjà dans Mon Repas','Added to My Meal':'Ajouté à Mon Repas',
       'Back to Guides':'Retour aux Guides','Back to all recipes':'Retour à toutes les recettes','Back to recipes':'Retour aux recettes','Cooking Guide':'Guide de Cuisine',
@@ -395,6 +395,8 @@ function addEnglishRecipeNames() {
 const cards = [...document.querySelectorAll('.recipe-card')];
 const search = document.getElementById('recipeSearch');
 const cuisineFiltersWrap = document.getElementById('cuisineFilters');
+const europeanSubcuisineGroup = document.getElementById('europeanSubcuisineGroup');
+const europeanSubcuisineFilters = document.getElementById('europeanSubcuisineFilters');
 const asianSubcuisineGroup = document.getElementById('asianSubcuisineGroup');
 const asianSubcuisineFilters = document.getElementById('asianSubcuisineFilters');
 const latinSubcuisineGroup = document.getElementById('latinSubcuisineGroup');
@@ -405,6 +407,7 @@ const filters = [...document.querySelectorAll('.filter')];
 const noResults = document.getElementById('noResults');
 let activeFilter = 'all';
 let activeCuisine = 'all';
+let activeEuropeanSubcuisine = 'all';
 let activeAsianSubcuisine = 'all';
 let activeLatinSubcuisine = 'all';
 let activeMexicanSubcategory = 'all';
@@ -436,6 +439,16 @@ const LATIN_SUBCUISINES = [
   ['Central America', ['guatemalan','guatemala','salvadoran','el salvador','honduran','honduras','nicaraguan','nicaragua','costa rican','costa rica','panamanian','panama']]
 ];
 
+const EUROPEAN_SUBCUISINES = [
+  ['Italy', ['italian','italy','roman','sicilian','venetian','piedmont','piedmontese','campanian','florentine','milanese','sorrentina','amatriciana','carbonara','cacio e pepe','gricia','arrabbiata','bolognese','cioppino']],
+  ['France', ['french','france','bourguignon','béchamel','bechamel','veloute','velouté','espagnole','hollandaise','bearnaise','béarnaise','provençale','provencale']],
+  ['United Kingdom', ['british','english','scottish','welsh','sticky toffee','spotted dick','bread pudding']],
+  ['Switzerland', ['swiss','switzerland','zurich','zürich','rosti','rösti','fondue']],
+  ['Belgium', ['belgian','belgium','moules-frites','frites']],
+  ['Spain', ['spanish','spain','catalan','basque']],
+  ['Greece', ['greek','greece','saganaki']]
+];
+
 const ASIAN_SUBCUISINES = [
   ['Chinese', ['chinese','moo shu','mandarin']],
   ['Japanese', ['japanese','miso']],
@@ -446,13 +459,7 @@ const ASIAN_SUBCUISINES = [
 ];
 
 const CUISINES = [
-  ['Italian', ['italian','roman','sicilian','venetian','piedmont','campanian']],
-  ['French', ['french','bourguignon']],
-  ['British', ['british','sticky toffee','spotted dick','bread pudding']],
-  ['Swiss', ['swiss','zurich','zürich','rosti','rösti','fondue']],
-  ['Belgian', ['belgian','moules-frites','frites']],
-  ['Spanish', ['spanish','catalan','basque']],
-  ['Greek', ['greek','saganaki']],
+  ['European', ['italian','italy','roman','sicilian','venetian','piedmont','piedmontese','campanian','florentine','milanese','sorrentina','amatriciana','carbonara','cacio e pepe','gricia','arrabbiata','bolognese','cioppino','french','france','bourguignon','béchamel','bechamel','veloute','velouté','espagnole','hollandaise','bearnaise','béarnaise','provençale','provencale','british','english','scottish','welsh','sticky toffee','spotted dick','bread pudding','swiss','switzerland','zurich','zürich','rosti','rösti','fondue','belgian','belgium','moules-frites','frites','spanish','spain','catalan','basque','greek','greece','saganaki']],
   ['Mediterranean', ['mediterranean']],
   ['Cajun / Creole', ['cajun','creole','new orleans']],
   ['Latin American', ['latin','mexican','mexico','argentinian','argentine','argentina','uruguayan','uruguay','peruvian','peru','brazilian','brazil','colombian','colombia','venezuelan','venezuela','chilean','chile','cuban','cuba','puerto rican','puerto rico','dominican','dominican republic','guatemalan','guatemala','salvadoran','el salvador','honduran','honduras','nicaraguan','nicaragua','costa rican','costa rica','panamanian','panama','criolla','tomatillo','enchilada','taco','chilaquiles','huevos rancheros','mole','provoleta','milanesa','chimichurri','asado','chivito','ceviche','lomo saltado','aji','feijoada','moqueca','arepa','ajiaco','pabellon','pastel de choclo','ropa vieja','mofongo','mangu']],
@@ -477,6 +484,14 @@ function detectCuisine(card) {
   const text = cardHaystack(card);
   for (const [label, terms] of CUISINES) {
     if (terms.some(term => text.includes(term))) return label;
+  }
+  return '';
+}
+
+function detectEuropeanSubcuisine(card) {
+  const text = cardHaystack(card);
+  for (const [label, terms] of EUROPEAN_SUBCUISINES) {
+    if (terms.some(term => text.includes(normalizeSearchText(term)))) return label;
   }
   return '';
 }
@@ -555,6 +570,29 @@ function populateLatinSubcuisines() {
   });
 }
 
+function populateEuropeanSubcuisines() {
+  if (!europeanSubcuisineFilters) return;
+  const europeanCards = cards.filter(card => detectCuisine(card) === 'European');
+  const represented = [...new Set(europeanCards.map(detectEuropeanSubcuisine).filter(Boolean))]
+    .sort((a,b) => a.localeCompare(b));
+
+  europeanSubcuisineFilters.innerHTML =
+    '<button class="cuisine-filter active" data-european="all">All European</button>' +
+    represented.map(name =>
+      `<button class="cuisine-filter" data-european="${name}">${name}</button>`
+    ).join('');
+
+  europeanSubcuisineFilters.querySelectorAll('.cuisine-filter').forEach(button => {
+    button.addEventListener('click', () => {
+      europeanSubcuisineFilters.querySelectorAll('.cuisine-filter')
+        .forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+      activeEuropeanSubcuisine = button.dataset.european || 'all';
+      updateRecipes();
+    });
+  });
+}
+
 function populateAsianSubcuisines() {
   if (!asianSubcuisineFilters) return;
   const asianCards = cards.filter(card => detectCuisine(card) === 'Asian');
@@ -595,16 +633,21 @@ function populateCuisineFilter() {
         .forEach(b => b.classList.remove('active'));
       button.classList.add('active');
       activeCuisine = button.dataset.cuisine || 'all';
+      activeEuropeanSubcuisine = 'all';
       activeAsianSubcuisine = 'all';
       activeLatinSubcuisine = 'all';
       activeMexicanSubcategory = 'all';
 
+      if (europeanSubcuisineGroup) {
+        europeanSubcuisineGroup.hidden = activeCuisine !== 'European';
+      }
       if (asianSubcuisineGroup) {
         asianSubcuisineGroup.hidden = activeCuisine !== 'Asian';
       }
       if (latinSubcuisineGroup) {
         latinSubcuisineGroup.hidden = activeCuisine !== 'Latin American';
       }
+      if (activeCuisine === 'European') populateEuropeanSubcuisines();
       if (activeCuisine === 'Asian') populateAsianSubcuisines();
       if (activeCuisine === 'Latin American') populateLatinSubcuisines();
       syncMexicanSubcategoryVisibility();
@@ -700,6 +743,11 @@ function updateRecipes() {
     const cuisine = detectCuisine(card);
     const matchesCategory = matchesBroadCategory(card, activeFilter);
     const matchesCuisine = activeCuisine === 'all' || cuisine === activeCuisine;
+    const europeanSubcuisine = detectEuropeanSubcuisine(card);
+    const matchesEuropeanSubcuisine =
+      activeCuisine !== 'European' ||
+      activeEuropeanSubcuisine === 'all' ||
+      europeanSubcuisine === activeEuropeanSubcuisine;
     const asianSubcuisine = detectAsianSubcuisine(card);
     const matchesAsianSubcuisine =
       activeCuisine !== 'Asian' ||
@@ -717,7 +765,7 @@ function updateRecipes() {
       activeMexicanSubcategory === 'all' ||
       mexicanSubcategory === activeMexicanSubcategory;
     const matchesSearch = terms.length === 0 || terms.every(term => haystack.includes(term));
-    const show = matchesCategory && matchesCuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch;
+    const show = matchesCategory && matchesCuisine && matchesEuropeanSubcuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch;
 
     card.hidden = !show;
     card.style.display = show ? '' : 'none';
@@ -733,6 +781,7 @@ search?.addEventListener('input', () => {
   if ((search.value || '').trim()) {
     activeFilter = 'all';
     activeCuisine = 'all';
+    activeEuropeanSubcuisine = 'all';
     activeAsianSubcuisine = 'all';
     activeLatinSubcuisine = 'all';
     activeMexicanSubcategory = 'all';
@@ -740,6 +789,7 @@ search?.addEventListener('input', () => {
     cuisineFiltersWrap?.querySelectorAll('.cuisine-filter').forEach(b => {
       b.classList.toggle('active', (b.dataset.cuisine || '') === 'all');
     });
+    if (europeanSubcuisineGroup) europeanSubcuisineGroup.hidden = true;
     if (asianSubcuisineGroup) asianSubcuisineGroup.hidden = true;
     if (latinSubcuisineGroup) latinSubcuisineGroup.hidden = true;
     if (mexicanSubcategoryGroup) mexicanSubcategoryGroup.hidden = true;
@@ -759,6 +809,7 @@ addMetricIngredientMeasurements();
 addEnglishRecipeNames();
 shuffleMainRecipesOnLoad();
 populateCuisineFilter();
+populateEuropeanSubcuisines();
 populateAsianSubcuisines();
 populateLatinSubcuisines();
 populateMexicanSubcategories();
