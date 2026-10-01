@@ -900,17 +900,11 @@ updateRecipes();
     const recipe=detail?.querySelector('.recipe-layout');
     if(!detail || !recipe) return;
 
-    const selectors=[
-      '.mother-sauce-tip',
-      '.daughter-sauce-tip',
-      '.veloute-daughter-tip',
-      '.hollandaise-daughter-tip',
-      '.tomate-daughter-tip',
-      '.mexican-sauce-tip',
-      '.mexican-sauce-tip-2',
-      '.meat-tip'
-    ];
-    const alternatives=[...detail.querySelectorAll(selectors.join(','))];
+    // Any dynamically-created recommendation/cross-reference panel uses a
+    // *-tip class. Keep all such panels below the core recipe instead of trying
+    // to maintain an ever-growing list of individual panel classes.
+    const alternatives=[...detail.querySelectorAll('[class~="meat-tip"], [class$="-tip"], [class*="-tip "]')]
+      .filter(el => !el.closest('.recipe-alternatives'));
     if(!alternatives.length) return;
 
     let section=detail.querySelector('.recipe-alternatives');
@@ -918,7 +912,7 @@ updateRecipes();
       section=document.createElement('section');
       section.className='container recipe-alternatives';
       section.style.cssText='margin-top:28px';
-      section.innerHTML='<h2 style="margin:0 0 14px">Alternative Methods & Pairings</h2>';
+      section.innerHTML='<h2 style="margin:0 0 14px">Cross-References, Alternatives & Pairings</h2>';
     }
 
     alternatives.forEach(el=>section.appendChild(el));
@@ -932,6 +926,8 @@ updateRecipes();
   // those initializers have finished, and repeat once for any late DOM additions.
   setTimeout(moveAlternatives,0);
   setTimeout(moveAlternatives,100);
+  setTimeout(moveAlternatives,300);
+  setTimeout(moveAlternatives,700);
 })();
 
 
