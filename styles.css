@@ -488,3 +488,15 @@ button,a,input,select{touch-action:manipulation}
 .ingredient-recipe-link:focus-visible{
   color:var(--accent);
 }
+
+
+/* English translation shown beneath the original-language recipe title */
+.recipe-title-original,
+.recipe-title-english{
+  display:block;
+}
+.recipe-title-english{
+  font-size:60%;
+  line-height:1.12;
+  margin-top:.12em;
+}
