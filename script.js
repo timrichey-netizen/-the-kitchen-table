@@ -52,7 +52,6 @@ const ASIAN_SUBCUISINES = [
 ];
 
 const CUISINES = [
-  ['Uruguayan', ['uruguayan','uruguay','chivito','gramajo','caruso','puchero','pamplona']],
   ['Italian', ['italian','roman','sicilian','venetian','piedmont','campanian']],
   ['French', ['french','bourguignon']],
   ['British', ['british','sticky toffee','spotted dick','bread pudding']],
@@ -62,7 +61,7 @@ const CUISINES = [
   ['Greek', ['greek','saganaki']],
   ['Mediterranean', ['mediterranean']],
   ['Cajun / Creole', ['cajun','creole','new orleans']],
-  ['Latin American', ['latin','criolla','tomatillo']],
+  ['Latin American', ['latin','mexican','mexico','argentinian','argentine','argentina','uruguayan','uruguay','peruvian','peru','brazilian','brazil','colombian','colombia','venezuelan','venezuela','chilean','chile','cuban','cuba','puerto rican','puerto rico','dominican','dominican republic','guatemalan','guatemala','salvadoran','el salvador','honduran','honduras','nicaraguan','nicaragua','costa rican','costa rica','panamanian','panama','criolla','tomatillo','enchilada','taco','chilaquiles','huevos rancheros','mole','provoleta','milanesa','chimichurri','asado','chivito','ceviche','lomo saltado','aji','feijoada','moqueca','arepa','ajiaco','pabellon','pastel de choclo','ropa vieja','mofongo','mangu']],
   ['Asian', ['asian','chinese','moo shu','mandarin','japanese','miso','korean','gochujang','thai','vietnamese','fusion','stir-fry']],
   ['American', ['american','san francisco']]
 ];
@@ -237,8 +236,13 @@ function updateRecipes() {
       activeCuisine !== 'Asian' ||
       activeAsianSubcuisine === 'all' ||
       asianSubcuisine === activeAsianSubcuisine;
+    const latinSubcuisine = detectLatinSubcuisine(card);
+    const matchesLatinSubcuisine =
+      activeCuisine !== 'Latin American' ||
+      activeLatinSubcuisine === 'all' ||
+      latinSubcuisine === activeLatinSubcuisine;
     const matchesSearch = terms.length === 0 || terms.every(term => haystack.includes(term));
-    const show = matchesCategory && matchesCuisine && matchesAsianSubcuisine && matchesSearch;
+    const show = matchesCategory && matchesCuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesSearch;
 
     card.hidden = !show;
     card.style.display = show ? '' : 'none';
@@ -255,11 +259,13 @@ search?.addEventListener('input', () => {
     activeFilter = 'all';
     activeCuisine = 'all';
     activeAsianSubcuisine = 'all';
+    activeLatinSubcuisine = 'all';
     filters.forEach(b => b.classList.toggle('active', (b.dataset.filter || 'all') === 'all'));
     cuisineFiltersWrap?.querySelectorAll('.cuisine-filter').forEach(b => {
       b.classList.toggle('active', (b.dataset.cuisine || '') === 'all');
     });
     if (asianSubcuisineGroup) asianSubcuisineGroup.hidden = true;
+    if (latinSubcuisineGroup) latinSubcuisineGroup.hidden = true;
   }
   updateRecipes();
 });
@@ -862,3 +868,15 @@ const MEXICAN_BREAKFAST_LINKS_3={
 "pan-dulce-cafe-olla.html":[["TAMALES CON ATOLE","Another classic Mexican breakfast pairing.","tamales-atole.html"],["CHILAQUILES ROJOS","Savory breakfast option alongside café de olla.","chilaquiles-rojos.html"],["HUEVOS RANCHEROS","Another traditional breakfast plate.","huevos-rancheros.html"]]
 };
 (function(){const p=(location.pathname.split("/").pop()||"index.html").toLowerCase(),r=MEXICAN_BREAKFAST_LINKS_3[p];if(!r||document.querySelector(".mex-breakfast-tip-3"))return;const a=document.querySelector(".mex-breakfast-tip-2")||document.querySelector(".mex-breakfast-tip-1")||document.querySelector(".print-button");if(!a)return;const w=document.createElement("div");w.className="mex-breakfast-tip-3";w.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fff9ec";w.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MEXICAN BREAKFAST PAIRINGS</p>'+r.map(x=>'<p style="margin:0 0 7px"><strong>'+x[0]+':</strong> '+x[1]+' <a class="text-link" href="'+x[2]+'">View →</a></p>').join('');a.insertAdjacentElement("afterend",w)})();
+
+
+// Keep recipe imagery visible even if a third-party image host blocks hotlinking.
+document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(img => {
+  img.addEventListener('error', () => {
+    if (img.dataset.recipeImageFallback) return;
+    img.dataset.recipeImageFallback = '1';
+    img.src = 'assets/the-kitchen-table-hero.png';
+    img.style.visibility = 'visible';
+    img.style.display = '';
+  });
+});
