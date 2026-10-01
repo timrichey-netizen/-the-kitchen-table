@@ -1084,3 +1084,191 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
 
   updateCount();
 })();
+
+
+// Recipe ratings and comments
+(function(){
+  function slugFromHref(href){
+    if(!href)return'';
+    var file=href.split('#')[0].split('?')[0].split('/').pop()||'';
+    return file.replace(/\.html$/,'').toLowerCase();
+  }
+  function starsText(stats){
+    return stats&&stats.count
+      ? stats.average.toFixed(1)+' / 10 · '+stats.count+' rating'+(stats.count===1?'':'s')
+      : 'Not yet rated';
+  }
+  function addCardRating(card,stats){
+    var body=card.querySelector('.recipe-card-body');
+    if(!body)return;
+    var line=body.querySelector('.recipe-card-rating');
+    if(!line){
+      line=document.createElement('div');
+      line.className='recipe-card-rating';
+      var h=body.querySelector('h3');
+      if(h)h.insertAdjacentElement('afterend',line);
+      else body.prepend(line);
+    }
+    line.textContent=starsText(stats);
+  }
+  function loadHomeRatings(){
+    var cards=[].slice.call(document.querySelectorAll('#recipeGrid .recipe-card'));
+    if(!cards.length)return;
+    var mapped=cards.map(function(card){
+      var link=card.querySelector('a[href$=".html"],a[href*=".html?"]');
+      return {card:card,slug:slugFromHref(link&&link.getAttribute('href'))};
+    }).filter(function(x){return x.slug;});
+    var chunkSize=80;
+    for(var i=0;i<mapped.length;i+=chunkSize){
+      (function(chunk){
+        fetch('/api/recipe-feedback?slugs='+encodeURIComponent(chunk.map(function(x){return x.slug;}).join(',')))
+          .then(function(r){if(!r.ok)throw new Error();return r.json();})
+          .then(function(data){
+            chunk.forEach(function(x){addCardRating(x.card,(data.ratings||{})[x.slug]||{count:0,average:null});});
+          })
+          .catch(function(){
+            chunk.forEach(function(x){addCardRating(x.card,{count:0,average:null});});
+          });
+      })(mapped.slice(i,i+chunkSize));
+    }
+  }
+
+  function recipeSlug(){
+    return slugFromHref(location.pathname);
+  }
+  function recipeTitle(){
+    var h=document.querySelector('.recipe-detail h1');
+    return h?h.textContent.trim():'Recipe';
+  }
+  function feedbackMarkup(){
+    var section=document.createElement('section');
+    section.className='recipe-feedback container';
+    section.id='recipeFeedback';
+    section.innerHTML=
+      '<div class="recipe-feedback-heading">'+
+        '<div><p class="eyebrow">RECIPE FEEDBACK</p><h2>Rate this recipe</h2><p class="muted-copy">Rate it from 1 to 10, with 10 being best, and leave a comment.</p></div>'+
+        '<div class="recipe-rating-summary"><strong id="recipeRatingAverage">—</strong><span id="recipeRatingCount">Loading ratings…</span></div>'+
+      '</div>'+
+      '<form id="recipeFeedbackForm" class="recipe-feedback-form">'+
+        '<div class="recipe-rating-picker" role="group" aria-label="Recipe rating from 1 to 10">'+
+          Array.from({length:10},function(_,i){var n=i+1;return '<button type="button" data-rating="'+n+'" aria-pressed="false">'+n+'</button>';}).join('')+
+        '</div>'+
+        '<div class="recipe-feedback-fields">'+
+          '<label><span>Name <small>(optional)</small></span><input id="recipeFeedbackName" type="text" maxlength="80" autocomplete="name" placeholder="Your name"></label>'+
+          '<label class="recipe-comment-field"><span>Comment</span><textarea id="recipeFeedbackComment" maxlength="1200" rows="4" required placeholder="What did you think of this recipe?"></textarea></label>'+
+        '</div>'+
+        '<div class="recipe-feedback-actions"><button class="button primary" id="submitRecipeFeedback" type="submit" disabled>Submit rating & comment</button><p id="recipeFeedbackStatus" role="status" aria-live="polite"></p></div>'+
+      '</form>'+
+      '<div class="recipe-comments"><h3>Comments</h3><div id="recipeCommentsList"><p class="muted-copy">Loading comments…</p></div></div>';
+    return section;
+  }
+  function renderSummary(stats){
+    var avg=document.getElementById('recipeRatingAverage');
+    var count=document.getElementById('recipeRatingCount');
+    if(!avg||!count)return;
+    if(stats&&stats.count){
+      avg.textContent=stats.average.toFixed(1)+' / 10';
+      count.textContent=stats.count+' rating'+(stats.count===1?'':'s');
+    }else{
+      avg.textContent='— / 10';
+      count.textContent='No ratings yet';
+    }
+  }
+  function formatDate(iso){
+    try{return new Date(iso).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});}catch(e){return'';}
+  }
+  function renderComments(comments){
+    var wrap=document.getElementById('recipeCommentsList');
+    if(!wrap)return;
+    if(!comments||!comments.length){
+      wrap.innerHTML='<p class="muted-copy">Be the first to leave a comment.</p>';
+      return;
+    }
+    wrap.innerHTML='';
+    comments.forEach(function(item){
+      var article=document.createElement('article');
+      article.className='recipe-comment';
+      var top=document.createElement('div');
+      top.className='recipe-comment-meta';
+      var strong=document.createElement('strong');
+      strong.textContent=(item.name||'Anonymous')+' · '+item.rating+'/10';
+      var time=document.createElement('span');
+      time.textContent=formatDate(item.createdAt);
+      top.append(strong,time);
+      var p=document.createElement('p');
+      p.textContent=item.comment||'';
+      article.append(top,p);
+      wrap.append(article);
+    });
+  }
+  function loadRecipeFeedback(slug){
+    fetch('/api/recipe-feedback?slugs='+encodeURIComponent(slug))
+      .then(function(r){if(!r.ok)throw new Error();return r.json();})
+      .then(function(data){
+        renderSummary((data.ratings||{})[slug]||{count:0,average:null});
+        renderComments(data.comments||[]);
+      })
+      .catch(function(){
+        renderSummary({count:0,average:null});
+        var wrap=document.getElementById('recipeCommentsList');
+        if(wrap)wrap.innerHTML='<p class="muted-copy">Ratings and comments are temporarily unavailable.</p>';
+      });
+  }
+  function initRecipeFeedback(){
+    var detail=document.querySelector('.recipe-detail');
+    if(!detail||document.getElementById('recipeFeedback'))return;
+    var slug=recipeSlug();
+    if(!slug)return;
+    var section=feedbackMarkup();
+    detail.insertAdjacentElement('afterend',section);
+
+    var selectedRating=0;
+    var form=document.getElementById('recipeFeedbackForm');
+    var submit=document.getElementById('submitRecipeFeedback');
+    var status=document.getElementById('recipeFeedbackStatus');
+    section.querySelectorAll('[data-rating]').forEach(function(button){
+      button.addEventListener('click',function(){
+        selectedRating=Number(button.dataset.rating);
+        section.querySelectorAll('[data-rating]').forEach(function(b){
+          var selected=Number(b.dataset.rating)===selectedRating;
+          b.classList.toggle('selected',selected);
+          b.setAttribute('aria-pressed',String(selected));
+        });
+        submit.disabled=false;
+      });
+    });
+    form.addEventListener('submit',function(event){
+      event.preventDefault();
+      var comment=document.getElementById('recipeFeedbackComment').value.trim();
+      var name=document.getElementById('recipeFeedbackName').value.trim();
+      if(!selectedRating){status.textContent='Choose a rating from 1 to 10.';return;}
+      if(!comment){status.textContent='Please enter a comment.';return;}
+      var original=submit.textContent;
+      submit.disabled=true;
+      submit.textContent='Submitting…';
+      status.textContent='';
+      fetch('/api/recipe-feedback',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({slug:slug,rating:selectedRating,comment:comment,name:name,recipeTitle:recipeTitle()})
+      }).then(function(r){
+        return r.json().catch(function(){return{};}).then(function(data){
+          if(!r.ok)throw new Error(data.error||'Could not submit feedback.');
+          renderSummary(data.stats);
+          document.getElementById('recipeFeedbackComment').value='';
+          status.textContent='Thank you — your rating and comment were added.';
+          loadRecipeFeedback(slug);
+        });
+      }).catch(function(error){
+        status.textContent=error.message||'Could not submit feedback.';
+      }).finally(function(){
+        submit.disabled=false;
+        submit.textContent=original;
+      });
+    });
+    loadRecipeFeedback(slug);
+  }
+
+  if(document.getElementById('recipeGrid'))loadHomeRatings();
+  initRecipeFeedback();
+})();
