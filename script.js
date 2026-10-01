@@ -551,3 +551,35 @@ const PERUVIAN_RECIPE_LINKS = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">PERUVIAN RECIPE CROSS-REFERENCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">View →</a></p>').join('');
   anchor.insertAdjacentElement("afterend",wrap);
 })();
+
+const PERUVIAN_SIDE_LINKS = {
+  "papas-a-la-huancaina.html":[["CAUSA LIMEÑA","Another classic ají amarillo potato preparation.","causa-limena.html"],["CAUSA RELLENA","Compare a filled chilled potato preparation.","causa-rellena.html"],["AJÍ DE GALLINA","Shares the creamy ají amarillo flavor profile.","aji-de-gallina.html"]],
+  "causa-limena.html":[["CAUSA RELLENA","Closely related layered potato preparation.","causa-rellena.html"],["SALSA DE AGUACATE","Avocado salsa works as an optional accompaniment.","salsa-aguacate.html"]],
+  "yuca-frita.html":[["SALSA CRIOLLA","Bright onion relish for fried yuca.","salsa-criolla.html"],["SALSA DE AGUACATE","Creamy dipping sauce.","salsa-aguacate.html"],["POLLO A LA BRASA","Classic side option with roast chicken.","pollo-a-la-brasa-peruano.html"],["ANTICUCHOS","Excellent side for grilled skewers.","anticuchos-de-corazon.html"]],
+  "arroz-peruano.html":[["SECO DE RES","Classic rice accompaniment.","seco-de-res.html"],["AJÍ DE GALLINA","Traditional side.","aji-de-gallina.html"],["CARAPULCRA","Ideal starch for the stew.","carapulcra.html"],["POLLO A LA BRASA","Simple rice side for roast chicken.","pollo-a-la-brasa-peruano.html"]],
+  "solterito-arequipeno.html":[["ANTICUCHOS","Fresh salad alongside grilled meats.","anticuchos-de-corazon.html"],["SECO DE RES","Bright vegetable side for the braise.","seco-de-res.html"],["CHOCLO CON QUESO","Shares choclo and queso fresco ingredients.","choclo-con-queso.html"]],
+  "ensalada-criolla-peruana.html":[["ANTICUCHOS","Classic bright accompaniment to grilled meat.","anticuchos-de-corazon.html"],["SECO DE RES","Fresh acidic side for the braise.","seco-de-res.html"],["CARAPULCRA","Cuts through the rich pork-and-peanut stew.","carapulcra.html"],["POLLO A LA BRASA","Fresh side for roast chicken.","pollo-a-la-brasa-peruano.html"],["TACU TACU","Natural onion-tomato accompaniment.","tacu-tacu.html"]],
+  "choclo-con-queso.html":[["CEVICHE PERUANO","Classic accompaniment to ceviche.","ceviche-peruano.html"],["ANTICUCHOS","Traditional side for grilled skewers.","anticuchos-de-corazon.html"],["SOLTERITO AREQUIPEÑO","Shares choclo and queso fresco.","solterito-arequipeno.html"]],
+  "papa-rellena-peruana.html":[["SALSA CRIOLLA","Traditional accompaniment.","salsa-criolla.html"],["ENSALADA CRIOLLA","Fresh onion-tomato side.","ensalada-criolla-peruana.html"],["SALSA DE AJÍ","Optional spicy salsa pairing.","salsa-roja.html"]],
+  "tamal-peruano.html":[["SALSA CRIOLLA","Classic fresh accompaniment.","salsa-criolla.html"],["SALSA DE GUAJILLO","Dried-chile sauce pairs with pork or chicken filling.","salsa-guajillo.html"],["ADOBO","Related chile-and-spice flavor profile.","mexican-adobo.html"]],
+  "camote-frito.html":[["CEVICHE PERUANO","Classic sweet-potato accompaniment.","ceviche-peruano.html"],["POLLO A LA BRASA","Crisp sweet-potato side for roast chicken.","pollo-a-la-brasa-peruano.html"],["ANTICUCHOS","Sweet counterpoint to smoky grilled beef heart.","anticuchos-de-corazon.html"]],
+  "ceviche-peruano.html":[["CAMOTE FRITO","Classic sweet accompaniment.","camote-frito.html"],["CHOCLO CON QUESO","Choclo is a traditional ceviche side.","choclo-con-queso.html"]],
+  "pollo-a-la-brasa-peruano.html":[["YUCA FRITA","Crisp cassava side.","yuca-frita.html"],["ARROZ PERUANO","Simple garlic rice side.","arroz-peruano.html"],["ENSALADA CRIOLLA","Fresh acidic side.","ensalada-criolla-peruana.html"],["CAMOTE FRITO","Sweet-potato alternative to fries.","camote-frito.html"]],
+  "anticuchos-de-corazon.html":[["YUCA FRITA","Crisp cassava accompaniment.","yuca-frita.html"],["CHOCLO CON QUESO","Traditional corn-and-cheese side.","choclo-con-queso.html"],["ENSALADA CRIOLLA","Fresh acidic garnish.","ensalada-criolla-peruana.html"]],
+  "seco-de-res.html":[["ARROZ PERUANO","Classic accompaniment.","arroz-peruano.html"],["ENSALADA CRIOLLA","Bright side for the cilantro braise.","ensalada-criolla-peruana.html"]],
+  "carapulcra.html":[["ARROZ PERUANO","Ideal side for the stew.","arroz-peruano.html"],["ENSALADA CRIOLLA","Fresh counterpoint to rich pork and peanuts.","ensalada-criolla-peruana.html"]],
+  "tacu-tacu.html":[["ENSALADA CRIOLLA","Fresh onion-tomato accompaniment.","ensalada-criolla-peruana.html"]],
+  "aji-de-gallina.html":[["PAPAS A LA HUANCAÍNA","Related creamy ají amarillo preparation.","papas-a-la-huancaina.html"],["ARROZ PERUANO","Traditional rice accompaniment.","arroz-peruano.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=PERUVIAN_SIDE_LINKS[p];
+  if(!refs || !refs.length || document.querySelector(".peruvian-side-tip")) return;
+  const anchor=document.querySelector(".peruvian-crossref-tip") || document.querySelector(".mexican-sauce-tip-2") || document.querySelector(".mexican-sauce-tip") || document.querySelector(".print-button");
+  if(!anchor) return;
+  const wrap=document.createElement("div");
+  wrap.className="peruvian-side-tip";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#f5f8f2";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">PERUVIAN PAIRING</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">View →</a></p>').join('');
+  anchor.insertAdjacentElement("afterend",wrap);
+})();
