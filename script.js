@@ -24,7 +24,23 @@
       'No close matches found yet. Try a broader combination of ingredients.':'No se encontraron coincidencias cercanas. Prueba una combinación más amplia de ingredientes.',
       'My Meal':'Mi Comida','Finalize Meal':'Finalizar Comida','Ingredient List':'Lista de Ingredientes','Print list':'Imprimir lista',
       'Mother Sauces':'Salsas Madre','Daughter Sauces by Mother':'Salsas Derivadas por Salsa Madre','Other Sauces':'Otras Salsas','The Five Mother Sauces Guide':'Guía de las Cinco Salsas Madre',
-      'Seafood & Fish Guide':'Guía de Pescados y Mariscos','Pasta Guide':'Guía de Pasta','Mushroom Guide':'Guía de Hongos','Meat Guide':'Guía de Carnes','Tortilla Guide':'Guía de Tortillas'
+      'Seafood & Fish Guide':'Guía de Pescados y Mariscos','Pasta Guide':'Guía de Pasta','Mushroom Guide':'Guía de Hongos','Meat Guide':'Guía de Carnes','Tortilla Guide':'Guía de Tortillas',
+      'Shapes, styles, pairings, preparation, and pasta fundamentals.':'Formas, estilos, combinaciones, preparación y fundamentos de la pasta.',
+      'Common varieties, flavor profiles, cooking uses, and handling.':'Variedades comunes, perfiles de sabor, usos culinarios y manipulación.',
+      'Cuts, cooking methods, doneness, and practical meat references.':'Cortes, métodos de cocción, puntos de cocción y referencias prácticas sobre carnes.',
+      'The classic foundation sauces and the families of sauces built from them.':'Las salsas clásicas fundamentales y las familias de salsas que se derivan de ellas.',
+      'Types, preparation methods, ingredients, and serving uses.':'Tipos, métodos de preparación, ingredientes y formas de servir.',
+      'Fish types, shellfish, cuts, freshness, cooking methods, doneness, and preparation.':'Tipos de pescado, mariscos, cortes, frescura, métodos de cocción, puntos de cocción y preparación.',
+      'Practical references for ingredients, techniques, sauces, cuts, and kitchen fundamentals—all gathered in one place.':'Referencias prácticas sobre ingredientes, técnicas, salsas, cortes y fundamentos de cocina, reunidas en un solo lugar.',
+      'From the five classical French mother sauces to their daughter sauces and other kitchen staples, browse the sauce collection in one place.':'Desde las cinco salsas madre clásicas francesas hasta sus salsas derivadas y otros básicos de cocina, explora toda la colección de salsas en un solo lugar.',
+      'Start with Béchamel, Velouté, Espagnole, Sauce Tomate, and Hollandaise, then explore the sauces derived from them.':'Comienza con Béchamel, Velouté, Espagnole, Sauce Tomate y Hollandaise, y luego explora las salsas derivadas de ellas.',
+      'Select the ingredients you already have, and we’ll recommend dishes you can make.':'Selecciona los ingredientes que ya tienes y te recomendaremos platos que puedes preparar.',
+      'Recipes you add while browsing appear here. Review your selections, remove anything you do not want, then finalize the meal when it looks right.':'Las recetas que agregues mientras navegas aparecerán aquí. Revisa tus selecciones, elimina lo que no quieras y finaliza la comida cuando esté lista.',
+      'Selected dishes':'Platos seleccionados','Clear all':'Borrar todo','Finalize meal':'Finalizar comida','Create ingredient list':'Crear lista de ingredientes','Edit meal':'Editar comida','Browse recipes':'Explorar recetas',
+      'No recipes have been added yet.':'Todavía no se han agregado recetas.','No dishes selected yet.':'Todavía no hay platos seleccionados.','Your Kitchen Table meal':'Tu comida de The Kitchen Table',
+      'These are the dishes currently included in your finalized meal.':'Estos son los platos incluidos actualmente en tu comida finalizada.','Built from your finalized meal.':'Creada a partir de tu comida finalizada.',
+      'Remove':'Eliminar','View recipe →':'Ver receta →','Open guide →':'Abrir guía →','Open the guide →':'Abrir la guía →','View sauce →':'Ver salsa →',
+      'Find Dishes':'Buscar platos','Clear selections':'Borrar selección','Print list':'Imprimir lista','Print':'Imprimir','Close':'Cerrar','Submit':'Enviar','Save':'Guardar','Cancel':'Cancelar'
     },
     fr:{
       'Recipes':'Recettes','My Meal':'Mon Repas','Pantry to Plate':'Du Garde-Manger à l’Assiette','Sauces':'Sauces','Guides':'Guides','Plan a Meal':'Planifier un Repas','About':'À propos',
@@ -42,7 +58,23 @@
       'No close matches found yet. Try a broader combination of ingredients.':'Aucune correspondance proche. Essayez une combinaison plus large d’ingrédients.',
       'Finalize Meal':'Finaliser le Repas','Ingredient List':'Liste des Ingrédients','Print list':'Imprimer la liste',
       'Mother Sauces':'Sauces Mères','Daughter Sauces by Mother':'Sauces Dérivées par Sauce Mère','Other Sauces':'Autres Sauces','The Five Mother Sauces Guide':'Guide des Cinq Sauces Mères',
-      'Seafood & Fish Guide':'Guide des Poissons et Fruits de Mer','Pasta Guide':'Guide des Pâtes','Mushroom Guide':'Guide des Champignons','Meat Guide':'Guide des Viandes','Tortilla Guide':'Guide des Tortillas'
+      'Seafood & Fish Guide':'Guide des Poissons et Fruits de Mer','Pasta Guide':'Guide des Pâtes','Mushroom Guide':'Guide des Champignons','Meat Guide':'Guide des Viandes','Tortilla Guide':'Guide des Tortillas',
+      'Shapes, styles, pairings, preparation, and pasta fundamentals.':'Formes, styles, accords, préparation et bases des pâtes.',
+      'Common varieties, flavor profiles, cooking uses, and handling.':'Variétés courantes, profils de saveur, usages culinaires et manipulation.',
+      'Cuts, cooking methods, doneness, and practical meat references.':'Coupes, méthodes de cuisson, degrés de cuisson et références pratiques sur les viandes.',
+      'The classic foundation sauces and the families of sauces built from them.':'Les sauces classiques de base et les familles de sauces qui en dérivent.',
+      'Types, preparation methods, ingredients, and serving uses.':'Types, méthodes de préparation, ingrédients et façons de servir.',
+      'Fish types, shellfish, cuts, freshness, cooking methods, doneness, and preparation.':'Types de poissons, fruits de mer, découpes, fraîcheur, méthodes de cuisson, degrés de cuisson et préparation.',
+      'Practical references for ingredients, techniques, sauces, cuts, and kitchen fundamentals—all gathered in one place.':'Des références pratiques sur les ingrédients, techniques, sauces, découpes et fondamentaux de cuisine, réunies en un seul endroit.',
+      'From the five classical French mother sauces to their daughter sauces and other kitchen staples, browse the sauce collection in one place.':'Des cinq sauces mères françaises classiques à leurs sauces dérivées et autres essentiels de cuisine, parcourez toute la collection de sauces en un seul endroit.',
+      'Start with Béchamel, Velouté, Espagnole, Sauce Tomate, and Hollandaise, then explore the sauces derived from them.':'Commencez par la Béchamel, le Velouté, l’Espagnole, la Sauce Tomate et la Hollandaise, puis explorez les sauces qui en dérivent.',
+      'Select the ingredients you already have, and we’ll recommend dishes you can make.':'Sélectionnez les ingrédients que vous avez déjà et nous vous proposerons des plats à préparer.',
+      'Recipes you add while browsing appear here. Review your selections, remove anything you do not want, then finalize the meal when it looks right.':'Les recettes que vous ajoutez en parcourant le site apparaissent ici. Vérifiez vos choix, retirez ce que vous ne souhaitez pas, puis finalisez le repas.',
+      'Selected dishes':'Plats sélectionnés','Clear all':'Tout effacer','Finalize meal':'Finaliser le repas','Create ingredient list':'Créer la liste des ingrédients','Edit meal':'Modifier le repas','Browse recipes':'Parcourir les recettes',
+      'No recipes have been added yet.':'Aucune recette n’a encore été ajoutée.','No dishes selected yet.':'Aucun plat sélectionné.','Your Kitchen Table meal':'Votre repas The Kitchen Table',
+      'These are the dishes currently included in your finalized meal.':'Voici les plats actuellement inclus dans votre repas finalisé.','Built from your finalized meal.':'Créée à partir de votre repas finalisé.',
+      'Remove':'Retirer','View recipe →':'Voir la recette →','Open guide →':'Ouvrir le guide →','Open the guide →':'Ouvrir le guide →','View sauce →':'Voir la sauce →',
+      'Find Dishes':'Trouver des plats','Clear selections':'Effacer la sélection','Print list':'Imprimer la liste','Print':'Imprimer','Close':'Fermer','Submit':'Envoyer','Save':'Enregistrer','Cancel':'Annuler'
     }
   };
 
@@ -62,26 +94,41 @@
       acceptNode:function(node){
         var p=node.parentElement;
         if(!p||/^(SCRIPT|STYLE|TEXTAREA|OPTION)$/i.test(p.tagName))return NodeFilter.FILTER_REJECT;
-        return node.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+        if(p.closest&&p.closest('.language-switcher'))return NodeFilter.FILTER_REJECT;
+        return node.nodeValue&&node.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
       }
     });
     var nodes=[],n;
     while((n=walker.nextNode()))nodes.push(n);
     nodes.forEach(function(node){
-      if(!node.parentElement.dataset.i18nOriginal) node.parentElement.dataset.i18nOriginal=node.nodeValue;
-      var original=node.parentElement.dataset.i18nOriginal;
-      node.nodeValue=current==='en'?original:translateExact(original);
+      if(typeof node.__ktI18nOriginal==='undefined') node.__ktI18nOriginal=node.nodeValue;
+      var original=node.__ktI18nOriginal;
+      var desired=current==='en'?original:translateExact(original);
+      if(node.nodeValue!==desired) node.nodeValue=desired;
     });
 
-    document.querySelectorAll('input[placeholder]').forEach(function(el){
-      if(!el.dataset.i18nPlaceholder)el.dataset.i18nPlaceholder=el.getAttribute('placeholder')||'';
-      var original=el.dataset.i18nPlaceholder;
+    document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(function(el){
+      if(typeof el.__ktI18nPlaceholder==='undefined')el.__ktI18nPlaceholder=el.getAttribute('placeholder')||'';
+      var original=el.__ktI18nPlaceholder;
       el.setAttribute('placeholder',current==='en'?original:translateExact(original));
     });
+
+    document.querySelectorAll('input[type="button"],input[type="submit"],input[type="reset"]').forEach(function(el){
+      if(typeof el.__ktI18nValue==='undefined')el.__ktI18nValue=el.value||'';
+      var original=el.__ktI18nValue;
+      el.value=current==='en'?original:translateExact(original);
+    });
+
     document.querySelectorAll('[aria-label]').forEach(function(el){
-      if(!el.dataset.i18nAria)el.dataset.i18nAria=el.getAttribute('aria-label')||'';
-      var original=el.dataset.i18nAria;
+      if(typeof el.__ktI18nAria==='undefined')el.__ktI18nAria=el.getAttribute('aria-label')||'';
+      var original=el.__ktI18nAria;
       el.setAttribute('aria-label',current==='en'?original:translateExact(original));
+    });
+
+    document.querySelectorAll('[title]').forEach(function(el){
+      if(typeof el.__ktI18nTitle==='undefined')el.__ktI18nTitle=el.getAttribute('title')||'';
+      var original=el.__ktI18nTitle;
+      el.setAttribute('title',current==='en'?original:translateExact(original));
     });
   }
 
@@ -123,11 +170,23 @@
   else init();
 
   // Translate controls or status text inserted later by existing site scripts.
+  var observerQueued=false;
   var observer=new MutationObserver(function(mutations){
-    var changed=mutations.some(function(m){return m.type==='childList'&&m.addedNodes.length;});
-    if(changed&&current!=='en')translateDOM();
+    if(current==='en'||observerQueued)return;
+    var changed=mutations.some(function(m){
+      return (m.type==='childList'&&m.addedNodes.length) || m.type==='characterData' || m.type==='attributes';
+    });
+    if(!changed)return;
+    observerQueued=true;
+    requestAnimationFrame(function(){
+      observerQueued=false;
+      translateDOM();
+    });
   });
-  if(document.documentElement)observer.observe(document.documentElement,{childList:true,subtree:true});
+  if(document.documentElement)observer.observe(document.documentElement,{
+    childList:true,subtree:true,characterData:true,attributes:true,
+    attributeFilter:['placeholder','aria-label','title','value']
+  });
 })();
 
 // Browser scroll restoration is handled early on the homepage in index.html.
