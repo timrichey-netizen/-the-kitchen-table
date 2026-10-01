@@ -796,12 +796,29 @@ function standardizeRegionalMetadata(root) {
     if (container.matches('.recipe-card')) {
       const meta=container.querySelector('.recipe-meta');
       if (!meta) return;
-      let first=meta.querySelector('span');
+
+      // Recipe-card metadata is intentionally two-sided:
+      // FOOD TYPE on the left, COUNTRY on the right.
+      // Do not place city/region, cuisine style, protein, time, or other
+      // secondary metadata in this row.
+      let spans=[...meta.querySelectorAll('span')];
+      let first=spans[0];
       if (!first) {
         first=document.createElement('span');
-        meta.prepend(first);
+        meta.appendChild(first);
       }
-      first.textContent=label;
+      let second=spans[1];
+      if (!second) {
+        second=document.createElement('span');
+        meta.appendChild(second);
+      }
+
+      first.textContent=(foodType || 'Food').toUpperCase();
+      second.textContent=(country || '').toUpperCase();
+      second.hidden=!country;
+
+      spans=[...meta.querySelectorAll('span')];
+      spans.slice(2).forEach(function(span){ span.remove(); });
       return;
     }
 
