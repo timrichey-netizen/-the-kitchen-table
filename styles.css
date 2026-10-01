@@ -500,3 +500,15 @@ button,a,input,select{touch-action:manipulation}
   line-height:1.12;
   margin-top:.12em;
 }
+
+
+/* Center the complete original + English title block on recipe detail pages */
+.recipe-detail .recipe-title-original,
+.recipe-detail .recipe-title-english{
+  width:100%;
+  text-align:center;
+}
+.recipe-detail h1:has(.recipe-title-original),
+.recipe-detail h2:has(.recipe-title-original){
+  text-align:center;
+}
