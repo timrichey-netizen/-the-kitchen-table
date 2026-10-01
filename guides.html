@@ -36,6 +36,12 @@
     .guide-card img{width:100%;height:190px;object-fit:cover;display:block}
     .guide-card-body{padding:22px 24px 24px}
     .guide-card h2{font-family:"DM Serif Display",serif;font-size:1.65rem;font-weight:400;margin:0 0 8px}
+    .guide-card h2 a{color:var(--ink);text-decoration:none}
+    .guide-card-photo-credit{padding:9px 24px 0;font-size:.78rem;color:var(--muted)}
+    .guide-card-photo-credit a{color:var(--accent);font-weight:700;text-decoration:none}
+    .guide-card-photo-credit a:hover{text-decoration:underline}
+    .guide-card-note{font-size:.82rem!important;margin-top:12px!important;color:var(--muted)!important}
+    .guide-card-no-photo{display:flex;align-items:center;min-height:270px}
     .guide-card p{margin:0;line-height:1.55;color:#59493f}
     .arrow{display:inline-block;margin-top:16px;font-weight:700;color:var(--accent)}
     @media (max-width:700px){
@@ -62,42 +68,47 @@
       </section>
 
       <section class="grid" aria-label="Cooking guides">
-        <a class="guide-card" href="pasta-guide.html">
-          <img src="assets/fresh-pasta-hard-soft-flour.png" alt="Fresh pasta dough and pasta preparation">
-          <div class="guide-card-body"><h2>Pasta Guide</h2>
+        <article class="guide-card">
+          <a class="guide-card-image-link" href="fresh-pasta-hard-soft-flour.html" aria-label="Fresh Pasta with Hard + Soft Flour recipe"><img src="assets/fresh-pasta-hard-soft-flour.png" alt="Fresh Pasta with Hard + Soft Flour"></a>
+          <div class="guide-card-photo-credit">From: <a href="fresh-pasta-hard-soft-flour.html">Fresh Pasta with Hard + Soft Flour</a></div>
+          <div class="guide-card-body"><h2><a href="pasta-guide.html">Pasta Guide</a></h2>
           <p>Shapes, styles, pairings, preparation, and pasta fundamentals.</p>
-          <span class="arrow">Open guide →</span></div>
-        </a>
-        <a class="guide-card" href="mushroom-guide.html">
-          <img src="assets/miso-mushroom-leek-pasta.png" alt="Cooked mushrooms in a pasta dish">
-          <div class="guide-card-body"><h2>Mushroom Guide</h2>
+          <a class="arrow" href="pasta-guide.html">Open guide →</a></div>
+        </article>
+        <article class="guide-card">
+          <a class="guide-card-image-link" href="miso-mushroom-leek-pasta.html" aria-label="Miso Mushroom and Leek Pasta recipe"><img src="assets/miso-mushroom-leek-pasta.png" alt="Miso Mushroom and Leek Pasta"></a>
+          <div class="guide-card-photo-credit">From: <a href="miso-mushroom-leek-pasta.html">Miso Mushroom and Leek Pasta</a></div>
+          <div class="guide-card-body"><h2><a href="mushroom-guide.html">Mushroom Guide</a></h2>
           <p>Common varieties, flavor profiles, cooking uses, and handling.</p>
-          <span class="arrow">Open guide →</span></div>
-        </a>
-        <a class="guide-card" href="meat-guide.html">
-          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Filet%20mignon.jpg" alt="Medium-rare filet mignon">
-          <div class="guide-card-body"><h2>Meat Guide</h2>
+          <a class="arrow" href="mushroom-guide.html">Open guide →</a></div>
+        </article>
+        <article class="guide-card">
+          <a class="guide-card-image-link" href="florentine-steak-balsamic-rosemary.html" aria-label="Balsamic and Rosemary-Marinated Florentine Steak recipe"><img src="assets/florentine-steak-balsamic-rosemary.png" alt="Balsamic and Rosemary-Marinated Florentine Steak"></a>
+          <div class="guide-card-photo-credit">From: <a href="florentine-steak-balsamic-rosemary.html">Balsamic and Rosemary-Marinated Florentine Steak</a></div>
+          <div class="guide-card-body"><h2><a href="meat-guide.html">Meat Guide</a></h2>
           <p>Cuts, cooking methods, doneness, and practical meat references.</p>
-          <span class="arrow">Open guide →</span></div>
-        </a>
-        <a class="guide-card" href="mother-sauces-guide.html">
-          <img src="assets/shrimp-shell-sauce.png" alt="Finished classical-style sauce">
-          <div class="guide-card-body"><h2>Sauces</h2>
+          <a class="arrow" href="meat-guide.html">Open guide →</a></div>
+        </article>
+        <article class="guide-card">
+          <a class="guide-card-image-link" href="shrimp-shell-sauce.html" aria-label="Shrimp Shell Sauce recipe"><img src="assets/shrimp-shell-sauce.png" alt="Shrimp Shell Sauce"></a>
+          <div class="guide-card-photo-credit">From: <a href="shrimp-shell-sauce.html">Shrimp Shell Sauce</a></div>
+          <div class="guide-card-body"><h2><a href="mother-sauces-guide.html">Sauces</a></h2>
           <p>The classic foundation sauces and the families of sauces built from them.</p>
-          <span class="arrow">Open guide →</span></div>
-        </a>
-        <a class="guide-card" href="seafood-fish-guide.html">
-          <img src="assets/herb-crusted-salmon.png" alt="Herb-crusted salmon">
-          <div class="guide-card-body"><h2>Seafood &amp; Fish Guide</h2>
+          <a class="arrow" href="mother-sauces-guide.html">Open guide →</a></div>
+        </article>
+        <article class="guide-card">
+          <a class="guide-card-image-link" href="herb-crusted-salmon.html" aria-label="Herb-Crusted Salmon recipe"><img src="assets/herb-crusted-salmon.png" alt="Herb-Crusted Salmon"></a>
+          <div class="guide-card-photo-credit">From: <a href="herb-crusted-salmon.html">Herb-Crusted Salmon</a></div>
+          <div class="guide-card-body"><h2><a href="seafood-fish-guide.html">Seafood &amp; Fish Guide</a></h2>
           <p>Fish types, shellfish, cuts, freshness, cooking methods, doneness, and preparation.</p>
-          <span class="arrow">Open guide →</span></div>
-        </a>
-        <a class="guide-card" href="tortilla-guide.html">
-          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Stack%20of%20corn%20and%20flour%20tortillas.jpg" alt="Stack of corn and flour tortillas">
-          <div class="guide-card-body"><h2>Tortilla Guide</h2>
+          <a class="arrow" href="seafood-fish-guide.html">Open guide →</a></div>
+        </article>
+        <article class="guide-card guide-card-no-photo">
+          <div class="guide-card-body"><h2><a href="tortilla-guide.html">Tortilla Guide</a></h2>
           <p>Types, preparation methods, ingredients, and serving uses.</p>
-          <span class="arrow">Open guide →</span></div>
-        </a>
+          <p class="guide-card-note">No portfolio recipe photograph is currently available for this guide.</p>
+          <a class="arrow" href="tortilla-guide.html">Open guide →</a></div>
+        </article>
       </section>
     </main>
   </div>
