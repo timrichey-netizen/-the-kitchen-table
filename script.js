@@ -20,12 +20,27 @@ const asianSubcuisineGroup = document.getElementById('asianSubcuisineGroup');
 const asianSubcuisineFilters = document.getElementById('asianSubcuisineFilters');
 const latinSubcuisineGroup = document.getElementById('latinSubcuisineGroup');
 const latinSubcuisineFilters = document.getElementById('latinSubcuisineFilters');
+const mexicanSubcategoryGroup = document.getElementById('mexicanSubcategoryGroup');
+const mexicanSubcategoryFilters = document.getElementById('mexicanSubcategoryFilters');
 const filters = [...document.querySelectorAll('.filter')];
 const noResults = document.getElementById('noResults');
 let activeFilter = 'all';
 let activeCuisine = 'all';
 let activeAsianSubcuisine = 'all';
 let activeLatinSubcuisine = 'all';
+let activeMexicanSubcategory = 'all';
+
+const MEXICAN_SUBCATEGORIES = [
+  ['Breakfast & Brunch', ['huevos','chilaquiles','molletes','migas mexicanas','gorditas de desayuno','tamales con atole','pan dulce','cafe de olla','nopales con huevo','papas con chorizo y huevo']],
+  ['Tacos', ['taco','tacos']],
+  ['Salsas, Moles & Adobos', ['salsa','mole','adobo','xni pec']],
+  ['Soups & Stews', ['pozole','menudo','birria','consome','caldo']],
+  ['Main Dishes', ['cochinita','carnitas','barbacoa','chile relleno','enchilada','carne asada','pescado a la veracruzana','tinga','cabrito']],
+  ['Seafood', ['pescado','camaron','shrimp','pulpo','calamar','atun','cazon','mantaraya','ostiones','callo de hacha','mariscos','langosta','jaiba']],
+  ['Sides, Vegetables & Beans', ['arroz rojo','arroz verde','frijoles','elote','esquites','nopales','rajas','calabacitas','papas','chiles toreados','cebollitas','jicama','chayotes','verdolagas','ejotes','calabaza','platanos','yuca']],
+  ['Cheese, Tortillas & Antojitos', ['queso','quesadilla','choriqueso','tortilla','gordita','tamal','enfrijolada','entomatada']],
+  ['Desserts & Drinks', ['dessert','dulce','cafe de olla','atole']]
+];
 
 const LATIN_SUBCUISINES = [
   ['Mexico', ['mexican','mexico','tomatillo','enchilada','taco','chilaquiles','huevos rancheros','mole']],
@@ -103,6 +118,39 @@ function detectLatinSubcuisine(card) {
   return '';
 }
 
+function detectMexicanSubcategory(card) {
+  const text = cardHaystack(card);
+  for (const [label, terms] of MEXICAN_SUBCATEGORIES) {
+    if (terms.some(term => text.includes(normalizeSearchText(term)))) return label;
+  }
+  return 'Other Mexican';
+}
+
+function populateMexicanSubcategories() {
+  if (!mexicanSubcategoryFilters) return;
+  const mexicanCards = cards.filter(card => detectLatinSubcuisine(card) === 'Mexico');
+  const represented = [...new Set(mexicanCards.map(detectMexicanSubcategory).filter(Boolean))]
+    .sort((a,b) => a.localeCompare(b));
+  mexicanSubcategoryFilters.innerHTML =
+    '<button class="cuisine-filter active" data-mexican="all">All Mexican food</button>' +
+    represented.map(name => `<button class="cuisine-filter" data-mexican="${name}">${name}</button>`).join('');
+  mexicanSubcategoryFilters.querySelectorAll('.cuisine-filter').forEach(button => {
+    button.addEventListener('click', () => {
+      mexicanSubcategoryFilters.querySelectorAll('.cuisine-filter').forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+      activeMexicanSubcategory = button.dataset.mexican || 'all';
+      updateRecipes();
+    });
+  });
+}
+
+function syncMexicanSubcategoryVisibility() {
+  const show = activeCuisine === 'Latin American' && activeLatinSubcuisine === 'Mexico';
+  if (mexicanSubcategoryGroup) mexicanSubcategoryGroup.hidden = !show;
+  if (show) populateMexicanSubcategories();
+  else activeMexicanSubcategory = 'all';
+}
+
 function populateLatinSubcuisines() {
   if (!latinSubcuisineFilters) return;
   const latinCards = cards.filter(card => detectCuisine(card) === 'Latin American');
@@ -121,6 +169,8 @@ function populateLatinSubcuisines() {
         .forEach(b => b.classList.remove('active'));
       button.classList.add('active');
       activeLatinSubcuisine = button.dataset.latin || 'all';
+      activeMexicanSubcategory = 'all';
+      syncMexicanSubcategoryVisibility();
       updateRecipes();
     });
   });
@@ -168,6 +218,7 @@ function populateCuisineFilter() {
       activeCuisine = button.dataset.cuisine || 'all';
       activeAsianSubcuisine = 'all';
       activeLatinSubcuisine = 'all';
+      activeMexicanSubcategory = 'all';
 
       if (asianSubcuisineGroup) {
         asianSubcuisineGroup.hidden = activeCuisine !== 'Asian';
@@ -177,6 +228,7 @@ function populateCuisineFilter() {
       }
       if (activeCuisine === 'Asian') populateAsianSubcuisines();
       if (activeCuisine === 'Latin American') populateLatinSubcuisines();
+      syncMexicanSubcategoryVisibility();
 
       // Cuisine is the primary filter: reset food type to All when cuisine changes.
       activeFilter = 'all';
@@ -241,8 +293,14 @@ function updateRecipes() {
       activeCuisine !== 'Latin American' ||
       activeLatinSubcuisine === 'all' ||
       latinSubcuisine === activeLatinSubcuisine;
+    const mexicanSubcategory = detectMexicanSubcategory(card);
+    const matchesMexicanSubcategory =
+      activeCuisine !== 'Latin American' ||
+      activeLatinSubcuisine !== 'Mexico' ||
+      activeMexicanSubcategory === 'all' ||
+      mexicanSubcategory === activeMexicanSubcategory;
     const matchesSearch = terms.length === 0 || terms.every(term => haystack.includes(term));
-    const show = matchesCategory && matchesCuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesSearch;
+    const show = matchesCategory && matchesCuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch;
 
     card.hidden = !show;
     card.style.display = show ? '' : 'none';
@@ -260,12 +318,14 @@ search?.addEventListener('input', () => {
     activeCuisine = 'all';
     activeAsianSubcuisine = 'all';
     activeLatinSubcuisine = 'all';
+    activeMexicanSubcategory = 'all';
     filters.forEach(b => b.classList.toggle('active', (b.dataset.filter || 'all') === 'all'));
     cuisineFiltersWrap?.querySelectorAll('.cuisine-filter').forEach(b => {
       b.classList.toggle('active', (b.dataset.cuisine || '') === 'all');
     });
     if (asianSubcuisineGroup) asianSubcuisineGroup.hidden = true;
     if (latinSubcuisineGroup) latinSubcuisineGroup.hidden = true;
+    if (mexicanSubcategoryGroup) mexicanSubcategoryGroup.hidden = true;
   }
   updateRecipes();
 });
@@ -281,6 +341,8 @@ filters.forEach(button => button.addEventListener('click', () => {
 populateCuisineFilter();
 populateAsianSubcuisines();
 populateLatinSubcuisines();
+populateMexicanSubcategories();
+syncMexicanSubcategoryVisibility();
 updateRecipes();
 
 // Recipe images are served only from local GitHub Pages assets.
