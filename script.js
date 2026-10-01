@@ -13,7 +13,7 @@
       'Home':'Inicio','Cooking Guides':'Guías de Cocina','Open guide →':'Abrir guía →','View recipe →':'Ver receta →','View sauce →':'Ver salsa →',
       'Browse recipes':'Explorar recetas','View categories':'Ver categorías','RECIPE OF THE DAY':'RECETA DEL DÍA','A PERSONAL COOKBOOK':'UN RECETARIO PERSONAL',
       'Recipes worth making again.':'Recetas que vale la pena repetir.','Find something delicious.':'Encuentra algo delicioso.','RECIPE COLLECTION':'COLECCIÓN DE RECETAS',
-      'Search recipes…':'Buscar recetas…','All cuisines':'Todas las cocinas','Cuisine':'Cocina','European':'Europea','European country':'País europeo','All European':'Toda Europa','Italy':'Italia','France':'Francia','United Kingdom':'Reino Unido','Switzerland':'Suiza','Belgium':'Bélgica','Spain':'España','Greece':'Grecia','Food type':'Tipo de comida','All':'Todo','Meat':'Carnes','Pasta':'Pasta','Rice':'Arroz','Seafood':'Mariscos','Vegetables & Sides':'Verduras y Guarniciones','Soups & Salads':'Sopas y Ensaladas','Extras':'Extras','Desserts':'Postres',
+      'Search recipes…':'Buscar recetas…','All cuisines':'Todas las cocinas','Cuisine':'Cocina','American':'Estadounidense','American cuisine':'Cocina estadounidense','All American':'Toda la cocina estadounidense','General American':'Estadounidense general','Cajun / Creole':'Cajún / Criolla','European':'Europea','European country':'País europeo','All European':'Toda Europa','Italy':'Italia','France':'Francia','United Kingdom':'Reino Unido','Switzerland':'Suiza','Belgium':'Bélgica','Spain':'España','Greece':'Grecia','Food type':'Tipo de comida','All':'Todo','Meat':'Carnes','Pasta':'Pasta','Rice':'Arroz','Seafood':'Mariscos','Vegetables & Sides':'Verduras y Guarniciones','Soups & Salads':'Sopas y Ensaladas','Extras':'Extras','Desserts':'Postres',
       'Ingredients':'Ingredientes','Preparation':'Preparación','Related Recipes':'Recetas Relacionadas','All recipes':'Todas las recetas','Print Recipe':'Imprimir receta','Print recipe':'Imprimir receta',
       'Add to My Meal':'Agregar a Mi Comida','Already in My Meal':'Ya está en Mi Comida','Added to My Meal':'Agregado a Mi Comida',
       'Back to Guides':'Volver a Guías','Back to all recipes':'Volver a todas las recetas','Back to recipes':'Volver a recetas','Cooking Guide':'Guía de Cocina',
@@ -47,7 +47,7 @@
       'Home':'Accueil','Cooking Guides':'Guides de Cuisine','Open guide →':'Ouvrir le guide →','View recipe →':'Voir la recette →','View sauce →':'Voir la sauce →',
       'Browse recipes':'Parcourir les recettes','View categories':'Voir les catégories','RECIPE OF THE DAY':'RECETTE DU JOUR','A PERSONAL COOKBOOK':'UN LIVRE DE RECETTES PERSONNEL',
       'Recipes worth making again.':'Des recettes à refaire encore et encore.','Find something delicious.':'Trouvez quelque chose de délicieux.','RECIPE COLLECTION':'COLLECTION DE RECETTES',
-      'Search recipes…':'Rechercher des recettes…','All cuisines':'Toutes les cuisines','Cuisine':'Cuisine','European':'Européenne','European country':'Pays européen','All European':'Toute l’Europe','Italy':'Italie','France':'France','United Kingdom':'Royaume-Uni','Switzerland':'Suisse','Belgium':'Belgique','Spain':'Espagne','Greece':'Grèce','Food type':'Type de plat','All':'Tout','Meat':'Viandes','Pasta':'Pâtes','Rice':'Riz','Seafood':'Fruits de mer','Vegetables & Sides':'Légumes et Accompagnements','Soups & Salads':'Soupes et Salades','Extras':'Extras','Desserts':'Desserts',
+      'Search recipes…':'Rechercher des recettes…','All cuisines':'Toutes les cuisines','Cuisine':'Cuisine','American':'Américaine','American cuisine':'Cuisine américaine','All American':'Toute la cuisine américaine','General American':'Américaine générale','Cajun / Creole':'Cajun / Créole','European':'Européenne','European country':'Pays européen','All European':'Toute l’Europe','Italy':'Italie','France':'France','United Kingdom':'Royaume-Uni','Switzerland':'Suisse','Belgium':'Belgique','Spain':'Espagne','Greece':'Grèce','Food type':'Type de plat','All':'Tout','Meat':'Viandes','Pasta':'Pâtes','Rice':'Riz','Seafood':'Fruits de mer','Vegetables & Sides':'Légumes et Accompagnements','Soups & Salads':'Soupes et Salades','Extras':'Extras','Desserts':'Desserts',
       'Ingredients':'Ingrédients','Preparation':'Préparation','Related Recipes':'Recettes Associées','All recipes':'Toutes les recettes','Print Recipe':'Imprimer la recette','Print recipe':'Imprimer la recette',
       'Add to My Meal':'Ajouter à Mon Repas','Already in My Meal':'Déjà dans Mon Repas','Added to My Meal':'Ajouté à Mon Repas',
       'Back to Guides':'Retour aux Guides','Back to all recipes':'Retour à toutes les recettes','Back to recipes':'Retour aux recettes','Cooking Guide':'Guide de Cuisine',
@@ -397,6 +397,8 @@ const search = document.getElementById('recipeSearch');
 const cuisineFiltersWrap = document.getElementById('cuisineFilters');
 const europeanSubcuisineGroup = document.getElementById('europeanSubcuisineGroup');
 const europeanSubcuisineFilters = document.getElementById('europeanSubcuisineFilters');
+const americanSubcuisineGroup = document.getElementById('americanSubcuisineGroup');
+const americanSubcuisineFilters = document.getElementById('americanSubcuisineFilters');
 const asianSubcuisineGroup = document.getElementById('asianSubcuisineGroup');
 const asianSubcuisineFilters = document.getElementById('asianSubcuisineFilters');
 const latinSubcuisineGroup = document.getElementById('latinSubcuisineGroup');
@@ -407,6 +409,7 @@ const filters = [...document.querySelectorAll('.filter')];
 const noResults = document.getElementById('noResults');
 let activeFilter = 'all';
 let activeCuisine = 'all';
+let activeAmericanSubcuisine = 'all';
 let activeEuropeanSubcuisine = 'all';
 let activeAsianSubcuisine = 'all';
 let activeLatinSubcuisine = 'all';
@@ -439,6 +442,11 @@ const LATIN_SUBCUISINES = [
   ['Central America', ['guatemalan','guatemala','salvadoran','el salvador','honduran','honduras','nicaraguan','nicaragua','costa rican','costa rica','panamanian','panama']]
 ];
 
+const AMERICAN_SUBCUISINES = [
+  ['Cajun / Creole', ['cajun','creole','new orleans']],
+  ['General American', ['american','san francisco']]
+];
+
 const EUROPEAN_SUBCUISINES = [
   ['Italy', ['italian','italy','roman','sicilian','venetian','piedmont','piedmontese','campanian','florentine','milanese','sorrentina','amatriciana','carbonara','cacio e pepe','gricia','arrabbiata','bolognese','cioppino']],
   ['France', ['french','france','bourguignon','béchamel','bechamel','veloute','velouté','espagnole','hollandaise','bearnaise','béarnaise','provençale','provencale']],
@@ -461,10 +469,9 @@ const ASIAN_SUBCUISINES = [
 const CUISINES = [
   ['European', ['italian','italy','roman','sicilian','venetian','piedmont','piedmontese','campanian','florentine','milanese','sorrentina','amatriciana','carbonara','cacio e pepe','gricia','arrabbiata','bolognese','cioppino','french','france','bourguignon','béchamel','bechamel','veloute','velouté','espagnole','hollandaise','bearnaise','béarnaise','provençale','provencale','british','english','scottish','welsh','sticky toffee','spotted dick','bread pudding','swiss','switzerland','zurich','zürich','rosti','rösti','fondue','belgian','belgium','moules-frites','frites','spanish','spain','catalan','basque','greek','greece','saganaki']],
   ['Mediterranean', ['mediterranean']],
-  ['Cajun / Creole', ['cajun','creole','new orleans']],
   ['Latin American', ['latin','mexican','mexico','argentinian','argentine','argentina','uruguayan','uruguay','peruvian','peru','brazilian','brazil','colombian','colombia','venezuelan','venezuela','chilean','chile','cuban','cuba','puerto rican','puerto rico','dominican','dominican republic','guatemalan','guatemala','salvadoran','el salvador','honduran','honduras','nicaraguan','nicaragua','costa rican','costa rica','panamanian','panama','criolla','tomatillo','enchilada','taco','chilaquiles','huevos rancheros','mole','provoleta','milanesa','chimichurri','asado','chivito','ceviche','lomo saltado','aji','feijoada','moqueca','arepa','ajiaco','pabellon','pastel de choclo','ropa vieja','mofongo','mangu']],
   ['Asian', ['asian','chinese','moo shu','mandarin','japanese','miso','korean','gochujang','thai','vietnamese','fusion','stir-fry']],
-  ['American', ['american','san francisco']]
+  ['American', ['american','san francisco','cajun','creole','new orleans']]
 ];
 
 function normalizeSearchText(value) {
@@ -484,6 +491,14 @@ function detectCuisine(card) {
   const text = cardHaystack(card);
   for (const [label, terms] of CUISINES) {
     if (terms.some(term => text.includes(term))) return label;
+  }
+  return '';
+}
+
+function detectAmericanSubcuisine(card) {
+  const text = cardHaystack(card);
+  for (const [label, terms] of AMERICAN_SUBCUISINES) {
+    if (terms.some(term => text.includes(normalizeSearchText(term)))) return label;
   }
   return '';
 }
@@ -570,6 +585,24 @@ function populateLatinSubcuisines() {
   });
 }
 
+function populateAmericanSubcuisines() {
+  if (!americanSubcuisineFilters) return;
+  const americanCards = cards.filter(card => detectCuisine(card) === 'American');
+  const represented = [...new Set(americanCards.map(detectAmericanSubcuisine).filter(Boolean))]
+    .sort((a,b) => a.localeCompare(b));
+  americanSubcuisineFilters.innerHTML =
+    '<button class="cuisine-filter active" data-american="all">All American</button>' +
+    represented.map(name => `<button class="cuisine-filter" data-american="${name}">${name}</button>`).join('');
+  americanSubcuisineFilters.querySelectorAll('.cuisine-filter').forEach(button => {
+    button.addEventListener('click', () => {
+      americanSubcuisineFilters.querySelectorAll('.cuisine-filter').forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+      activeAmericanSubcuisine = button.dataset.american || 'all';
+      updateRecipes();
+    });
+  });
+}
+
 function populateEuropeanSubcuisines() {
   if (!europeanSubcuisineFilters) return;
   const europeanCards = cards.filter(card => detectCuisine(card) === 'European');
@@ -633,11 +666,15 @@ function populateCuisineFilter() {
         .forEach(b => b.classList.remove('active'));
       button.classList.add('active');
       activeCuisine = button.dataset.cuisine || 'all';
+      activeAmericanSubcuisine = 'all';
       activeEuropeanSubcuisine = 'all';
       activeAsianSubcuisine = 'all';
       activeLatinSubcuisine = 'all';
       activeMexicanSubcategory = 'all';
 
+      if (americanSubcuisineGroup) {
+        americanSubcuisineGroup.hidden = activeCuisine !== 'American';
+      }
       if (europeanSubcuisineGroup) {
         europeanSubcuisineGroup.hidden = activeCuisine !== 'European';
       }
@@ -647,6 +684,7 @@ function populateCuisineFilter() {
       if (latinSubcuisineGroup) {
         latinSubcuisineGroup.hidden = activeCuisine !== 'Latin American';
       }
+      if (activeCuisine === 'American') populateAmericanSubcuisines();
       if (activeCuisine === 'European') populateEuropeanSubcuisines();
       if (activeCuisine === 'Asian') populateAsianSubcuisines();
       if (activeCuisine === 'Latin American') populateLatinSubcuisines();
@@ -743,6 +781,11 @@ function updateRecipes() {
     const cuisine = detectCuisine(card);
     const matchesCategory = matchesBroadCategory(card, activeFilter);
     const matchesCuisine = activeCuisine === 'all' || cuisine === activeCuisine;
+    const americanSubcuisine = detectAmericanSubcuisine(card);
+    const matchesAmericanSubcuisine =
+      activeCuisine !== 'American' ||
+      activeAmericanSubcuisine === 'all' ||
+      americanSubcuisine === activeAmericanSubcuisine;
     const europeanSubcuisine = detectEuropeanSubcuisine(card);
     const matchesEuropeanSubcuisine =
       activeCuisine !== 'European' ||
@@ -765,7 +808,7 @@ function updateRecipes() {
       activeMexicanSubcategory === 'all' ||
       mexicanSubcategory === activeMexicanSubcategory;
     const matchesSearch = terms.length === 0 || terms.every(term => haystack.includes(term));
-    const show = matchesCategory && matchesCuisine && matchesEuropeanSubcuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch;
+    const show = matchesCategory && matchesCuisine && matchesAmericanSubcuisine && matchesEuropeanSubcuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch;
 
     card.hidden = !show;
     card.style.display = show ? '' : 'none';
@@ -781,6 +824,7 @@ search?.addEventListener('input', () => {
   if ((search.value || '').trim()) {
     activeFilter = 'all';
     activeCuisine = 'all';
+    activeAmericanSubcuisine = 'all';
     activeEuropeanSubcuisine = 'all';
     activeAsianSubcuisine = 'all';
     activeLatinSubcuisine = 'all';
@@ -789,6 +833,7 @@ search?.addEventListener('input', () => {
     cuisineFiltersWrap?.querySelectorAll('.cuisine-filter').forEach(b => {
       b.classList.toggle('active', (b.dataset.cuisine || '') === 'all');
     });
+    if (americanSubcuisineGroup) americanSubcuisineGroup.hidden = true;
     if (europeanSubcuisineGroup) europeanSubcuisineGroup.hidden = true;
     if (asianSubcuisineGroup) asianSubcuisineGroup.hidden = true;
     if (latinSubcuisineGroup) latinSubcuisineGroup.hidden = true;
@@ -809,6 +854,7 @@ addMetricIngredientMeasurements();
 addEnglishRecipeNames();
 shuffleMainRecipesOnLoad();
 populateCuisineFilter();
+populateAmericanSubcuisines();
 populateEuropeanSubcuisines();
 populateAsianSubcuisines();
 populateLatinSubcuisines();
