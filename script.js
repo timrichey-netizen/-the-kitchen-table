@@ -520,3 +520,34 @@ const MEXICAN_SAUCE_LINKS_2 = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MEXICAN SALSA PAIRING</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See salsa →</a></p>').join('');
   anchor.insertAdjacentElement("afterend",wrap);
 })();
+
+const PERUVIAN_RECIPE_LINKS = {
+  "lomo-saltado.html":[["MEAT GUIDE","High-heat searing and salting technique apply directly to the beef.","meat-guide.html"],["SALSA DE GUAJILLO","Optional mild chile sauce for the steak.","salsa-guajillo.html"],["SALSA DE MOLCAJETE","Optional roasted salsa for serving.","salsa-molcajete.html"]],
+  "aji-de-gallina.html":[["SUPRÊME","Related cream-finished chicken-sauce technique.","supreme-sauce.html"],["SALSA DE AJÍ / SALSA VERDE","For a brighter chile contrast, serve a small amount alongside.","salsa-verde.html"]],
+  "ceviche-peruano.html":[["SALSA XNI-PEC","Fresh habanero-citrus salsa is a natural optional pairing.","salsa-xni-pec.html"],["SALSA DE AGUACATE","Creamy avocado salsa can be served alongside.","salsa-aguacate.html"]],
+  "pollo-a-la-brasa-peruano.html":[["MEAT GUIDE","Use the grilling, salting, and resting guidance for whole chicken.","meat-guide.html"],["SALSA VERDE","Bright tomatillo salsa for serving.","salsa-verde.html"],["SALSA DE AGUACATE","Cooling creamy salsa for grilled chicken.","salsa-aguacate.html"],["ADOBO","Related dried-chile marinade technique.","mexican-adobo.html"]],
+  "arroz-con-mariscos-peruano.html":[["SEAFOOD PAIRING","Bright tomatillo salsa works well with seafood rice.","salsa-tomatillo.html"],["NORMANDE","Optional classical fish-stock cream-sauce reference.","normande-sauce.html"]],
+  "seco-de-res.html":[["MEAT GUIDE","Braising and slow-cooking guidance apply directly to the beef.","meat-guide.html"],["SALSA DE GUAJILLO","Optional chile sauce for serving.","salsa-guajillo.html"],["SALSA BORRACHA","Optional grilled/braised meat condiment.","salsa-borracha.html"]],
+  "tacu-tacu.html":[["SALSA CRIOLLA","Traditional bright onion-and-pepper accompaniment.","salsa-criolla.html"],["PICO DE GALLO","Fresh tomato-onion alternative.","pico-de-gallo.html"],["SALSA DE AGUACATE","Creamy topping option.","salsa-aguacate.html"]],
+  "causa-rellena.html":[["SALSA DE AGUACATE","Avocado-based sauce complements the chilled potato layers.","salsa-aguacate.html"],["SALSA VERDE","Bright tomatillo sauce for a fresh contrast.","salsa-verde.html"]],
+  "anticuchos-de-corazon.html":[["MEAT GUIDE","High-heat grilling, salting, and resting guidance apply.","meat-guide.html"],["SALSA DE GUAJILLO","Natural dried-chile accompaniment.","salsa-guajillo.html"],["SALSA MORITA","Smoky chile salsa for grilled heart.","salsa-morita.html"],["SALSA BORRACHA","Traditional grilled-meat style pairing.","salsa-borracha.html"]],
+  "carapulcra.html":[["MEAT GUIDE","Slow-cooking and braising guidance apply to the pork.","meat-guide.html"],["SALSA DE CACAHUATE","Related peanut-chile flavor profile.","salsa-cacahuate.html"],["SALSA MORITA","Smoky chile condiment for serving.","salsa-morita.html"]],
+  "salsa-criolla.html":[["TACU TACU","Classic accompaniment.","tacu-tacu.html"],["CARAPULCRA","Traditional bright side for the stew.","carapulcra.html"]],
+  "pollo-a-la-parrilla.html":[["POLLO A LA BRASA","Compare with Peru's rotisserie-style marinated chicken.","pollo-a-la-brasa-peruano.html"]],
+  "bife-de-chorizo-chimichurri.html":[["LOMO SALTADO","Compare a different South American steak tradition using high-heat stir-frying.","lomo-saltado.html"]],
+  "creamy-seafood-risotto.html":[["ARROZ CON MARISCOS","Compare with Peru's ají-seasoned seafood rice.","arroz-con-mariscos-peruano.html"]],
+  "shrimp-creole.html":[["ARROZ CON MARISCOS","Related seafood-and-rice flavor direction.","arroz-con-mariscos-peruano.html"]],
+  "red-beans-rice-andouille.html":[["TACU TACU","Compare another rice-and-bean tradition.","tacu-tacu.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=PERUVIAN_RECIPE_LINKS[p];
+  if(!refs || !refs.length || document.querySelector(".peruvian-crossref-tip")) return;
+  const anchor=document.querySelector(".mexican-sauce-tip-2") || document.querySelector(".mexican-sauce-tip") || document.querySelector(".tomate-daughter-tip") || document.querySelector(".hollandaise-daughter-tip") || document.querySelector(".veloute-daughter-tip") || document.querySelector(".daughter-sauce-tip") || document.querySelector(".mother-sauce-tip") || document.querySelector(".print-button");
+  if(!anchor) return;
+  const wrap=document.createElement("div");
+  wrap.className="peruvian-crossref-tip";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#f8f6ef";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">PERUVIAN RECIPE CROSS-REFERENCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">View →</a></p>').join('');
+  anchor.insertAdjacentElement("afterend",wrap);
+})();
