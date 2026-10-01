@@ -1555,6 +1555,10 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
     var info=recipeInfoFromPage();
     if(!info)return;
     var detail=document.querySelector('.recipe-detail');
+    // Guides use the recipe-detail layout for styling but are not recipes.
+    // Never add meal-planning controls to guide/reference pages.
+    var path=(window.location.pathname.split('/').pop() || '').toLowerCase();
+    if(path.includes('guide') || document.querySelector('a[href="guides.html"]'))return;
     if(!detail||detail.querySelector('.add-to-my-meal'))return;
     var print=detail.querySelector('.print-button');
     var button=document.createElement('button');
