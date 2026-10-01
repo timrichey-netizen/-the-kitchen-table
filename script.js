@@ -583,3 +583,33 @@ const PERUVIAN_SIDE_LINKS = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">PERUVIAN PAIRING</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">View →</a></p>').join('');
   anchor.insertAdjacentElement("afterend",wrap);
 })();
+
+const MEXICAN_MAIN_LINKS = {
+  "tacos-al-pastor.html":[["MEAT GUIDE","Grilling, salting, and browning guidance apply to the pork.","meat-guide.html"],["ADOBO","The pork marinade is closely related to Mexican adobo.","mexican-adobo.html"],["SALSA DE GUAJILLO","Guajillo is central to the marinade and makes a natural table salsa.","salsa-guajillo.html"],["SALSA TAQUERA","Classic taco-shop pairing.","salsa-taquera.html"],["SALSA DE CHILE DE ÁRBOL","Traditional hot salsa pairing.","salsa-chile-de-arbol.html"]],
+  "birria.html":[["MEAT GUIDE","Braising and slow-cooking techniques apply directly.","meat-guide.html"],["SALSA DE GUAJILLO","Direct chile-family match.","salsa-guajillo.html"],["SALSA MORITA","Smoky table salsa for birria tacos.","salsa-morita.html"],["SALSA BORRACHA","Optional robust meat-salsa pairing.","salsa-borracha.html"]],
+  "mole-poblano-con-pollo.html":[["MOLE POBLANO","Uses the full Mole Poblano sauce recipe.","mole-poblano.html"],["ARROZ PERUANO","A simple garlic rice is an optional side if Mexican rice is not being served.","arroz-peruano.html"],["MEAT GUIDE","Poultry temperature and resting guidance apply.","meat-guide.html"]],
+  "cochinita-pibil.html":[["MEAT GUIDE","Slow-roasting and resting guidance apply to pork shoulder.","meat-guide.html"],["SALSA XNI-PEC","Classic Yucatán pairing.","salsa-xni-pec.html"],["SALSA HABANERO","Natural regional hot-sauce pairing.","salsa-habanero.html"],["PICO DE GALLO","Milder fresh alternative.","pico-de-gallo.html"]],
+  "carnitas.html":[["MEAT GUIDE","Slow cooking followed by crisping is the core technique.","meat-guide.html"],["SALSA VERDE","Classic carnitas pairing.","salsa-verde.html"],["SALSA ROJA","Classic red-salsa option.","salsa-roja.html"],["SALSA DE MOLCAJETE","Rustic roasted salsa for tacos.","salsa-molcajete.html"]],
+  "barbacoa.html":[["MEAT GUIDE","Low-and-slow braising guidance applies directly.","meat-guide.html"],["SALSA BORRACHA","Traditional robust meat pairing.","salsa-borracha.html"],["SALSA DE GUAJILLO","Natural dried-chile accompaniment.","salsa-guajillo.html"],["SALSA DE MOLCAJETE","Rustic table salsa for barbacoa tacos.","salsa-molcajete.html"]],
+  "chile-relleno.html":[["SALSA RANCHERA","Classic sauce for serving chile relleno.","salsa-ranchera.html"],["SALSA ROJA","Alternative red tomato-chile sauce.","salsa-roja.html"],["PICO DE GALLO","Fresh side garnish.","pico-de-gallo.html"]],
+  "enchiladas-rojas.html":[["SALSA ROJA","Direct sauce-family match.","salsa-roja.html"],["SALSA DE GUAJILLO","Guajillo-based sauce is the core red enchilada flavor.","salsa-guajillo.html"],["SALSA DE CHILE DE ÁRBOL","Optional extra heat.","salsa-chile-de-arbol.html"]],
+  "enchiladas-verdes.html":[["SALSA VERDE","Direct sauce-family match.","salsa-verde.html"],["SALSA DE TOMATILLO","Tomatillo is the defining base.","salsa-tomatillo.html"],["SALSA DE AGUACATE","Optional creamy garnish.","salsa-aguacate.html"]],
+  "pozole-rojo.html":[["MEAT GUIDE","Long, gentle pork cooking guidance applies.","meat-guide.html"],["SALSA DE GUAJILLO","Direct chile-family match for the broth.","salsa-guajillo.html"],["SALSA DE CHILE DE ÁRBOL","Traditional table condiment for extra heat.","salsa-chile-de-arbol.html"],["SALSA MORITA","Smoky optional garnish.","salsa-morita.html"]],
+  "salsa-guajillo.html":[["TACOS AL PASTOR","Guajillo is central to the pastor marinade.","tacos-al-pastor.html"],["BIRRIA","Core dried-chile flavor in the braise.","birria.html"],["ENCHILADAS ROJAS","Classic red enchilada base.","enchiladas-rojas.html"],["POZOLE ROJO","Key chile for the red broth.","pozole-rojo.html"]],
+  "salsa-xni-pec.html":[["COCHINITA PIBIL","Classic Yucatán accompaniment.","cochinita-pibil.html"]],
+  "salsa-verde.html":[["CARNITAS","Classic taco pairing.","carnitas.html"],["ENCHILADAS VERDES","Direct use case.","enchiladas-verdes.html"]],
+  "salsa-ranchera.html":[["CHILE RELLENO","Classic serving sauce.","chile-relleno.html"]],
+  "mole-poblano.html":[["MOLE POBLANO CON POLLO","Direct dish application.","mole-poblano-con-pollo.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=MEXICAN_MAIN_LINKS[p];
+  if(!refs || !refs.length || document.querySelector(".mexican-main-tip")) return;
+  const anchor=document.querySelector(".peruvian-side-tip") || document.querySelector(".peruvian-crossref-tip") || document.querySelector(".mexican-sauce-tip-2") || document.querySelector(".mexican-sauce-tip") || document.querySelector(".print-button");
+  if(!anchor) return;
+  const wrap=document.createElement("div");
+  wrap.className="mexican-main-tip";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fff7ec";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MEXICAN RECIPE CROSS-REFERENCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">View →</a></p>').join('');
+  anchor.insertAdjacentElement("afterend",wrap);
+})();
