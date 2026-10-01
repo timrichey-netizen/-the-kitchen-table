@@ -14,6 +14,75 @@ if (menuButton && nav) {
 }
 
 
+
+function addMetricIngredientMeasurements(root) {
+  root = root || document;
+  var fractionMap = {'¼':0.25,'½':0.5,'¾':0.75,'⅓':1/3,'⅔':2/3,'⅛':0.125,'⅜':0.375,'⅝':0.625,'⅞':0.875};
+
+  function parseQty(raw) {
+    raw = (raw || '').trim();
+    if (!raw) return null;
+    if (fractionMap[raw] != null) return fractionMap[raw];
+    var mixed = raw.match(/^(\d+)\s+([¼½¾⅓⅔⅛⅜⅝⅞])$/);
+    if (mixed) return Number(mixed[1]) + fractionMap[mixed[2]];
+    var slashMixed = raw.match(/^(\d+)\s+(\d+)\/(\d+)$/);
+    if (slashMixed) return Number(slashMixed[1]) + Number(slashMixed[2]) / Number(slashMixed[3]);
+    var frac = raw.match(/^(\d+)\/(\d+)$/);
+    if (frac) return Number(frac[1]) / Number(frac[2]);
+    var n = Number(raw);
+    return isFinite(n) ? n : null;
+  }
+
+  function pretty(n, unit) {
+    if (unit === 'kg' && n < 1) return Math.round(n * 1000) + ' g';
+    if (unit === 'L' && n < 1) return Math.round(n * 1000) + ' mL';
+    if (unit === 'g') return Math.round(n) + ' g';
+    if (unit === 'mL') {
+      var rounded = n < 20 ? Math.round(n * 2) / 2 : Math.round(n);
+      return rounded + ' mL';
+    }
+    var v = Math.round(n * 100) / 100;
+    return v + ' ' + unit;
+  }
+
+  function metricFor(line) {
+    if (/\([^)]*(?:g|kg|ml|mL|l|L)\b[^)]*\)/.test(line)) return null;
+    var qtyPattern = '(\\d+\\s+[¼½¾⅓⅔⅛⅜⅝⅞]|\\d+\\s+\\d+\\/\\d+|\\d+\\/\\d+|[¼½¾⅓⅔⅛⅜⅝⅞]|\\d+(?:\\.\\d+)?)';
+    var re = new RegExp('^\\s*' + qtyPattern + '\\s*(lb|lbs|pound|pounds|oz|ounce|ounces|qt|quart|quarts|gal|gallon|gallons|cup|cups|tbsp|tablespoon|tablespoons|tsp|teaspoon|teaspoons)\\b', 'i');
+    var m = line.match(re);
+    if (!m) return null;
+    var q = parseQty(m[1]);
+    if (q == null) return null;
+    var u = m[2].toLowerCase();
+    if (/^(lb|lbs|pound|pounds)$/.test(u)) return pretty(q * 453.59237, 'g');
+    if (/^(oz|ounce|ounces)$/.test(u)) return pretty(q * 28.349523125, 'g');
+    if (/^(qt|quart|quarts)$/.test(u)) return pretty(q * 0.946352946, 'L');
+    if (/^(gal|gallon|gallons)$/.test(u)) return pretty(q * 3.785411784, 'L');
+    if (/^(cup|cups)$/.test(u)) return pretty(q * 236.5882365, 'mL');
+    if (/^(tbsp|tablespoon|tablespoons)$/.test(u)) return pretty(q * 14.7867648, 'mL');
+    if (/^(tsp|teaspoon|teaspoons)$/.test(u)) return pretty(q * 4.92892159, 'mL');
+    return null;
+  }
+
+  root.querySelectorAll('.ingredients-panel li').forEach(function(li) {
+    if (li.dataset.metricAdded === 'true') return;
+    var original = (li.textContent || '').replace(/\s+/g, ' ').trim();
+    var metric = metricFor(original);
+    if (metric) {
+      li.innerHTML = '';
+      var imperial = document.createElement('span');
+      imperial.className = 'ingredient-imperial';
+      imperial.textContent = original;
+      var metricSpan = document.createElement('span');
+      metricSpan.className = 'ingredient-metric';
+      metricSpan.textContent = ' (' + metric + ')';
+      li.appendChild(imperial);
+      li.appendChild(metricSpan);
+    }
+    li.dataset.metricAdded = 'true';
+  });
+}
+
 const recipeEnglishNames = {
   "Dashi":"Japanese Soup Stock","Kombu Dashi":"Kelp Soup Stock","Shiitake Dashi":"Shiitake Mushroom Soup Stock",
   "Tonkotsu Broth":"Pork Bone Broth","Pho Broth":"Vietnamese Noodle Soup Broth","Tom Yum Broth":"Thai Hot and Sour Soup Broth","Tom Kha Broth":"Thai Coconut Soup Broth",
@@ -434,6 +503,7 @@ filters.forEach(button => button.addEventListener('click', () => {
   updateRecipes();
 }));
 
+addMetricIngredientMeasurements();
 addEnglishRecipeNames();
 sortRecipesMainFirst();
 populateCuisineFilter();
@@ -1513,6 +1583,7 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
     var doc=new DOMParser().parseFromString(html,'text/html');
     var panel=doc.querySelector('.ingredients-panel');
     if(!panel)return[];
+    addMetricIngredientMeasurements(doc);
     return [].slice.call(panel.querySelectorAll('li')).map(function(li){
       return (li.textContent||'').replace(/\s+/g,' ').trim();
     }).filter(Boolean);
