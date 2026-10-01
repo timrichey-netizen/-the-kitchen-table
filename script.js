@@ -613,3 +613,34 @@ const MEXICAN_MAIN_LINKS = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MEXICAN RECIPE CROSS-REFERENCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">View →</a></p>').join('');
   anchor.insertAdjacentElement("afterend",wrap);
 })();
+
+const MEXICAN_MAIN_LINKS_2 = {
+  "chiles-en-nogada.html":[["MEAT GUIDE","Ground-meat browning technique applies to the picadillo.","meat-guide.html"],["PICO DE GALLO","Optional fresh side, though the walnut sauce should remain the focus.","pico-de-gallo.html"]],
+  "carne-asada.html":[["MEAT GUIDE","Salting, grilling, resting, and slicing guidance apply directly.","meat-guide.html"],["SALSA TAQUERA","Classic steak-taco pairing.","salsa-taquera.html"],["SALSA DE MOLCAJETE","Rustic grilled-meat salsa.","salsa-molcajete.html"],["SALSA MORITA","Smoky salsa for charred beef.","salsa-morita.html"],["SALSA DE AGUACATE","Cooling creamy topping.","salsa-aguacate.html"]],
+  "pescado-a-la-veracruzana.html":[["PROVENÇALE","Related tomato, olive, caper, and herb flavor family.","provencale-sauce.html"],["SAUCE TOMATE","Classical tomato-sauce reference.","sauce-tomate.html"],["SALSA XNI-PEC","Optional citrus-habanero contrast.","salsa-xni-pec.html"]],
+  "tacos-de-pescado.html":[["SALSA VERDE","Bright tomatillo salsa for fish tacos.","salsa-verde.html"],["SALSA DE AGUACATE","Creamy avocado salsa.","salsa-aguacate.html"],["PICO DE GALLO","Classic fresh taco topping.","pico-de-gallo.html"],["SALSA XNI-PEC","Hot citrusy topping.","salsa-xni-pec.html"]],
+  "pollo-en-mole-negro.html":[["MOLE NEGRO","Direct sauce application.","mole-negro.html"],["MEAT GUIDE","Poultry temperature and resting guidance apply.","meat-guide.html"]],
+  "costillas-en-chile-colorado.html":[["MEAT GUIDE","Braising and slow-cooking guidance apply to the ribs.","meat-guide.html"],["SALSA DE GUAJILLO","Direct chile-family match.","salsa-guajillo.html"],["ADOBO","Related dried-chile braising profile.","mexican-adobo.html"]],
+  "enfrijoladas.html":[["SALSA DE CHIPOTLE","Smoky bean-sauce variation.","salsa-chipotle.html"],["PICO DE GALLO","Fresh topping.","pico-de-gallo.html"],["SALSA DE AGUACATE","Creamy topping.","salsa-aguacate.html"],["TACU TACU","Compare another rice-and-bean tradition.","tacu-tacu.html"]],
+  "tinga-de-pollo.html":[["SALSA DE CHIPOTLE","Direct smoky chile-family match.","salsa-chipotle.html"],["SAUCE TOMATE","Related tomato-sauce foundation.","sauce-tomate.html"],["PICO DE GALLO","Fresh tostada topping.","pico-de-gallo.html"]],
+  "tamales-mexicanos.html":[["SALSA ROJA","Direct red-chile serving sauce.","salsa-roja.html"],["SALSA VERDE","Classic green-salsa alternative.","salsa-verde.html"],["SALSA DE GUAJILLO","Natural chile sauce for red tamales.","salsa-guajillo.html"],["TAMAL PERUANO","Compare with the Peruvian tamal tradition.","tamal-peruano.html"]],
+  "cabrito-al-pastor.html":[["MEAT GUIDE","Slow roasting, grilling, and resting guidance apply directly.","meat-guide.html"],["SALSA BORRACHA","Excellent northern-style grilled-meat pairing.","salsa-borracha.html"],["SALSA DE MOLCAJETE","Rustic salsa for roast goat.","salsa-molcajete.html"],["SALSA DE GUAJILLO","Mild dried-chile accompaniment.","salsa-guajillo.html"]],
+  "mole-negro.html":[["POLLO EN MOLE NEGRO","Direct dish application.","pollo-en-mole-negro.html"]],
+  "salsa-chipotle.html":[["TINGA DE POLLO","Direct smoky tomato-chipotle use case.","tinga-de-pollo.html"],["ENFRIJOLADAS","Optional smoky bean-sauce variation.","enfrijoladas.html"]],
+  "salsa-guajillo.html":[["COSTILLAS EN CHILE COLORADO","Guajillo is central to the red chile braise.","costillas-en-chile-colorado.html"],["TAMALES","Natural sauce for red tamales.","tamales-mexicanos.html"],["CABRITO AL PASTOR","Optional dried-chile accompaniment.","cabrito-al-pastor.html"]],
+  "salsa-molcajete.html":[["CARNE ASADA","Classic grilled-beef pairing.","carne-asada.html"],["CABRITO AL PASTOR","Rustic salsa for roast goat.","cabrito-al-pastor.html"]],
+  "salsa-verde.html":[["TACOS DE PESCADO","Classic fish-taco pairing.","tacos-de-pescado.html"],["TAMALES","Classic green-salsa serving option.","tamales-mexicanos.html"]],
+  "pico-de-gallo.html":[["TACOS DE PESCADO","Classic fresh topping.","tacos-de-pescado.html"],["TINGA DE POLLO","Fresh tostada topping.","tinga-de-pollo.html"],["ENFRIJOLADAS","Fresh contrast to bean sauce.","enfrijoladas.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=MEXICAN_MAIN_LINKS_2[p];
+  if(!refs || !refs.length || document.querySelector(".mexican-main-tip-2")) return;
+  const anchor=document.querySelector(".mexican-main-tip") || document.querySelector(".peruvian-side-tip") || document.querySelector(".peruvian-crossref-tip") || document.querySelector(".mexican-sauce-tip-2") || document.querySelector(".mexican-sauce-tip") || document.querySelector(".print-button");
+  if(!anchor) return;
+  const wrap=document.createElement("div");
+  wrap.className="mexican-main-tip-2";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fff6e8";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MEXICAN RECIPE CROSS-REFERENCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">View →</a></p>').join('');
+  anchor.insertAdjacentElement("afterend",wrap);
+})();
