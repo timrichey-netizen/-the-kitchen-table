@@ -86,6 +86,12 @@
   }
 
   function addSwitcher(){
+    if(!document.getElementById('kitchen-table-language-styles')){
+      var style=document.createElement('style');
+      style.id='kitchen-table-language-styles';
+      style.textContent='.language-switcher{display:flex;align-items:center;gap:4px;margin-left:10px;flex:0 0 auto}.language-switcher button{border:1px solid rgba(120,100,80,.28);background:rgba(255,255,255,.72);color:inherit;border-radius:999px;padding:5px 8px;font:700 11px/1 Inter,Arial,sans-serif;letter-spacing:.06em;cursor:pointer}.language-switcher button.active{background:#a4442f;color:#fff;border-color:#a4442f}.topbar .language-switcher button{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);color:#fff}.topbar .language-switcher button.active{background:#d8a35d;color:#20262a;border-color:#d8a35d}@media(max-width:760px){.language-switcher{margin-left:0}.nav-wrap .language-switcher{order:3}.language-switcher button{padding:6px 9px}}';
+      document.head.appendChild(style);
+    }
     if(document.querySelector('.language-switcher'))return;
     var host=document.querySelector('.nav-wrap')||document.querySelector('.topbar')||document.querySelector('.site-header');
     if(!host)return;
