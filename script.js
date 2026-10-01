@@ -644,3 +644,17 @@ const MEXICAN_MAIN_LINKS_2 = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MEXICAN RECIPE CROSS-REFERENCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">View →</a></p>').join('');
   anchor.insertAdjacentElement("afterend",wrap);
 })();
+
+const MEXICAN_TACO_LINKS_V2={
+"tacos-de-adobada.html":[["ADOBO","Direct marinade match.","mexican-adobo.html"],["SALSA DE GUAJILLO","Natural chile pairing.","salsa-guajillo.html"],["SALSA TAQUERA","Classic taco-shop salsa.","salsa-taquera.html"]],
+"tacos-de-bistec.html":[["MEAT GUIDE","High-heat searing and slicing guidance.","meat-guide.html"],["SALSA TAQUERA","Classic steak-taco salsa.","salsa-taquera.html"],["SALSA DE MOLCAJETE","Rustic grilled-beef pairing.","salsa-molcajete.html"]],
+"tacos-de-alambre.html":[["MEAT GUIDE","Griddle browning applies directly.","meat-guide.html"],["SALSA ROJA","Classic red-salsa topping.","salsa-roja.html"],["SALSA DE AGUACATE","Cooling creamy topping.","salsa-aguacate.html"]],
+"tacos-de-pastor-negro.html":[["ADOBO","Related dark chile marinade.","mexican-adobo.html"],["SALSA MORITA","Smoky pairing.","salsa-morita.html"],["SALSA DE CHILE DE ÁRBOL","Hot taquería pairing.","salsa-chile-de-arbol.html"]],
+"tacos-de-mixiote.html":[["MEAT GUIDE","Slow cooking applies directly.","meat-guide.html"],["ADOBO","Direct dried-chile marinade connection.","mexican-adobo.html"],["SALSA DE GUAJILLO","Natural pairing.","salsa-guajillo.html"]],
+"tacos-de-machaca.html":[["SALSA RANCHERA","Classic northern pairing.","salsa-ranchera.html"],["SALSA DE MOLCAJETE","Rustic salsa for beef tacos.","salsa-molcajete.html"],["PICO DE GALLO","Fresh topping.","pico-de-gallo.html"]],
+"tacos-de-discada.html":[["MEAT GUIDE","High-heat griddle browning applies.","meat-guide.html"],["SALSA MORITA","Smoky mixed-meat pairing.","salsa-morita.html"],["SALSA BORRACHA","Robust northern-style pairing.","salsa-borracha.html"]],
+"tacos-de-lechon.html":[["MEAT GUIDE","Slow roasting and crisping apply.","meat-guide.html"],["SALSA XNI-PEC","Citrus-habanero pairing.","salsa-xni-pec.html"],["SALSA HABANERO","Hot pork accompaniment.","salsa-habanero.html"]],
+"tacos-de-buche.html":[["MEAT GUIDE","Gentle cooking then griddle crisping.","meat-guide.html"],["SALSA TAQUERA","Classic taquería condiment.","salsa-taquera.html"],["SALSA DE CHILE DE ÁRBOL","Classic hot pairing.","salsa-chile-de-arbol.html"]],
+"tacos-de-cachete.html":[["MEAT GUIDE","Low-and-slow braising is key.","meat-guide.html"],["SALSA VERDE","Bright contrast for rich beef.","salsa-verde.html"],["SALSA BORRACHA","Robust meat pairing.","salsa-borracha.html"]]
+};
+(function(){const p=(location.pathname.split("/").pop()||"index.html").toLowerCase(),r=MEXICAN_TACO_LINKS_V2[p];if(!r||document.querySelector(".mexican-taco-tip"))return;const a=document.querySelector(".mexican-main-tip-2")||document.querySelector(".mexican-main-tip")||document.querySelector(".print-button");if(!a)return;const w=document.createElement("div");w.className="mexican-taco-tip";w.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fff5e6";w.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MEXICAN TACO CROSS-REFERENCE</p>'+r.map(x=>'<p style="margin:0 0 7px"><strong>'+x[0]+':</strong> '+x[1]+' <a class="text-link" href="'+x[2]+'">View →</a></p>').join('');a.insertAdjacentElement("afterend",w)})();
