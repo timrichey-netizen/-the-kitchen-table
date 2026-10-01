@@ -1272,3 +1272,200 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
   if(document.getElementById('recipeGrid'))loadHomeRatings();
   initRecipeFeedback();
 })();
+
+
+// My Meal
+(function(){
+  var STORAGE_KEY='kitchenTableMyMeal';
+  var FINAL_KEY='kitchenTableFinalizedMeal';
+
+  function read(key){
+    try{return JSON.parse(localStorage.getItem(key)||'[]');}catch(e){return[];}
+  }
+  function write(key,value){
+    localStorage.setItem(key,JSON.stringify(value));
+    updateCounts();
+  }
+  function normalizeUrl(url){
+    try{return new URL(url,window.location.href).pathname.split('/').pop();}catch(e){return url;}
+  }
+  function recipeInfoFromPage(){
+    var detail=document.querySelector('.recipe-detail');
+    if(!detail)return null;
+    var h=detail.querySelector('h1');
+    if(!h)return null;
+    var img=detail.querySelector('.recipe-feature-image');
+    var intro=detail.querySelector('.recipe-intro');
+    return {
+      title:h.textContent.trim(),
+      url:normalizeUrl(location.href),
+      image:img?img.getAttribute('src'):'',
+      description:intro?intro.textContent.trim():''
+    };
+  }
+  function updateCounts(){
+    var count=read(STORAGE_KEY).length;
+    document.querySelectorAll('[data-my-meal-count]').forEach(function(el){
+      el.textContent=count?'('+count+')':'';
+    });
+    var pageCount=document.getElementById('myMealNavCount');
+    if(pageCount)pageCount.textContent=count?'('+count+')':'';
+  }
+  function addCurrentRecipeButton(){
+    var info=recipeInfoFromPage();
+    if(!info)return;
+    var detail=document.querySelector('.recipe-detail');
+    if(!detail||detail.querySelector('.add-to-my-meal'))return;
+    var print=detail.querySelector('.print-button');
+    var button=document.createElement('button');
+    button.type='button';
+    button.className='button primary add-to-my-meal';
+    button.textContent='Add to My Meal';
+    button.addEventListener('click',function(){
+      var items=read(STORAGE_KEY);
+      if(items.some(function(x){return x.url===info.url;})){
+        button.textContent='Already in My Meal';
+        return;
+      }
+      items.push(info);
+      write(STORAGE_KEY,items);
+      button.textContent='Added to My Meal';
+    });
+    if(print){
+      print.insertAdjacentElement('afterend',button);
+    }else{
+      var top=detail.querySelector('.recipe-layout > div');
+      if(top)top.appendChild(button);
+    }
+  }
+  function card(item,finalized){
+    var article=document.createElement('article');
+    article.className='my-meal-card';
+    if(item.image){
+      var img=document.createElement('img');
+      img.src=item.image;
+      img.alt=item.title;
+      article.appendChild(img);
+    }
+    var body=document.createElement('div');
+    body.className='my-meal-card-body';
+    var h=document.createElement('h3');
+    h.textContent=item.title;
+    var p=document.createElement('p');
+    p.textContent=item.description||'';
+    var actions=document.createElement('div');
+    actions.className='my-meal-card-actions';
+    var view=document.createElement('a');
+    view.className='text-link';
+    view.href=item.url;
+    view.textContent='View recipe →';
+    actions.appendChild(view);
+    if(!finalized){
+      var remove=document.createElement('button');
+      remove.type='button';
+      remove.className='my-meal-remove';
+      remove.textContent='Remove';
+      remove.addEventListener('click',function(){
+        var items=read(STORAGE_KEY).filter(function(x){return x.url!==item.url;});
+        write(STORAGE_KEY,items);
+        renderBuilder();
+      });
+      actions.appendChild(remove);
+    }
+    body.append(h,p,actions);
+    article.appendChild(body);
+    return article;
+  }
+  function renderBuilder(){
+    var grid=document.getElementById('myMealSelectedGrid');
+    if(!grid)return;
+    var items=read(STORAGE_KEY);
+    var empty=document.getElementById('myMealEmpty');
+    var finalize=document.getElementById('finalizeMyMeal');
+    var summary=document.getElementById('myMealSelectedSummary');
+    grid.innerHTML='';
+    items.forEach(function(item){grid.appendChild(card(item,false));});
+    if(empty)empty.hidden=items.length>0;
+    if(finalize)finalize.disabled=!items.length;
+    if(summary)summary.textContent=items.length
+      ?items.length+' dish'+(items.length===1?'':'es')+' selected.'
+      :'No dishes selected yet.';
+  }
+  function renderFinalized(){
+    var section=document.getElementById('finalizedMealSection');
+    var grid=document.getElementById('finalizedMealGrid');
+    if(!section||!grid)return;
+    var items=read(FINAL_KEY);
+    section.hidden=!items.length;
+    grid.innerHTML='';
+    items.forEach(function(item){grid.appendChild(card(item,true));});
+  }
+  function extractIngredients(html){
+    var doc=new DOMParser().parseFromString(html,'text/html');
+    var panel=doc.querySelector('.ingredients-panel');
+    if(!panel)return[];
+    return [].slice.call(panel.querySelectorAll('li')).map(function(li){
+      return (li.textContent||'').replace(/\s+/g,' ').trim();
+    }).filter(Boolean);
+  }
+  function buildFinalIngredients(){
+    var panel=document.getElementById('finalMealIngredientPanel');
+    var status=document.getElementById('finalMealIngredientStatus');
+    var content=document.getElementById('finalMealIngredientContent');
+    var items=read(FINAL_KEY);
+    if(!panel||!status||!content)return;
+    panel.hidden=false;
+    status.textContent='Building ingredient list…';
+    content.innerHTML='';
+    Promise.all(items.map(function(item){
+      return fetch(item.url).then(function(r){
+        if(!r.ok)throw new Error();
+        return r.text();
+      }).then(function(html){
+        return {item:item,ingredients:extractIngredients(html)};
+      }).catch(function(){
+        return {item:item,ingredients:[]};
+      });
+    })).then(function(groups){
+      status.textContent='';
+      content.innerHTML=groups.map(function(group){
+        var list=group.ingredients.length
+          ?'<ul>'+group.ingredients.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>'
+          :'<p class="muted-copy">Ingredients could not be read automatically. <a href="'+group.item.url+'">Open recipe</a>.</p>';
+        return '<section class="ingredient-dish-group"><h3><a href="'+group.item.url+'">'+group.item.title+'</a></h3>'+list+'</section>';
+      }).join('');
+      panel.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  }
+  function initMyMealPage(){
+    if(!document.getElementById('myMealBuilder'))return;
+    renderBuilder();
+    renderFinalized();
+    var clear=document.getElementById('clearMyMeal');
+    if(clear)clear.addEventListener('click',function(){
+      write(STORAGE_KEY,[]);
+      renderBuilder();
+    });
+    var finalize=document.getElementById('finalizeMyMeal');
+    if(finalize)finalize.addEventListener('click',function(){
+      var items=read(STORAGE_KEY);
+      write(FINAL_KEY,items);
+      renderFinalized();
+      var section=document.getElementById('finalizedMealSection');
+      if(section)section.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    var edit=document.getElementById('editMyMeal');
+    if(edit)edit.addEventListener('click',function(){
+      var section=document.getElementById('myMealBuilder');
+      if(section)section.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    var ingredients=document.getElementById('createFinalMealIngredients');
+    if(ingredients)ingredients.addEventListener('click',buildFinalIngredients);
+    var print=document.getElementById('printFinalMealIngredients');
+    if(print)print.addEventListener('click',function(){window.print();});
+  }
+
+  addCurrentRecipeButton();
+  initMyMealPage();
+  updateCounts();
+})();
