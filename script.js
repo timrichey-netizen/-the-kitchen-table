@@ -535,6 +535,39 @@ function normalizeSearchText(value) {
 
 function removeRedundantRecipeCardMetadata() {
   document.querySelectorAll('.recipe-card').forEach(function(card) {
+    const allElements=[...card.querySelectorAll('*')];
+
+    // General rule for regional American labels:
+    // If the card already says "American (Boston)", "American (Chicago)",
+    // "American (New York)", etc., suppress a second label that simply repeats
+    // that same place as "Boston, United States", "Chicago, United States", etc.
+    let americanRegion='';
+    allElements.forEach(function(el){
+      const text=(el.textContent||'').trim();
+      const m=text.match(/^American\s*\(([^)]+)\)$/i);
+      if(m && !americanRegion) americanRegion=normalizeSearchText(m[1]);
+    });
+
+    if(americanRegion){
+      allElements.forEach(function(el){
+        const text=(el.textContent||'').trim();
+        const normalized=normalizeSearchText(text);
+        const stripped=normalized
+          .replace(/\bunited states\b/g,'')
+          .replace(/\busa\b/g,'')
+          .replace(/\bus\b/g,'')
+          .trim();
+
+        if(
+          stripped===americanRegion &&
+          /united states|\busa\b|\bu\.?s\.?\b/i.test(text)
+        ){
+          el.remove();
+        }
+      });
+    }
+
+    // Also retain the prior generic duplicate-location cleanup for metadata rows.
     const meta = card.querySelector('.recipe-meta');
     if (!meta) return;
 
