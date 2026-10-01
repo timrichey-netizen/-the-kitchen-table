@@ -32,7 +32,7 @@
       <a class="brand" href="#top">The Kitchen Table</a>
       <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="Primary navigation">
-        <a href="#recipes">Recipes</a><a href="sauces.html">Sauces</a><a href="guides.html">Guides</a><a href="plan-a-meal.html">Plan a Meal</a>
+        <a href="#recipes">Recipes</a><a href="#pantry-to-plate">Pantry to Plate</a><a href="sauces.html">Sauces</a><a href="guides.html">Guides</a><a href="plan-a-meal.html">Plan a Meal</a>
         <a href="#categories">Categories</a>
         <a href="#about">About</a>
         <a href="plate-composer.html?v=20260930-1916">Plate Composer</a>
@@ -64,6 +64,149 @@
           <p id="featuredRecipeDescription">Bright, savory chicken with lemon, shallots, capers, and fresh herbs.</p>
           <a id="featuredRecipeLink" href="mediterranean-lemon-shallot-chicken.html" class="text-link">View recipe →</a>
         </div>
+      </div>
+    </section>
+
+    <section id="pantry-to-plate" class="section pantry-to-plate-section">
+      <div class="container">
+        <div class="pantry-heading">
+          <div>
+            <p class="eyebrow">PANTRY TO PLATE</p>
+            <h2>Cook with what you already have.</h2>
+            <p class="recipe-intro">Select the ingredients you already have, and we’ll recommend dishes you can make.</p>
+          </div>
+          <div class="pantry-selection-summary" aria-live="polite">
+            <strong id="pantrySelectionCount">0</strong>
+            <span>ingredients selected</span>
+          </div>
+        </div>
+
+        <div class="pantry-selector" id="pantrySelector">
+          <section class="pantry-group">
+            <h3>Proteins</h3>
+            <div class="pantry-options">
+              <button type="button" data-ingredient="chicken">Chicken</button>
+              <button type="button" data-ingredient="beef">Beef</button>
+              <button type="button" data-ingredient="pork">Pork</button>
+              <button type="button" data-ingredient="veal">Veal</button>
+              <button type="button" data-ingredient="lamb">Lamb</button>
+              <button type="button" data-ingredient="shrimp">Shrimp</button>
+              <button type="button" data-ingredient="fish">Fish</button>
+              <button type="button" data-ingredient="shellfish">Shellfish</button>
+              <button type="button" data-ingredient="eggs">Eggs</button>
+              <button type="button" data-ingredient="beans">Beans</button>
+            </div>
+          </section>
+
+          <section class="pantry-group">
+            <h3>Vegetables</h3>
+            <div class="pantry-options">
+              <button type="button" data-ingredient="tomato">Tomatoes</button>
+              <button type="button" data-ingredient="onion">Onions</button>
+              <button type="button" data-ingredient="garlic">Garlic</button>
+              <button type="button" data-ingredient="mushroom">Mushrooms</button>
+              <button type="button" data-ingredient="zucchini">Zucchini</button>
+              <button type="button" data-ingredient="eggplant">Eggplant</button>
+              <button type="button" data-ingredient="broccoli">Broccoli</button>
+              <button type="button" data-ingredient="spinach">Spinach</button>
+              <button type="button" data-ingredient="potato">Potatoes</button>
+              <button type="button" data-ingredient="cauliflower">Cauliflower</button>
+              <button type="button" data-ingredient="green beans">Green Beans</button>
+              <button type="button" data-ingredient="pepper">Peppers</button>
+            </div>
+          </section>
+
+          <section class="pantry-group">
+            <h3>Grains &amp; Pasta</h3>
+            <div class="pantry-options">
+              <button type="button" data-ingredient="pasta">Pasta</button>
+              <button type="button" data-ingredient="spaghetti">Spaghetti</button>
+              <button type="button" data-ingredient="rigatoni">Rigatoni</button>
+              <button type="button" data-ingredient="rice">Rice</button>
+              <button type="button" data-ingredient="polenta">Polenta</button>
+              <button type="button" data-ingredient="bread">Bread</button>
+              <button type="button" data-ingredient="tortilla">Tortillas</button>
+            </div>
+          </section>
+
+          <section class="pantry-group">
+            <h3>Dairy</h3>
+            <div class="pantry-options">
+              <button type="button" data-ingredient="butter">Butter</button>
+              <button type="button" data-ingredient="cream">Cream</button>
+              <button type="button" data-ingredient="milk">Milk</button>
+              <button type="button" data-ingredient="parmesan">Parmesan</button>
+              <button type="button" data-ingredient="pecorino">Pecorino</button>
+              <button type="button" data-ingredient="mozzarella">Mozzarella</button>
+              <button type="button" data-ingredient="ricotta">Ricotta</button>
+              <button type="button" data-ingredient="cheese">Cheese</button>
+            </div>
+          </section>
+
+          <section class="pantry-group">
+            <h3>Pantry</h3>
+            <div class="pantry-options">
+              <button type="button" data-ingredient="olive oil">Olive Oil</button>
+              <button type="button" data-ingredient="flour">Flour</button>
+              <button type="button" data-ingredient="breadcrumbs">Breadcrumbs</button>
+              <button type="button" data-ingredient="stock">Stock / Broth</button>
+              <button type="button" data-ingredient="chickpeas">Chickpeas</button>
+              <button type="button" data-ingredient="lentils">Lentils</button>
+              <button type="button" data-ingredient="canned tomato">Canned Tomatoes</button>
+              <button type="button" data-ingredient="wine">Wine</button>
+              <button type="button" data-ingredient="lemon">Lemon</button>
+              <button type="button" data-ingredient="lime">Lime</button>
+            </div>
+          </section>
+
+          <section class="pantry-group">
+            <h3>Herbs &amp; Spices</h3>
+            <div class="pantry-options">
+              <button type="button" data-ingredient="basil">Basil</button>
+              <button type="button" data-ingredient="parsley">Parsley</button>
+              <button type="button" data-ingredient="cilantro">Cilantro</button>
+              <button type="button" data-ingredient="thyme">Thyme</button>
+              <button type="button" data-ingredient="rosemary">Rosemary</button>
+              <button type="button" data-ingredient="sage">Sage</button>
+              <button type="button" data-ingredient="oregano">Oregano</button>
+              <button type="button" data-ingredient="chile">Chile</button>
+              <button type="button" data-ingredient="cumin">Cumin</button>
+              <button type="button" data-ingredient="paprika">Paprika</button>
+            </div>
+          </section>
+
+          <section class="pantry-group">
+            <h3>Sauces &amp; Condiments</h3>
+            <div class="pantry-options">
+              <button type="button" data-ingredient="pesto">Pesto</button>
+              <button type="button" data-ingredient="mustard">Mustard</button>
+              <button type="button" data-ingredient="mayonnaise">Mayonnaise</button>
+              <button type="button" data-ingredient="soy sauce">Soy Sauce</button>
+              <button type="button" data-ingredient="miso">Miso</button>
+              <button type="button" data-ingredient="salsa">Salsa</button>
+              <button type="button" data-ingredient="tomatillo">Tomatillo</button>
+              <button type="button" data-ingredient="capers">Capers</button>
+              <button type="button" data-ingredient="hot sauce">Hot Sauce</button>
+            </div>
+          </section>
+        </div>
+
+        <div class="pantry-actions">
+          <button class="button primary" id="findPantryDishes" type="button">Find Dishes</button>
+          <button class="button secondary" id="clearPantryIngredients" type="button">Clear selections</button>
+        </div>
+
+        <section class="pantry-results" id="pantryResults" hidden aria-live="polite">
+          <div class="pantry-results-heading">
+            <div>
+              <p class="eyebrow">RECOMMENDED</p>
+              <h3>Dishes that match your pantry</h3>
+            </div>
+            <p id="pantryResultsSummary" class="muted-copy"></p>
+          </div>
+          <div class="pantry-results-grid" id="pantryResultsGrid"></div>
+          <p class="muted-copy pantry-results-note">Recommendations are based on ingredients mentioned in the Kitchen Table recipe collection. Open a recipe to confirm the full ingredient list before cooking.</p>
+        </section>
       </div>
     </section>
 
