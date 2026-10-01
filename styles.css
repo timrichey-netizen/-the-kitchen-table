@@ -474,3 +474,17 @@ button,a,input,select{touch-action:manipulation}
   .guide-back-wrap{top:76px}
   .guide-back-floating{padding:8px 12px;font-size:.9rem}
 }
+
+
+/* Ingredient cross-references to Kitchen Table recipes */
+.ingredient-recipe-link{
+  color:var(--accent-dark);
+  font-weight:700;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:2px;
+}
+.ingredient-recipe-link:hover,
+.ingredient-recipe-link:focus-visible{
+  color:var(--accent);
+}
