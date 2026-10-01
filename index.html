@@ -11,18 +11,33 @@
   <link rel="stylesheet" href="styles.css" />
   <script data-home-scroll-guard>
     (function () {
-      var shouldStayAtTop = !window.location.hash || window.location.hash === '#top';
+      var hash = window.location.hash;
+      var normalHomeArrival = !hash || hash === '#top';
+
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-      if (!shouldStayAtTop) return;
-      function keepTop() { window.scrollTo(0, 0); }
-      keepTop();
-      document.addEventListener('DOMContentLoaded', keepTop, { once: true });
+      if (!normalHomeArrival) return;
+
+      function forceOpeningScreen() {
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }
+
+      forceOpeningScreen();
+      document.addEventListener('DOMContentLoaded', forceOpeningScreen, { once: true });
       window.addEventListener('load', function () {
-        keepTop();
-        setTimeout(keepTop, 50);
-        setTimeout(keepTop, 250);
+        forceOpeningScreen();
+        requestAnimationFrame(forceOpeningScreen);
+        setTimeout(forceOpeningScreen, 100);
+        setTimeout(forceOpeningScreen, 500);
+        setTimeout(forceOpeningScreen, 1200);
       }, { once: true });
-      window.addEventListener('pageshow', keepTop);
+      window.addEventListener('pageshow', function (event) {
+        if (!window.location.hash || window.location.hash === '#top') {
+          forceOpeningScreen();
+          if (event.persisted) setTimeout(forceOpeningScreen, 50);
+        }
+      });
     })();
   </script>
 </head>
