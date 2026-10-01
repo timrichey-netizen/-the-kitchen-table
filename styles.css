@@ -271,3 +271,8 @@ button,a,input,select{touch-action:manipulation}
   .nav{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
   .footer{padding-bottom:max(22px,env(safe-area-inset-bottom))}
 }
+
+.latin-subcuisine-group{margin-top:4px;padding:12px 0 4px;border-top:1px dashed var(--line)}
+.latin-subcuisine-group[hidden]{display:none}
+.latin-subcuisine-group .filter-group-label{color:var(--accent-dark)}
+.latin-subcuisine-group .cuisine-filter{padding:8px 13px;font-size:.92rem}
