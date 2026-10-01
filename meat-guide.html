@@ -8,8 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-.guide-hero-image{width:100%;height:min(42vw,460px);object-fit:cover;display:block;border-radius:22px;box-shadow:var(--shadow);margin:28px 0 34px}
-@media(max-width:700px){.guide-hero-image{height:240px;border-radius:16px;margin:22px 0 28px}}
+.guide-hero-image{width:min(100%,620px);height:280px;object-fit:cover;display:block;border-radius:18px;box-shadow:var(--shadow);margin:24px auto 32px}
+.guide-section-visual{display:grid;grid-template-columns:220px minmax(0,1fr);gap:22px;align-items:center;margin:26px 0}
+.guide-section-visual img{width:220px;height:150px;object-fit:cover;border-radius:14px;border:1px solid var(--line);display:block}
+.guide-section-visual .visual-copy h2{margin-top:0}
+.guide-mini-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0 30px}
+.guide-mini-gallery figure{margin:0}
+.guide-mini-gallery img{width:100%;height:145px;object-fit:cover;border-radius:14px;display:block;border:1px solid var(--line)}
+.guide-mini-gallery figcaption{font-size:.82rem;color:var(--muted);margin-top:6px}
+@media(max-width:700px){.guide-hero-image{height:210px;width:100%;margin:20px auto 26px}.guide-section-visual{grid-template-columns:1fr}.guide-section-visual img{width:100%;height:190px}.guide-mini-gallery{grid-template-columns:1fr}.guide-mini-gallery img{height:210px}}
 </style>
 </head><body>
 <header class="site-header"><div class="container nav-wrap"><a class="brand" href="index.html">The Kitchen Table</a><button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button><nav class="nav" aria-label="Primary navigation"><a href="index.html#recipes">Recipes</a><a href="pasta-guide.html">Pasta Guide</a><a href="mushroom-guide.html">Mushroom Guide</a><a href="meat-guide.html">Meat Guide</a><a href="plan-a-meal.html">Plan a Meal</a><a href="index.html#categories">Categories</a></nav></div></header>
@@ -21,11 +28,11 @@
 <section style="padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff;margin-bottom:24px"><p class="eyebrow" style="margin-top:0">FIRST PRINCIPLE</p><h2 style="margin-top:0">Match the method to the cut.</h2><p>Tender cuts usually benefit from fast, dry heat. Tough, collagen-rich cuts become tender with time and moisture. Thick steaks are easier to cook evenly with a two-stage method; thin cutlets are better with fast pan heat.</p></section>
 
 <div class="recipe-layout">
-<section class="ingredients-panel"><h2>Dry Aging</h2><p><strong>What it does:</strong> controlled aging concentrates flavor and allows natural enzymes to tenderize beef.</p><ul><li><strong>Wet-aged:</strong> aged in vacuum packaging; milder flavor and less moisture loss.</li><li><strong>Dry-aged:</strong> held under tightly controlled refrigeration, airflow, and humidity; develops deeper nutty, beefy flavor and loses moisture.</li><li><strong>Best use:</strong> thick steaks and roasts where the added flavor is noticeable.</li></ul><p><strong>Important:</strong> true dry-aging requires controlled equipment and food-safety management. Do not improvise long-term dry-aging in a normal household refrigerator.</p></section>
+<section class="ingredients-panel"><div class="guide-section-visual"><img src="assets/florentine-steak-balsamic-rosemary.png" alt="Thick cooked steak"><div class="visual-copy"><h2>Dry Aging</h2><p>Dry aging concentrates beef flavor and changes texture through controlled moisture loss and enzymatic activity.</p></div></div><p><strong>What it does:</strong> controlled aging concentrates flavor and allows natural enzymes to tenderize beef.</p><ul><li><strong>Wet-aged:</strong> aged in vacuum packaging; milder flavor and less moisture loss.</li><li><strong>Dry-aged:</strong> held under tightly controlled refrigeration, airflow, and humidity; develops deeper nutty, beefy flavor and loses moisture.</li><li><strong>Best use:</strong> thick steaks and roasts where the added flavor is noticeable.</li></ul><p><strong>Important:</strong> true dry-aging requires controlled equipment and food-safety management. Do not improvise long-term dry-aging in a normal household refrigerator.</p></section>
 <section class="instructions-panel"><h2>Why Salting Matters</h2><p>Salt is more than surface seasoning. Given time, it dissolves in surface moisture and diffuses inward, seasoning the meat more evenly and helping it retain moisture during cooking.</p><ul><li><strong>Thin cuts:</strong> salt shortly before cooking.</li><li><strong>Steaks and chops:</strong> salt at least 40 minutes ahead, or ideally several hours to overnight uncovered in the refrigerator.</li><li><strong>Large roasts:</strong> season 12–24 hours ahead when practical.</li></ul><p>Pat the surface dry before searing. A dry surface browns faster.</p></section>
 </div>
 
-<section style="margin-top:30px"><h2>Core Cooking Methods</h2>
+<section style="margin-top:30px"><div class="guide-section-visual"><img src="assets/pork-chop-milanese.png" alt="Cooked meat showing browned exterior"><div class="visual-copy"><h2>Core Cooking Methods</h2><p>Choose dry heat for tender cuts and slower moist methods for collagen-rich cuts that need time to become tender.</p></div></div>
 <div class="recipe-layout">
 <div class="ingredients-panel"><h3>Grilling</h3><p>Best for steaks, chops, burgers, sausages, chicken, and thinner cuts. Use direct heat for browning and indirect heat to finish thicker pieces. Avoid constant flipping over flare-ups; move meat to a cooler zone when needed.</p>
 <h3>Pan-Searing</h3><p>Ideal for steaks, chops, cutlets, and small tender pieces. Preheat the pan, dry the meat well, use a thin layer of high-heat fat, and avoid crowding.</p>
