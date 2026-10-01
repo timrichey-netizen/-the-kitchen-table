@@ -29,6 +29,15 @@
 .sauce-tree p{line-height:1.7;margin:7px 0}
 @media(max-width:820px){.sauce-family-head{grid-template-columns:1fr}.daughter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.guide-hero-image{height:240px}.sauce-family{padding:19px}.daughter-grid{grid-template-columns:1fr}}
+.guide-hero-image{width:min(100%,620px);height:280px;object-fit:cover;display:block;border-radius:18px;box-shadow:var(--shadow);margin:24px auto 32px}
+.guide-section-visual{display:grid;grid-template-columns:220px minmax(0,1fr);gap:22px;align-items:center;margin:26px 0}
+.guide-section-visual img{width:220px;height:150px;object-fit:cover;border-radius:14px;border:1px solid var(--line);display:block}
+.guide-section-visual .visual-copy h2{margin-top:0}
+.guide-mini-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0 30px}
+.guide-mini-gallery figure{margin:0}
+.guide-mini-gallery img{width:100%;height:145px;object-fit:cover;border-radius:14px;display:block;border:1px solid var(--line)}
+.guide-mini-gallery figcaption{font-size:.82rem;color:var(--muted);margin-top:6px}
+@media(max-width:700px){.guide-hero-image{height:210px;width:100%;margin:20px auto 26px}.guide-section-visual{grid-template-columns:1fr}.guide-section-visual img{width:100%;height:190px}.guide-mini-gallery{grid-template-columns:1fr}.guide-mini-gallery img{height:210px}}
 </style>
 </head>
 <body>
@@ -50,7 +59,7 @@
 <p><strong>Mother → daughter → granddaughter:</strong> some sauces branch again. A classic example is <strong>Hollandaise → Béarnaise → Choron or Foyot</strong>.</p>
 </section>
 
-<section class="sauce-family" id="bechamel">
+<div class="guide-mini-gallery"><figure><img src="assets/fettuccine-alfredo.png" alt="Creamy white sauce on pasta"><figcaption>White and cream sauce family</figcaption></figure><figure><img src="assets/rigatoni-amatriciana.png" alt="Tomato sauce on pasta"><figcaption>Tomato sauce family</figcaption></figure><figure><img src="assets/florentine-steak-balsamic-rosemary.png" alt="Steak served with a rich sauce"><figcaption>Brown and emulsion sauces complement meat</figcaption></figure></div><section class="sauce-family" id="bechamel">
 <div class="sauce-family-head"><div><p class="eyebrow">MOTHER SAUCE 1</p><h2>Béchamel (White Sauce)</h2><p class="mother-definition">A smooth white sauce made from milk thickened with a white roux. Its neutral, creamy character makes it the foundation for cheese, cream, onion, and mustard sauces.</p><a class="text-link mother-link" href="bechamel-sauce.html">Open Béchamel recipe →</a></div><div class="family-formula"><strong>Foundation</strong>Milk + white roux<br><br><strong>Typical uses</strong>Gratins, lasagna, vegetables, baked pasta, croquettes, soufflés, and cheese sauces.</div></div>
 <h3 class="daughter-title">Daughter sauces from Béchamel</h3><div class="daughter-grid">
 <a class="daughter-card" href="mornay-sauce.html"><strong>Mornay</strong><span>Béchamel enriched with cheese, traditionally Gruyère and/or Parmesan.</span></a>
