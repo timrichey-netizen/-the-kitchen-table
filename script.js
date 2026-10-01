@@ -445,3 +445,40 @@ const TOMATE_DAUGHTER_LINKS = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">SAUCE TOMATE FAMILY</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('')+'<a class="text-link" href="sauce-tomate.html">See Sauce Tomate and related sauces →</a>';
   anchor.insertAdjacentElement("afterend",wrap);
 })();
+
+const MEXICAN_SAUCE_LINKS = {
+  "tomatillo-avocado-salsa-cauliflower-rice.html":[["SALSA VERDE","Direct tomatillo-salsa family match.","salsa-verde.html"],["SALSA TAQUERA","Optional taco-style chile salsa for extra heat.","salsa-taquera.html"]],
+  "lemon-tomatillo-salsa-verde.html":[["SALSA VERDE","Direct classical tomatillo-salsa reference.","salsa-verde.html"]],
+  "classic-american-hamburger.html":[["SALSA ROJA","Optional spicy tomato salsa topping.","salsa-roja.html"],["PICO DE GALLO","Fresh topping alternative.","pico-de-gallo.html"],["SALSA MACHA","Chile-oil condiment for a smoky-hot variation.","salsa-macha.html"]],
+  "florentine-steak-balsamic-rosemary.html":[["SALSA TAQUERA","Optional chile-forward steak sauce.","salsa-taquera.html"],["SALSA MACHA","Excellent chile-oil pairing for grilled steak.","salsa-macha.html"],["ADOBO","Use as an alternative chile-vinegar marinade.","mexican-adobo.html"]],
+  "bife-de-chorizo-chimichurri.html":[["SALSA TAQUERA","Optional taquería-style salsa for grilled beef.","salsa-taquera.html"],["SALSA MACHA","Nutty chile-oil pairing for steak.","salsa-macha.html"],["PICO DE GALLO","Fresh acidic counterpoint to grilled beef.","pico-de-gallo.html"]],
+  "asado-argentino.html":[["SALSA ROJA","Optional grilled-meat salsa.","salsa-roja.html"],["SALSA MACHA","Optional chile-oil condiment for beef and sausage.","salsa-macha.html"]],
+  "asado-uruguayo.html":[["SALSA ROJA","Optional red salsa for grilled meats.","salsa-roja.html"],["SALSA MACHA","Optional chile-oil condiment.","salsa-macha.html"]],
+  "pollo-a-la-parrilla.html":[["SALSA VERDE","Bright tomatillo salsa for grilled chicken.","salsa-verde.html"],["SALSA RANCHERA","Smoky roasted tomato salsa pairing.","salsa-ranchera.html"],["ADOBO","Use as an alternative chile-vinegar marinade.","mexican-adobo.html"],["MOLE POBLANO","Optional rich Puebla-style sauce for chicken.","mole-poblano.html"]],
+  "mediterranean-lemon-shallot-chicken.html":[["SALSA VERDE","Optional fresh tomatillo variation.","salsa-verde.html"],["MOLE POBLANO","Alternative rich sauce direction for chicken.","mole-poblano.html"],["ADOBO","Alternative dried-chile marinade for chicken.","mexican-adobo.html"]],
+  "sage-mushroom-chicken-skillet.html":[["MOLE NEGRO","Optional deep Oaxacan-style sauce for chicken.","mole-negro.html"],["MOLE POBLANO","Optional richer chile-chocolate sauce direction.","mole-poblano.html"]],
+  "arroz-con-pollo-uruguayo.html":[["SALSA RANCHERA","Smoky tomato salsa works well alongside chicken and rice.","salsa-ranchera.html"],["PICO DE GALLO","Fresh topping for rice and chicken.","pico-de-gallo.html"]],
+  "shrimp-piccata-skewers.html":[["SALSA VERDE","Bright tomatillo salsa for grilled shrimp.","salsa-verde.html"],["SALSA MACHA","Chile-oil condiment for shrimp.","salsa-macha.html"],["PICO DE GALLO","Fresh topping for grilled shrimp.","pico-de-gallo.html"]],
+  "cajun-garlic-butter-shrimp.html":[["SALSA DE CHILE DE ÁRBOL","Fiery chile salsa for shrimp.","salsa-chile-de-arbol.html"],["SALSA MACHA","Chile-oil condiment for a Mexican-style variation.","salsa-macha.html"]],
+  "spicy-garlic-butter-shrimp-lime-chili-dip.html":[["SALSA DE CHILE DE ÁRBOL","Natural high-heat salsa pairing.","salsa-chile-de-arbol.html"],["SALSA VERDE","Bright tomatillo alternative.","salsa-verde.html"]],
+  "blackened-redfish.html":[["SALSA VERDE","Acidic tomatillo salsa balances blackened fish.","salsa-verde.html"],["PICO DE GALLO","Fresh tomato topping for spicy fish.","pico-de-gallo.html"]],
+  "red-beans-rice-andouille.html":[["SALSA DE CHILE DE ÁRBOL","Hot chile salsa for beans and sausage.","salsa-chile-de-arbol.html"],["SALSA RANCHERA","Tomato-chile condiment for beans and rice.","salsa-ranchera.html"]],
+  "locro.html":[["SALSA DE CHILE DE ÁRBOL","Optional hot chile condiment for stew.","salsa-chile-de-arbol.html"],["SALSA MACHA","Oil-based chile condiment for serving.","salsa-macha.html"]],
+  "chivito.html":[["PICO DE GALLO","Optional fresh tomato-onion topping.","pico-de-gallo.html"],["SALSA TAQUERA","Optional spicy sandwich condiment.","salsa-taquera.html"]],
+  "chivito-al-plato.html":[["PICO DE GALLO","Fresh topping alternative for steak and fries.","pico-de-gallo.html"],["SALSA VERDE","Bright tomatillo sauce for the steak.","salsa-verde.html"]],
+  "pork-chop-milanese.html":[["ADOBO","Alternative chile-vinegar marinade before breading or grilling.","mexican-adobo.html"],["SALSA RANCHERA","Smoky tomato sauce pairing for pork.","salsa-ranchera.html"]],
+  "osso-buco-red-wine.html":[["ADOBO","Alternative chile-vinegar braising direction for veal.","mexican-adobo.html"],["MOLE NEGRO","Optional deep chile-spice sauce for braised meat.","mole-negro.html"]],
+  "provoleta.html":[["SALSA MACHA","Chile-oil condiment for grilled cheese.","salsa-macha.html"],["PICO DE GALLO","Fresh acidic topping for melted cheese.","pico-de-gallo.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=MEXICAN_SAUCE_LINKS[p];
+  if(!refs || !refs.length || document.querySelector(".mexican-sauce-tip")) return;
+  const anchor=document.querySelector(".tomate-daughter-tip") || document.querySelector(".hollandaise-daughter-tip") || document.querySelector(".veloute-daughter-tip") || document.querySelector(".daughter-sauce-tip") || document.querySelector(".mother-sauce-tip") || document.querySelector(".print-button");
+  if(!anchor) return;
+  const wrap=document.createElement("div");
+  wrap.className="mexican-sauce-tip";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fff8f0";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MEXICAN SAUCE PAIRING</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('');
+  anchor.insertAdjacentElement("afterend",wrap);
+})();
