@@ -440,6 +440,8 @@ function addEnglishRecipeNames() {
   renderTranslatedTitle(document.querySelector('.recipe-detail h1, .recipe-detail h2'));
 }
 
+removeRedundantRecipeCardMetadata();
+
 const cards = [...document.querySelectorAll('.recipe-card')];
 const search = document.getElementById('recipeSearch');
 const cuisineFiltersWrap = document.getElementById('cuisineFilters');
@@ -529,6 +531,39 @@ function normalizeSearchText(value) {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
+}
+
+function removeRedundantRecipeCardMetadata() {
+  document.querySelectorAll('.recipe-card').forEach(function(card) {
+    const meta = card.querySelector('.recipe-meta');
+    if (!meta) return;
+
+    const parts = [...meta.children];
+    if (parts.length < 2) return;
+
+    const normalized = parts.map(function(el){ return normalizeSearchText(el.textContent); });
+
+    parts.forEach(function(el, index) {
+      const value = normalized[index];
+      if (!value) return;
+
+      const locationBits = value.split(' ').filter(function(bit) {
+        return !['united','states','usa','us'].includes(bit);
+      });
+      if (!locationBits.length) return;
+
+      const redundant = normalized.some(function(other, otherIndex) {
+        if (otherIndex === index) return false;
+        return locationBits.every(function(bit) {
+          return (' ' + other + ' ').includes(' ' + bit + ' ');
+        });
+      });
+
+      if (redundant && /united states|\busa\b|\bu s\b/.test(value)) {
+        el.remove();
+      }
+    });
+  });
 }
 
 function cardHaystack(card) {
