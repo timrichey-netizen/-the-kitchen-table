@@ -586,163 +586,232 @@ function simplifyNamedRegionalLabels(root) {
 function standardizeRegionalMetadata(root) {
   const scope = root || document;
 
-  function leafElements(container) {
-    return [...container.querySelectorAll('*')].filter(function(el) {
-      return !el.children.length && (el.textContent || '').trim();
-    });
+  // Kitchen Table recipe metadata standard:
+  // FOOD TYPE / COUNTRY · CITY, REGION
+  // Never invent a city or region when the recipe metadata does not provide one.
+
+  const countryRules = [
+    {country:'United States', terms:['american','united states','usa','u.s.','cajun','creole']},
+    {country:'Mexico', terms:['mexican','mexico']},
+    {country:'Argentina', terms:['argentine','argentinian','argentina']},
+    {country:'Uruguay', terms:['uruguayan','uruguay']},
+    {country:'Peru', terms:['peruvian','peru']},
+    {country:'Brazil', terms:['brazilian','brazil']},
+    {country:'Colombia', terms:['colombian','colombia']},
+    {country:'Venezuela', terms:['venezuelan','venezuela']},
+    {country:'Chile', terms:['chilean','chile']},
+    {country:'Cuba', terms:['cuban','cuba']},
+    {country:'Puerto Rico', terms:['puerto rican','puerto rico']},
+    {country:'Dominican Republic', terms:['dominican','dominican republic']},
+    {country:'Guatemala', terms:['guatemalan','guatemala']},
+    {country:'El Salvador', terms:['salvadoran','el salvador']},
+    {country:'Honduras', terms:['honduran','honduras']},
+    {country:'Nicaragua', terms:['nicaraguan','nicaragua']},
+    {country:'Costa Rica', terms:['costa rican','costa rica']},
+    {country:'Panama', terms:['panamanian','panama']},
+    {country:'Italy', terms:['italian','italy','roman','sicilian','venetian','piedmontese','florentine','milanese','neapolitan']},
+    {country:'France', terms:['french','france','provençal','provencal','burgundy']},
+    {country:'United Kingdom', terms:['british','english','scottish','welsh','united kingdom','england','scotland','wales']},
+    {country:'Ireland', terms:['irish','ireland']},
+    {country:'Switzerland', terms:['swiss','switzerland']},
+    {country:'Belgium', terms:['belgian','belgium']},
+    {country:'Spain', terms:['spanish','spain','catalan','basque']},
+    {country:'Greece', terms:['greek','greece']},
+    {country:'Portugal', terms:['portuguese','portugal']},
+    {country:'Germany', terms:['german','germany']},
+    {country:'Austria', terms:['austrian','austria']},
+    {country:'Poland', terms:['polish','poland']},
+    {country:'Hungary', terms:['hungarian','hungary']},
+    {country:'Czechia', terms:['czech','czechia','czech republic']},
+    {country:'Slovakia', terms:['slovak','slovakia']},
+    {country:'Romania', terms:['romanian','romania']},
+    {country:'Bulgaria', terms:['bulgarian','bulgaria']},
+    {country:'Croatia', terms:['croatian','croatia']},
+    {country:'Serbia', terms:['serbian','serbia']},
+    {country:'Bosnia and Herzegovina', terms:['bosnian','bosnia','bosnia and herzegovina']},
+    {country:'Slovenia', terms:['slovenian','slovenia']},
+    {country:'Albania', terms:['albanian','albania']},
+    {country:'Georgia', terms:['georgian','georgia']},
+    {country:'Armenia', terms:['armenian','armenia']},
+    {country:'Azerbaijan', terms:['azerbaijani','azerbaijan']},
+    {country:'Uzbekistan', terms:['uzbek','uzbekistan']},
+    {country:'Turkmenistan', terms:['turkmen','turkmenistan']},
+    {country:'Kazakhstan', terms:['kazakh','kazakhstan']},
+    {country:'Kyrgyzstan', terms:['kyrgyz','kyrgyzstan']},
+    {country:'Tajikistan', terms:['tajik','tajikistan']},
+    {country:'Türkiye', terms:['turkish','turkey','türkiye']},
+    {country:'China', terms:['chinese','china']},
+    {country:'Japan', terms:['japanese','japan']},
+    {country:'South Korea', terms:['korean','south korea','korea']},
+    {country:'Thailand', terms:['thai','thailand']},
+    {country:'Vietnam', terms:['vietnamese','vietnam']},
+    {country:'India', terms:['indian','india']},
+    {country:'Indonesia', terms:['indonesian','indonesia']},
+    {country:'Philippines', terms:['filipino','philippines']},
+    {country:'Malaysia', terms:['malaysian','malaysia']},
+    {country:'Singapore', terms:['singaporean','singapore']},
+    {country:'Lebanon', terms:['lebanese','lebanon']},
+    {country:'Morocco', terms:['moroccan','morocco']},
+    {country:'Egypt', terms:['egyptian','egypt']},
+    {country:'Tunisia', terms:['tunisian','tunisia']},
+    {country:'Ethiopia', terms:['ethiopian','ethiopia']},
+    {country:'Nigeria', terms:['nigerian','nigeria']},
+    {country:'South Africa', terms:['south african','south africa']},
+    {country:'Australia', terms:['australian','australia']},
+    {country:'New Zealand', terms:['new zealand']}
+  ];
+
+  const cityRegionRules = [
+    {terms:['new orleans'], location:'New Orleans, Louisiana'},
+    {terms:['san francisco'], location:'San Francisco, California'}
+  ];
+
+  const foodTypes = {
+    'meat':'Meat','beef':'Beef','pork':'Pork','lamb':'Lamb','veal':'Veal',
+    'chicken':'Chicken','poultry':'Poultry','seafood':'Seafood','fish':'Fish',
+    'pasta':'Pasta','rice':'Rice','bread':'Bread','breakfast':'Breakfast',
+    'vegetable':'Vegetable','vegetables':'Vegetables','side':'Side','salad':'Salad',
+    'soup':'Soup','soups':'Soup','dessert':'Dessert','sauce':'Sauce',
+    'broth':'Broth','stock':'Broth & Stock','cheese':'Cheese',
+    'sandwich':'Sandwich','taco':'Tacos','tacos':'Tacos'
+  };
+
+  function norm(value) {
+    return normalizeSearchText(value || '');
+  }
+
+  function contains(text, term) {
+    return (' ' + norm(text) + ' ').includes(' ' + norm(term) + ' ');
+  }
+
+  function inferCountry(text) {
+    for (const rule of countryRules) {
+      if (rule.terms.some(function(term){ return contains(text, term); })) return rule.country;
+    }
+    return '';
   }
 
   function escapeRegExp(value) {
-    return String(value).replace(/[.*+?^\$\{\}()|[\]\\]/g, '\\$&');
+    return String(value).replace(/[.*+?^{}()|[\]\\$]/g, '\\$&');
   }
 
-  function cleanCountrySuffix(value, countryTerms) {
-    let text=String(value || '').trim();
-    countryTerms.forEach(function(term){
-      const re=new RegExp('\\s*,?\\s*'+escapeRegExp(term)+'\\s*$','i');
-      text=text.replace(re,'');
+  function stripCountry(text, country) {
+    let out=String(text || '').trim();
+    const rule=countryRules.find(function(r){ return r.country === country; });
+    const aliases=[country].concat(rule ? rule.terms : []).sort(function(a,b){ return b.length-a.length; });
+    aliases.forEach(function(alias){
+      out=out.replace(new RegExp('(?:\\s*,\\s*|\\s+)'+escapeRegExp(alias)+'\\s*$','i'),'').trim();
     });
-    return text.replace(/\s*,\s*$/,'').trim();
+    return out.replace(/^[,·/\s]+|[,·/\s]+$/g,'').trim();
   }
 
-  const countryRules=[
-    {label:'American',countries:['United States of America','United States','USA','U.S.A.','U.S.']},
-    {label:'Mexican',countries:['Mexico']},
-    {label:'Argentine',countries:['Argentina']},
-    {label:'Argentinian',countries:['Argentina']},
-    {label:'Uruguayan',countries:['Uruguay']},
-    {label:'Peruvian',countries:['Peru']},
-    {label:'Brazilian',countries:['Brazil']},
-    {label:'Colombian',countries:['Colombia']},
-    {label:'Venezuelan',countries:['Venezuela']},
-    {label:'Chilean',countries:['Chile']},
-    {label:'Cuban',countries:['Cuba']},
-    {label:'Puerto Rican',countries:['Puerto Rico']},
-    {label:'Dominican',countries:['Dominican Republic']},
-    {label:'Guatemalan',countries:['Guatemala']},
-    {label:'Salvadoran',countries:['El Salvador']},
-    {label:'Honduran',countries:['Honduras']},
-    {label:'Nicaraguan',countries:['Nicaragua']},
-    {label:'Costa Rican',countries:['Costa Rica']},
-    {label:'Panamanian',countries:['Panama']},
-    {label:'Italian',countries:['Italy']},
-    {label:'French',countries:['France']},
-    {label:'British',countries:['United Kingdom','UK']},
-    {label:'English',countries:['England','United Kingdom','UK']},
-    {label:'Scottish',countries:['Scotland','United Kingdom','UK']},
-    {label:'Welsh',countries:['Wales','United Kingdom','UK']},
-    {label:'Swiss',countries:['Switzerland']},
-    {label:'Belgian',countries:['Belgium']},
-    {label:'Spanish',countries:['Spain']},
-    {label:'Greek',countries:['Greece']},
-    {label:'Portuguese',countries:['Portugal']},
-    {label:'German',countries:['Germany']},
-    {label:'Austrian',countries:['Austria']},
-    {label:'Irish',countries:['Ireland']},
-    {label:'Polish',countries:['Poland']},
-    {label:'Hungarian',countries:['Hungary']},
-    {label:'Czech',countries:['Czech Republic','Czechia']},
-    {label:'Slovak',countries:['Slovakia']},
-    {label:'Romanian',countries:['Romania']},
-    {label:'Bulgarian',countries:['Bulgaria']},
-    {label:'Croatian',countries:['Croatia']},
-    {label:'Serbian',countries:['Serbia']},
-    {label:'Bosnian',countries:['Bosnia and Herzegovina','Bosnia']},
-    {label:'Slovenian',countries:['Slovenia']},
-    {label:'Albanian',countries:['Albania']},
-    {label:'Georgian',countries:['Georgia']},
-    {label:'Armenian',countries:['Armenia']},
-    {label:'Azerbaijani',countries:['Azerbaijan']},
-    {label:'Turkish',countries:['Turkey','Türkiye']},
-    {label:'Chinese',countries:['China']},
-    {label:'Japanese',countries:['Japan']},
-    {label:'Korean',countries:['South Korea','Korea']},
-    {label:'Thai',countries:['Thailand']},
-    {label:'Vietnamese',countries:['Vietnam']},
-    {label:'Indian',countries:['India']},
-    {label:'Indonesian',countries:['Indonesia']},
-    {label:'Filipino',countries:['Philippines']},
-    {label:'Malaysian',countries:['Malaysia']},
-    {label:'Singaporean',countries:['Singapore']},
-    {label:'Lebanese',countries:['Lebanon']},
-    {label:'Moroccan',countries:['Morocco']},
-    {label:'Egyptian',countries:['Egypt']},
-    {label:'Tunisian',countries:['Tunisia']},
-    {label:'Ethiopian',countries:['Ethiopia']},
-    {label:'Nigerian',countries:['Nigeria']},
-    {label:'South African',countries:['South Africa']},
-    {label:'Australian',countries:['Australia']},
-    {label:'New Zealand',countries:['New Zealand']}
-  ];
-
-  function getCuisineLabel(text) {
-    const raw=String(text || '').trim();
-    for(const rule of countryRules){
-      const esc=escapeRegExp(rule.label);
-      let m=raw.match(new RegExp('^'+esc+'\\s*\\(([^)]+)\\)$','i'));
-      if(m) return {rule:rule,region:m[1].trim()};
-      m=raw.match(new RegExp('^'+esc+'\\s*[·•|-]\\s*(.+)$','i'));
-      if(m) return {rule:rule,region:m[1].trim()};
+  function inferFoodType(container) {
+    const meta=container.querySelector('.recipe-meta');
+    if (meta) {
+      const first=meta.querySelector('span');
+      if (first) {
+        const raw=(first.textContent || '').split(/[·/|]/)[0].trim();
+        const key=norm(raw);
+        if (foodTypes[key]) return foodTypes[key];
+        if (raw && raw.length <= 28 && !/\d/.test(raw)) return raw;
+      }
     }
-    return null;
+
+    const eyebrow=container.querySelector('.eyebrow');
+    if (eyebrow) {
+      const raw=(eyebrow.textContent || '').split(/[·/|]/)[0].trim();
+      const key=norm(raw);
+      if (foodTypes[key]) return foodTypes[key];
+      if (raw && raw.length <= 28 && !inferCountry(raw) && !/\d/.test(raw)) return raw;
+    }
+
+    const categories=(container.dataset && container.dataset.category || '').split(/\s+/);
+    for (const category of categories) {
+      const mapped=foodTypes[norm(category)];
+      if (mapped) return mapped;
+    }
+    return 'Food';
+  }
+
+  function inferLocation(container, country, allText) {
+    const leaves=[...container.querySelectorAll('*')].filter(function(el){
+      return !el.children.length && (el.textContent || '').trim();
+    });
+
+    let best='';
+    if (country) {
+      leaves.forEach(function(el){
+        const raw=(el.textContent || '').trim();
+        if (!contains(raw, country)) return;
+        const cleaned=stripCountry(raw, country);
+        if (cleaned && cleaned.length > best.length && !/\d/.test(cleaned)) best=cleaned;
+      });
+    }
+    if (best) return best;
+
+    for (const rule of cityRegionRules) {
+      if (rule.terms.some(function(term){ return contains(allText, term); })) return rule.location;
+    }
+
+    return '';
+  }
+
+  function format(foodType, country, location) {
+    const type=(foodType || 'Food').toUpperCase();
+    const c=(country || '').toUpperCase();
+    const loc=(location || '').toUpperCase();
+    if (c && loc) return type + ' / ' + c + ' · ' + loc;
+    if (c) return type + ' / ' + c;
+    if (loc) return type + ' · ' + loc;
+    return type;
   }
 
   function normalizeContainer(container) {
-    const leaves=leafElements(container);
-    let cuisineEl=null;
-    let parsed=null;
+    const allText=[
+      container.textContent || '',
+      container.dataset && container.dataset.search || '',
+      container.dataset && container.dataset.category || ''
+    ].join(' ');
 
-    for(const el of leaves){
-      const p=getCuisineLabel(el.textContent);
-      if(p){ cuisineEl=el; parsed=p; break; }
-    }
-    if(!cuisineEl || !parsed || !parsed.region) return;
+    const foodType=inferFoodType(container);
+    const country=inferCountry(allText);
+    const location=inferLocation(container, country, allText);
+    const label=format(foodType, country, location);
 
-    const regionNorm=normalizeSearchText(parsed.region);
-    let fuller='';
-    let fullerEl=null;
-
-    leaves.forEach(function(el){
-      if(el===cuisineEl) return;
-      const raw=(el.textContent||'').trim();
-      if(!raw) return;
-
-      const hasCountry=parsed.rule.countries.some(function(country){
-        return (' '+normalizeSearchText(raw)+' ').includes(' '+normalizeSearchText(country)+' ');
-      });
-      if(!hasCountry) return;
-
-      const cleaned=cleanCountrySuffix(raw,parsed.rule.countries);
-      const cleanedNorm=normalizeSearchText(cleaned);
-      if(!cleanedNorm) return;
-
-      if(cleanedNorm===regionNorm || cleanedNorm.startsWith(regionNorm+' ') || regionNorm.startsWith(cleanedNorm+' ')){
-        if(cleaned.length>fuller.length){ fuller=cleaned; fullerEl=el; }
+    if (container.matches('.recipe-card')) {
+      const meta=container.querySelector('.recipe-meta');
+      if (!meta) return;
+      let first=meta.querySelector('span');
+      if (!first) {
+        first=document.createElement('span');
+        meta.prepend(first);
       }
-    });
+      first.textContent=label;
+      return;
+    }
 
-    const displayRegion=fuller || parsed.region;
-    cuisineEl.textContent=parsed.rule.label+' · '+displayRegion;
+    if (container.matches('.recipe-detail')) {
+      const eyebrow=container.querySelector('.eyebrow');
+      if (eyebrow) eyebrow.textContent=label;
 
-    if(fullerEl) fullerEl.remove();
-
-    leafElements(container).forEach(function(el){
-      if(el===cuisineEl) return;
-      const raw=(el.textContent||'').trim();
-      const hasCountry=parsed.rule.countries.some(function(country){
-        return (' '+normalizeSearchText(raw)+' ').includes(' '+normalizeSearchText(country)+' ');
-      });
-      if(!hasCountry) return;
-      const cleaned=cleanCountrySuffix(raw,parsed.rule.countries);
-      if(normalizeSearchText(cleaned)===normalizeSearchText(displayRegion)) el.remove();
-    });
+      // Remove duplicate geographic/cuisine pills while preserving time/yield.
+      const stats=container.querySelector('.stats');
+      if (stats) {
+        [...stats.querySelectorAll('span')].forEach(function(span){
+          const raw=(span.textContent || '').trim();
+          if (!/\d/.test(raw) && (inferCountry(raw) || (location && norm(stripCountry(raw,country))===norm(location)))) {
+            span.remove();
+          }
+        });
+      }
+    }
   }
 
   scope.querySelectorAll('.recipe-card').forEach(normalizeContainer);
   const detail=scope.matches && scope.matches('.recipe-detail')
     ? scope
     : scope.querySelector && scope.querySelector('.recipe-detail');
-  if(detail) normalizeContainer(detail);
+  if (detail) normalizeContainer(detail);
 }
 
 function removeRedundantRecipeCardMetadata() {
