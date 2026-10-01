@@ -477,47 +477,26 @@ function recipeDisplayPriority(card) {
   return mainDish ? 0 : 1;
 }
 
-function dailyRecipeSeed() {
-  // Use the visitor's local calendar date so the default selection changes once
-  // per day, while remaining stable during that day.
-  const now = new Date();
-  return Number(
-    String(now.getFullYear()) +
-    String(now.getMonth() + 1).padStart(2, '0') +
-    String(now.getDate()).padStart(2, '0')
-  );
-}
-
-function seededRecipeValue(seed, index) {
-  // Small deterministic hash: visually random without changing on every reload.
-  let x = (seed ^ Math.imul(index + 1, 0x9e3779b1)) >>> 0;
-  x ^= x >>> 16;
-  x = Math.imul(x, 0x21f0aaad);
-  x ^= x >>> 15;
-  x = Math.imul(x, 0x735a2d97);
-  x ^= x >>> 15;
-  return x >>> 0;
-}
-
-function shuffleMainRecipesDaily() {
+function shuffleMainRecipesOnLoad() {
   const grid = document.getElementById('recipeGrid');
   if (!grid) return;
 
-  const seed = dailyRecipeSeed();
-  const ordered = cards.map((card, index) => ({
-    card,
-    index,
-    priority: recipeDisplayPriority(card),
-    dailyOrder: seededRecipeValue(seed, index)
-  }));
+  const main = [];
+  const other = [];
 
-  // Main dishes are the default discovery set and appear in a different,
-  // deterministic random order each calendar day. Non-main recipes remain
-  // available immediately through cuisine/type filters and search.
-  ordered
-    .sort((a, b) => a.priority - b.priority ||
-                    (a.priority === 0 ? a.dailyOrder - b.dailyOrder : a.index - b.index))
-    .forEach(item => grid.appendChild(item.card));
+  cards.forEach((card, index) => {
+    (recipeDisplayPriority(card) === 0 ? main : other).push({card, index});
+  });
+
+  // Fisher-Yates shuffle: create a fresh main-dish order every page load.
+  for (let i = main.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [main[i], main[j]] = [main[j], main[i]];
+  }
+
+  // Keep main dishes as the discovery set; leave non-main recipes in their
+  // existing order after them so filters and search continue to expose all recipes.
+  [...main, ...other].forEach(item => grid.appendChild(item.card));
 }
 
 function updateRecipes() {
@@ -587,7 +566,7 @@ filters.forEach(button => button.addEventListener('click', () => {
 
 addMetricIngredientMeasurements();
 addEnglishRecipeNames();
-shuffleMainRecipesDaily();
+shuffleMainRecipesOnLoad();
 populateCuisineFilter();
 populateAsianSubcuisines();
 populateLatinSubcuisines();
