@@ -482,3 +482,41 @@ const MEXICAN_SAUCE_LINKS = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MEXICAN SAUCE PAIRING</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('');
   anchor.insertAdjacentElement("afterend",wrap);
 })();
+
+const MEXICAN_SAUCE_LINKS_2 = {
+  "tomatillo-avocado-salsa-cauliflower-rice.html":[["SALSA DE TOMATILLO","Direct tomatillo-salsa match.","salsa-tomatillo.html"],["SALSA DE AGUACATE","Creamy avocado-tomatillo variation.","salsa-aguacate.html"]],
+  "lemon-tomatillo-salsa-verde.html":[["SALSA DE TOMATILLO","Direct reference for the classic tomatillo base.","salsa-tomatillo.html"]],
+  "florentine-steak-balsamic-rosemary.html":[["SALSA DE GUAJILLO","Mild earthy chile sauce for grilled steak.","salsa-guajillo.html"],["SALSA BORRACHA","Traditional grilled-meat pairing.","salsa-borracha.html"],["SALSA MORITA","Smoky chile pairing for steak.","salsa-morita.html"],["SALSA DE MOLCAJETE","Rustic roasted salsa for grilled beef.","salsa-molcajete.html"]],
+  "bife-de-chorizo-chimichurri.html":[["SALSA DE GUAJILLO","Optional mild chile sauce for grilled beef.","salsa-guajillo.html"],["SALSA BORRACHA","Classic barbacoa-style salsa pairing.","salsa-borracha.html"],["SALSA MORITA","Smoky alternative to chimichurri.","salsa-morita.html"]],
+  "asado-argentino.html":[["SALSA BORRACHA","Especially suited to grilled meats.","salsa-borracha.html"],["SALSA DE MOLCAJETE","Rustic roasted salsa for the parrilla.","salsa-molcajete.html"]],
+  "asado-uruguayo.html":[["SALSA BORRACHA","Optional grilled-meat salsa.","salsa-borracha.html"],["SALSA DE MOLCAJETE","Rustic charred salsa for beef and sausage.","salsa-molcajete.html"]],
+  "pollo-a-la-parrilla.html":[["SALSA DE TOMATILLO","Bright green salsa for grilled chicken.","salsa-tomatillo.html"],["SALSA DE AGUACATE","Creamy cooling salsa for grilled chicken.","salsa-aguacate.html"],["SALSA MORITA","Smoky red chile sauce for chicken.","salsa-morita.html"],["SALSA XNI-PEC","Fresh Yucatecan habanero salsa for grilled poultry.","salsa-xni-pec.html"]],
+  "mediterranean-lemon-shallot-chicken.html":[["SALSA DE GUAJILLO","Alternative chile-forward sauce direction.","salsa-guajillo.html"],["SALSA DE CHIPOTLE","Smoky tomato-chipotle pairing.","salsa-chipotle.html"]],
+  "arroz-con-pollo-uruguayo.html":[["SALSA DE CHIPOTLE","Smoky salsa alongside chicken and rice.","salsa-chipotle.html"],["SALSA DE AGUACATE","Creamy topping for rice and chicken.","salsa-aguacate.html"]],
+  "shrimp-piccata-skewers.html":[["SALSA DE TOMATILLO","Bright acidic salsa for grilled shrimp.","salsa-tomatillo.html"],["SALSA DE AGUACATE","Creamy avocado pairing.","salsa-aguacate.html"],["SALSA XNI-PEC","Fresh habanero-citrus topping.","salsa-xni-pec.html"]],
+  "cajun-garlic-butter-shrimp.html":[["SALSA HABANERO","Very hot citrusy salsa for shrimp.","salsa-habanero.html"],["SALSA MORITA","Smoky chile pairing.","salsa-morita.html"]],
+  "spicy-garlic-butter-shrimp-lime-chili-dip.html":[["SALSA HABANERO","Extra-hot citrus-forward pairing.","salsa-habanero.html"],["SALSA DE AGUACATE","Cooling creamy counterpoint.","salsa-aguacate.html"]],
+  "blackened-redfish.html":[["SALSA XNI-PEC","Fresh citrus-habanero salsa cuts through blackened spice.","salsa-xni-pec.html"],["SALSA DE AGUACATE","Cooling creamy salsa for spicy fish.","salsa-aguacate.html"]],
+  "pork-chop-milanese.html":[["SALSA DE GUAJILLO","Mild dried-chile sauce for pork.","salsa-guajillo.html"],["SALSA DE CACAHUATE","Nutty chile sauce pairs naturally with pork.","salsa-cacahuate.html"],["SALSA MORITA","Smoky chile sauce for pork.","salsa-morita.html"]],
+  "locro.html":[["SALSA MORITA","Smoky chile condiment for pork-rich stew.","salsa-morita.html"],["SALSA DE CACAHUATE","Optional nutty chile condiment.","salsa-cacahuate.html"]],
+  "red-beans-rice-andouille.html":[["SALSA DE CHIPOTLE","Smoky salsa for beans and sausage.","salsa-chipotle.html"],["SALSA MORITA","Smoky dried-chile pairing.","salsa-morita.html"]],
+  "classic-american-hamburger.html":[["SALSA DE CHIPOTLE","Smoky burger topping.","salsa-chipotle.html"],["SALSA DE AGUACATE","Creamy avocado topping.","salsa-aguacate.html"],["SALSA DE MOLCAJETE","Rustic tomato-chile topping.","salsa-molcajete.html"]],
+  "chivito.html":[["SALSA DE AGUACATE","Creamy topping variation.","salsa-aguacate.html"],["SALSA DE MOLCAJETE","Rustic grilled-meat salsa.","salsa-molcajete.html"]],
+  "chivito-al-plato.html":[["SALSA DE MOLCAJETE","Charred salsa for steak and fries.","salsa-molcajete.html"],["SALSA XNI-PEC","Fresh habanero-citrus contrast.","salsa-xni-pec.html"]],
+  "provoleta.html":[["SALSA MORITA","Smoky chile sauce for grilled cheese.","salsa-morita.html"],["SALSA DE CACAHUATE","Nutty spicy sauce for melted cheese.","salsa-cacahuate.html"]],
+  "roasted-cauliflower.html":[["SALSA DE CACAHUATE","Nutty chile sauce for roasted vegetables.","salsa-cacahuate.html"],["SALSA DE AGUACATE","Creamy avocado salsa for roasted vegetables.","salsa-aguacate.html"]],
+  "roasted-broccoli-lemon-almonds.html":[["SALSA DE CACAHUATE","Peanut chile sauce complements toasted nuts.","salsa-cacahuate.html"]],
+  "osso-buco-red-wine.html":[["SALSA DE GUAJILLO","Optional chile-based sauce direction for braised meat.","salsa-guajillo.html"],["SALSA MORITA","Smoky alternative for braised veal.","salsa-morita.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=MEXICAN_SAUCE_LINKS_2[p];
+  if(!refs || !refs.length || document.querySelector(".mexican-sauce-tip-2")) return;
+  const anchor=document.querySelector(".mexican-sauce-tip") || document.querySelector(".tomate-daughter-tip") || document.querySelector(".hollandaise-daughter-tip") || document.querySelector(".veloute-daughter-tip") || document.querySelector(".daughter-sauce-tip") || document.querySelector(".mother-sauce-tip") || document.querySelector(".print-button");
+  if(!anchor) return;
+  const wrap=document.createElement("div");
+  wrap.className="mexican-sauce-tip-2";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fff8f0";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">MEXICAN SALSA PAIRING</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See salsa →</a></p>').join('');
+  anchor.insertAdjacentElement("afterend",wrap);
+})();
