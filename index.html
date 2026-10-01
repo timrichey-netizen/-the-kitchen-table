@@ -11,33 +11,62 @@
   <link rel="stylesheet" href="styles.css" />
   <script data-home-scroll-guard>
     (function () {
-      var hash = window.location.hash;
-      var normalHomeArrival = !hash || hash === '#top';
-
+      /*
+       * Always open the home page on the opening image.
+       * Incoming hashes are removed before the browser can restore/seek an anchor.
+       * Hash links clicked after the page has loaded continue to work normally.
+       */
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-      if (!normalHomeArrival) return;
+
+      var arriving = true;
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
 
       function forceOpeningScreen() {
+        if (!arriving) return;
         document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        if (document.body) document.body.scrollTop = 0;
+        window.scrollTo(0, 0);
       }
 
       forceOpeningScreen();
-      document.addEventListener('DOMContentLoaded', forceOpeningScreen, { once: true });
-      window.addEventListener('load', function () {
+
+      document.addEventListener('DOMContentLoaded', function () {
         forceOpeningScreen();
         requestAnimationFrame(forceOpeningScreen);
+      }, { once: true });
+
+      window.addEventListener('load', function () {
+        forceOpeningScreen();
+        requestAnimationFrame(function () {
+          forceOpeningScreen();
+          requestAnimationFrame(forceOpeningScreen);
+        });
         setTimeout(forceOpeningScreen, 100);
         setTimeout(forceOpeningScreen, 500);
-        setTimeout(forceOpeningScreen, 1200);
-      }, { once: true });
-      window.addEventListener('pageshow', function (event) {
-        if (!window.location.hash || window.location.hash === '#top') {
+        setTimeout(function () {
           forceOpeningScreen();
-          if (event.persisted) setTimeout(forceOpeningScreen, 50);
+          arriving = false;
+        }, 1500);
+      }, { once: true });
+
+      window.addEventListener('pageshow', function () {
+        arriving = true;
+        if (window.location.hash) {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
         }
+        forceOpeningScreen();
+        setTimeout(function () {
+          forceOpeningScreen();
+          arriving = false;
+        }, 250);
       });
+
+      document.addEventListener('click', function (event) {
+        var link = event.target.closest('a[href^="#"]');
+        if (link) arriving = false;
+      }, true);
     })();
   </script>
 </head>
