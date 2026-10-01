@@ -528,8 +528,17 @@ const LATIN_SUBCUISINES = [
 ];
 
 const AMERICAN_SUBCUISINES = [
-  ['Cajun / Creole', ['cajun','creole','new orleans']],
-  ['General American', ['american','san francisco']]
+  ['New England', ['new england','maine','new hampshire','vermont','massachusetts','rhode island','connecticut','boston']],
+  ['Mid-Atlantic', ['mid atlantic','new york','new jersey','pennsylvania','delaware','maryland','district of columbia','washington dc','virginia','philadelphia','baltimore']],
+  ['Cajun / Creole', ['cajun','creole','new orleans','louisiana']],
+  ['South', ['southern','southeast','deep south','georgia','alabama','mississippi','tennessee','kentucky','north carolina','south carolina','arkansas','florida','lowcountry','appalachian']],
+  ['Midwest', ['midwest','ohio','michigan','indiana','illinois','wisconsin','minnesota','iowa','missouri','chicago','detroit']],
+  ['Great Plains', ['great plains','kansas','nebraska','north dakota','south dakota','oklahoma']],
+  ['Southwest', ['southwest','arizona','new mexico','texas','sonoran']],
+  ['Mountain West', ['rocky mountain','colorado','utah','idaho','montana','wyoming','nevada']],
+  ['Pacific Northwest', ['pacific northwest','washington','oregon','seattle','portland']],
+  ['California / West Coast', ['california','west coast','san francisco','los angeles','san diego']],
+  ['Alaska / Hawaii', ['alaska','hawaii']]
 ];
 
 const EUROPEAN_SUBCUISINES = [
@@ -869,7 +878,7 @@ function detectAmericanSubcuisine(card) {
   for (const [label, terms] of AMERICAN_SUBCUISINES) {
     if (terms.some(term => containsCuisineTerm(text, term))) return label;
   }
-  return '';
+  return detectCuisine(card) === 'American' ? 'General American' : '';
 }
 
 function detectEuropeanSubcuisine(card) {
