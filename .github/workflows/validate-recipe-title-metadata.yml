@@ -1,0 +1,36 @@
+name: Validate recipe title metadata
+
+on:
+  pull_request:
+    paths:
+      - "*.html"
+      - "tools/validate_recipe_title_metadata.py"
+  push:
+    branches: [main]
+    paths:
+      - "*.html"
+      - "tools/validate_recipe_title_metadata.py"
+
+jobs:
+  validate-changed-recipes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Identify changed HTML
+        shell: bash
+        run: |
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            git diff --name-only HEAD^ HEAD -- '*.html' > changed-html.txt
+          else
+            git ls-files '*.html' > changed-html.txt
+          fi
+          cat changed-html.txt
+      - name: Validate recipe title metadata
+        shell: bash
+        run: |
+          files=$(tr '\n' ' ' < changed-html.txt)
+          if [ -n "$files" ]; then
+            python tools/validate_recipe_title_metadata.py --strict $files
+          fi
