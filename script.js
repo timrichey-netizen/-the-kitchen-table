@@ -273,6 +273,31 @@ function matchesBroadCategory(card, filter) {
   }
 }
 
+function recipeDisplayPriority(card) {
+  const categories = (card.dataset.category || '').toLowerCase();
+  const text = cardHaystack(card);
+
+  // Put entree/main-dish recipes first in the default collection view.
+  const clearlyNonMain =
+    /dessert|sauce|seasoning|side|salad|soup|bread|drink|beverage|appetizer|starter/.test(categories) ||
+    /dessert|sauce|seasoning|side dish|salad|soup|bread|cocktail|appetizer|starter/.test(text);
+  if (clearlyNonMain) return 1;
+
+  const mainDish =
+    /chicken|beef|pork|veal|lamb|turkey|duck|sausage|fish|seafood|pasta|rice|main|entree|entrée/.test(categories) ||
+    /chicken|steak|beef|pork|veal|lamb|turkey|duck|sausage|salmon|shrimp|fish|mussels|pasta|spaghetti|rigatoni|risotto/.test(text);
+  return mainDish ? 0 : 1;
+}
+
+function sortRecipesMainFirst() {
+  const grid = document.getElementById('recipeGrid');
+  if (!grid) return;
+  cards
+    .map((card, index) => ({card, index, priority: recipeDisplayPriority(card)}))
+    .sort((a, b) => a.priority - b.priority || a.index - b.index)
+    .forEach(item => grid.appendChild(item.card));
+}
+
 function updateRecipes() {
   const q = normalizeSearchText(search?.value || '');
   const terms = q ? q.split(/\s+/).filter(Boolean) : [];
@@ -338,6 +363,7 @@ filters.forEach(button => button.addEventListener('click', () => {
   updateRecipes();
 }));
 
+sortRecipesMainFirst();
 populateCuisineFilter();
 populateAsianSubcuisines();
 populateLatinSubcuisines();
