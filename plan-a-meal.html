@@ -144,7 +144,16 @@
         <div class="pairing-column"><h3>Desserts</h3><div id="pairingDesserts"></div></div>
       </div>
     </section>
-    <div class="planner-result-actions"><button class="button secondary" id="plannerRestart" type="button">Plan another meal</button><a class="button primary" href="plate-composer.html">Compose this visually</a></div></section>
+    <div class="planner-result-actions"><button class="button secondary" id="plannerRestart" type="button">Plan another meal</button><button class="button secondary" id="createIngredientList" type="button">Create ingredient list</button><a class="button primary" href="plate-composer.html">Compose this visually</a></div>
+    <section class="ingredient-list-panel" id="ingredientListPanel" hidden aria-live="polite">
+      <div class="ingredient-list-heading">
+        <div><p class="eyebrow">SHOPPING PREP</p><h2>Ingredient list</h2><p class="muted-copy">Built from the recipes currently selected in your Kitchen Table menu.</p></div>
+        <button class="button secondary ingredient-print-button" id="printIngredientList" type="button">Print list</button>
+      </div>
+      <div id="ingredientListStatus" class="muted-copy"></div>
+      <div id="ingredientListContent"></div>
+    </section>
+    </section>
 </div></main>
 
 <footer class="footer"><div class="container footer-wrap"><p>© <span id="year"></span> The Kitchen Table</p><a href="index.html#recipes">All recipes</a></div></footer>
