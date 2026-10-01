@@ -14,7 +14,8 @@
 .pasta-guide-table th{font-weight:700;background:#faf7f2}
 .pasta-shape-image{width:132px;height:92px;object-fit:cover;border-radius:12px;display:block;background:#f2eee8;border:1px solid var(--line)}
 .pasta-image-cell{width:148px}
-.pasta-name-cell{font-weight:700;white-space:nowrap}
+.pasta-guide-table th:nth-child(2),.pasta-guide-table td:nth-child(2){width:112px;max-width:112px}
+.pasta-name-cell{font-weight:700;white-space:normal;overflow-wrap:anywhere;word-break:normal;line-height:1.35}
 .pasta-guide-table tr:last-child td{border-bottom:0}
 .pasta-family{margin-top:42px}
 .pasta-family h2{margin-bottom:10px}
@@ -22,7 +23,7 @@
 .pasta-index{margin-top:52px}
 .pasta-index td:first-child{font-weight:600}
 .pasta-tip{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:28px}
-@media(max-width:760px){.pasta-guide-table{display:block;overflow-x:auto}.pasta-guide-table th,.pasta-guide-table td{min-width:150px}.pasta-image-cell{min-width:140px!important}.pasta-shape-image{width:120px;height:84px}}
+@media(max-width:760px){.pasta-guide-table{display:block;overflow-x:auto}.pasta-guide-table th,.pasta-guide-table td{min-width:150px}.pasta-guide-table th:nth-child(2),.pasta-guide-table td:nth-child(2){width:104px;min-width:104px;max-width:104px;white-space:normal;overflow-wrap:anywhere}.pasta-image-cell{min-width:140px!important}.pasta-shape-image{width:120px;height:84px}}
 
 .guide-recipe-credit{display:block;margin-top:7px;font-size:.78rem;line-height:1.35;color:var(--muted)}
 .guide-recipe-credit a{color:var(--accent-dark);font-weight:700;text-decoration:none}
