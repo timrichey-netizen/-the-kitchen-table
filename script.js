@@ -405,3 +405,43 @@ const HOLLANDAISE_DAUGHTER_LINKS = {
   wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">HOLLANDAISE DAUGHTER SAUCE</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('')+'<a class="text-link" href="hollandaise-sauce.html">See Hollandaise and all daughter sauces →</a>';
   anchor.insertAdjacentElement("afterend",wrap);
 })();
+
+const TOMATE_DAUGHTER_LINKS = {
+  "shrimp-creole.html":[["CREOLE SAUCE","Direct family match: tomato, holy trinity, herbs, and Creole seasoning.","creole-sauce.html"]],
+  "jambalaya.html":[["CREOLE SAUCE","Related Creole tomato-and-aromatics profile.","creole-sauce.html"],["SPANISH SAUCE","Pepper, tomato, and paprika make a useful optional variation.","spanish-tomato-sauce.html"]],
+  "chicken-and-andouille-gumbo.html":[["CREOLE SAUCE","Optional Creole tomato sauce variation for a more tomato-forward style.","creole-sauce.html"]],
+  "new-orleans-bbq-shrimp.html":[["CREOLE SAUCE","Optional tomato-based New Orleans variation alongside the buttery preparation.","creole-sauce.html"]],
+  "blackened-redfish.html":[["CREOLE SAUCE","Classic tomato-based Creole pairing for blackened fish.","creole-sauce.html"]],
+  "pollo-al-disco.html":[["SPANISH SAUCE","Tomato, peppers, onion, and paprika align closely with this chicken dish.","spanish-tomato-sauce.html"],["PORTUGUESE SAUCE","Optional paprika-and-tomato variation.","portuguese-sauce.html"]],
+  "arroz-con-pollo-uruguayo.html":[["SPANISH SAUCE","Optional pepper-and-paprika tomato sauce pairing.","spanish-tomato-sauce.html"]],
+  "swordfish-sicilian-style.html":[["PROVENÇALE","Tomato, garlic, herbs, olives, and capers closely mirror this Mediterranean profile.","provencale-sauce.html"]],
+  "shrimp-saganaki.html":[["PROVENÇALE","Related tomato, garlic, herb, and olive-forward Mediterranean profile.","provencale-sauce.html"]],
+  "cioppino.html":[["PROVENÇALE","Optional southern French-style tomato base for seafood stew.","provencale-sauce.html"]],
+  "roasted-eggplant-cherry-tomatoes.html":[["PROVENÇALE","Directly compatible with garlic, herbs, olives, and capers.","provencale-sauce.html"]],
+  "pasta-alla-norma.html":[["MARINARA","A simple tomato-garlic-herb base can stand in for the sauce.","marinara-sauce.html"],["NEAPOLITAN SAUCE","Southern Italian tomato-basil profile is especially compatible.","neapolitan-sauce.html"]],
+  "eggplant-parmesan.html":[["MARINARA","Classic tomato sauce choice for layering.","marinara-sauce.html"],["NEAPOLITAN SAUCE","Alternative tomato-basil sauce for the bake.","neapolitan-sauce.html"]],
+  "gnocchi-alla-sorrentina.html":[["MARINARA","Simple tomato-garlic sauce works well with gnocchi and mozzarella.","marinara-sauce.html"],["NEAPOLITAN SAUCE","Especially natural southern Italian pairing.","neapolitan-sauce.html"]],
+  "zucchini-lasagna.html":[["MARINARA","Direct tomato-sauce option for layering.","marinara-sauce.html"]],
+  "milanesa-napolitana.html":[["NEAPOLITAN SAUCE","Natural tomato-basil sauce for the Napolitana topping.","neapolitan-sauce.html"],["MARINARA","Simple tomato sauce alternative.","marinara-sauce.html"]],
+  "penne-arrabbiata.html":[["MARINARA","Related tomato-garlic base; add chile for arrabbiata character.","marinara-sauce.html"]],
+  "rigatoni-amatriciana.html":[["MARINARA","Related tomato base; guanciale and Pecorino define the final sauce.","marinara-sauce.html"]],
+  "bucatini-amatriciana.html":[["MARINARA","Related tomato base; guanciale and Pecorino define the final sauce.","marinara-sauce.html"]],
+  "noquis-con-tuco.html":[["BOLOGNESE","Optional meat-ragù direction for the gnocchi.","bolognese-sauce-daughter.html"],["NEAPOLITAN SAUCE","Optional lighter tomato-basil alternative.","neapolitan-sauce.html"]],
+  "bolognese-meat-sauce.html":[["BOLOGNESE","Direct match to the classic slow meat-ragù family.","bolognese-sauce-daughter.html"]],
+  "rigatoni-pork-ragu-ricotta.html":[["BOLOGNESE","Related slow meat-ragù technique with soffritto, wine, and tomato.","bolognese-sauce-daughter.html"]],
+  "pasta-ncasciata.html":[["BOLOGNESE","Related meat-ragù foundation for the baked pasta.","bolognese-sauce-daughter.html"]],
+  "osso-buco-red-wine.html":[["PORTUGUESE SAUCE","Optional tomato, garlic, paprika, and wine variation for braised veal.","portuguese-sauce.html"]],
+  "mediterranean-lemon-shallot-chicken.html":[["PORTUGUESE SAUCE","Optional tomato-paprika variation for chicken.","portuguese-sauce.html"],["PROVENÇALE","Optional garlic-herb tomato variation.","provencale-sauce.html"]]
+};
+(function(){
+  const p=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  const refs=TOMATE_DAUGHTER_LINKS[p];
+  if(!refs || !refs.length || document.querySelector(".tomate-daughter-tip")) return;
+  const anchor=document.querySelector(".hollandaise-daughter-tip") || document.querySelector(".veloute-daughter-tip") || document.querySelector(".daughter-sauce-tip") || document.querySelector(".mother-sauce-tip") || document.querySelector(".print-button");
+  if(!anchor) return;
+  const wrap=document.createElement("div");
+  wrap.className="tomate-daughter-tip";
+  wrap.style.cssText="margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fff5f2";
+  wrap.innerHTML='<p class="eyebrow" style="margin:0 0 8px">SAUCE TOMATE FAMILY</p>'+refs.map(r=>'<p style="margin:0 0 7px"><strong>'+r[0]+':</strong> '+r[1]+' <a class="text-link" href="'+r[2]+'">See sauce →</a></p>').join('')+'<a class="text-link" href="sauce-tomate.html">See Sauce Tomate and related sauces →</a>';
+  anchor.insertAdjacentElement("afterend",wrap);
+})();
