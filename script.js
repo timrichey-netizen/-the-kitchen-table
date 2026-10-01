@@ -477,12 +477,46 @@ function recipeDisplayPriority(card) {
   return mainDish ? 0 : 1;
 }
 
-function sortRecipesMainFirst() {
+function dailyRecipeSeed() {
+  // Use the visitor's local calendar date so the default selection changes once
+  // per day, while remaining stable during that day.
+  const now = new Date();
+  return Number(
+    String(now.getFullYear()) +
+    String(now.getMonth() + 1).padStart(2, '0') +
+    String(now.getDate()).padStart(2, '0')
+  );
+}
+
+function seededRecipeValue(seed, index) {
+  // Small deterministic hash: visually random without changing on every reload.
+  let x = (seed ^ Math.imul(index + 1, 0x9e3779b1)) >>> 0;
+  x ^= x >>> 16;
+  x = Math.imul(x, 0x21f0aaad);
+  x ^= x >>> 15;
+  x = Math.imul(x, 0x735a2d97);
+  x ^= x >>> 15;
+  return x >>> 0;
+}
+
+function shuffleMainRecipesDaily() {
   const grid = document.getElementById('recipeGrid');
   if (!grid) return;
-  cards
-    .map((card, index) => ({card, index, priority: recipeDisplayPriority(card)}))
-    .sort((a, b) => a.priority - b.priority || a.index - b.index)
+
+  const seed = dailyRecipeSeed();
+  const ordered = cards.map((card, index) => ({
+    card,
+    index,
+    priority: recipeDisplayPriority(card),
+    dailyOrder: seededRecipeValue(seed, index)
+  }));
+
+  // Main dishes are the default discovery set and appear in a different,
+  // deterministic random order each calendar day. Non-main recipes remain
+  // available immediately through cuisine/type filters and search.
+  ordered
+    .sort((a, b) => a.priority - b.priority ||
+                    (a.priority === 0 ? a.dailyOrder - b.dailyOrder : a.index - b.index))
     .forEach(item => grid.appendChild(item.card));
 }
 
@@ -553,7 +587,7 @@ filters.forEach(button => button.addEventListener('click', () => {
 
 addMetricIngredientMeasurements();
 addEnglishRecipeNames();
-sortRecipesMainFirst();
+shuffleMainRecipesDaily();
 populateCuisineFilter();
 populateAsianSubcuisines();
 populateLatinSubcuisines();
