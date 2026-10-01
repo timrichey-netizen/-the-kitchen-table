@@ -406,19 +406,33 @@ function toRecipeTitleCase(value) {
 }
 
 function addEnglishRecipeNames() {
-  function translated(title) {
-    title = (title || '').trim();
-    if (!title || /\([^)]*\)\s*$/.test(title)) return title;
-    const originalTitle = title;
-    const displayTitle = toRecipeTitleCase(title);
-    const normalizedTitle = normalizeSearchText(originalTitle);
-    const normalizedKey = Object.keys(recipeEnglishNames).find(function(key){
+  function fallbackEnglishName(title) {
+    const originalTitle=(title || '').trim();
+    if (!originalTitle) return '';
+    const displayTitle=toRecipeTitleCase(originalTitle);
+    const normalizedTitle=normalizeSearchText(originalTitle);
+    const normalizedKey=Object.keys(recipeEnglishNames).find(function(key){
       return normalizeSearchText(key) === normalizedTitle;
     });
-    const englishName = recipeEnglishNames[originalTitle] ||
+    return recipeEnglishNames[originalTitle] ||
       recipeEnglishNames[displayTitle] ||
       (normalizedKey ? recipeEnglishNames[normalizedKey] : '');
-    if (englishName) return displayTitle + ' (' + toRecipeTitleCase(englishName) + ')';
+  }
+
+  function translated(title, explicitEnglish) {
+    title = (title || '').trim();
+    if (!title) return title;
+    const displayTitle = toRecipeTitleCase(title);
+
+    // Preferred source: explicit recipe metadata.
+    // Cards: data-title-en="..."
+    // Detail pages: <meta name="recipe-title-en" content="...">
+    // The legacy dictionary below is migration-only fallback for recipes
+    // that have not yet been upgraded to explicit metadata.
+    const englishName=(explicitEnglish || '').trim() || fallbackEnglishName(title);
+    if (englishName && normalizeSearchText(englishName) !== normalizeSearchText(displayTitle)) {
+      return displayTitle + ' (' + toRecipeTitleCase(englishName) + ')';
+    }
     title = displayTitle;
 
     let m = title.match(/^Tacos\s+de\s+(.+)$/i);
@@ -436,7 +450,18 @@ function addEnglishRecipeNames() {
 
   function renderTranslatedTitle(el) {
     if (!el) return;
-    const full = translated(el.textContent);
+
+    const card=el.closest('.recipe-card');
+    const detail=el.closest('.recipe-detail');
+    let explicitEnglish='';
+
+    if (card) {
+      explicitEnglish=(card.dataset.titleEn || '').trim();
+    } else if (detail) {
+      explicitEnglish=(document.querySelector('meta[name="recipe-title-en"]')?.content || '').trim();
+    }
+
+    const full = translated(el.textContent, explicitEnglish);
     const match = full.match(/^(.*?)\s*\(([^()]*)\)\s*$/);
     if (!match) {
       el.textContent = full;
