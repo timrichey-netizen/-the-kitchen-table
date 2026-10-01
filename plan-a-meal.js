@@ -125,6 +125,7 @@ var recipeIndex={
 
 var state={mood:[],mainIngredients:[],effort:'any',restrictions:[],occasion:'weeknight',dessert:'surprise',avoidText:'',custom:{}};
 var currentMeal={main:null,side:null,veg:null,dessert:null};
+var currentIngredientGroups=[];
 var steps=[].slice.call(document.querySelectorAll('.planner-step')),back=document.getElementById('plannerBack'),next=document.getElementById('plannerNext'),card=document.getElementById('plannerCard'),results=document.getElementById('plannerResults'),progress=document.getElementById('plannerProgressBar'),step=0;
 document.querySelectorAll('.planner-options').forEach(function(group){var key=group.dataset.key,multi=group.classList.contains('multi');group.querySelectorAll('button').forEach(function(button){button.addEventListener('click',function(){if(multi){button.classList.toggle('selected');state[key]=[].slice.call(group.querySelectorAll('button.selected')).map(function(b){return b.dataset.value;});}else{group.querySelectorAll('button').forEach(function(b){b.classList.remove('selected');});button.classList.add('selected');state[key]=button.dataset.value;}});});});
 function showStep(){steps.forEach(function(el,i){el.classList.toggle('active',i===step);});back.disabled=step===0;next.textContent=step===steps.length-1?'Build my meal':'Next';progress.style.width=((step+1)/steps.length*100)+'%';}
@@ -272,6 +273,7 @@ function createIngredientList(){
       return {label:item[0],dish:item[1],ingredients:[]};
     });
   })).then(function(groups){
+    currentIngredientGroups=groups;
     status.textContent='';
     content.innerHTML=groups.map(function(group){
       var body=group.ingredients.length
@@ -280,6 +282,61 @@ function createIngredientList(){
       return '<section class="ingredient-dish-group"><h3>'+group.label+': <a href="'+group.dish.url+'">'+group.dish.title+'</a></h3>'+body+'</section>';
     }).join('');
     panel.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+function ingredientPayload(){
+  return currentIngredientGroups.map(function(group){
+    return {
+      label:group.label,
+      title:group.dish.title,
+      url:new URL(group.dish.url,window.location.href).href,
+      ingredients:group.ingredients
+    };
+  });
+}
+function sendIngredientList(channel,recipient,submitButton){
+  var shareStatus=document.getElementById('ingredientShareStatus');
+  if(!currentIngredientGroups.length){
+    shareStatus.textContent='Create the ingredient list first.';
+    return Promise.resolve();
+  }
+  var original=submitButton.textContent;
+  submitButton.disabled=true;
+  submitButton.textContent='Sending…';
+  shareStatus.textContent='';
+  return fetch('/api/send-ingredient-list',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      channel:channel,
+      recipient:recipient,
+      mealTitle:'The Kitchen Table ingredient list',
+      groups:ingredientPayload()
+    })
+  }).then(function(response){
+    return response.json().catch(function(){return {};}).then(function(data){
+      if(!response.ok)throw new Error(data.error||'Could not send the ingredient list.');
+      shareStatus.textContent=channel==='email'?'Ingredient list emailed successfully.':'Ingredient list texted successfully.';
+    });
+  }).catch(function(error){
+    shareStatus.textContent=error.message||'Could not send the ingredient list.';
+  }).finally(function(){
+    submitButton.disabled=false;
+    submitButton.textContent=original;
+  });
+}
+function bindIngredientSharing(){
+  var emailForm=document.getElementById('emailIngredientForm');
+  if(emailForm)emailForm.addEventListener('submit',function(event){
+    event.preventDefault();
+    var input=document.getElementById('ingredientEmail');
+    sendIngredientList('email',input.value.trim(),emailForm.querySelector('button[type="submit"]'));
+  });
+  var textForm=document.getElementById('textIngredientForm');
+  if(textForm)textForm.addEventListener('submit',function(event){
+    event.preventDefault();
+    var input=document.getElementById('ingredientPhone');
+    sendIngredientList('sms',input.value.trim(),textForm.querySelector('button[type="submit"]'));
   });
 }
 function buildMeal(){readCustomize();var main=pick('main',state.mainType),side=pick('side',state.sideType,[main&&main.url]),veg=pick('veg',state.vegType,[main&&main.url,side&&side.url]);currentMeal={main:main,side:side,veg:veg,dessert:null};document.getElementById('plannerSummary').textContent=
@@ -294,5 +351,6 @@ var ingredientButton=document.getElementById('createIngredientList');
 if(ingredientButton)ingredientButton.addEventListener('click',createIngredientList);
 var printButton=document.getElementById('printIngredientList');
 if(printButton)printButton.addEventListener('click',function(){window.print();});
+bindIngredientSharing();
 showStep();
 })();
