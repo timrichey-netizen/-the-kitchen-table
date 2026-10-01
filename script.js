@@ -371,11 +371,38 @@ const recipeEnglishNames = {
   "Menudo":"Mexican Tripe Soup","Papas con Chorizo y Huevo":"Potatoes with Chorizo and Egg","Nopales con Huevo":"Cactus with Egg","Pan Dulce con Café de Olla":"Sweet Bread with Spiced Pot Coffee"
 };
 
+function toRecipeTitleCase(value) {
+  const smallWords = new Set([
+    'a','an','the','and','but','or','nor','for','so','yet',
+    'of','in','to','with','on','at','by','from'
+  ]);
+  const words = String(value || '').trim().split(/\s+/);
+  return words.map(function(word, index) {
+    // Preserve acronyms, all-caps culinary terms, numbers, and mixed-case names.
+    if (!word) return word;
+    const core = word.replace(/^[^A-Za-zÀ-ÖØ-öø-ÿ]+|[^A-Za-zÀ-ÖØ-öø-ÿ]+$/g, '');
+    if (!core) return word;
+    if (core.length > 1 && core === core.toUpperCase()) return word;
+    if (/[A-ZÀ-ÖØ-Þ].*[A-ZÀ-ÖØ-Þ]/.test(core.slice(1))) return word;
+
+    const lower = core.toLowerCase();
+    const shouldLower = index > 0 && index < words.length - 1 && smallWords.has(lower);
+    const replacement = shouldLower
+      ? lower
+      : lower.charAt(0).toUpperCase() + lower.slice(1);
+    return word.replace(core, replacement);
+  }).join(' ');
+}
+
 function addEnglishRecipeNames() {
   function translated(title) {
     title = (title || '').trim();
     if (!title || /\([^)]*\)\s*$/.test(title)) return title;
-    if (recipeEnglishNames[title]) return title + ' (' + recipeEnglishNames[title] + ')';
+    const originalTitle = title;
+    const displayTitle = toRecipeTitleCase(title);
+    const englishName = recipeEnglishNames[originalTitle] || recipeEnglishNames[displayTitle];
+    if (englishName) return displayTitle + ' (' + toRecipeTitleCase(englishName) + ')';
+    title = displayTitle;
 
     let m = title.match(/^Tacos de (.+)$/);
     if (m) {
