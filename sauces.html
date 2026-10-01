@@ -47,10 +47,12 @@
     .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
     .sauce-card{
       color:var(--chalk);text-decoration:none;background:var(--card);border:1px solid rgba(255,255,255,.13);
-      border-radius:16px;padding:20px;min-height:118px;display:flex;flex-direction:column;justify-content:space-between;
+      border-radius:16px;padding:0;min-height:118px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;
       box-shadow:0 8px 24px rgba(0,0,0,.16);transition:transform .16s ease,background .16s ease,border-color .16s ease
     }
     .sauce-card:hover,.sauce-card:focus-visible{transform:translateY(-2px);background:rgba(38,46,51,.96);border-color:rgba(216,163,93,.48)}
+    .sauce-card img{width:100%;height:145px;object-fit:cover;display:block}
+    .sauce-card-body{padding:17px 19px 19px;display:flex;flex-direction:column;flex:1}
     .sauce-card strong{font-family:"DM Serif Display",serif;font-size:1.32rem;font-weight:400;line-height:1.15}
     .sauce-card span{margin-top:12px;color:var(--accent);font-weight:700;font-size:.88rem}
     .mother{border-color:rgba(216,163,93,.36)}
@@ -61,7 +63,7 @@
       .topnav a{padding:7px 9px;font-size:.87rem}
       main{padding:42px 0 58px}
       .grid{grid-template-columns:1fr}
-      .sauce-card{min-height:auto}
+      .sauce-card{min-height:auto}.sauce-card img{height:175px}
       .guide-feature{padding:20px}
     }
   </style>
@@ -95,11 +97,11 @@
 
       <h2 class="section-label">Mother Sauces</h2>
       <section class="grid" aria-label="Mother sauces">
-        <a class="sauce-card mother" href="bechamel-sauce.html"><strong>Béchamel</strong><span>View sauce →</span></a>
-        <a class="sauce-card mother" href="veloute-sauce.html"><strong>Velouté</strong><span>View sauce →</span></a>
-        <a class="sauce-card mother" href="espagnole-sauce.html"><strong>Espagnole</strong><span>View sauce →</span></a>
-        <a class="sauce-card mother" href="sauce-tomate.html"><strong>Sauce Tomate</strong><span>View sauce →</span></a>
-        <a class="sauce-card mother" href="hollandaise-sauce.html"><strong>Hollandaise</strong><span>View sauce →</span></a>
+        <a class="sauce-card mother" href="bechamel-sauce.html"><img src="assets/fettuccine-alfredo.png" alt="Creamy white sauce" loading="lazy"><div class="sauce-card-body"><strong>Béchamel</strong><span>View sauce →</span></div></a>
+        <a class="sauce-card mother" href="veloute-sauce.html"><img src="assets/chicken-broth.webp" alt="Light chicken velouté foundation" loading="lazy"><div class="sauce-card-body"><strong>Velouté</strong><span>View sauce →</span></div></a>
+        <a class="sauce-card mother" href="espagnole-sauce.html"><img src="assets/beef-broth.webp" alt="Rich brown beef sauce foundation" loading="lazy"><div class="sauce-card-body"><strong>Espagnole</strong><span>View sauce →</span></div></a>
+        <a class="sauce-card mother" href="sauce-tomate.html"><img src="assets/penne-arrabbiata.png" alt="Tomato sauce" loading="lazy"><div class="sauce-card-body"><strong>Sauce Tomate</strong><span>View sauce →</span></div></a>
+        <a class="sauce-card mother" href="hollandaise-sauce.html"><img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Hollandaise%20sauce.jpg" alt="Hollandaise sauce" loading="lazy"><div class="sauce-card-body"><strong>Hollandaise</strong><span>View sauce →</span></div></a>
       </section>
 
       <h2 class="section-label">Daughter Sauces by Mother</h2>
@@ -107,53 +109,53 @@
 
       <h3 id="bechamel-family">From Béchamel</h3>
       <section class="grid" aria-label="Béchamel daughter sauces">
-        <a class="sauce-card" href="mornay-sauce.html"><strong>Mornay</strong><span>Béchamel → cheese</span></a>
-        <a class="sauce-card" href="soubise-sauce.html"><strong>Soubise</strong><span>Béchamel → onion</span></a>
-        <a class="sauce-card" href="creme-sauce.html"><strong>Crème Sauce</strong><span>Béchamel → cream</span></a>
-        <a class="sauce-card" href="mustard-sauce-bechamel.html"><strong>Mustard Sauce</strong><span>Béchamel → mustard</span></a>
-        <a class="sauce-card" href="cheddar-cheese-sauce.html"><strong>Cheddar Cheese Sauce</strong><span>Béchamel → cheddar</span></a>
+        <a class="sauce-card" href="mornay-sauce.html"><img src="assets/fettuccine-alfredo.png" alt="Creamy cheese sauce" loading="lazy"><div class="sauce-card-body"><strong>Mornay</strong><span>Béchamel → cheese</span></div></a>
+        <a class="sauce-card" href="soubise-sauce.html"><img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Soubise%20sauce.jpg" alt="Soubise sauce" loading="lazy"><div class="sauce-card-body"><strong>Soubise</strong><span>Béchamel → onion</span></div></a>
+        <a class="sauce-card" href="creme-sauce.html"><img src="assets/fettuccine-alfredo.png" alt="Cream sauce" loading="lazy"><div class="sauce-card-body"><strong>Crème Sauce</strong><span>Béchamel → cream</span></div></a>
+        <a class="sauce-card" href="mustard-sauce-bechamel.html"><img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Mustard%20sauce.jpg" alt="Mustard sauce" loading="lazy"><div class="sauce-card-body"><strong>Mustard Sauce</strong><span>Béchamel → mustard</span></div></a>
+        <a class="sauce-card" href="cheddar-cheese-sauce.html"><img src="assets/fettuccine-alfredo.png" alt="Cheese sauce" loading="lazy"><div class="sauce-card-body"><strong>Cheddar Cheese Sauce</strong><span>Béchamel → cheddar</span></div></a>
       </section>
 
       <h3 id="veloute-family">From Velouté</h3>
       <section class="grid" aria-label="Velouté daughter sauces">
-        <a class="sauce-card" href="allemande-sauce.html"><strong>Allemande</strong><span>Velouté → liaison + lemon</span></a>
-        <a class="sauce-card" href="supreme-sauce.html"><strong>Suprême</strong><span>Chicken velouté → cream</span></a>
-        <a class="sauce-card" href="nantua-sauce.html"><strong>Nantua</strong><span>Velouté → cream + shellfish</span></a>
-        <a class="sauce-card" href="normande-sauce.html"><strong>Normande</strong><span>Fish velouté → cream</span></a>
-        <a class="sauce-card" href="bercy-sauce.html"><strong>Bercy</strong><span>Fish velouté → shallot + wine</span></a>
-        <a class="sauce-card" href="poulette-sauce.html"><strong>Poulette</strong><span>Velouté → mushroom + cream</span></a>
-        <a class="sauce-card" href="hungarian-sauce-veloute.html"><strong>Hungarian</strong><span>Velouté → paprika + onion</span></a>
-        <a class="sauce-card" href="venetian-sauce-veloute.html"><strong>Venetian</strong><span>Velouté → herbs + aromatics</span></a>
+        <a class="sauce-card" href="allemande-sauce.html"><img src="assets/chicken-broth.webp" alt="Light velouté sauce" loading="lazy"><div class="sauce-card-body"><strong>Allemande</strong><span>Velouté → liaison + lemon</span></div></a>
+        <a class="sauce-card" href="supreme-sauce.html"><img src="assets/fettuccine-alfredo.png" alt="Creamy supreme-style sauce" loading="lazy"><div class="sauce-card-body"><strong>Suprême</strong><span>Chicken velouté → cream</span></div></a>
+        <a class="sauce-card" href="nantua-sauce.html"><img src="assets/shrimp-shell-sauce.png" alt="Shellfish sauce" loading="lazy"><div class="sauce-card-body"><strong>Nantua</strong><span>Velouté → cream + shellfish</span></div></a>
+        <a class="sauce-card" href="normande-sauce.html"><img src="assets/fish-stock.png" alt="Fish velouté foundation" loading="lazy"><div class="sauce-card-body"><strong>Normande</strong><span>Fish velouté → cream</span></div></a>
+        <a class="sauce-card" href="bercy-sauce.html"><img src="assets/fish-stock.png" alt="Fish and wine sauce foundation" loading="lazy"><div class="sauce-card-body"><strong>Bercy</strong><span>Fish velouté → shallot + wine</span></div></a>
+        <a class="sauce-card" href="poulette-sauce.html"><img src="assets/miso-mushroom-leek-pasta.png" alt="Mushroom cream sauce" loading="lazy"><div class="sauce-card-body"><strong>Poulette</strong><span>Velouté → mushroom + cream</span></div></a>
+        <a class="sauce-card" href="hungarian-sauce-veloute.html"><img src="assets/chicken-broth.webp" alt="Velouté sauce" loading="lazy"><div class="sauce-card-body"><strong>Hungarian</strong><span>Velouté → paprika + onion</span></div></a>
+        <a class="sauce-card" href="venetian-sauce-veloute.html"><img src="assets/chicken-broth.webp" alt="Velouté sauce" loading="lazy"><div class="sauce-card-body"><strong>Venetian</strong><span>Velouté → herbs + aromatics</span></div></a>
       </section>
 
       <h3 id="tomate-family">From Sauce Tomate</h3>
       <section class="grid" aria-label="Tomato daughter sauces">
-        <a class="sauce-card" href="creole-sauce.html"><strong>Creole</strong><span>Tomate → peppers + aromatics</span></a>
-        <a class="sauce-card" href="portuguese-sauce.html"><strong>Portuguese</strong><span>Tomate → onion + garlic</span></a>
-        <a class="sauce-card" href="spanish-tomato-sauce.html"><strong>Spanish Tomato</strong><span>Tomate → peppers + mushrooms</span></a>
-        <a class="sauce-card" href="provencale-sauce.html"><strong>Provençale</strong><span>Tomate → garlic + herbs</span></a>
-        <a class="sauce-card" href="marinara-sauce.html"><strong>Marinara</strong><span>Tomato family → garlic + herbs</span></a>
-        <a class="sauce-card" href="neapolitan-sauce.html"><strong>Neapolitan</strong><span>Tomato family → garlic + herbs</span></a>
-        <a class="sauce-card" href="aurora-sauce.html"><strong>Aurora</strong><span>Pale sauce + tomato</span></a>
+        <a class="sauce-card" href="creole-sauce.html"><img src="assets/penne-arrabbiata.png" alt="Tomato and pepper sauce" loading="lazy"><div class="sauce-card-body"><strong>Creole</strong><span>Tomate → peppers + aromatics</span></div></a>
+        <a class="sauce-card" href="portuguese-sauce.html"><img src="assets/rigatoni-amatriciana.png" alt="Tomato sauce" loading="lazy"><div class="sauce-card-body"><strong>Portuguese</strong><span>Tomate → onion + garlic</span></div></a>
+        <a class="sauce-card" href="spanish-tomato-sauce.html"><img src="assets/rigatoni-amatriciana.png" alt="Tomato sauce" loading="lazy"><div class="sauce-card-body"><strong>Spanish Tomato</strong><span>Tomate → peppers + mushrooms</span></div></a>
+        <a class="sauce-card" href="provencale-sauce.html"><img src="assets/penne-arrabbiata.png" alt="Tomato and herb sauce" loading="lazy"><div class="sauce-card-body"><strong>Provençale</strong><span>Tomate → garlic + herbs</span></div></a>
+        <a class="sauce-card" href="marinara-sauce.html"><img src="assets/penne-arrabbiata.png" alt="Marinara-style tomato sauce" loading="lazy"><div class="sauce-card-body"><strong>Marinara</strong><span>Tomato family → garlic + herbs</span></div></a>
+        <a class="sauce-card" href="neapolitan-sauce.html"><img src="assets/pasta-alla-norma.png" alt="Neapolitan-style tomato sauce" loading="lazy"><div class="sauce-card-body"><strong>Neapolitan</strong><span>Tomato family → garlic + herbs</span></div></a>
+        <a class="sauce-card" href="aurora-sauce.html"><img src="assets/rigatoni-amatriciana.png" alt="Creamy tomato sauce" loading="lazy"><div class="sauce-card-body"><strong>Aurora</strong><span>Pale sauce + tomato</span></div></a>
       </section>
 
       <h3 id="hollandaise-family">From Hollandaise</h3>
       <section class="grid" aria-label="Hollandaise daughter sauces">
-        <a class="sauce-card" href="bearnaise-sauce.html"><strong>Béarnaise</strong><span>Hollandaise family → tarragon reduction</span></a>
-        <a class="sauce-card" href="maltaise-sauce.html"><strong>Maltaise</strong><span>Hollandaise → blood orange</span></a>
-        <a class="sauce-card" href="choron-sauce.html"><strong>Choron</strong><span>Hollandaise → Béarnaise → tomato</span></a>
-        <a class="sauce-card" href="foyot-sauce.html"><strong>Foyot</strong><span>Hollandaise → Béarnaise → meat glaze</span></a>
+        <a class="sauce-card" href="bearnaise-sauce.html"><img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Bearnaise%20sauce.jpg" alt="Béarnaise sauce" loading="lazy"><div class="sauce-card-body"><strong>Béarnaise</strong><span>Hollandaise family → tarragon reduction</span></div></a>
+        <a class="sauce-card" href="maltaise-sauce.html"><img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Hollandaise%20sauce.jpg" alt="Hollandaise-family sauce" loading="lazy"><div class="sauce-card-body"><strong>Maltaise</strong><span>Hollandaise → blood orange</span></div></a>
+        <a class="sauce-card" href="choron-sauce.html"><img src="assets/rigatoni-amatriciana.png" alt="Tomato-enriched sauce" loading="lazy"><div class="sauce-card-body"><strong>Choron</strong><span>Hollandaise → Béarnaise → tomato</span></div></a>
+        <a class="sauce-card" href="foyot-sauce.html"><img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Bearnaise%20sauce.jpg" alt="Béarnaise-family sauce" loading="lazy"><div class="sauce-card-body"><strong>Foyot</strong><span>Hollandaise → Béarnaise → meat glaze</span></div></a>
       </section>
 
       <h3 id="espagnole-family">From Espagnole</h3>
       <section class="grid" aria-label="Espagnole family">
-        <a class="sauce-card" href="espagnole-sauce.html"><strong>Espagnole → Demi-glace</strong><span>Brown-sauce family branching point →</span></a>
+        <a class="sauce-card" href="espagnole-sauce.html"><img src="assets/beef-broth.webp" alt="Rich brown beef sauce foundation" loading="lazy"><div class="sauce-card-body"><strong>Espagnole → Demi-glace</strong><span>Brown-sauce family branching point →</span></div></a>
       </section>
 
       <h2 class="section-label">Other Sauces</h2>
       <section class="grid" aria-label="Other sauces">
-        <a class="sauce-card" href="bolognese-meat-sauce.html"><strong>Bolognese Meat Sauce</strong><span>View sauce →</span></a>
-        <a class="sauce-card" href="shrimp-shell-sauce.html"><strong>Shrimp Shell Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="bolognese-meat-sauce.html"><img src="assets/bolognese-meat-sauce.png" alt="Bolognese meat sauce" loading="lazy"><div class="sauce-card-body"><strong>Bolognese Meat Sauce</strong><span>View sauce →</span></div></a>
+        <a class="sauce-card" href="shrimp-shell-sauce.html"><img src="assets/shrimp-shell-sauce.png" alt="Shrimp shell sauce" loading="lazy"><div class="sauce-card-body"><strong>Shrimp Shell Sauce</strong><span>View sauce →</span></div></a>
       </section>
     </main>
   </div>
