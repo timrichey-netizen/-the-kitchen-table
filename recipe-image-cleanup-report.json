@@ -1,0 +1,3720 @@
+{
+  "recipe_cards_found": 424,
+  "recipe_cards_after_cleanup": 424,
+  "recipe_cards_updated": 424,
+  "recipe_cards_with_images_remaining": 0,
+  "recipe_pages_found": 424,
+  "recipe_pages_updated": 407,
+  "recipe_pages_with_images_remaining": 0,
+  "recipe_pages_still_with_images": [],
+  "missing_recipe_pages": [],
+  "unique_recipe_image_references": 534,
+  "physical_image_files_deleted": 458,
+  "deleted_files": [
+    "assets/generated-broths/beef-bone-broth.svg",
+    "assets/generated-broths/beef-broth.svg",
+    "assets/generated-broths/birria-consome.svg",
+    "assets/generated-broths/bone-broth.svg",
+    "assets/generated-broths/chicken-bone-broth.svg",
+    "assets/generated-broths/chicken-broth.svg",
+    "assets/generated-broths/chinese-superior-stock.svg",
+    "assets/generated-broths/clam-broth.svg",
+    "assets/generated-broths/consomme.svg",
+    "assets/generated-broths/court-bouillon.svg",
+    "assets/generated-broths/crab-broth.svg",
+    "assets/generated-broths/dashi.svg",
+    "assets/generated-broths/fish-broth.svg",
+    "assets/generated-broths/french-onion-broth.svg",
+    "assets/generated-broths/italian-brodo.svg",
+    "assets/generated-broths/kombu-dashi.svg",
+    "assets/generated-broths/korean-anchovy-broth.svg",
+    "assets/generated-broths/lamb-broth.svg",
+    "assets/generated-broths/lobster-broth.svg",
+    "assets/generated-broths/mexican-caldo-de-pollo.svg",
+    "assets/generated-broths/mexican-caldo-de-res.svg",
+    "assets/generated-broths/miso-broth.svg",
+    "assets/generated-broths/mushroom-broth.svg",
+    "assets/generated-broths/parmesan-broth.svg",
+    "assets/generated-broths/pho-broth.svg",
+    "assets/generated-broths/pork-broth.svg",
+    "assets/generated-broths/pozole-broth.svg",
+    "assets/generated-broths/ramen-chicken-broth.svg",
+    "assets/generated-broths/seaweed-broth.svg",
+    "assets/generated-broths/shellfish-broth.svg",
+    "assets/generated-broths/shiitake-dashi.svg",
+    "assets/generated-broths/shrimp-broth.svg",
+    "assets/generated-broths/tom-kha-broth.svg",
+    "assets/generated-broths/tom-yum-broth.svg",
+    "assets/generated-broths/tonkotsu-broth.svg",
+    "assets/generated-broths/tortellini-broth.svg",
+    "assets/generated-broths/turkey-broth.svg",
+    "assets/generated-broths/veal-broth.svg",
+    "assets/generated-broths/vegetable-broth.svg",
+    "assets/generated-broths/wonton-broth.svg",
+    "assets/generated-desserts/alegrias.svg",
+    "assets/generated-desserts/arroz-con-leche.svg",
+    "assets/generated-desserts/bunuelos.svg",
+    "assets/generated-desserts/cajeta.svg",
+    "assets/generated-desserts/camotes-poblanos.svg",
+    "assets/generated-desserts/capirotada.svg",
+    "assets/generated-desserts/carlota-limon.svg",
+    "assets/generated-desserts/chocoflan.svg",
+    "assets/generated-desserts/churros.svg",
+    "assets/generated-desserts/cocadas.svg",
+    "assets/generated-desserts/conchas.svg",
+    "assets/generated-desserts/dulce-de-leche.svg",
+    "assets/generated-desserts/empanadas-cajeta.svg",
+    "assets/generated-desserts/flan-napolitano.svg",
+    "assets/generated-desserts/fresas-con-crema.svg",
+    "assets/generated-desserts/gelatina-mosaico.svg",
+    "assets/generated-desserts/gorditas-azucar.svg",
+    "assets/generated-desserts/jericalla.svg",
+    "assets/generated-desserts/marranitos.svg",
+    "assets/generated-desserts/mazapan-cacahuate.svg",
+    "assets/generated-desserts/nieves-mexicanas.svg",
+    "assets/generated-desserts/orejas.svg",
+    "assets/generated-desserts/paletas-mexicanas.svg",
+    "assets/generated-desserts/pan-de-muerto.svg",
+    "assets/generated-desserts/pastel-cajeta.svg",
+    "assets/generated-desserts/pastel-de-elote.svg",
+    "assets/generated-desserts/platanos-fritos-con-crema.svg",
+    "assets/generated-desserts/polvorones-mexicanos.svg",
+    "assets/generated-desserts/tres-leches-cake.svg",
+    "assets/generated/323779.svg",
+    "assets/generated/5-recetas-flor-calabaza-disfrutar-193046413.svg",
+    "assets/generated/adobo.svg",
+    "assets/generated/aj-de-gallina.svg",
+    "assets/generated/aji-de-gallina.svg",
+    "assets/generated/alfajores.svg",
+    "assets/generated/allemande-sauce.svg",
+    "assets/generated/allemande.svg",
+    "assets/generated/american-cheesecake.svg",
+    "assets/generated/anticuchos-de-coraz-n.svg",
+    "assets/generated/anticuchos-de-corazon.svg",
+    "assets/generated/apple-crumb-cake.svg",
+    "assets/generated/aprovecha-la-cuaresma-para-preparar-unos-tacos-de-pulpo-capeado-con-esta-receta-8188.svg",
+    "assets/generated/arroz-con-mariscos-peruano.svg",
+    "assets/generated/arroz-con-mariscos.svg",
+    "assets/generated/arroz-con-pollo-uruguayo.svg",
+    "assets/generated/arroz-con-pollo.svg",
+    "assets/generated/arroz-peruano.svg",
+    "assets/generated/arroz-rojo.svg",
+    "assets/generated/arroz-verde.svg",
+    "assets/generated/asado-argentino.svg",
+    "assets/generated/asado-uruguayo.svg",
+    "assets/generated/asi-puedes-preparar-una-salsa-molcajeteada-de-chile-morita-para-tus-antojitos-18051-amp.svg",
+    "assets/generated/atole-de-chocolate-mexican-traditional-beverage-and-tamales-made-with-cinnamon-and-chocolate-in-mexico-266732366.svg",
+    "assets/generated/aurora-sauce.svg",
+    "assets/generated/b-arnaise.svg",
+    "assets/generated/baja-fish-tacos.svg",
+    "assets/generated/banana-bread.svg",
+    "assets/generated/barbacoa.svg",
+    "assets/generated/bearnaise-sauce.svg",
+    "assets/generated/bechamel-sauce.svg",
+    "assets/generated/beer-bacon-mussels.svg",
+    "assets/generated/belgian-french-fries.svg",
+    "assets/generated/bercy-sauce.svg",
+    "assets/generated/berenjenas-en-escabeche.svg",
+    "assets/generated/bife-de-chorizo-chimichurri.svg",
+    "assets/generated/birria-consome.svg",
+    "assets/generated/birria-de-res.svg",
+    "assets/generated/birria.svg",
+    "assets/generated/blackened-redfish.svg",
+    "assets/generated/bolognese-sauce-daughter.svg",
+    "assets/generated/bread-pudding.svg",
+    "assets/generated/cabrito-al-pastor.svg",
+    "assets/generated/calabacitas-guisadas-elote-amarillo-36739.svg",
+    "assets/generated/calabacitas-mexicana.svg",
+    "assets/generated/calabaza-elote.svg",
+    "assets/generated/camote-frito.svg",
+    "assets/generated/capeletis-a-la-caruso.svg",
+    "assets/generated/carapulcra.svg",
+    "assets/generated/carne-asada.svg",
+    "assets/generated/carnitas.svg",
+    "assets/generated/causa-lime-a.svg",
+    "assets/generated/causa-limena.svg",
+    "assets/generated/causa-rellena.svg",
+    "assets/generated/cebollitas-asadas.svg",
+    "assets/generated/ceviche-peruano.svg",
+    "assets/generated/chayotes-crema.svg",
+    "assets/generated/cheddar-cheese-sauce.svg",
+    "assets/generated/chicken-and-andouille-gumbo.svg",
+    "assets/generated/chilaquiles-rojos.svg",
+    "assets/generated/chilaquiles-verdes.svg",
+    "assets/generated/chile-relleno.svg",
+    "assets/generated/chiles-en-nogada.svg",
+    "assets/generated/chiles-rellenos-de-queso.svg",
+    "assets/generated/chiles-rellenos-queso.svg",
+    "assets/generated/chiles-toreados.svg",
+    "assets/generated/chimichurri.svg",
+    "assets/generated/chivito-al-plato.svg",
+    "assets/generated/chivito.svg",
+    "assets/generated/choclo-a-la-parrilla.svg",
+    "assets/generated/choclo-con-queso.svg",
+    "assets/generated/chocolate-babka.svg",
+    "assets/generated/chocolate-chip-cookies.svg",
+    "assets/generated/chocolate-mousse.svg",
+    "assets/generated/chocotorta.svg",
+    "assets/generated/choriqueso.svg",
+    "assets/generated/choron-sauce.svg",
+    "assets/generated/choron.svg",
+    "assets/generated/classic-american-hamburger.svg",
+    "assets/generated/cochinita-pibil.svg",
+    "assets/generated/coconut-curry-steamed-mussels.svg",
+    "assets/generated/coleslaw-baja.svg",
+    "assets/generated/coleslaw-estilo-baja.svg",
+    "assets/generated/como-se-debe-desinfectar-la-flor-de-calabaza-sigue-estos-sencillos-pasos-52051.svg",
+    "assets/generated/costillas-en-chile-colorado.svg",
+    "assets/generated/crawfish-etouffee.svg",
+    "assets/generated/crawfish-touff-e.svg",
+    "assets/generated/creative-ways-mexicans-use-calabacitas-zucchini-201152920.svg",
+    "assets/generated/creme-sauce.svg",
+    "assets/generated/creole-sauce.svg",
+    "assets/generated/desayuno-saludable-prepara-unos-huevos-la-mexicana-faciles-nutritivos-64229-amp.svg",
+    "assets/generated/dijon-hollandaise.svg",
+    "assets/generated/ejotes-a-la-mexicana.svg",
+    "assets/generated/ejotes-mexicana.svg",
+    "assets/generated/elote.svg",
+    "assets/generated/empanadas-argentinas.svg",
+    "assets/generated/empanadas-uruguayas.svg",
+    "assets/generated/enchiladas-rojas.svg",
+    "assets/generated/enchiladas-verdes.svg",
+    "assets/generated/enfrijoladas.svg",
+    "assets/generated/ensalada-aguacate.svg",
+    "assets/generated/ensalada-criolla-peruana.svg",
+    "assets/generated/ensalada-criolla.svg",
+    "assets/generated/ensalada-de-aguacate.svg",
+    "assets/generated/ensalada-de-j-cama.svg",
+    "assets/generated/ensalada-de-nopales.svg",
+    "assets/generated/ensalada-jicama.svg",
+    "assets/generated/ensalada-nopales.svg",
+    "assets/generated/ensalada-rusa.svg",
+    "assets/generated/entomatadas.svg",
+    "assets/generated/eres-fan-de-los-moles-lanzate-al-festival-del-mole-poblano-2025-en-cholula-57694.svg",
+    "assets/generated/espagnole-sauce.svg",
+    "assets/generated/esquites.svg",
+    "assets/generated/flan-con-dulce-de-leche.svg",
+    "assets/generated/fondue-mountain-cheeses.svg",
+    "assets/generated/fondue-with-mountain-cheeses.svg",
+    "assets/generated/foyot-sauce.svg",
+    "assets/generated/fried-okra.svg",
+    "assets/generated/frijoles-charros.svg",
+    "assets/generated/frijoles-de-la-olla.svg",
+    "assets/generated/frijoles-refritos.svg",
+    "assets/generated/gazpacho.svg",
+    "assets/generated/gnocchi-gorgonzola.svg",
+    "assets/generated/gorditas-desayuno.svg",
+    "assets/generated/guacamole.svg",
+    "assets/generated/hollandaise-sauce.svg",
+    "assets/generated/hollandaise.svg",
+    "assets/generated/huevos-chorizo.svg",
+    "assets/generated/huevos-divorciados.svg",
+    "assets/generated/huevos-machaca.svg",
+    "assets/generated/huevos-mexicana.svg",
+    "assets/generated/huevos-motulenos.svg",
+    "assets/generated/huevos-rancheros.svg",
+    "assets/generated/hungarian-sauce-veloute.svg",
+    "assets/generated/jambalaya.svg",
+    "assets/generated/jar-jar-easy-mexican-salsa-200000571.svg",
+    "assets/generated/lemon-pasta.svg",
+    "assets/generated/lemon-ricotta-cake.svg",
+    "assets/generated/locro.svg",
+    "assets/generated/lomo-saltado.svg",
+    "assets/generated/maltaise-sauce.svg",
+    "assets/generated/marinara-sauce.svg",
+    "assets/generated/matambre-arrollado.svg",
+    "assets/generated/matambre-relleno.svg",
+    "assets/generated/meat-guide.svg",
+    "assets/generated/menudo.svg",
+    "assets/generated/mexican-adobo.svg",
+    "assets/generated/mexican_queso_fundido_or_mexican_fondue.svg",
+    "assets/generated/migas-mexicanas.svg",
+    "assets/generated/milanesa-napolitana.svg",
+    "assets/generated/mole-negro.svg",
+    "assets/generated/mole-poblano-con-pollo.svg",
+    "assets/generated/mole-poblano.svg",
+    "assets/generated/molletes.svg",
+    "assets/generated/mornay-sauce.svg",
+    "assets/generated/mother-sauces-guide.svg",
+    "assets/generated/moules-marinieres.svg",
+    "assets/generated/mousseline-hollandaise.svg",
+    "assets/generated/mousseline.svg",
+    "assets/generated/muffuletta.svg",
+    "assets/generated/mushroom-guide.svg",
+    "assets/generated/mustard-sauce-bechamel.svg",
+    "assets/generated/nantua-sauce.svg",
+    "assets/generated/nantua.svg",
+    "assets/generated/neapolitan-sauce.svg",
+    "assets/generated/new-orleans-bbq-shrimp.svg",
+    "assets/generated/noisette-hollandaise.svg",
+    "assets/generated/noisette.svg",
+    "assets/generated/nopales-asados.svg",
+    "assets/generated/nopales-con-huevo.svg",
+    "assets/generated/nopales_with_egg_nutrition.svg",
+    "assets/generated/noquis-con-tuco.svg",
+    "assets/generated/normande-sauce.svg",
+    "assets/generated/oquis-con-tuco.svg",
+    "assets/generated/pamplona-de-carne.svg",
+    "assets/generated/pan-dulce-con-caf-de-olla.svg",
+    "assets/generated/panqueques-con-dulce-de-leche.svg",
+    "assets/generated/papa-rellena-peruana.svg",
+    "assets/generated/papa-rellena.svg",
+    "assets/generated/papas-a-la-huanca-na.svg",
+    "assets/generated/papas-a-la-huancaina.svg",
+    "assets/generated/papas-a-la-mexicana.svg",
+    "assets/generated/papas-a-la-provenzal.svg",
+    "assets/generated/papas-al-plomo.svg",
+    "assets/generated/papas-chorizo-huevo.svg",
+    "assets/generated/papas-con-chorizo.svg",
+    "assets/generated/papas-fritas.svg",
+    "assets/generated/papas-mexicana.svg",
+    "assets/generated/pasta-guide.svg",
+    "assets/generated/pastafrola.svg",
+    "assets/generated/pastel-de-papa.svg",
+    "assets/generated/peach-pie.svg",
+    "assets/generated/pescado-a-la-veracruzana.svg",
+    "assets/generated/pico-de-gallo.svg",
+    "assets/generated/platanos-fritos-un-antojito-con-mucho.svg",
+    "assets/generated/platanos-fritos.svg",
+    "assets/generated/pollo-a-la-brasa-peruano.svg",
+    "assets/generated/pollo-a-la-brasa.svg",
+    "assets/generated/pollo-a-la-parrilla.svg",
+    "assets/generated/pollo-al-disco.svg",
+    "assets/generated/pollo-en-mole-negro.svg",
+    "assets/generated/portuguese-sauce.svg",
+    "assets/generated/poulette-sauce.svg",
+    "assets/generated/pozole-rojo.svg",
+    "assets/generated/provencale-sauce.svg",
+    "assets/generated/provoleta.svg",
+    "assets/generated/puchero-uruguayo.svg",
+    "assets/generated/pumpkin-bread.svg",
+    "assets/generated/pumpkin-pie.svg",
+    "assets/generated/pur-de-papas.svg",
+    "assets/generated/pure-de-papas.svg",
+    "assets/generated/purslane-was-favored-by-gandhi-but-is.svg",
+    "assets/generated/quesadillas-flor-calabaza.svg",
+    "assets/generated/queso-fundido.svg",
+    "assets/generated/queso_fundido_with_chorizo_nutrition.svg",
+    "assets/generated/r-sti.svg",
+    "assets/generated/rajas-con-crema.svg",
+    "assets/generated/receita-de-chuchu-com-molho-branco-9374.svg",
+    "assets/generated/receta-de-empanadas-uruguayas-11992.svg",
+    "assets/generated/receta-de-tacos-de-alambre-78239.svg",
+    "assets/generated/red-beans-and-rice-with-andouille-sausage.svg",
+    "assets/generated/red-beans-rice-andouille.svg",
+    "assets/generated/revuelto-gramajo.svg",
+    "assets/generated/rogel.svg",
+    "assets/generated/rosti.svg",
+    "assets/generated/salsa-aguacate.svg",
+    "assets/generated/salsa-borracha-con-tequila-ponle-un-toque-de-sabor-tradicional-esta-delicia-mexicana-38686.svg",
+    "assets/generated/salsa-borracha.svg",
+    "assets/generated/salsa-cacahuate.svg",
+    "assets/generated/salsa-chile-de-arbol.svg",
+    "assets/generated/salsa-chipotle.svg",
+    "assets/generated/salsa-de-aguacate.svg",
+    "assets/generated/salsa-de-cacahuate.svg",
+    "assets/generated/salsa-de-chile-de-rbol.svg",
+    "assets/generated/salsa-de-chipotle.svg",
+    "assets/generated/salsa-de-guajillo.svg",
+    "assets/generated/salsa-de-molcajete.svg",
+    "assets/generated/salsa-de-tomatillo.svg",
+    "assets/generated/salsa-guajillo.svg",
+    "assets/generated/salsa-habanero.svg",
+    "assets/generated/salsa-macha.svg",
+    "assets/generated/salsa-molcajete.svg",
+    "assets/generated/salsa-morita.svg",
+    "assets/generated/salsa-ranchera.svg",
+    "assets/generated/salsa-roja.svg",
+    "assets/generated/salsa-taquera.svg",
+    "assets/generated/salsa-tomatillo.svg",
+    "assets/generated/salsa-verde.svg",
+    "assets/generated/salsa-xni-pec.svg",
+    "assets/generated/sauce-foyot-R90015475.svg",
+    "assets/generated/sauce-tomate.svg",
+    "assets/generated/seafood-gumbo.svg",
+    "assets/generated/seco-de-res.svg",
+    "assets/generated/shrimp-creole.svg",
+    "assets/generated/shrimp-po-boy.svg",
+    "assets/generated/solterito-arequipe-o.svg",
+    "assets/generated/solterito-arequipeno.svg",
+    "assets/generated/soubise-sauce.svg",
+    "assets/generated/soubise.svg",
+    "assets/generated/spanish-sauce.svg",
+    "assets/generated/spanish-tomato-sauce.svg",
+    "assets/generated/spargel-rezept-schnelle-senf-hollandaise-9407.svg",
+    "assets/generated/spotted-dick.svg",
+    "assets/generated/steak-tartare.svg",
+    "assets/generated/sticky-toffee-pudding.svg",
+    "assets/generated/strawberry-tart.svg",
+    "assets/generated/supreme-sauce.svg",
+    "assets/generated/tacos-al-pastor.svg",
+    "assets/generated/tacos-atun-aguacate.svg",
+    "assets/generated/tacos-atun-sellado.svg",
+    "assets/generated/tacos-barbacoa.svg",
+    "assets/generated/tacos-calamar-frito.svg",
+    "assets/generated/tacos-calamar.svg",
+    "assets/generated/tacos-callo-hacha.svg",
+    "assets/generated/tacos-camaron-ajillo.svg",
+    "assets/generated/tacos-camaron-capeado.svg",
+    "assets/generated/tacos-camaron-diabla.svg",
+    "assets/generated/tacos-camaron-empanizado.svg",
+    "assets/generated/tacos-camaron-gobernador.svg",
+    "assets/generated/tacos-camaron-pastor.svg",
+    "assets/generated/tacos-camaron-plancha.svg",
+    "assets/generated/tacos-camaron-queso.svg",
+    "assets/generated/tacos-canasta.svg",
+    "assets/generated/tacos-cazon.svg",
+    "assets/generated/tacos-chapulines.svg",
+    "assets/generated/tacos-de-adobada.svg",
+    "assets/generated/tacos-de-alambre.svg",
+    "assets/generated/tacos-de-at-n-con-aguacate.svg",
+    "assets/generated/tacos-de-at-n-sellado.svg",
+    "assets/generated/tacos-de-bistec.svg",
+    "assets/generated/tacos-de-buche.svg",
+    "assets/generated/tacos-de-cachete.svg",
+    "assets/generated/tacos-de-calamar-frito.svg",
+    "assets/generated/tacos-de-calamar.svg",
+    "assets/generated/tacos-de-callo-de-hacha.svg",
+    "assets/generated/tacos-de-camar-n-a-la-diabla.svg",
+    "assets/generated/tacos-de-camar-n-a-la-plancha.svg",
+    "assets/generated/tacos-de-camar-n-al-ajillo.svg",
+    "assets/generated/tacos-de-camar-n-al-pastor.svg",
+    "assets/generated/tacos-de-camar-n-capeado.svg",
+    "assets/generated/tacos-de-camar-n-con-queso.svg",
+    "assets/generated/tacos-de-camar-n-empanizado.svg",
+    "assets/generated/tacos-de-camar-n-gobernador.svg",
+    "assets/generated/tacos-de-caz-n.svg",
+    "assets/generated/tacos-de-chapulines.svg",
+    "assets/generated/tacos-de-chicharr-n-prensado.svg",
+    "assets/generated/tacos-de-chicharr-n.svg",
+    "assets/generated/tacos-de-chicharron-prensado.svg",
+    "assets/generated/tacos-de-chicharron.svg",
+    "assets/generated/tacos-de-chile-relleno.svg",
+    "assets/generated/tacos-de-discada.svg",
+    "assets/generated/tacos-de-frijoles-con-queso.svg",
+    "assets/generated/tacos-de-hongos.svg",
+    "assets/generated/tacos-de-huitlacoche.svg",
+    "assets/generated/tacos-de-jaiba.svg",
+    "assets/generated/tacos-de-labio.svg",
+    "assets/generated/tacos-de-langosta.svg",
+    "assets/generated/tacos-de-lech-n.svg",
+    "assets/generated/tacos-de-lechon.svg",
+    "assets/generated/tacos-de-longaniza.svg",
+    "assets/generated/tacos-de-machaca.svg",
+    "assets/generated/tacos-de-mantaraya.svg",
+    "assets/generated/tacos-de-mariscos-mixtos.svg",
+    "assets/generated/tacos-de-marl-n-ahumado.svg",
+    "assets/generated/tacos-de-mixiote.svg",
+    "assets/generated/tacos-de-mole.svg",
+    "assets/generated/tacos-de-ostiones.svg",
+    "assets/generated/tacos-de-papa.svg",
+    "assets/generated/tacos-de-pastor-negro.svg",
+    "assets/generated/tacos-de-pescado-a-la-plancha.svg",
+    "assets/generated/tacos-de-pescado-a-la-veracruzana.svg",
+    "assets/generated/tacos-de-pescado-adobado.svg",
+    "assets/generated/tacos-de-pescado-ahumado.svg",
+    "assets/generated/tacos-de-pescado-al-ajillo.svg",
+    "assets/generated/tacos-de-pescado-al-pastor.svg",
+    "assets/generated/tacos-de-pescado-capeado.svg",
+    "assets/generated/tacos-de-pescado-ensenada.svg",
+    "assets/generated/tacos-de-pescado-tikin-xic.svg",
+    "assets/generated/tacos-de-pescado-zarandeado.svg",
+    "assets/generated/tacos-de-pescado.svg",
+    "assets/generated/tacos-de-pollo-asado.svg",
+    "assets/generated/tacos-de-sesos.svg",
+    "assets/generated/tacos-de-tinga.svg",
+    "assets/generated/tacos-flor-calabaza.svg",
+    "assets/generated/tacos-frijoles-queso.svg",
+    "assets/generated/tacos-hongos.svg",
+    "assets/generated/tacos-huitlacoche.svg",
+    "assets/generated/tacos-jaiba.svg",
+    "assets/generated/tacos-langosta.svg",
+    "assets/generated/tacos-mantaraya.svg",
+    "assets/generated/tacos-mariscos-mixtos.svg",
+    "assets/generated/tacos-marlin-ahumado.svg",
+    "assets/generated/tacos-ostiones.svg",
+    "assets/generated/tacos-pescado-adobado.svg",
+    "assets/generated/tacos-pescado-ahumado.svg",
+    "assets/generated/tacos-pescado-ajillo.svg",
+    "assets/generated/tacos-pescado-capeado.svg",
+    "assets/generated/tacos-pescado-ensenada.svg",
+    "assets/generated/tacos-pescado-pastor.svg",
+    "assets/generated/tacos-pescado-plancha.svg",
+    "assets/generated/tacos-pescado-tikin-xic.svg",
+    "assets/generated/tacos-pescado-veracruzana.svg",
+    "assets/generated/tacos-pescado-zarandeado.svg",
+    "assets/generated/tacos-pulpo-ajillo.svg",
+    "assets/generated/tacos-pulpo-enamorado.svg",
+    "assets/generated/tacos-pulpo-parrilla.svg",
+    "assets/generated/tacos-pulpo.svg",
+    "assets/generated/tacu-tacu.svg",
+    "assets/generated/tamal-peruano.svg",
+    "assets/generated/tamales-atole.svg",
+    "assets/generated/tamales-mexicanos.svg",
+    "assets/generated/tamales.svg",
+    "assets/generated/thai-style-coconut-curry-mussels.svg",
+    "assets/generated/tinga-de-pollo.svg",
+    "assets/generated/toffee.svg",
+    "assets/generated/torta-balcarce.svg",
+    "assets/generated/tortillas-de-ma-z-hechas-a-mano.svg",
+    "assets/generated/tortillas-maiz-hechas-mano.svg",
+    "assets/generated/tuna-tartare.svg",
+    "assets/generated/veloute-sauce.svg",
+    "assets/generated/venetian-sauce-veloute.svg",
+    "assets/generated/venetian-sauce.svg",
+    "assets/generated/verdolagas.svg",
+    "assets/generated/white-wine-garlic-mussels.svg",
+    "assets/generated/yuca-chile-limon.svg",
+    "assets/generated/yuca-con-chile-y-lim-n.svg",
+    "assets/generated/yuca-frita.svg",
+    "assets/generated/zapallitos-rellenos.svg",
+    "assets/generated/zurich-style-veal-creamy-mushroom-sauce.svg"
+  ],
+  "shared_or_nonlocal_images_preserved_count": 65,
+  "shared_or_nonlocal_images_preserved": [
+    {
+      "file": "assets/baked-cauliflower.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/boeuf-bourguignon.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/bolognese-meat-sauce.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/bucatini-amatriciana.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/butternut-squash-ravioli-brown-butter-sage.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/buttery-shrimp-peas-potatoes.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/cajun-garlic-butter-shrimp.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/cajun-seasoning-mix.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/cioppino.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/creamy-seafood-risotto.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/eggplant-parmesan.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/elegant-roasted-potato-stacks.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/fettuccine-alfredo.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/fish-stock.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/florentine-steak-balsamic-rosemary.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/fresh-pasta-hard-soft-flour.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/gnocchi-alla-sorrentina.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/herb-crusted-salmon.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/lemon-stuffed-grilled-branzino.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/lemon-tomatillo-salsa-verde.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/mediterranean-lemon-shallot-chicken.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/miso-mushroom-leek-pasta.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/moo-shu-chicken.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/new-orleans-shrimp-corn-bisque.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/osso-buco-red-wine.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/pasta-aglio-e-olio.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/pasta-alla-norma.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/pasta-cacio-e-pepe.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/pasta-e-ceci.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/pasta-ncasciata.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/penne-arrabbiata.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/perciatelli-alla-gricia.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/pork-chop-milanese.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/ricotta-parmesan-gnudi.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/rigatoni-amatriciana.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/rigatoni-pecorino-crispy-guanciale.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/rigatoni-pork-ragu-ricotta.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/roasted-broccoli-lemon-almonds.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/roasted-eggplant-cherry-tomatoes.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/roasted-green-beans-parmesan.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/roasted-hasselback-vegetable-bake.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/roasted-tomato-caprese-salad.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/roasted-zucchini-lemon-thyme.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/sage-mushroom-chicken-skillet.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/salsa-criolla.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/sauteed-spinach-garlic.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/shrimp-herb-stir-fry.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/shrimp-piccata-skewers.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/shrimp-saganaki.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/shrimp-shell-sauce.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/spaghetti-carbonara.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/spaghetti-shrimp-lemon-mint-pecorino.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/spaghetti-with-mussels.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/spicy-cajun-shrimp-corn-chowder.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/spicy-garlic-butter-shrimp-lime-chili-dip.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/spinach-salad-bagna-cauda.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/stracotto-di-fassona-piemontese.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/swordfish-sicilian-style.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/the-kitchen-table-hero.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/tomatillo-avocado-salsa-cauliflower-rice.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/tuscan-white-bean-soup.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/veal-piccata.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/venetian-shrimp-polenta.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/zucchini-lasagna.png",
+      "reason": "still referenced outside recipe images"
+    },
+    {
+      "file": "assets/zucchini-risotto-shrimp.png",
+      "reason": "still referenced outside recipe images"
+    }
+  ],
+  "missing_local_recipe_images": [
+    "assets/asado-argentino.png",
+    "assets/bife-de-chorizo-chimichurri.png",
+    "assets/carbonada-criolla.png",
+    "assets/chimichurri.png",
+    "assets/empanadas-argentinas.png",
+    "assets/humita-en-chala.png",
+    "assets/locro.png",
+    "assets/matambre-arrollado.png",
+    "assets/milanesa-napolitana.png",
+    "assets/pastel-de-papa.png",
+    "assets/pollo-al-disco.png"
+  ],
+  "deleted_files_still_referenced": [],
+  "inventory": [
+    {
+      "sequence": 1,
+      "title": "Chicken Broth",
+      "slug": "chicken-broth",
+      "page": "chicken-broth.html",
+      "image": "assets/generated-broths/chicken-broth.svg"
+    },
+    {
+      "sequence": 2,
+      "title": "Beef Broth",
+      "slug": "beef-broth",
+      "page": "beef-broth.html",
+      "image": "assets/generated-broths/beef-broth.svg"
+    },
+    {
+      "sequence": 3,
+      "title": "Pork Broth",
+      "slug": "pork-broth",
+      "page": "pork-broth.html",
+      "image": "assets/generated-broths/pork-broth.svg"
+    },
+    {
+      "sequence": 4,
+      "title": "Turkey Broth",
+      "slug": "turkey-broth",
+      "page": "turkey-broth.html",
+      "image": "assets/generated-broths/turkey-broth.svg"
+    },
+    {
+      "sequence": 5,
+      "title": "Lamb Broth",
+      "slug": "lamb-broth",
+      "page": "lamb-broth.html",
+      "image": "assets/generated-broths/lamb-broth.svg"
+    },
+    {
+      "sequence": 6,
+      "title": "Veal Broth",
+      "slug": "veal-broth",
+      "page": "veal-broth.html",
+      "image": "assets/generated-broths/veal-broth.svg"
+    },
+    {
+      "sequence": 7,
+      "title": "Fish Broth",
+      "slug": "fish-broth",
+      "page": "fish-broth.html",
+      "image": "assets/generated-broths/fish-broth.svg"
+    },
+    {
+      "sequence": 8,
+      "title": "Shellfish Broth",
+      "slug": "shellfish-broth",
+      "page": "shellfish-broth.html",
+      "image": "assets/generated-broths/shellfish-broth.svg"
+    },
+    {
+      "sequence": 9,
+      "title": "Shrimp Broth",
+      "slug": "shrimp-broth",
+      "page": "shrimp-broth.html",
+      "image": "assets/generated-broths/shrimp-broth.svg"
+    },
+    {
+      "sequence": 10,
+      "title": "Lobster Broth",
+      "slug": "lobster-broth",
+      "page": "lobster-broth.html",
+      "image": "assets/generated-broths/lobster-broth.svg"
+    },
+    {
+      "sequence": 11,
+      "title": "Crab Broth",
+      "slug": "crab-broth",
+      "page": "crab-broth.html",
+      "image": "assets/generated-broths/crab-broth.svg"
+    },
+    {
+      "sequence": 12,
+      "title": "Clam Broth",
+      "slug": "clam-broth",
+      "page": "clam-broth.html",
+      "image": "assets/generated-broths/clam-broth.svg"
+    },
+    {
+      "sequence": 13,
+      "title": "Vegetable Broth",
+      "slug": "vegetable-broth",
+      "page": "vegetable-broth.html",
+      "image": "assets/generated-broths/vegetable-broth.svg"
+    },
+    {
+      "sequence": 14,
+      "title": "Mushroom Broth",
+      "slug": "mushroom-broth",
+      "page": "mushroom-broth.html",
+      "image": "assets/generated-broths/mushroom-broth.svg"
+    },
+    {
+      "sequence": 15,
+      "title": "Bone Broth",
+      "slug": "bone-broth",
+      "page": "bone-broth.html",
+      "image": "assets/generated-broths/bone-broth.svg"
+    },
+    {
+      "sequence": 16,
+      "title": "Chicken Bone Broth",
+      "slug": "chicken-bone-broth",
+      "page": "chicken-bone-broth.html",
+      "image": "assets/generated-broths/chicken-bone-broth.svg"
+    },
+    {
+      "sequence": 17,
+      "title": "Beef Bone Broth",
+      "slug": "beef-bone-broth",
+      "page": "beef-bone-broth.html",
+      "image": "assets/generated-broths/beef-bone-broth.svg"
+    },
+    {
+      "sequence": 18,
+      "title": "Dashi",
+      "slug": "dashi",
+      "page": "dashi.html",
+      "image": "assets/generated-broths/dashi.svg"
+    },
+    {
+      "sequence": 19,
+      "title": "Kombu Dashi",
+      "slug": "kombu-dashi",
+      "page": "kombu-dashi.html",
+      "image": "assets/generated-broths/kombu-dashi.svg"
+    },
+    {
+      "sequence": 20,
+      "title": "Shiitake Dashi",
+      "slug": "shiitake-dashi",
+      "page": "shiitake-dashi.html",
+      "image": "assets/generated-broths/shiitake-dashi.svg"
+    },
+    {
+      "sequence": 21,
+      "title": "Tonkotsu Broth",
+      "slug": "tonkotsu-broth",
+      "page": "tonkotsu-broth.html",
+      "image": "assets/generated-broths/tonkotsu-broth.svg"
+    },
+    {
+      "sequence": 22,
+      "title": "Ramen Chicken Broth",
+      "slug": "ramen-chicken-broth",
+      "page": "ramen-chicken-broth.html",
+      "image": "assets/generated-broths/ramen-chicken-broth.svg"
+    },
+    {
+      "sequence": 23,
+      "title": "Miso Broth",
+      "slug": "miso-broth",
+      "page": "miso-broth.html",
+      "image": "assets/generated-broths/miso-broth.svg"
+    },
+    {
+      "sequence": 24,
+      "title": "Pho Broth",
+      "slug": "pho-broth",
+      "page": "pho-broth.html",
+      "image": "assets/generated-broths/pho-broth.svg"
+    },
+    {
+      "sequence": 25,
+      "title": "Tom Yum Broth",
+      "slug": "tom-yum-broth",
+      "page": "tom-yum-broth.html",
+      "image": "assets/generated-broths/tom-yum-broth.svg"
+    },
+    {
+      "sequence": 26,
+      "title": "Tom Kha Broth",
+      "slug": "tom-kha-broth",
+      "page": "tom-kha-broth.html",
+      "image": "assets/generated-broths/tom-kha-broth.svg"
+    },
+    {
+      "sequence": 27,
+      "title": "Mexican Caldo de Pollo",
+      "slug": "mexican-caldo-de-pollo",
+      "page": "mexican-caldo-de-pollo.html",
+      "image": "assets/generated-broths/mexican-caldo-de-pollo.svg"
+    },
+    {
+      "sequence": 28,
+      "title": "Mexican Caldo de Res",
+      "slug": "mexican-caldo-de-res",
+      "page": "mexican-caldo-de-res.html",
+      "image": "assets/generated-broths/mexican-caldo-de-res.svg"
+    },
+    {
+      "sequence": 29,
+      "title": "Pozole Broth",
+      "slug": "pozole-broth",
+      "page": "pozole-broth.html",
+      "image": "assets/generated-broths/pozole-broth.svg"
+    },
+    {
+      "sequence": 30,
+      "title": "Consommé",
+      "slug": "consomme",
+      "page": "consomme.html",
+      "image": "assets/generated-broths/consomme.svg"
+    },
+    {
+      "sequence": 31,
+      "title": "Court-Bouillon",
+      "slug": "court-bouillon",
+      "page": "court-bouillon.html",
+      "image": "assets/generated-broths/court-bouillon.svg"
+    },
+    {
+      "sequence": 32,
+      "title": "French Onion Broth",
+      "slug": "french-onion-broth",
+      "page": "french-onion-broth.html",
+      "image": "assets/generated-broths/french-onion-broth.svg"
+    },
+    {
+      "sequence": 33,
+      "title": "Italian Brodo",
+      "slug": "italian-brodo",
+      "page": "italian-brodo.html",
+      "image": "assets/generated-broths/italian-brodo.svg"
+    },
+    {
+      "sequence": 34,
+      "title": "Parmesan Broth",
+      "slug": "parmesan-broth",
+      "page": "parmesan-broth.html",
+      "image": "assets/generated-broths/parmesan-broth.svg"
+    },
+    {
+      "sequence": 35,
+      "title": "Tortellini Broth",
+      "slug": "tortellini-broth",
+      "page": "tortellini-broth.html",
+      "image": "assets/generated-broths/tortellini-broth.svg"
+    },
+    {
+      "sequence": 36,
+      "title": "Chinese Superior Stock",
+      "slug": "chinese-superior-stock",
+      "page": "chinese-superior-stock.html",
+      "image": "assets/generated-broths/chinese-superior-stock.svg"
+    },
+    {
+      "sequence": 37,
+      "title": "Wonton Broth",
+      "slug": "wonton-broth",
+      "page": "wonton-broth.html",
+      "image": "assets/generated-broths/wonton-broth.svg"
+    },
+    {
+      "sequence": 38,
+      "title": "Korean Anchovy Broth",
+      "slug": "korean-anchovy-broth",
+      "page": "korean-anchovy-broth.html",
+      "image": "assets/generated-broths/korean-anchovy-broth.svg"
+    },
+    {
+      "sequence": 39,
+      "title": "Seaweed Broth",
+      "slug": "seaweed-broth",
+      "page": "seaweed-broth.html",
+      "image": "assets/generated-broths/seaweed-broth.svg"
+    },
+    {
+      "sequence": 40,
+      "title": "Tres Leches Cake",
+      "slug": "tres-leches-cake",
+      "page": "tres-leches-cake.html",
+      "image": "assets/generated-desserts/tres-leches-cake.svg"
+    },
+    {
+      "sequence": 41,
+      "title": "Churros",
+      "slug": "churros",
+      "page": "churros.html",
+      "image": "assets/generated-desserts/churros.svg"
+    },
+    {
+      "sequence": 42,
+      "title": "Flan Napolitano",
+      "slug": "flan-napolitano",
+      "page": "flan-napolitano.html",
+      "image": "assets/generated-desserts/flan-napolitano.svg"
+    },
+    {
+      "sequence": 43,
+      "title": "Pastel de Elote",
+      "slug": "pastel-de-elote",
+      "page": "pastel-de-elote.html",
+      "image": "assets/generated-desserts/pastel-de-elote.svg"
+    },
+    {
+      "sequence": 44,
+      "title": "Arroz con Leche",
+      "slug": "arroz-con-leche",
+      "page": "arroz-con-leche.html",
+      "image": "assets/generated-desserts/arroz-con-leche.svg"
+    },
+    {
+      "sequence": 45,
+      "title": "Buñuelos",
+      "slug": "bunuelos",
+      "page": "bunuelos.html",
+      "image": "assets/generated-desserts/bunuelos.svg"
+    },
+    {
+      "sequence": 46,
+      "title": "Capirotada",
+      "slug": "capirotada",
+      "page": "capirotada.html",
+      "image": "assets/generated-desserts/capirotada.svg"
+    },
+    {
+      "sequence": 47,
+      "title": "Conchas",
+      "slug": "conchas",
+      "page": "conchas.html",
+      "image": "assets/generated-desserts/conchas.svg"
+    },
+    {
+      "sequence": 48,
+      "title": "Pan de Muerto",
+      "slug": "pan-de-muerto",
+      "page": "pan-de-muerto.html",
+      "image": "assets/generated-desserts/pan-de-muerto.svg"
+    },
+    {
+      "sequence": 49,
+      "title": "Carlota de Limón",
+      "slug": "carlota-limon",
+      "page": "carlota-limon.html",
+      "image": "assets/generated-desserts/carlota-limon.svg"
+    },
+    {
+      "sequence": 50,
+      "title": "Jericalla",
+      "slug": "jericalla",
+      "page": "jericalla.html",
+      "image": "assets/generated-desserts/jericalla.svg"
+    },
+    {
+      "sequence": 51,
+      "title": "Chocoflan",
+      "slug": "chocoflan",
+      "page": "chocoflan.html",
+      "image": "assets/generated-desserts/chocoflan.svg"
+    },
+    {
+      "sequence": 52,
+      "title": "Pastel de Cajeta",
+      "slug": "pastel-cajeta",
+      "page": "pastel-cajeta.html",
+      "image": "assets/generated-desserts/pastel-cajeta.svg"
+    },
+    {
+      "sequence": 53,
+      "title": "Empanadas de Cajeta",
+      "slug": "empanadas-cajeta",
+      "page": "empanadas-cajeta.html",
+      "image": "assets/generated-desserts/empanadas-cajeta.svg"
+    },
+    {
+      "sequence": 54,
+      "title": "Cocadas",
+      "slug": "cocadas",
+      "page": "cocadas.html",
+      "image": "assets/generated-desserts/cocadas.svg"
+    },
+    {
+      "sequence": 55,
+      "title": "Alegrías",
+      "slug": "alegrias",
+      "page": "alegrias.html",
+      "image": "assets/generated-desserts/alegrias.svg"
+    },
+    {
+      "sequence": 56,
+      "title": "Mazapán de Cacahuate",
+      "slug": "mazapan-cacahuate",
+      "page": "mazapan-cacahuate.html",
+      "image": "assets/generated-desserts/mazapan-cacahuate.svg"
+    },
+    {
+      "sequence": 57,
+      "title": "Camotes Poblanos",
+      "slug": "camotes-poblanos",
+      "page": "camotes-poblanos.html",
+      "image": "assets/generated-desserts/camotes-poblanos.svg"
+    },
+    {
+      "sequence": 58,
+      "title": "Dulce de Leche",
+      "slug": "dulce-de-leche",
+      "page": "dulce-de-leche.html",
+      "image": "assets/generated-desserts/dulce-de-leche.svg"
+    },
+    {
+      "sequence": 59,
+      "title": "Cajeta",
+      "slug": "cajeta",
+      "page": "cajeta.html",
+      "image": "assets/generated-desserts/cajeta.svg"
+    },
+    {
+      "sequence": 60,
+      "title": "Paletas Mexicanas",
+      "slug": "paletas-mexicanas",
+      "page": "paletas-mexicanas.html",
+      "image": "assets/generated-desserts/paletas-mexicanas.svg"
+    },
+    {
+      "sequence": 61,
+      "title": "Nieves Mexicanas",
+      "slug": "nieves-mexicanas",
+      "page": "nieves-mexicanas.html",
+      "image": "assets/generated-desserts/nieves-mexicanas.svg"
+    },
+    {
+      "sequence": 62,
+      "title": "Fresas con Crema",
+      "slug": "fresas-con-crema",
+      "page": "fresas-con-crema.html",
+      "image": "assets/generated-desserts/fresas-con-crema.svg"
+    },
+    {
+      "sequence": 63,
+      "title": "Plátanos Fritos con Crema",
+      "slug": "platanos-fritos-con-crema",
+      "page": "platanos-fritos-con-crema.html",
+      "image": "assets/generated-desserts/platanos-fritos-con-crema.svg"
+    },
+    {
+      "sequence": 64,
+      "title": "Gorditas de Azúcar",
+      "slug": "gorditas-azucar",
+      "page": "gorditas-azucar.html",
+      "image": "assets/generated-desserts/gorditas-azucar.svg"
+    },
+    {
+      "sequence": 65,
+      "title": "Polvorones Mexicanos",
+      "slug": "polvorones-mexicanos",
+      "page": "polvorones-mexicanos.html",
+      "image": "assets/generated-desserts/polvorones-mexicanos.svg"
+    },
+    {
+      "sequence": 66,
+      "title": "Marranitos",
+      "slug": "marranitos",
+      "page": "marranitos.html",
+      "image": "assets/generated-desserts/marranitos.svg"
+    },
+    {
+      "sequence": 67,
+      "title": "Orejas",
+      "slug": "orejas",
+      "page": "orejas.html",
+      "image": "assets/generated-desserts/orejas.svg"
+    },
+    {
+      "sequence": 68,
+      "title": "Gelatina de Mosaico",
+      "slug": "gelatina-mosaico",
+      "page": "gelatina-mosaico.html",
+      "image": "assets/generated-desserts/gelatina-mosaico.svg"
+    },
+    {
+      "sequence": 69,
+      "title": "New Orleans Shrimp & Corn Bisque",
+      "slug": "new-orleans-shrimp-corn-bisque",
+      "page": "new-orleans-shrimp-corn-bisque.html",
+      "image": "assets/new-orleans-shrimp-corn-bisque.png"
+    },
+    {
+      "sequence": 70,
+      "title": "Roasted Hasselback Root Vegetable & Zucchini Bake",
+      "slug": "roasted-hasselback-vegetable-bake",
+      "page": "roasted-hasselback-vegetable-bake.html",
+      "image": "assets/roasted-hasselback-vegetable-bake.png"
+    },
+    {
+      "sequence": 71,
+      "title": "Mediterranean Lemon Shallot Chicken with Fresh Herbs",
+      "slug": "mediterranean-lemon-shallot-chicken",
+      "page": "mediterranean-lemon-shallot-chicken.html",
+      "image": "assets/mediterranean-lemon-shallot-chicken.png"
+    },
+    {
+      "sequence": 72,
+      "title": "Moo Shu Chicken",
+      "slug": "moo-shu-chicken",
+      "page": "moo-shu-chicken.html",
+      "image": "assets/moo-shu-chicken.png"
+    },
+    {
+      "sequence": 73,
+      "title": "Shrimp Piccata Skewers",
+      "slug": "shrimp-piccata-skewers",
+      "page": "shrimp-piccata-skewers.html",
+      "image": "assets/shrimp-piccata-skewers.png"
+    },
+    {
+      "sequence": 74,
+      "title": "Spaghetti Carbonara",
+      "slug": "spaghetti-carbonara",
+      "page": "spaghetti-carbonara.html",
+      "image": "assets/spaghetti-carbonara.png"
+    },
+    {
+      "sequence": 75,
+      "title": "Pasta Cacio e Pepe",
+      "slug": "pasta-cacio-e-pepe",
+      "page": "pasta-cacio-e-pepe.html",
+      "image": "assets/pasta-cacio-e-pepe.png"
+    },
+    {
+      "sequence": 76,
+      "title": "Rigatoni Amatriciana",
+      "slug": "rigatoni-amatriciana",
+      "page": "rigatoni-amatriciana.html",
+      "image": "assets/rigatoni-amatriciana.png"
+    },
+    {
+      "sequence": 77,
+      "title": "Perciatelli alla Gricia",
+      "slug": "perciatelli-alla-gricia",
+      "page": "perciatelli-alla-gricia.html",
+      "image": "assets/perciatelli-alla-gricia.png"
+    },
+    {
+      "sequence": 78,
+      "title": "Fettuccine Alfredo",
+      "slug": "fettuccine-alfredo",
+      "page": "fettuccine-alfredo.html",
+      "image": "assets/fettuccine-alfredo.png"
+    },
+    {
+      "sequence": 79,
+      "title": "Pasta e Ceci",
+      "slug": "pasta-e-ceci",
+      "page": "pasta-e-ceci.html",
+      "image": "assets/pasta-e-ceci.png"
+    },
+    {
+      "sequence": 80,
+      "title": "Rigatoni with Pecorino and Crispy Guanciale",
+      "slug": "rigatoni-pecorino-crispy-guanciale",
+      "page": "rigatoni-pecorino-crispy-guanciale.html",
+      "image": "assets/rigatoni-pecorino-crispy-guanciale.png"
+    },
+    {
+      "sequence": 81,
+      "title": "Rigatoni with Pork Ragù and Fresh Ricotta",
+      "slug": "rigatoni-pork-ragu-ricotta",
+      "page": "rigatoni-pork-ragu-ricotta.html",
+      "image": "assets/rigatoni-pork-ragu-ricotta.png"
+    },
+    {
+      "sequence": 82,
+      "title": "Penne all’Arrabbiata",
+      "slug": "penne-arrabbiata",
+      "page": "penne-arrabbiata.html",
+      "image": "assets/penne-arrabbiata.png"
+    },
+    {
+      "sequence": 83,
+      "title": "Bucatini Amatriciana",
+      "slug": "bucatini-amatriciana",
+      "page": "bucatini-amatriciana.html",
+      "image": "assets/bucatini-amatriciana.png"
+    },
+    {
+      "sequence": 84,
+      "title": "Spaghetti with Shrimp, Lemon, Mint, and Pecorino",
+      "slug": "spaghetti-shrimp-lemon-mint-pecorino",
+      "page": "spaghetti-shrimp-lemon-mint-pecorino.html",
+      "image": "assets/spaghetti-shrimp-lemon-mint-pecorino.png"
+    },
+    {
+      "sequence": 85,
+      "title": "Osso Buco with Red Wine",
+      "slug": "osso-buco-red-wine",
+      "page": "osso-buco-red-wine.html",
+      "image": "assets/osso-buco-red-wine.png"
+    },
+    {
+      "sequence": 86,
+      "title": "Eggplant Parmesan",
+      "slug": "eggplant-parmesan",
+      "page": "eggplant-parmesan.html",
+      "image": "assets/eggplant-parmesan.png"
+    },
+    {
+      "sequence": 87,
+      "title": "Lemon-Stuffed Grilled Branzino",
+      "slug": "lemon-stuffed-grilled-branzino",
+      "page": "lemon-stuffed-grilled-branzino.html",
+      "image": "assets/lemon-stuffed-grilled-branzino.png"
+    },
+    {
+      "sequence": 88,
+      "title": "Creamy Seafood Risotto",
+      "slug": "creamy-seafood-risotto",
+      "page": "creamy-seafood-risotto.html",
+      "image": "assets/creamy-seafood-risotto.png"
+    },
+    {
+      "sequence": 89,
+      "title": "Balsamic and Rosemary-Marinated Florentine Steak",
+      "slug": "florentine-steak-balsamic-rosemary",
+      "page": "florentine-steak-balsamic-rosemary.html",
+      "image": "assets/florentine-steak-balsamic-rosemary.png"
+    },
+    {
+      "sequence": 90,
+      "title": "Pasta alla Norma",
+      "slug": "pasta-alla-norma",
+      "page": "pasta-alla-norma.html",
+      "image": "assets/pasta-alla-norma.png"
+    },
+    {
+      "sequence": 91,
+      "title": "Pork Chop Milanese",
+      "slug": "pork-chop-milanese",
+      "page": "pork-chop-milanese.html",
+      "image": "assets/pork-chop-milanese.png"
+    },
+    {
+      "sequence": 92,
+      "title": "Gnocchi alla Sorrentina",
+      "slug": "gnocchi-alla-sorrentina",
+      "page": "gnocchi-alla-sorrentina.html",
+      "image": "assets/gnocchi-alla-sorrentina.png"
+    },
+    {
+      "sequence": 93,
+      "title": "Cioppino",
+      "slug": "cioppino",
+      "page": "cioppino.html",
+      "image": "assets/cioppino.png"
+    },
+    {
+      "sequence": 94,
+      "title": "Spaghetti with Mussels",
+      "slug": "spaghetti-with-mussels",
+      "page": "spaghetti-with-mussels.html",
+      "image": "assets/spaghetti-with-mussels.png"
+    },
+    {
+      "sequence": 95,
+      "title": "Butternut Squash Ravioli with Brown Butter and Sage",
+      "slug": "butternut-squash-ravioli-brown-butter-sage",
+      "page": "butternut-squash-ravioli-brown-butter-sage.html",
+      "image": "assets/butternut-squash-ravioli-brown-butter-sage.png"
+    },
+    {
+      "sequence": 96,
+      "title": "Bolognese Meat Sauce",
+      "slug": "bolognese-meat-sauce",
+      "page": "bolognese-meat-sauce.html",
+      "image": "assets/bolognese-meat-sauce.png"
+    },
+    {
+      "sequence": 97,
+      "title": "Ricotta and Parmesan Gnudi",
+      "slug": "ricotta-parmesan-gnudi",
+      "page": "ricotta-parmesan-gnudi.html",
+      "image": "assets/ricotta-parmesan-gnudi.png"
+    },
+    {
+      "sequence": 98,
+      "title": "Pasta ’Ncasciata",
+      "slug": "pasta-ncasciata",
+      "page": "pasta-ncasciata.html",
+      "image": "assets/pasta-ncasciata.png"
+    },
+    {
+      "sequence": 99,
+      "title": "Zucchini Risotto with Shrimp",
+      "slug": "zucchini-risotto-shrimp",
+      "page": "zucchini-risotto-shrimp.html",
+      "image": "assets/zucchini-risotto-shrimp.png"
+    },
+    {
+      "sequence": 100,
+      "title": "Veal Piccata",
+      "slug": "veal-piccata",
+      "page": "veal-piccata.html",
+      "image": "assets/veal-piccata.png"
+    },
+    {
+      "sequence": 101,
+      "title": "Pasta Aglio e Olio",
+      "slug": "pasta-aglio-e-olio",
+      "page": "pasta-aglio-e-olio.html",
+      "image": "assets/pasta-aglio-e-olio.png"
+    },
+    {
+      "sequence": 102,
+      "title": "Tuscan White Bean Soup",
+      "slug": "tuscan-white-bean-soup",
+      "page": "tuscan-white-bean-soup.html",
+      "image": "assets/tuscan-white-bean-soup.png"
+    },
+    {
+      "sequence": 103,
+      "title": "Venetian Shrimp with Polenta",
+      "slug": "venetian-shrimp-polenta",
+      "page": "venetian-shrimp-polenta.html",
+      "image": "assets/venetian-shrimp-polenta.png"
+    },
+    {
+      "sequence": 104,
+      "title": "Swordfish Sicilian-Style",
+      "slug": "swordfish-sicilian-style",
+      "page": "swordfish-sicilian-style.html",
+      "image": "assets/swordfish-sicilian-style.png"
+    },
+    {
+      "sequence": 105,
+      "title": "Stracotto di Fassona Piemontese",
+      "slug": "stracotto-di-fassona-piemontese",
+      "page": "stracotto-di-fassona-piemontese.html",
+      "image": "assets/stracotto-di-fassona-piemontese.png"
+    },
+    {
+      "sequence": 106,
+      "title": "Buttery Shrimp with Peas and Potatoes",
+      "slug": "buttery-shrimp-peas-potatoes",
+      "page": "buttery-shrimp-peas-potatoes.html",
+      "image": "assets/buttery-shrimp-peas-potatoes.png"
+    },
+    {
+      "sequence": 107,
+      "title": "Boeuf Bourguignon",
+      "slug": "boeuf-bourguignon",
+      "page": "boeuf-bourguignon.html",
+      "image": "assets/boeuf-bourguignon.png"
+    },
+    {
+      "sequence": 108,
+      "title": "Spicy Cajun-Style Shrimp &amp; Corn Chowder",
+      "slug": "spicy-cajun-shrimp-corn-chowder",
+      "page": "spicy-cajun-shrimp-corn-chowder.html",
+      "image": "assets/spicy-cajun-shrimp-corn-chowder.png"
+    },
+    {
+      "sequence": 109,
+      "title": "Shrimp Shell Sauce",
+      "slug": "shrimp-shell-sauce",
+      "page": "shrimp-shell-sauce.html",
+      "image": "assets/shrimp-shell-sauce.png"
+    },
+    {
+      "sequence": 110,
+      "title": "Cajun Seasoning Mix",
+      "slug": "cajun-seasoning-mix",
+      "page": "cajun-seasoning-mix.html",
+      "image": "assets/cajun-seasoning-mix.png"
+    },
+    {
+      "sequence": 111,
+      "title": "Miso Mushroom and Leek Pasta",
+      "slug": "miso-mushroom-leek-pasta",
+      "page": "miso-mushroom-leek-pasta.html",
+      "image": "assets/miso-mushroom-leek-pasta.png"
+    },
+    {
+      "sequence": 112,
+      "title": "Salsa Criolla",
+      "slug": "salsa-criolla",
+      "page": "salsa-criolla.html",
+      "image": "assets/salsa-criolla.png"
+    },
+    {
+      "sequence": 113,
+      "title": "Cajun Garlic Butter Shrimp",
+      "slug": "cajun-garlic-butter-shrimp",
+      "page": "cajun-garlic-butter-shrimp.html",
+      "image": "assets/cajun-garlic-butter-shrimp.png"
+    },
+    {
+      "sequence": 114,
+      "title": "Spinach Salad with Bagna Càuda Dressing",
+      "slug": "spinach-salad-bagna-cauda",
+      "page": "spinach-salad-bagna-cauda.html",
+      "image": "assets/spinach-salad-bagna-cauda.png"
+    },
+    {
+      "sequence": 115,
+      "title": "Baked Cauliflower",
+      "slug": "baked-cauliflower",
+      "page": "baked-cauliflower.html",
+      "image": "assets/baked-cauliflower.png"
+    },
+    {
+      "sequence": 116,
+      "title": "Roasted Tomato Caprese Salad",
+      "slug": "roasted-tomato-caprese-salad",
+      "page": "roasted-tomato-caprese-salad.html",
+      "image": "assets/roasted-tomato-caprese-salad.png"
+    },
+    {
+      "sequence": 117,
+      "title": "Spicy Garlic Butter Shrimp with Lime Chili Dip",
+      "slug": "spicy-garlic-butter-shrimp-lime-chili-dip",
+      "page": "spicy-garlic-butter-shrimp-lime-chili-dip.html",
+      "image": "assets/spicy-garlic-butter-shrimp-lime-chili-dip.png"
+    },
+    {
+      "sequence": 118,
+      "title": "Shrimp Saganaki",
+      "slug": "shrimp-saganaki",
+      "page": "shrimp-saganaki.html",
+      "image": "assets/shrimp-saganaki.png"
+    },
+    {
+      "sequence": 119,
+      "title": "Fresh Pasta with Hard + Soft Flour",
+      "slug": "fresh-pasta-hard-soft-flour",
+      "page": "fresh-pasta-hard-soft-flour.html",
+      "image": "assets/fresh-pasta-hard-soft-flour.png"
+    },
+    {
+      "sequence": 120,
+      "title": "Elegant Roasted Potato Stacks",
+      "slug": "elegant-roasted-potato-stacks",
+      "page": "elegant-roasted-potato-stacks.html",
+      "image": "assets/elegant-roasted-potato-stacks.png"
+    },
+    {
+      "sequence": 121,
+      "title": "Herb-Crusted Salmon",
+      "slug": "herb-crusted-salmon",
+      "page": "herb-crusted-salmon.html",
+      "image": "assets/herb-crusted-salmon.png"
+    },
+    {
+      "sequence": 122,
+      "title": "Roasted Broccoli with Lemon &amp; Almonds",
+      "slug": "roasted-broccoli-lemon-almonds",
+      "page": "roasted-broccoli-lemon-almonds.html",
+      "image": "assets/roasted-broccoli-lemon-almonds.png"
+    },
+    {
+      "sequence": 123,
+      "title": "Tomatillo-Avocado Salsa over Cauliflower Rice",
+      "slug": "tomatillo-avocado-salsa-cauliflower-rice",
+      "page": "tomatillo-avocado-salsa-cauliflower-rice.html",
+      "image": "assets/tomatillo-avocado-salsa-cauliflower-rice.png"
+    },
+    {
+      "sequence": 124,
+      "title": "Shrimp &amp; Herb Stir-Fry",
+      "slug": "shrimp-herb-stir-fry",
+      "page": "shrimp-herb-stir-fry.html",
+      "image": "assets/shrimp-herb-stir-fry.png"
+    },
+    {
+      "sequence": 125,
+      "title": "Roasted Eggplant &amp; Cherry Tomatoes",
+      "slug": "roasted-eggplant-cherry-tomatoes",
+      "page": "roasted-eggplant-cherry-tomatoes.html",
+      "image": "assets/roasted-eggplant-cherry-tomatoes.png"
+    },
+    {
+      "sequence": 126,
+      "title": "Zucchini “Lasagna”",
+      "slug": "zucchini-lasagna",
+      "page": "zucchini-lasagna.html",
+      "image": "assets/zucchini-lasagna.png"
+    },
+    {
+      "sequence": 127,
+      "title": "Sage &amp; Mushroom Chicken Skillet",
+      "slug": "sage-mushroom-chicken-skillet",
+      "page": "sage-mushroom-chicken-skillet.html",
+      "image": "assets/sage-mushroom-chicken-skillet.png"
+    },
+    {
+      "sequence": 128,
+      "title": "Roasted Green Beans with Parmesan",
+      "slug": "roasted-green-beans-parmesan",
+      "page": "roasted-green-beans-parmesan.html",
+      "image": "assets/roasted-green-beans-parmesan.png"
+    },
+    {
+      "sequence": 129,
+      "title": "Sautéed Spinach with Garlic",
+      "slug": "sauteed-spinach-garlic",
+      "page": "sauteed-spinach-garlic.html",
+      "image": "assets/sauteed-spinach-garlic.png"
+    },
+    {
+      "sequence": 130,
+      "title": "Lemon &amp; Tomatillo Salsa Verde",
+      "slug": "lemon-tomatillo-salsa-verde",
+      "page": "lemon-tomatillo-salsa-verde.html",
+      "image": "assets/lemon-tomatillo-salsa-verde.png"
+    },
+    {
+      "sequence": 131,
+      "title": "Fish Stock",
+      "slug": "fish-stock",
+      "page": "fish-stock.html",
+      "image": "assets/fish-stock.png"
+    },
+    {
+      "sequence": 132,
+      "title": "Roasted Zucchini with Lemon and Thyme",
+      "slug": "roasted-zucchini-lemon-thyme",
+      "page": "roasted-zucchini-lemon-thyme.html",
+      "image": "assets/roasted-zucchini-lemon-thyme.png"
+    },
+    {
+      "sequence": 133,
+      "title": "Tiramisu",
+      "slug": "tiramisu",
+      "page": "tiramisu.html",
+      "image": ""
+    },
+    {
+      "sequence": 134,
+      "title": "Crème Brûlée",
+      "slug": "creme-brulee",
+      "page": "creme-brulee.html",
+      "image": ""
+    },
+    {
+      "sequence": 135,
+      "title": "Chocolate Lava Cake",
+      "slug": "chocolate-lava-cake",
+      "page": "chocolate-lava-cake.html",
+      "image": ""
+    },
+    {
+      "sequence": 136,
+      "title": "Apple Crumble",
+      "slug": "apple-crumble",
+      "page": "apple-crumble.html",
+      "image": ""
+    },
+    {
+      "sequence": 137,
+      "title": "Lemon Squares",
+      "slug": "lemon-squares",
+      "page": "lemon-squares.html",
+      "image": ""
+    },
+    {
+      "sequence": 138,
+      "title": "Brownies",
+      "slug": "brownies",
+      "page": "brownies.html",
+      "image": ""
+    },
+    {
+      "sequence": 139,
+      "title": "Key Lime Pie",
+      "slug": "key-lime-pie",
+      "page": "key-lime-pie.html",
+      "image": ""
+    },
+    {
+      "sequence": 140,
+      "title": "Classic American Apple Pie",
+      "slug": "classic-american-apple-pie",
+      "page": "classic-american-apple-pie.html",
+      "image": ""
+    },
+    {
+      "sequence": 141,
+      "title": "Peach Pie",
+      "slug": "peach-pie",
+      "page": "peach-pie.html",
+      "image": ""
+    },
+    {
+      "sequence": 142,
+      "title": "Steak Tartare",
+      "slug": "steak-tartare",
+      "page": "steak-tartare.html",
+      "image": "assets/generated/peach-pie.svg"
+    },
+    {
+      "sequence": 143,
+      "title": "Tuna Tartare",
+      "slug": "tuna-tartare",
+      "page": "tuna-tartare.html",
+      "image": "assets/generated/steak-tartare.svg"
+    },
+    {
+      "sequence": 144,
+      "title": "Gazpacho",
+      "slug": "gazpacho",
+      "page": "gazpacho.html",
+      "image": "assets/generated/tuna-tartare.svg"
+    },
+    {
+      "sequence": 145,
+      "title": "White Wine &amp; Garlic Mussels",
+      "slug": "white-wine-garlic-mussels",
+      "page": "white-wine-garlic-mussels.html",
+      "image": "assets/generated/gazpacho.svg"
+    },
+    {
+      "sequence": 146,
+      "title": "Beer &amp; Bacon Mussels",
+      "slug": "beer-bacon-mussels",
+      "page": "beer-bacon-mussels.html",
+      "image": "assets/generated/white-wine-garlic-mussels.svg"
+    },
+    {
+      "sequence": 147,
+      "title": "Moules Marinières",
+      "slug": "moules-marinieres",
+      "page": "moules-marinieres.html",
+      "image": "assets/generated/beer-bacon-mussels.svg"
+    },
+    {
+      "sequence": 148,
+      "title": "Belgian French Fries",
+      "slug": "belgian-french-fries",
+      "page": "belgian-french-fries.html",
+      "image": "assets/generated/moules-marinieres.svg"
+    },
+    {
+      "sequence": 149,
+      "title": "Coconut Curry Steamed Mussels",
+      "slug": "coconut-curry-steamed-mussels",
+      "page": "coconut-curry-steamed-mussels.html",
+      "image": "assets/generated/belgian-french-fries.svg"
+    },
+    {
+      "sequence": 150,
+      "title": "Gnocchi Gorgonzola",
+      "slug": "gnocchi-gorgonzola",
+      "page": "gnocchi-gorgonzola.html",
+      "image": "assets/generated/coconut-curry-steamed-mussels.svg"
+    },
+    {
+      "sequence": 151,
+      "title": "Thai-Style Coconut-Curry Mussels",
+      "slug": "thai-style-coconut-curry-mussels",
+      "page": "thai-style-coconut-curry-mussels.html",
+      "image": "assets/generated/gnocchi-gorgonzola.svg"
+    },
+    {
+      "sequence": 152,
+      "title": "Rösti",
+      "slug": "rosti",
+      "page": "rosti.html",
+      "image": "assets/generated/thai-style-coconut-curry-mussels.svg"
+    },
+    {
+      "sequence": 153,
+      "title": "Fondue with Mountain Cheeses",
+      "slug": "fondue-mountain-cheeses",
+      "page": "fondue-mountain-cheeses.html",
+      "image": "assets/generated/rosti.svg"
+    },
+    {
+      "sequence": 154,
+      "title": "Classic American Hamburger",
+      "slug": "classic-american-hamburger",
+      "page": "classic-american-hamburger.html",
+      "image": "assets/generated/fondue-mountain-cheeses.svg"
+    },
+    {
+      "sequence": 155,
+      "title": "Fried Okra",
+      "slug": "fried-okra",
+      "page": "fried-okra.html",
+      "image": "assets/generated/classic-american-hamburger.svg"
+    },
+    {
+      "sequence": 156,
+      "title": "Zurich-Style Veal with Creamy Mushroom Sauce",
+      "slug": "zurich-style-veal-creamy-mushroom-sauce",
+      "page": "zurich-style-veal-creamy-mushroom-sauce.html",
+      "image": "assets/generated/fried-okra.svg"
+    },
+    {
+      "sequence": 157,
+      "title": "Strawberry Tart",
+      "slug": "strawberry-tart",
+      "page": "strawberry-tart.html",
+      "image": "assets/generated/zurich-style-veal-creamy-mushroom-sauce.svg"
+    },
+    {
+      "sequence": 158,
+      "title": "Sticky Toffee Pudding",
+      "slug": "sticky-toffee-pudding",
+      "page": "sticky-toffee-pudding.html",
+      "image": "assets/generated/strawberry-tart.svg"
+    },
+    {
+      "sequence": 159,
+      "title": "Spotted Dick",
+      "slug": "spotted-dick",
+      "page": "spotted-dick.html",
+      "image": "assets/generated/sticky-toffee-pudding.svg"
+    },
+    {
+      "sequence": 160,
+      "title": "Chocolate Mousse",
+      "slug": "chocolate-mousse",
+      "page": "chocolate-mousse.html",
+      "image": "assets/generated/spotted-dick.svg"
+    },
+    {
+      "sequence": 161,
+      "title": "Chocolate Babka",
+      "slug": "chocolate-babka",
+      "page": "chocolate-babka.html",
+      "image": "assets/generated/chocolate-mousse.svg"
+    },
+    {
+      "sequence": 162,
+      "title": "American Cheesecake",
+      "slug": "american-cheesecake",
+      "page": "american-cheesecake.html",
+      "image": "assets/generated/chocolate-babka.svg"
+    },
+    {
+      "sequence": 163,
+      "title": "Pumpkin Pie",
+      "slug": "pumpkin-pie",
+      "page": "pumpkin-pie.html",
+      "image": "assets/generated/american-cheesecake.svg"
+    },
+    {
+      "sequence": 164,
+      "title": "Banana Bread",
+      "slug": "banana-bread",
+      "page": "banana-bread.html",
+      "image": "assets/generated/pumpkin-pie.svg"
+    },
+    {
+      "sequence": 165,
+      "title": "Pumpkin Bread",
+      "slug": "pumpkin-bread",
+      "page": "pumpkin-bread.html",
+      "image": "assets/generated/banana-bread.svg"
+    },
+    {
+      "sequence": 166,
+      "title": "Chocolate Chip Cookies",
+      "slug": "chocolate-chip-cookies",
+      "page": "chocolate-chip-cookies.html",
+      "image": "assets/generated/pumpkin-bread.svg"
+    },
+    {
+      "sequence": 167,
+      "title": "Toffee",
+      "slug": "toffee",
+      "page": "toffee.html",
+      "image": "assets/generated/chocolate-chip-cookies.svg"
+    },
+    {
+      "sequence": 168,
+      "title": "Bread Pudding",
+      "slug": "bread-pudding",
+      "page": "bread-pudding.html",
+      "image": "assets/generated/toffee.svg"
+    },
+    {
+      "sequence": 169,
+      "title": "Apple Crumb Cake",
+      "slug": "apple-crumb-cake",
+      "page": "apple-crumb-cake.html",
+      "image": "assets/generated/bread-pudding.svg"
+    },
+    {
+      "sequence": 170,
+      "title": "Lemon Ricotta Cake",
+      "slug": "lemon-ricotta-cake",
+      "page": "lemon-ricotta-cake.html",
+      "image": "assets/generated/apple-crumb-cake.svg"
+    },
+    {
+      "sequence": 171,
+      "title": "Lemon Pasta",
+      "slug": "lemon-pasta",
+      "page": "lemon-pasta.html",
+      "image": "assets/generated/lemon-ricotta-cake.svg"
+    },
+    {
+      "sequence": 172,
+      "title": "Asado Argentino",
+      "slug": "asado-argentino",
+      "page": "asado-argentino.html",
+      "image": "assets/generated/lemon-pasta.svg"
+    },
+    {
+      "sequence": 173,
+      "title": "Bife de Chorizo con Chimichurri",
+      "slug": "bife-de-chorizo-chimichurri",
+      "page": "bife-de-chorizo-chimichurri.html",
+      "image": "assets/generated/asado-argentino.svg"
+    },
+    {
+      "sequence": 174,
+      "title": "Milanesa Napolitana",
+      "slug": "milanesa-napolitana",
+      "page": "milanesa-napolitana.html",
+      "image": "assets/generated/bife-de-chorizo-chimichurri.svg"
+    },
+    {
+      "sequence": 175,
+      "title": "Empanadas Argentinas",
+      "slug": "empanadas-argentinas",
+      "page": "empanadas-argentinas.html",
+      "image": "assets/generated/milanesa-napolitana.svg"
+    },
+    {
+      "sequence": 176,
+      "title": "Locro",
+      "slug": "locro",
+      "page": "locro.html",
+      "image": "assets/generated/empanadas-argentinas.svg"
+    },
+    {
+      "sequence": 177,
+      "title": "Matambre Arrollado",
+      "slug": "matambre-arrollado",
+      "page": "matambre-arrollado.html",
+      "image": "assets/generated/locro.svg"
+    },
+    {
+      "sequence": 178,
+      "title": "Pastel de Papa",
+      "slug": "pastel-de-papa",
+      "page": "pastel-de-papa.html",
+      "image": "assets/generated/matambre-arrollado.svg"
+    },
+    {
+      "sequence": 179,
+      "title": "Carbonada Criolla",
+      "slug": "carbonada-criolla",
+      "page": "carbonada-criolla.html",
+      "image": "assets/generated/pastel-de-papa.svg"
+    },
+    {
+      "sequence": 180,
+      "title": "Humita en Chala",
+      "slug": "humita-en-chala",
+      "page": "humita-en-chala.html",
+      "image": "assets/the-kitchen-table-hero.png"
+    },
+    {
+      "sequence": 181,
+      "title": "Pollo al Disco",
+      "slug": "pollo-al-disco",
+      "page": "pollo-al-disco.html",
+      "image": "assets/the-kitchen-table-hero.png"
+    },
+    {
+      "sequence": 182,
+      "title": "Chimichurri",
+      "slug": "chimichurri",
+      "page": "chimichurri.html",
+      "image": "assets/generated/pollo-al-disco.svg"
+    },
+    {
+      "sequence": 183,
+      "title": "Provoleta",
+      "slug": "provoleta",
+      "page": "provoleta.html",
+      "image": "assets/generated/chimichurri.svg"
+    },
+    {
+      "sequence": 184,
+      "title": "Ensalada Rusa",
+      "slug": "ensalada-rusa",
+      "page": "ensalada-rusa.html",
+      "image": "assets/generated/provoleta.svg"
+    },
+    {
+      "sequence": 185,
+      "title": "Ensalada Criolla",
+      "slug": "ensalada-criolla",
+      "page": "ensalada-criolla.html",
+      "image": "assets/generated/ensalada-rusa.svg"
+    },
+    {
+      "sequence": 186,
+      "title": "Papas Fritas",
+      "slug": "papas-fritas",
+      "page": "papas-fritas.html",
+      "image": "assets/generated/ensalada-criolla.svg"
+    },
+    {
+      "sequence": 187,
+      "title": "Papas a la Provenzal",
+      "slug": "papas-a-la-provenzal",
+      "page": "papas-a-la-provenzal.html",
+      "image": "assets/generated/papas-fritas.svg"
+    },
+    {
+      "sequence": 188,
+      "title": "Puré de Papas",
+      "slug": "pure-de-papas",
+      "page": "pure-de-papas.html",
+      "image": "assets/generated/papas-a-la-provenzal.svg"
+    },
+    {
+      "sequence": 189,
+      "title": "Zapallitos Rellenos",
+      "slug": "zapallitos-rellenos",
+      "page": "zapallitos-rellenos.html",
+      "image": "assets/generated/pure-de-papas.svg"
+    },
+    {
+      "sequence": 190,
+      "title": "Berenjenas en Escabeche",
+      "slug": "berenjenas-en-escabeche",
+      "page": "berenjenas-en-escabeche.html",
+      "image": "assets/generated/zapallitos-rellenos.svg"
+    },
+    {
+      "sequence": 191,
+      "title": "Choclo a la Parrilla",
+      "slug": "choclo-a-la-parrilla",
+      "page": "choclo-a-la-parrilla.html",
+      "image": "assets/generated/berenjenas-en-escabeche.svg"
+    },
+    {
+      "sequence": 192,
+      "title": "Papas al Plomo",
+      "slug": "papas-al-plomo",
+      "page": "papas-al-plomo.html",
+      "image": "assets/generated/choclo-a-la-parrilla.svg"
+    },
+    {
+      "sequence": 193,
+      "title": "Chocotorta",
+      "slug": "chocotorta",
+      "page": "chocotorta.html",
+      "image": "assets/generated/papas-al-plomo.svg"
+    },
+    {
+      "sequence": 194,
+      "title": "Alfajores",
+      "slug": "alfajores",
+      "page": "alfajores.html",
+      "image": "assets/generated/chocotorta.svg"
+    },
+    {
+      "sequence": 195,
+      "title": "Flan con Dulce de Leche",
+      "slug": "flan-con-dulce-de-leche",
+      "page": "flan-con-dulce-de-leche.html",
+      "image": "assets/generated/alfajores.svg"
+    },
+    {
+      "sequence": 196,
+      "title": "Panqueques con Dulce de Leche",
+      "slug": "panqueques-con-dulce-de-leche",
+      "page": "panqueques-con-dulce-de-leche.html",
+      "image": "assets/generated/flan-con-dulce-de-leche.svg"
+    },
+    {
+      "sequence": 197,
+      "title": "Rogel",
+      "slug": "rogel",
+      "page": "rogel.html",
+      "image": "assets/generated/panqueques-con-dulce-de-leche.svg"
+    },
+    {
+      "sequence": 198,
+      "title": "Pastafrola",
+      "slug": "pastafrola",
+      "page": "pastafrola.html",
+      "image": "assets/generated/rogel.svg"
+    },
+    {
+      "sequence": 199,
+      "title": "Torta Balcarce",
+      "slug": "torta-balcarce",
+      "page": "torta-balcarce.html",
+      "image": "assets/generated/pastafrola.svg"
+    },
+    {
+      "sequence": 200,
+      "title": "Chivito",
+      "slug": "chivito",
+      "page": "chivito.html",
+      "image": "assets/generated/torta-balcarce.svg"
+    },
+    {
+      "sequence": 201,
+      "title": "Asado Uruguayo",
+      "slug": "asado-uruguayo",
+      "page": "asado-uruguayo.html",
+      "image": "assets/generated/chivito.svg"
+    },
+    {
+      "sequence": 202,
+      "title": "Chivito al Plato",
+      "slug": "chivito-al-plato",
+      "page": "chivito-al-plato.html",
+      "image": "assets/generated/asado-uruguayo.svg"
+    },
+    {
+      "sequence": 203,
+      "title": "Pamplona de Carne",
+      "slug": "pamplona-de-carne",
+      "page": "pamplona-de-carne.html",
+      "image": "assets/generated/chivito-al-plato.svg"
+    },
+    {
+      "sequence": 204,
+      "title": "Puchero Uruguayo",
+      "slug": "puchero-uruguayo",
+      "page": "puchero-uruguayo.html",
+      "image": "assets/generated/pamplona-de-carne.svg"
+    },
+    {
+      "sequence": 205,
+      "title": "Empanadas Uruguayas",
+      "slug": "empanadas-uruguayas",
+      "page": "empanadas-uruguayas.html",
+      "image": "assets/generated/puchero-uruguayo.svg"
+    },
+    {
+      "sequence": 206,
+      "title": "Matambre Relleno",
+      "slug": "matambre-relleno",
+      "page": "matambre-relleno.html",
+      "image": "assets/generated/empanadas-uruguayas.svg"
+    },
+    {
+      "sequence": 207,
+      "title": "Ñoquis con Tuco",
+      "slug": "noquis-con-tuco",
+      "page": "noquis-con-tuco.html",
+      "image": "assets/generated/matambre-relleno.svg"
+    },
+    {
+      "sequence": 208,
+      "title": "Revuelto Gramajo",
+      "slug": "revuelto-gramajo",
+      "page": "revuelto-gramajo.html",
+      "image": "assets/generated/noquis-con-tuco.svg"
+    },
+    {
+      "sequence": 209,
+      "title": "Capeletis a la Caruso",
+      "slug": "capeletis-a-la-caruso",
+      "page": "capeletis-a-la-caruso.html",
+      "image": "assets/generated/revuelto-gramajo.svg"
+    },
+    {
+      "sequence": 210,
+      "title": "Arroz con Pollo",
+      "slug": "arroz-con-pollo-uruguayo",
+      "page": "arroz-con-pollo-uruguayo.html",
+      "image": "assets/generated/capeletis-a-la-caruso.svg"
+    },
+    {
+      "sequence": 211,
+      "title": "Pollo a la Parrilla",
+      "slug": "pollo-a-la-parrilla",
+      "page": "pollo-a-la-parrilla.html",
+      "image": "assets/generated/arroz-con-pollo-uruguayo.svg"
+    },
+    {
+      "sequence": 212,
+      "title": "Seafood Gumbo",
+      "slug": "seafood-gumbo",
+      "page": "seafood-gumbo.html",
+      "image": "assets/generated/pollo-a-la-parrilla.svg"
+    },
+    {
+      "sequence": 213,
+      "title": "Chicken and Andouille Gumbo",
+      "slug": "chicken-and-andouille-gumbo",
+      "page": "chicken-and-andouille-gumbo.html",
+      "image": "assets/generated/seafood-gumbo.svg"
+    },
+    {
+      "sequence": 214,
+      "title": "Jambalaya",
+      "slug": "jambalaya",
+      "page": "jambalaya.html",
+      "image": "assets/generated/chicken-and-andouille-gumbo.svg"
+    },
+    {
+      "sequence": 215,
+      "title": "Crawfish Étouffée",
+      "slug": "crawfish-etouffee",
+      "page": "crawfish-etouffee.html",
+      "image": "assets/generated/jambalaya.svg"
+    },
+    {
+      "sequence": 216,
+      "title": "Shrimp Creole",
+      "slug": "shrimp-creole",
+      "page": "shrimp-creole.html",
+      "image": "assets/generated/crawfish-etouffee.svg"
+    },
+    {
+      "sequence": 217,
+      "title": "New Orleans BBQ Shrimp",
+      "slug": "new-orleans-bbq-shrimp",
+      "page": "new-orleans-bbq-shrimp.html",
+      "image": "assets/generated/shrimp-creole.svg"
+    },
+    {
+      "sequence": 218,
+      "title": "Red Beans and Rice with Andouille Sausage",
+      "slug": "red-beans-rice-andouille",
+      "page": "red-beans-rice-andouille.html",
+      "image": "assets/generated/new-orleans-bbq-shrimp.svg"
+    },
+    {
+      "sequence": 219,
+      "title": "Shrimp Po’ Boy",
+      "slug": "shrimp-po-boy",
+      "page": "shrimp-po-boy.html",
+      "image": "assets/generated/red-beans-rice-andouille.svg"
+    },
+    {
+      "sequence": 220,
+      "title": "Muffuletta",
+      "slug": "muffuletta",
+      "page": "muffuletta.html",
+      "image": "assets/generated/shrimp-po-boy.svg"
+    },
+    {
+      "sequence": 221,
+      "title": "Blackened Redfish",
+      "slug": "blackened-redfish",
+      "page": "blackened-redfish.html",
+      "image": "assets/generated/muffuletta.svg"
+    },
+    {
+      "sequence": 222,
+      "title": "Béchamel",
+      "slug": "bechamel-sauce",
+      "page": "bechamel-sauce.html",
+      "image": "assets/generated/blackened-redfish.svg"
+    },
+    {
+      "sequence": 223,
+      "title": "Velouté",
+      "slug": "veloute-sauce",
+      "page": "veloute-sauce.html",
+      "image": "assets/generated/bechamel-sauce.svg"
+    },
+    {
+      "sequence": 224,
+      "title": "Espagnole",
+      "slug": "espagnole-sauce",
+      "page": "espagnole-sauce.html",
+      "image": "assets/generated/veloute-sauce.svg"
+    },
+    {
+      "sequence": 225,
+      "title": "Sauce Tomate",
+      "slug": "sauce-tomate",
+      "page": "sauce-tomate.html",
+      "image": "assets/generated/espagnole-sauce.svg"
+    },
+    {
+      "sequence": 226,
+      "title": "Hollandaise",
+      "slug": "hollandaise-sauce",
+      "page": "hollandaise-sauce.html",
+      "image": "assets/generated/sauce-tomate.svg"
+    },
+    {
+      "sequence": 227,
+      "title": "Mornay",
+      "slug": "mornay-sauce",
+      "page": "mornay-sauce.html",
+      "image": "assets/generated/hollandaise-sauce.svg"
+    },
+    {
+      "sequence": 228,
+      "title": "Soubise",
+      "slug": "soubise-sauce",
+      "page": "soubise-sauce.html",
+      "image": "assets/generated/mornay-sauce.svg"
+    },
+    {
+      "sequence": 229,
+      "title": "Nantua",
+      "slug": "nantua-sauce",
+      "page": "nantua-sauce.html",
+      "image": "assets/generated/soubise-sauce.svg"
+    },
+    {
+      "sequence": 230,
+      "title": "Crème Sauce",
+      "slug": "creme-sauce",
+      "page": "creme-sauce.html",
+      "image": "assets/generated/nantua-sauce.svg"
+    },
+    {
+      "sequence": 231,
+      "title": "Mustard Sauce",
+      "slug": "mustard-sauce-bechamel",
+      "page": "mustard-sauce-bechamel.html",
+      "image": "assets/generated/creme-sauce.svg"
+    },
+    {
+      "sequence": 232,
+      "title": "Cheddar Cheese Sauce",
+      "slug": "cheddar-cheese-sauce",
+      "page": "cheddar-cheese-sauce.html",
+      "image": "assets/generated/mustard-sauce-bechamel.svg"
+    },
+    {
+      "sequence": 233,
+      "title": "Suprême",
+      "slug": "supreme-sauce",
+      "page": "supreme-sauce.html",
+      "image": "assets/generated/cheddar-cheese-sauce.svg"
+    },
+    {
+      "sequence": 234,
+      "title": "Allemande",
+      "slug": "allemande-sauce",
+      "page": "allemande-sauce.html",
+      "image": "assets/generated/supreme-sauce.svg"
+    },
+    {
+      "sequence": 235,
+      "title": "Normande",
+      "slug": "normande-sauce",
+      "page": "normande-sauce.html",
+      "image": "assets/generated/allemande-sauce.svg"
+    },
+    {
+      "sequence": 236,
+      "title": "Bercy",
+      "slug": "bercy-sauce",
+      "page": "bercy-sauce.html",
+      "image": "assets/generated/normande-sauce.svg"
+    },
+    {
+      "sequence": 237,
+      "title": "Poulette",
+      "slug": "poulette-sauce",
+      "page": "poulette-sauce.html",
+      "image": "assets/generated/bercy-sauce.svg"
+    },
+    {
+      "sequence": 238,
+      "title": "Aurora",
+      "slug": "aurora-sauce",
+      "page": "aurora-sauce.html",
+      "image": "assets/generated/poulette-sauce.svg"
+    },
+    {
+      "sequence": 239,
+      "title": "Hungarian Sauce",
+      "slug": "hungarian-sauce-veloute",
+      "page": "hungarian-sauce-veloute.html",
+      "image": "assets/generated/aurora-sauce.svg"
+    },
+    {
+      "sequence": 240,
+      "title": "Venetian Sauce",
+      "slug": "venetian-sauce-veloute",
+      "page": "venetian-sauce-veloute.html",
+      "image": "assets/generated/hungarian-sauce-veloute.svg"
+    },
+    {
+      "sequence": 241,
+      "title": "Béarnaise",
+      "slug": "bearnaise-sauce",
+      "page": "bearnaise-sauce.html",
+      "image": "assets/generated/venetian-sauce-veloute.svg"
+    },
+    {
+      "sequence": 242,
+      "title": "Choron",
+      "slug": "choron-sauce",
+      "page": "choron-sauce.html",
+      "image": "assets/generated/bearnaise-sauce.svg"
+    },
+    {
+      "sequence": 243,
+      "title": "Foyot",
+      "slug": "foyot-sauce",
+      "page": "foyot-sauce.html",
+      "image": "assets/generated/choron-sauce.svg"
+    },
+    {
+      "sequence": 244,
+      "title": "Mousseline",
+      "slug": "mousseline-hollandaise",
+      "page": "mousseline-hollandaise.html",
+      "image": "assets/generated/foyot-sauce.svg"
+    },
+    {
+      "sequence": 245,
+      "title": "Maltaise",
+      "slug": "maltaise-sauce",
+      "page": "maltaise-sauce.html",
+      "image": "assets/generated/mousseline-hollandaise.svg"
+    },
+    {
+      "sequence": 246,
+      "title": "Dijon",
+      "slug": "dijon-hollandaise",
+      "page": "dijon-hollandaise.html",
+      "image": "assets/generated/maltaise-sauce.svg"
+    },
+    {
+      "sequence": 247,
+      "title": "Noisette",
+      "slug": "noisette-hollandaise",
+      "page": "noisette-hollandaise.html",
+      "image": "assets/generated/dijon-hollandaise.svg"
+    },
+    {
+      "sequence": 248,
+      "title": "Creole Sauce",
+      "slug": "creole-sauce",
+      "page": "creole-sauce.html",
+      "image": "assets/generated/noisette-hollandaise.svg"
+    },
+    {
+      "sequence": 249,
+      "title": "Portuguese Sauce",
+      "slug": "portuguese-sauce",
+      "page": "portuguese-sauce.html",
+      "image": "assets/generated/creole-sauce.svg"
+    },
+    {
+      "sequence": 250,
+      "title": "Provençale",
+      "slug": "provencale-sauce",
+      "page": "provencale-sauce.html",
+      "image": "assets/generated/portuguese-sauce.svg"
+    },
+    {
+      "sequence": 251,
+      "title": "Spanish Sauce",
+      "slug": "spanish-tomato-sauce",
+      "page": "spanish-tomato-sauce.html",
+      "image": "assets/generated/provencale-sauce.svg"
+    },
+    {
+      "sequence": 252,
+      "title": "Marinara",
+      "slug": "marinara-sauce",
+      "page": "marinara-sauce.html",
+      "image": "assets/generated/spanish-tomato-sauce.svg"
+    },
+    {
+      "sequence": 253,
+      "title": "Bolognese",
+      "slug": "bolognese-sauce-daughter",
+      "page": "bolognese-sauce-daughter.html",
+      "image": "assets/generated/marinara-sauce.svg"
+    },
+    {
+      "sequence": 254,
+      "title": "Neapolitan Sauce",
+      "slug": "neapolitan-sauce",
+      "page": "neapolitan-sauce.html",
+      "image": "assets/generated/bolognese-sauce-daughter.svg"
+    },
+    {
+      "sequence": 255,
+      "title": "Salsa Roja",
+      "slug": "salsa-roja",
+      "page": "salsa-roja.html",
+      "image": "assets/generated/neapolitan-sauce.svg"
+    },
+    {
+      "sequence": 256,
+      "title": "Salsa Verde",
+      "slug": "salsa-verde",
+      "page": "salsa-verde.html",
+      "image": "assets/generated/salsa-roja.svg"
+    },
+    {
+      "sequence": 257,
+      "title": "Pico de Gallo",
+      "slug": "pico-de-gallo",
+      "page": "pico-de-gallo.html",
+      "image": "assets/generated/salsa-verde.svg"
+    },
+    {
+      "sequence": 258,
+      "title": "Salsa Ranchera",
+      "slug": "salsa-ranchera",
+      "page": "salsa-ranchera.html",
+      "image": "assets/generated/pico-de-gallo.svg"
+    },
+    {
+      "sequence": 259,
+      "title": "Salsa Taquera",
+      "slug": "salsa-taquera",
+      "page": "salsa-taquera.html",
+      "image": "assets/generated/salsa-ranchera.svg"
+    },
+    {
+      "sequence": 260,
+      "title": "Salsa de Chile de Árbol",
+      "slug": "salsa-chile-de-arbol",
+      "page": "salsa-chile-de-arbol.html",
+      "image": "assets/generated/salsa-taquera.svg"
+    },
+    {
+      "sequence": 261,
+      "title": "Salsa Macha",
+      "slug": "salsa-macha",
+      "page": "salsa-macha.html",
+      "image": "assets/generated/salsa-chile-de-arbol.svg"
+    },
+    {
+      "sequence": 262,
+      "title": "Mole Poblano",
+      "slug": "mole-poblano",
+      "page": "mole-poblano.html",
+      "image": "assets/generated/salsa-macha.svg"
+    },
+    {
+      "sequence": 263,
+      "title": "Mole Negro",
+      "slug": "mole-negro",
+      "page": "mole-negro.html",
+      "image": "assets/generated/mole-poblano.svg"
+    },
+    {
+      "sequence": 264,
+      "title": "Adobo",
+      "slug": "mexican-adobo",
+      "page": "mexican-adobo.html",
+      "image": "assets/generated/mole-negro.svg"
+    },
+    {
+      "sequence": 265,
+      "title": "Salsa de Guajillo",
+      "slug": "salsa-guajillo",
+      "page": "salsa-guajillo.html",
+      "image": "assets/generated/mexican-adobo.svg"
+    },
+    {
+      "sequence": 266,
+      "title": "Salsa de Chipotle",
+      "slug": "salsa-chipotle",
+      "page": "salsa-chipotle.html",
+      "image": "assets/generated/salsa-guajillo.svg"
+    },
+    {
+      "sequence": 267,
+      "title": "Salsa de Tomatillo",
+      "slug": "salsa-tomatillo",
+      "page": "salsa-tomatillo.html",
+      "image": "assets/generated/salsa-chipotle.svg"
+    },
+    {
+      "sequence": 268,
+      "title": "Salsa Borracha",
+      "slug": "salsa-borracha",
+      "page": "salsa-borracha.html",
+      "image": "assets/generated/salsa-tomatillo.svg"
+    },
+    {
+      "sequence": 269,
+      "title": "Salsa de Aguacate",
+      "slug": "salsa-aguacate",
+      "page": "salsa-aguacate.html",
+      "image": "assets/generated/salsa-borracha.svg"
+    },
+    {
+      "sequence": 270,
+      "title": "Salsa Habanero",
+      "slug": "salsa-habanero",
+      "page": "salsa-habanero.html",
+      "image": "assets/generated/salsa-aguacate.svg"
+    },
+    {
+      "sequence": 271,
+      "title": "Salsa Morita",
+      "slug": "salsa-morita",
+      "page": "salsa-morita.html",
+      "image": "assets/generated/salsa-habanero.svg"
+    },
+    {
+      "sequence": 272,
+      "title": "Salsa de Cacahuate",
+      "slug": "salsa-cacahuate",
+      "page": "salsa-cacahuate.html",
+      "image": "assets/generated/salsa-morita.svg"
+    },
+    {
+      "sequence": 273,
+      "title": "Salsa de Molcajete",
+      "slug": "salsa-molcajete",
+      "page": "salsa-molcajete.html",
+      "image": "assets/generated/salsa-cacahuate.svg"
+    },
+    {
+      "sequence": 274,
+      "title": "Salsa Xni-Pec",
+      "slug": "salsa-xni-pec",
+      "page": "salsa-xni-pec.html",
+      "image": "assets/generated/salsa-molcajete.svg"
+    },
+    {
+      "sequence": 275,
+      "title": "Lomo Saltado",
+      "slug": "lomo-saltado",
+      "page": "lomo-saltado.html",
+      "image": "assets/generated/salsa-xni-pec.svg"
+    },
+    {
+      "sequence": 276,
+      "title": "Ají de Gallina",
+      "slug": "aji-de-gallina",
+      "page": "aji-de-gallina.html",
+      "image": "assets/generated/lomo-saltado.svg"
+    },
+    {
+      "sequence": 277,
+      "title": "Ceviche Peruano",
+      "slug": "ceviche-peruano",
+      "page": "ceviche-peruano.html",
+      "image": "assets/generated/aji-de-gallina.svg"
+    },
+    {
+      "sequence": 278,
+      "title": "Pollo a la Brasa",
+      "slug": "pollo-a-la-brasa-peruano",
+      "page": "pollo-a-la-brasa-peruano.html",
+      "image": "assets/generated/ceviche-peruano.svg"
+    },
+    {
+      "sequence": 279,
+      "title": "Arroz con Mariscos",
+      "slug": "arroz-con-mariscos-peruano",
+      "page": "arroz-con-mariscos-peruano.html",
+      "image": "assets/generated/pollo-a-la-brasa-peruano.svg"
+    },
+    {
+      "sequence": 280,
+      "title": "Seco de Res",
+      "slug": "seco-de-res",
+      "page": "seco-de-res.html",
+      "image": "assets/generated/arroz-con-mariscos-peruano.svg"
+    },
+    {
+      "sequence": 281,
+      "title": "Tacu Tacu",
+      "slug": "tacu-tacu",
+      "page": "tacu-tacu.html",
+      "image": "assets/generated/seco-de-res.svg"
+    },
+    {
+      "sequence": 282,
+      "title": "Causa Rellena",
+      "slug": "causa-rellena",
+      "page": "causa-rellena.html",
+      "image": "assets/generated/tacu-tacu.svg"
+    },
+    {
+      "sequence": 283,
+      "title": "Anticuchos de Corazón",
+      "slug": "anticuchos-de-corazon",
+      "page": "anticuchos-de-corazon.html",
+      "image": "assets/generated/causa-rellena.svg"
+    },
+    {
+      "sequence": 284,
+      "title": "Carapulcra",
+      "slug": "carapulcra",
+      "page": "carapulcra.html",
+      "image": "assets/generated/anticuchos-de-corazon.svg"
+    },
+    {
+      "sequence": 285,
+      "title": "Papas a la Huancaína",
+      "slug": "papas-a-la-huancaina",
+      "page": "papas-a-la-huancaina.html",
+      "image": "assets/generated/carapulcra.svg"
+    },
+    {
+      "sequence": 286,
+      "title": "Causa Limeña",
+      "slug": "causa-limena",
+      "page": "causa-limena.html",
+      "image": "assets/generated/papas-a-la-huancaina.svg"
+    },
+    {
+      "sequence": 287,
+      "title": "Yuca Frita",
+      "slug": "yuca-frita",
+      "page": "yuca-frita.html",
+      "image": "assets/generated/causa-limena.svg"
+    },
+    {
+      "sequence": 288,
+      "title": "Arroz Peruano",
+      "slug": "arroz-peruano",
+      "page": "arroz-peruano.html",
+      "image": "assets/generated/yuca-frita.svg"
+    },
+    {
+      "sequence": 289,
+      "title": "Solterito Arequipeño",
+      "slug": "solterito-arequipeno",
+      "page": "solterito-arequipeno.html",
+      "image": "assets/generated/arroz-peruano.svg"
+    },
+    {
+      "sequence": 290,
+      "title": "Ensalada Criolla",
+      "slug": "ensalada-criolla-peruana",
+      "page": "ensalada-criolla-peruana.html",
+      "image": "assets/generated/solterito-arequipeno.svg"
+    },
+    {
+      "sequence": 291,
+      "title": "Choclo con Queso",
+      "slug": "choclo-con-queso",
+      "page": "choclo-con-queso.html",
+      "image": "assets/generated/ensalada-criolla-peruana.svg"
+    },
+    {
+      "sequence": 292,
+      "title": "Papa Rellena",
+      "slug": "papa-rellena-peruana",
+      "page": "papa-rellena-peruana.html",
+      "image": "assets/generated/choclo-con-queso.svg"
+    },
+    {
+      "sequence": 293,
+      "title": "Tamal Peruano",
+      "slug": "tamal-peruano",
+      "page": "tamal-peruano.html",
+      "image": "assets/generated/papa-rellena-peruana.svg"
+    },
+    {
+      "sequence": 294,
+      "title": "Camote Frito",
+      "slug": "camote-frito",
+      "page": "camote-frito.html",
+      "image": "assets/generated/tamal-peruano.svg"
+    },
+    {
+      "sequence": 295,
+      "title": "Tacos al Pastor",
+      "slug": "tacos-al-pastor",
+      "page": "tacos-al-pastor.html",
+      "image": "assets/generated/camote-frito.svg"
+    },
+    {
+      "sequence": 296,
+      "title": "Birria",
+      "slug": "birria",
+      "page": "birria.html",
+      "image": "assets/generated/tacos-al-pastor.svg"
+    },
+    {
+      "sequence": 297,
+      "title": "Mole Poblano con Pollo",
+      "slug": "mole-poblano-con-pollo",
+      "page": "mole-poblano-con-pollo.html",
+      "image": "assets/generated/birria.svg"
+    },
+    {
+      "sequence": 298,
+      "title": "Cochinita Pibil",
+      "slug": "cochinita-pibil",
+      "page": "cochinita-pibil.html",
+      "image": "assets/generated/mole-poblano-con-pollo.svg"
+    },
+    {
+      "sequence": 299,
+      "title": "Carnitas",
+      "slug": "carnitas",
+      "page": "carnitas.html",
+      "image": "assets/generated/cochinita-pibil.svg"
+    },
+    {
+      "sequence": 300,
+      "title": "Barbacoa",
+      "slug": "barbacoa",
+      "page": "barbacoa.html",
+      "image": "assets/generated/carnitas.svg"
+    },
+    {
+      "sequence": 301,
+      "title": "Chile Relleno",
+      "slug": "chile-relleno",
+      "page": "chile-relleno.html",
+      "image": "assets/generated/barbacoa.svg"
+    },
+    {
+      "sequence": 302,
+      "title": "Enchiladas Rojas",
+      "slug": "enchiladas-rojas",
+      "page": "enchiladas-rojas.html",
+      "image": "assets/generated/chile-relleno.svg"
+    },
+    {
+      "sequence": 303,
+      "title": "Enchiladas Verdes",
+      "slug": "enchiladas-verdes",
+      "page": "enchiladas-verdes.html",
+      "image": "assets/generated/enchiladas-rojas.svg"
+    },
+    {
+      "sequence": 304,
+      "title": "Pozole Rojo",
+      "slug": "pozole-rojo",
+      "page": "pozole-rojo.html",
+      "image": "assets/generated/enchiladas-verdes.svg"
+    },
+    {
+      "sequence": 305,
+      "title": "Chiles en Nogada",
+      "slug": "chiles-en-nogada",
+      "page": "chiles-en-nogada.html",
+      "image": "assets/generated/pozole-rojo.svg"
+    },
+    {
+      "sequence": 306,
+      "title": "Carne Asada",
+      "slug": "carne-asada",
+      "page": "carne-asada.html",
+      "image": "assets/generated/chiles-en-nogada.svg"
+    },
+    {
+      "sequence": 307,
+      "title": "Pescado a la Veracruzana",
+      "slug": "pescado-a-la-veracruzana",
+      "page": "pescado-a-la-veracruzana.html",
+      "image": "assets/generated/carne-asada.svg"
+    },
+    {
+      "sequence": 308,
+      "title": "Tacos de Pescado",
+      "slug": "tacos-de-pescado",
+      "page": "tacos-de-pescado.html",
+      "image": "assets/generated/pescado-a-la-veracruzana.svg"
+    },
+    {
+      "sequence": 309,
+      "title": "Pollo en Mole Negro",
+      "slug": "pollo-en-mole-negro",
+      "page": "pollo-en-mole-negro.html",
+      "image": "assets/generated/tacos-de-pescado.svg"
+    },
+    {
+      "sequence": 310,
+      "title": "Costillas en Chile Colorado",
+      "slug": "costillas-en-chile-colorado",
+      "page": "costillas-en-chile-colorado.html",
+      "image": "assets/generated/pollo-en-mole-negro.svg"
+    },
+    {
+      "sequence": 311,
+      "title": "Enfrijoladas",
+      "slug": "enfrijoladas",
+      "page": "enfrijoladas.html",
+      "image": "assets/generated/costillas-en-chile-colorado.svg"
+    },
+    {
+      "sequence": 312,
+      "title": "Tinga de Pollo",
+      "slug": "tinga-de-pollo",
+      "page": "tinga-de-pollo.html",
+      "image": "assets/generated/enfrijoladas.svg"
+    },
+    {
+      "sequence": 313,
+      "title": "Tamales",
+      "slug": "tamales-mexicanos",
+      "page": "tamales-mexicanos.html",
+      "image": "assets/generated/tinga-de-pollo.svg"
+    },
+    {
+      "sequence": 314,
+      "title": "Cabrito al Pastor",
+      "slug": "cabrito-al-pastor",
+      "page": "cabrito-al-pastor.html",
+      "image": "assets/generated/tamales-mexicanos.svg"
+    },
+    {
+      "sequence": 315,
+      "title": "Tacos de Adobada",
+      "slug": "tacos-de-adobada",
+      "page": "tacos-de-adobada.html",
+      "image": "assets/generated/cabrito-al-pastor.svg"
+    },
+    {
+      "sequence": 316,
+      "title": "Tacos de Bistec",
+      "slug": "tacos-de-bistec",
+      "page": "tacos-de-bistec.html",
+      "image": "assets/generated/tacos-de-adobada.svg"
+    },
+    {
+      "sequence": 317,
+      "title": "Tacos de Alambre",
+      "slug": "tacos-de-alambre",
+      "page": "tacos-de-alambre.html",
+      "image": "assets/generated/tacos-de-bistec.svg"
+    },
+    {
+      "sequence": 318,
+      "title": "Tacos de Pastor Negro",
+      "slug": "tacos-de-pastor-negro",
+      "page": "tacos-de-pastor-negro.html",
+      "image": "assets/generated/tacos-de-alambre.svg"
+    },
+    {
+      "sequence": 319,
+      "title": "Tacos de Mixiote",
+      "slug": "tacos-de-mixiote",
+      "page": "tacos-de-mixiote.html",
+      "image": "assets/generated/tacos-de-pastor-negro.svg"
+    },
+    {
+      "sequence": 320,
+      "title": "Tacos de Machaca",
+      "slug": "tacos-de-machaca",
+      "page": "tacos-de-machaca.html",
+      "image": "assets/generated/tacos-de-mixiote.svg"
+    },
+    {
+      "sequence": 321,
+      "title": "Tacos de Discada",
+      "slug": "tacos-de-discada",
+      "page": "tacos-de-discada.html",
+      "image": "assets/generated/tacos-de-machaca.svg"
+    },
+    {
+      "sequence": 322,
+      "title": "Tacos de Lechón",
+      "slug": "tacos-de-lechon",
+      "page": "tacos-de-lechon.html",
+      "image": "assets/generated/tacos-de-discada.svg"
+    },
+    {
+      "sequence": 323,
+      "title": "Tacos de Buche",
+      "slug": "tacos-de-buche",
+      "page": "tacos-de-buche.html",
+      "image": "assets/generated/tacos-de-lechon.svg"
+    },
+    {
+      "sequence": 324,
+      "title": "Tacos de Cachete",
+      "slug": "tacos-de-cachete",
+      "page": "tacos-de-cachete.html",
+      "image": "assets/generated/tacos-de-buche.svg"
+    },
+    {
+      "sequence": 325,
+      "title": "Tacos de Labio",
+      "slug": "tacos-de-labio",
+      "page": "tacos-de-labio.html",
+      "image": "assets/generated/tacos-de-cachete.svg"
+    },
+    {
+      "sequence": 326,
+      "title": "Tacos de Sesos",
+      "slug": "tacos-de-sesos",
+      "page": "tacos-de-sesos.html",
+      "image": "assets/generated/tacos-de-labio.svg"
+    },
+    {
+      "sequence": 327,
+      "title": "Tacos de Chicharrón",
+      "slug": "tacos-de-chicharron",
+      "page": "tacos-de-chicharron.html",
+      "image": "assets/generated/tacos-de-sesos.svg"
+    },
+    {
+      "sequence": 328,
+      "title": "Tacos de Chicharrón Prensado",
+      "slug": "tacos-de-chicharron-prensado",
+      "page": "tacos-de-chicharron-prensado.html",
+      "image": "assets/generated/tacos-de-chicharron.svg"
+    },
+    {
+      "sequence": 329,
+      "title": "Tacos de Longaniza",
+      "slug": "tacos-de-longaniza",
+      "page": "tacos-de-longaniza.html",
+      "image": "assets/generated/tacos-de-chicharron-prensado.svg"
+    },
+    {
+      "sequence": 330,
+      "title": "Tacos de Pollo Asado",
+      "slug": "tacos-de-pollo-asado",
+      "page": "tacos-de-pollo-asado.html",
+      "image": "assets/generated/tacos-de-longaniza.svg"
+    },
+    {
+      "sequence": 331,
+      "title": "Tacos de Tinga",
+      "slug": "tacos-de-tinga",
+      "page": "tacos-de-tinga.html",
+      "image": "assets/generated/tacos-de-pollo-asado.svg"
+    },
+    {
+      "sequence": 332,
+      "title": "Tacos de Mole",
+      "slug": "tacos-de-mole",
+      "page": "tacos-de-mole.html",
+      "image": "assets/generated/tacos-de-tinga.svg"
+    },
+    {
+      "sequence": 333,
+      "title": "Tacos de Chile Relleno",
+      "slug": "tacos-de-chile-relleno",
+      "page": "tacos-de-chile-relleno.html",
+      "image": "assets/generated/tacos-de-mole.svg"
+    },
+    {
+      "sequence": 334,
+      "title": "Tacos de Papa",
+      "slug": "tacos-de-papa",
+      "page": "tacos-de-papa.html",
+      "image": "assets/generated/tacos-de-chile-relleno.svg"
+    },
+    {
+      "sequence": 335,
+      "title": "Tacos de Frijoles con Queso",
+      "slug": "tacos-frijoles-queso",
+      "page": "tacos-frijoles-queso.html",
+      "image": "assets/generated/tacos-de-papa.svg"
+    },
+    {
+      "sequence": 336,
+      "title": "Tacos de Flor de Calabaza",
+      "slug": "tacos-flor-calabaza",
+      "page": "tacos-flor-calabaza.html",
+      "image": "assets/generated/tacos-frijoles-queso.svg"
+    },
+    {
+      "sequence": 337,
+      "title": "Tacos de Huitlacoche",
+      "slug": "tacos-huitlacoche",
+      "page": "tacos-huitlacoche.html",
+      "image": "assets/generated/tacos-flor-calabaza.svg"
+    },
+    {
+      "sequence": 338,
+      "title": "Tacos de Hongos",
+      "slug": "tacos-hongos",
+      "page": "tacos-hongos.html",
+      "image": "assets/generated/tacos-huitlacoche.svg"
+    },
+    {
+      "sequence": 339,
+      "title": "Tacos de Pulpo",
+      "slug": "tacos-pulpo",
+      "page": "tacos-pulpo.html",
+      "image": "assets/generated/tacos-hongos.svg"
+    },
+    {
+      "sequence": 340,
+      "title": "Tacos de Marlín Ahumado",
+      "slug": "tacos-marlin-ahumado",
+      "page": "tacos-marlin-ahumado.html",
+      "image": "assets/generated/tacos-pulpo.svg"
+    },
+    {
+      "sequence": 341,
+      "title": "Tacos de Pescado Zarandeado",
+      "slug": "tacos-pescado-zarandeado",
+      "page": "tacos-pescado-zarandeado.html",
+      "image": "assets/generated/tacos-marlin-ahumado.svg"
+    },
+    {
+      "sequence": 342,
+      "title": "Tacos de Jaiba",
+      "slug": "tacos-jaiba",
+      "page": "tacos-jaiba.html",
+      "image": "assets/generated/tacos-pescado-zarandeado.svg"
+    },
+    {
+      "sequence": 343,
+      "title": "Tacos de Langosta",
+      "slug": "tacos-langosta",
+      "page": "tacos-langosta.html",
+      "image": "assets/generated/tacos-jaiba.svg"
+    },
+    {
+      "sequence": 344,
+      "title": "Tacos de Chapulines",
+      "slug": "tacos-chapulines",
+      "page": "tacos-chapulines.html",
+      "image": "assets/generated/tacos-langosta.svg"
+    },
+    {
+      "sequence": 345,
+      "title": "Baja Fish Tacos",
+      "slug": "baja-fish-tacos",
+      "page": "baja-fish-tacos.html",
+      "image": "assets/generated/tacos-chapulines.svg"
+    },
+    {
+      "sequence": 346,
+      "title": "Tacos de Pescado Capeado",
+      "slug": "tacos-pescado-capeado",
+      "page": "tacos-pescado-capeado.html",
+      "image": "assets/generated/baja-fish-tacos.svg"
+    },
+    {
+      "sequence": 347,
+      "title": "Tacos de Pescado a la Plancha",
+      "slug": "tacos-pescado-plancha",
+      "page": "tacos-pescado-plancha.html",
+      "image": "assets/generated/tacos-pescado-capeado.svg"
+    },
+    {
+      "sequence": 348,
+      "title": "Tacos de Pescado al Pastor",
+      "slug": "tacos-pescado-pastor",
+      "page": "tacos-pescado-pastor.html",
+      "image": "assets/generated/tacos-pescado-plancha.svg"
+    },
+    {
+      "sequence": 349,
+      "title": "Tacos de Pescado al Ajillo",
+      "slug": "tacos-pescado-ajillo",
+      "page": "tacos-pescado-ajillo.html",
+      "image": "assets/generated/tacos-pescado-pastor.svg"
+    },
+    {
+      "sequence": 350,
+      "title": "Tacos de Pescado Ensenada",
+      "slug": "tacos-pescado-ensenada",
+      "page": "tacos-pescado-ensenada.html",
+      "image": "assets/generated/tacos-pescado-ajillo.svg"
+    },
+    {
+      "sequence": 351,
+      "title": "Tacos de Pescado Tikin Xic",
+      "slug": "tacos-pescado-tikin-xic",
+      "page": "tacos-pescado-tikin-xic.html",
+      "image": "assets/generated/tacos-pescado-ensenada.svg"
+    },
+    {
+      "sequence": 352,
+      "title": "Tacos de Pescado Adobado",
+      "slug": "tacos-pescado-adobado",
+      "page": "tacos-pescado-adobado.html",
+      "image": "assets/generated/tacos-pescado-tikin-xic.svg"
+    },
+    {
+      "sequence": 353,
+      "title": "Tacos de Pescado Ahumado",
+      "slug": "tacos-pescado-ahumado",
+      "page": "tacos-pescado-ahumado.html",
+      "image": "assets/generated/tacos-pescado-adobado.svg"
+    },
+    {
+      "sequence": 354,
+      "title": "Tacos de Pescado a la Veracruzana",
+      "slug": "tacos-pescado-veracruzana",
+      "page": "tacos-pescado-veracruzana.html",
+      "image": "assets/generated/tacos-pescado-ahumado.svg"
+    },
+    {
+      "sequence": 355,
+      "title": "Tacos de Camarón Capeado",
+      "slug": "tacos-camaron-capeado",
+      "page": "tacos-camaron-capeado.html",
+      "image": "assets/generated/tacos-pescado-veracruzana.svg"
+    },
+    {
+      "sequence": 356,
+      "title": "Tacos de Camarón al Ajillo",
+      "slug": "tacos-camaron-ajillo",
+      "page": "tacos-camaron-ajillo.html",
+      "image": "assets/generated/tacos-camaron-capeado.svg"
+    },
+    {
+      "sequence": 357,
+      "title": "Tacos de Camarón a la Diabla",
+      "slug": "tacos-camaron-diabla",
+      "page": "tacos-camaron-diabla.html",
+      "image": "assets/generated/tacos-camaron-ajillo.svg"
+    },
+    {
+      "sequence": 358,
+      "title": "Tacos de Camarón al Pastor",
+      "slug": "tacos-camaron-pastor",
+      "page": "tacos-camaron-pastor.html",
+      "image": "assets/generated/tacos-camaron-diabla.svg"
+    },
+    {
+      "sequence": 359,
+      "title": "Tacos de Camarón con Queso",
+      "slug": "tacos-camaron-queso",
+      "page": "tacos-camaron-queso.html",
+      "image": "assets/generated/tacos-camaron-pastor.svg"
+    },
+    {
+      "sequence": 360,
+      "title": "Tacos de Camarón Empanizado",
+      "slug": "tacos-camaron-empanizado",
+      "page": "tacos-camaron-empanizado.html",
+      "image": "assets/generated/tacos-camaron-queso.svg"
+    },
+    {
+      "sequence": 361,
+      "title": "Tacos de Camarón a la Plancha",
+      "slug": "tacos-camaron-plancha",
+      "page": "tacos-camaron-plancha.html",
+      "image": "assets/generated/tacos-camaron-empanizado.svg"
+    },
+    {
+      "sequence": 362,
+      "title": "Tacos de Camarón Gobernador",
+      "slug": "tacos-camaron-gobernador",
+      "page": "tacos-camaron-gobernador.html",
+      "image": "assets/generated/tacos-camaron-plancha.svg"
+    },
+    {
+      "sequence": 363,
+      "title": "Tacos de Pulpo al Ajillo",
+      "slug": "tacos-pulpo-ajillo",
+      "page": "tacos-pulpo-ajillo.html",
+      "image": "assets/generated/tacos-camaron-gobernador.svg"
+    },
+    {
+      "sequence": 364,
+      "title": "Tacos de Pulpo a la Parrilla",
+      "slug": "tacos-pulpo-parrilla",
+      "page": "tacos-pulpo-parrilla.html",
+      "image": "assets/generated/tacos-pulpo-ajillo.svg"
+    },
+    {
+      "sequence": 365,
+      "title": "Tacos de Pulpo Enamorado",
+      "slug": "tacos-pulpo-enamorado",
+      "page": "tacos-pulpo-enamorado.html",
+      "image": "assets/generated/tacos-pulpo-parrilla.svg"
+    },
+    {
+      "sequence": 366,
+      "title": "Tacos de Calamar",
+      "slug": "tacos-calamar",
+      "page": "tacos-calamar.html",
+      "image": "assets/generated/tacos-pulpo-enamorado.svg"
+    },
+    {
+      "sequence": 367,
+      "title": "Tacos de Calamar Frito",
+      "slug": "tacos-calamar-frito",
+      "page": "tacos-calamar-frito.html",
+      "image": "assets/generated/tacos-calamar.svg"
+    },
+    {
+      "sequence": 368,
+      "title": "Tacos de Atún Sellado",
+      "slug": "tacos-atun-sellado",
+      "page": "tacos-atun-sellado.html",
+      "image": "assets/generated/tacos-calamar-frito.svg"
+    },
+    {
+      "sequence": 369,
+      "title": "Tacos de Atún con Aguacate",
+      "slug": "tacos-atun-aguacate",
+      "page": "tacos-atun-aguacate.html",
+      "image": "assets/generated/tacos-atun-sellado.svg"
+    },
+    {
+      "sequence": 370,
+      "title": "Tacos de Cazón",
+      "slug": "tacos-cazon",
+      "page": "tacos-cazon.html",
+      "image": "assets/generated/tacos-atun-aguacate.svg"
+    },
+    {
+      "sequence": 371,
+      "title": "Tacos de Mantaraya",
+      "slug": "tacos-mantaraya",
+      "page": "tacos-mantaraya.html",
+      "image": "assets/generated/tacos-cazon.svg"
+    },
+    {
+      "sequence": 372,
+      "title": "Tacos de Ostiones",
+      "slug": "tacos-ostiones",
+      "page": "tacos-ostiones.html",
+      "image": "assets/generated/tacos-mantaraya.svg"
+    },
+    {
+      "sequence": 373,
+      "title": "Tacos de Callo de Hacha",
+      "slug": "tacos-callo-hacha",
+      "page": "tacos-callo-hacha.html",
+      "image": "assets/generated/tacos-ostiones.svg"
+    },
+    {
+      "sequence": 374,
+      "title": "Tacos de Mariscos Mixtos",
+      "slug": "tacos-mariscos-mixtos",
+      "page": "tacos-mariscos-mixtos.html",
+      "image": "assets/generated/tacos-callo-hacha.svg"
+    },
+    {
+      "sequence": 375,
+      "title": "Arroz Rojo",
+      "slug": "arroz-rojo",
+      "page": "arroz-rojo.html",
+      "image": "assets/generated/tacos-mariscos-mixtos.svg"
+    },
+    {
+      "sequence": 376,
+      "title": "Arroz Verde",
+      "slug": "arroz-verde",
+      "page": "arroz-verde.html",
+      "image": "assets/generated/arroz-rojo.svg"
+    },
+    {
+      "sequence": 377,
+      "title": "Frijoles Refritos",
+      "slug": "frijoles-refritos",
+      "page": "frijoles-refritos.html",
+      "image": "assets/generated/arroz-verde.svg"
+    },
+    {
+      "sequence": 378,
+      "title": "Frijoles Charros",
+      "slug": "frijoles-charros",
+      "page": "frijoles-charros.html",
+      "image": "assets/generated/frijoles-refritos.svg"
+    },
+    {
+      "sequence": 379,
+      "title": "Frijoles de la Olla",
+      "slug": "frijoles-de-la-olla",
+      "page": "frijoles-de-la-olla.html",
+      "image": "assets/generated/frijoles-charros.svg"
+    },
+    {
+      "sequence": 380,
+      "title": "Elote",
+      "slug": "elote",
+      "page": "elote.html",
+      "image": "assets/generated/frijoles-de-la-olla.svg"
+    },
+    {
+      "sequence": 381,
+      "title": "Esquites",
+      "slug": "esquites",
+      "page": "esquites.html",
+      "image": "assets/generated/elote.svg"
+    },
+    {
+      "sequence": 382,
+      "title": "Nopales Asados",
+      "slug": "nopales-asados",
+      "page": "nopales-asados.html",
+      "image": "assets/generated/esquites.svg"
+    },
+    {
+      "sequence": 383,
+      "title": "Ensalada de Nopales",
+      "slug": "ensalada-nopales",
+      "page": "ensalada-nopales.html",
+      "image": "assets/generated/nopales-asados.svg"
+    },
+    {
+      "sequence": 384,
+      "title": "Rajas con Crema",
+      "slug": "rajas-con-crema",
+      "page": "rajas-con-crema.html",
+      "image": "assets/generated/ensalada-nopales.svg"
+    },
+    {
+      "sequence": 385,
+      "title": "Calabacitas a la Mexicana",
+      "slug": "calabacitas-mexicana",
+      "page": "calabacitas-mexicana.html",
+      "image": "assets/generated/rajas-con-crema.svg"
+    },
+    {
+      "sequence": 386,
+      "title": "Papas con Chorizo",
+      "slug": "papas-con-chorizo",
+      "page": "papas-con-chorizo.html",
+      "image": "assets/generated/calabacitas-mexicana.svg"
+    },
+    {
+      "sequence": 387,
+      "title": "Papas a la Mexicana",
+      "slug": "papas-mexicana",
+      "page": "papas-mexicana.html",
+      "image": "assets/generated/papas-con-chorizo.svg"
+    },
+    {
+      "sequence": 388,
+      "title": "Chiles Toreados",
+      "slug": "chiles-toreados",
+      "page": "chiles-toreados.html",
+      "image": "assets/generated/papas-mexicana.svg"
+    },
+    {
+      "sequence": 389,
+      "title": "Cebollitas Asadas",
+      "slug": "cebollitas-asadas",
+      "page": "cebollitas-asadas.html",
+      "image": "assets/generated/chiles-toreados.svg"
+    },
+    {
+      "sequence": 390,
+      "title": "Guacamole",
+      "slug": "guacamole",
+      "page": "guacamole.html",
+      "image": "assets/generated/cebollitas-asadas.svg"
+    },
+    {
+      "sequence": 391,
+      "title": "Choriqueso",
+      "slug": "choriqueso",
+      "page": "choriqueso.html",
+      "image": "assets/generated/guacamole.svg"
+    },
+    {
+      "sequence": 392,
+      "title": "Queso Fundido",
+      "slug": "queso-fundido",
+      "page": "queso-fundido.html",
+      "image": "assets/generated/choriqueso.svg"
+    },
+    {
+      "sequence": 393,
+      "title": "Chiles Rellenos de Queso",
+      "slug": "chiles-rellenos-queso",
+      "page": "chiles-rellenos-queso.html",
+      "image": "assets/generated/queso-fundido.svg"
+    },
+    {
+      "sequence": 394,
+      "title": "Ensalada de Jícama",
+      "slug": "ensalada-jicama",
+      "page": "ensalada-jicama.html",
+      "image": "assets/generated/chiles-rellenos-queso.svg"
+    },
+    {
+      "sequence": 395,
+      "title": "Ensalada de Aguacate",
+      "slug": "ensalada-aguacate",
+      "page": "ensalada-aguacate.html",
+      "image": "assets/generated/ensalada-jicama.svg"
+    },
+    {
+      "sequence": 396,
+      "title": "Coleslaw Estilo Baja",
+      "slug": "coleslaw-baja",
+      "page": "coleslaw-baja.html",
+      "image": "assets/generated/ensalada-aguacate.svg"
+    },
+    {
+      "sequence": 397,
+      "title": "Chayotes con Crema",
+      "slug": "chayotes-crema",
+      "page": "chayotes-crema.html",
+      "image": "assets/generated/coleslaw-baja.svg"
+    },
+    {
+      "sequence": 398,
+      "title": "Verdolagas",
+      "slug": "verdolagas",
+      "page": "verdolagas.html",
+      "image": "assets/generated/chayotes-crema.svg"
+    },
+    {
+      "sequence": 399,
+      "title": "Ejotes a la Mexicana",
+      "slug": "ejotes-mexicana",
+      "page": "ejotes-mexicana.html",
+      "image": "assets/generated/verdolagas.svg"
+    },
+    {
+      "sequence": 400,
+      "title": "Calabaza con Elote",
+      "slug": "calabaza-elote",
+      "page": "calabaza-elote.html",
+      "image": "assets/generated/ejotes-mexicana.svg"
+    },
+    {
+      "sequence": 401,
+      "title": "Plátanos Fritos",
+      "slug": "platanos-fritos",
+      "page": "platanos-fritos.html",
+      "image": "assets/generated/calabaza-elote.svg"
+    },
+    {
+      "sequence": 402,
+      "title": "Yuca con Chile y Limón",
+      "slug": "yuca-chile-limon",
+      "page": "yuca-chile-limon.html",
+      "image": "assets/generated/platanos-fritos.svg"
+    },
+    {
+      "sequence": 403,
+      "title": "Tortillas de Maíz Hechas a Mano",
+      "slug": "tortillas-maiz-hechas-mano",
+      "page": "tortillas-maiz-hechas-mano.html",
+      "image": "assets/generated/yuca-chile-limon.svg"
+    },
+    {
+      "sequence": 404,
+      "title": "Huevos Rancheros",
+      "slug": "huevos-rancheros",
+      "page": "huevos-rancheros.html",
+      "image": "assets/generated/tortillas-maiz-hechas-mano.svg"
+    },
+    {
+      "sequence": 405,
+      "title": "Chilaquiles Rojos",
+      "slug": "chilaquiles-rojos",
+      "page": "chilaquiles-rojos.html",
+      "image": "assets/generated/huevos-rancheros.svg"
+    },
+    {
+      "sequence": 406,
+      "title": "Chilaquiles Verdes",
+      "slug": "chilaquiles-verdes",
+      "page": "chilaquiles-verdes.html",
+      "image": "assets/generated/chilaquiles-rojos.svg"
+    },
+    {
+      "sequence": 407,
+      "title": "Huevos a la Mexicana",
+      "slug": "huevos-mexicana",
+      "page": "huevos-mexicana.html",
+      "image": "assets/generated/chilaquiles-verdes.svg"
+    },
+    {
+      "sequence": 408,
+      "title": "Huevos Divorciados",
+      "slug": "huevos-divorciados",
+      "page": "huevos-divorciados.html",
+      "image": "assets/generated/huevos-mexicana.svg"
+    },
+    {
+      "sequence": 409,
+      "title": "Huevos Motuleños",
+      "slug": "huevos-motulenos",
+      "page": "huevos-motulenos.html",
+      "image": "assets/generated/huevos-divorciados.svg"
+    },
+    {
+      "sequence": 410,
+      "title": "Huevos con Chorizo",
+      "slug": "huevos-chorizo",
+      "page": "huevos-chorizo.html",
+      "image": "assets/generated/huevos-motulenos.svg"
+    },
+    {
+      "sequence": 411,
+      "title": "Huevos con Machaca",
+      "slug": "huevos-machaca",
+      "page": "huevos-machaca.html",
+      "image": "assets/generated/huevos-chorizo.svg"
+    },
+    {
+      "sequence": 412,
+      "title": "Molletes",
+      "slug": "molletes",
+      "page": "molletes.html",
+      "image": "assets/generated/huevos-machaca.svg"
+    },
+    {
+      "sequence": 413,
+      "title": "Entomatadas",
+      "slug": "entomatadas",
+      "page": "entomatadas.html",
+      "image": "assets/generated/molletes.svg"
+    },
+    {
+      "sequence": 414,
+      "title": "Migas Mexicanas",
+      "slug": "migas-mexicanas",
+      "page": "migas-mexicanas.html",
+      "image": "assets/generated/entomatadas.svg"
+    },
+    {
+      "sequence": 415,
+      "title": "Gorditas de Desayuno",
+      "slug": "gorditas-desayuno",
+      "page": "gorditas-desayuno.html",
+      "image": "assets/generated/migas-mexicanas.svg"
+    },
+    {
+      "sequence": 416,
+      "title": "Tamales con Atole",
+      "slug": "tamales-atole",
+      "page": "tamales-atole.html",
+      "image": "assets/generated/gorditas-desayuno.svg"
+    },
+    {
+      "sequence": 417,
+      "title": "Quesadillas de Flor de Calabaza",
+      "slug": "quesadillas-flor-calabaza",
+      "page": "quesadillas-flor-calabaza.html",
+      "image": "assets/generated/tamales-atole.svg"
+    },
+    {
+      "sequence": 418,
+      "title": "Tacos de Barbacoa",
+      "slug": "tacos-barbacoa",
+      "page": "tacos-barbacoa.html",
+      "image": "assets/generated/quesadillas-flor-calabaza.svg"
+    },
+    {
+      "sequence": 419,
+      "title": "Tacos de Canasta",
+      "slug": "tacos-canasta",
+      "page": "tacos-canasta.html",
+      "image": "assets/generated/tacos-barbacoa.svg"
+    },
+    {
+      "sequence": 420,
+      "title": "Birria con Consomé",
+      "slug": "birria-consome",
+      "page": "birria-consome.html",
+      "image": "assets/generated/tacos-canasta.svg"
+    },
+    {
+      "sequence": 421,
+      "title": "Menudo",
+      "slug": "menudo",
+      "page": "menudo.html",
+      "image": "assets/generated/birria-consome.svg"
+    },
+    {
+      "sequence": 422,
+      "title": "Papas con Chorizo y Huevo",
+      "slug": "papas-chorizo-huevo",
+      "page": "papas-chorizo-huevo.html",
+      "image": "assets/generated/menudo.svg"
+    },
+    {
+      "sequence": 423,
+      "title": "Nopales con Huevo",
+      "slug": "nopales-con-huevo",
+      "page": "nopales-con-huevo.html",
+      "image": "assets/generated/papas-chorizo-huevo.svg"
+    },
+    {
+      "sequence": 424,
+      "title": "Pan Dulce con Café de Olla",
+      "slug": "pan-dulce-cafe-olla",
+      "page": "pan-dulce-cafe-olla.html",
+      "image": "assets/generated/nopales-con-huevo.svg"
+    }
+  ]
+}
