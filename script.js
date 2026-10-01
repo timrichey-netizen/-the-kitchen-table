@@ -13,6 +13,77 @@ if (menuButton && nav) {
   });
 }
 
+
+const recipeEnglishNames = {
+  "Dashi":"Japanese Soup Stock","Kombu Dashi":"Kelp Soup Stock","Shiitake Dashi":"Shiitake Mushroom Soup Stock",
+  "Tonkotsu Broth":"Pork Bone Broth","Pho Broth":"Vietnamese Noodle Soup Broth","Tom Yum Broth":"Thai Hot and Sour Soup Broth","Tom Kha Broth":"Thai Coconut Soup Broth",
+  "Mexican Caldo de Pollo":"Mexican Chicken Soup","Mexican Caldo de Res":"Mexican Beef Soup","Consommé":"Clear Broth","Court-Bouillon":"Quick Aromatic Broth","Italian Brodo":"Italian Broth",
+  "Tres Leches Cake":"Three-Milk Cake","Flan Napolitano":"Neapolitan Flan","Pastel de Elote":"Sweet Corn Cake","Arroz con Leche":"Rice Pudding","Buñuelos":"Fried Sweet Fritters",
+  "Capirotada":"Mexican Bread Pudding","Conchas":"Mexican Sweet Shell Breads","Pan de Muerto":"Bread of the Dead","Carlota de Limón":"Mexican Lime Icebox Cake","Pastel de Cajeta":"Goat-Milk Caramel Cake",
+  "Empanadas de Cajeta":"Goat-Milk Caramel Turnovers","Cocadas":"Coconut Sweets","Alegrías":"Amaranth Seed Sweets","Mazapán de Cacahuate":"Peanut Marzipan","Camotes Poblanos":"Puebla-Style Sweet Potato Candy",
+  "Dulce de Leche":"Milk Caramel","Cajeta":"Goat-Milk Caramel","Paletas Mexicanas":"Mexican Ice Pops","Nieves Mexicanas":"Mexican Sorbet","Fresas con Crema":"Strawberries with Cream",
+  "Plátanos Fritos con Crema":"Fried Plantains with Cream","Gorditas de Azúcar":"Sweet Sugar Griddle Cakes","Polvorones Mexicanos":"Mexican Shortbread Cookies","Marranitos":"Mexican Gingerbread Pig Cookies",
+  "Orejas":"Palmier Pastries","Gelatina de Mosaico":"Mosaic Gelatin",
+  "Spaghetti Carbonara":"Spaghetti with Egg, Pecorino and Guanciale","Pasta Cacio e Pepe":"Pasta with Cheese and Pepper","Rigatoni Amatriciana":"Rigatoni with Tomato and Guanciale",
+  "Perciatelli alla Gricia":"Perciatelli with Guanciale and Pecorino","Pasta e Ceci":"Pasta and Chickpeas","Penne all’Arrabbiata":"Penne with Spicy Tomato Sauce","Bucatini Amatriciana":"Bucatini with Tomato and Guanciale",
+  "Osso Buco with Red Wine":"Braised Veal Shanks with Red Wine","Pasta alla Norma":"Sicilian Pasta with Eggplant","Pork Chop Milanese":"Milan-Style Breaded Pork Chop","Gnocchi alla Sorrentina":"Sorrento-Style Gnocchi",
+  "Ricotta and Parmesan Gnudi":"Ricotta and Parmesan Dumplings","Pasta ’Ncasciata":"Sicilian Baked Pasta","Pasta Aglio e Olio":"Pasta with Garlic and Olive Oil","Stracotto di Fassona Piemontese":"Piedmontese Slow-Braised Beef",
+  "Boeuf Bourguignon":"Burgundy-Style Braised Beef","Bagna Càuda":"Warm Garlic-Anchovy Dip","Crème Brûlée":"Burnt Cream Custard","Moules Marinières":"Sailor-Style Mussels","Rösti":"Swiss Crispy Potato Cake",
+  "Asado Argentino":"Argentine Barbecue","Bife de Chorizo con Chimichurri":"Sirloin Steak with Chimichurri","Milanesa Napolitana":"Neapolitan-Style Breaded Cutlet","Empanadas Argentinas":"Argentine Savory Turnovers",
+  "Locro":"Argentine Corn and Bean Stew","Matambre Arrollado":"Rolled Stuffed Flank Steak","Pastel de Papa":"Argentine Cottage Pie","Carbonada Criolla":"Argentine Beef and Vegetable Stew","Humita en Chala":"Corn Pudding in Corn Husks",
+  "Pollo al Disco":"Disc-Cooked Chicken","Provoleta":"Grilled Provolone Cheese","Ensalada Rusa":"Russian Potato Salad","Ensalada Criolla":"Creole Salad","Papas Fritas":"French Fries",
+  "Papas a la Provenzal":"Potatoes with Garlic and Parsley","Puré de Papas":"Mashed Potatoes","Zapallitos Rellenos":"Stuffed Zucchini","Berenjenas en Escabeche":"Pickled Eggplant","Choclo a la Parrilla":"Grilled Corn",
+  "Papas al Plomo":"Ember-Baked Potatoes","Chocotorta":"Chocolate Cookie Cake","Alfajores":"Dulce de Leche Sandwich Cookies","Flan con Dulce de Leche":"Flan with Milk Caramel","Panqueques con Dulce de Leche":"Crepes with Milk Caramel",
+  "Chivito":"Uruguayan Steak Sandwich","Asado Uruguayo":"Uruguayan Barbecue","Chivito al Plato":"Uruguayan Steak Platter","Pamplona de Carne":"Stuffed Rolled Beef","Puchero Uruguayo":"Uruguayan Meat and Vegetable Stew",
+  "Empanadas Uruguayas":"Uruguayan Savory Turnovers","Matambre Relleno":"Stuffed Flank Steak","Ñoquis con Tuco":"Gnocchi with Tomato-Meat Sauce","Revuelto Gramajo":"Potato, Egg and Ham Scramble","Capeletis a la Caruso":"Cappelletti with Caruso Sauce",
+  "Arroz con Pollo":"Chicken with Rice","Pollo a la Parrilla":"Grilled Chicken",
+  "Béchamel":"White Sauce","Velouté":"Velvety Stock Sauce","Espagnole":"Brown Sauce","Sauce Tomate":"Tomato Sauce","Hollandaise":"Dutch-Style Butter and Egg Sauce","Mornay":"Cheese Béchamel Sauce",
+  "Soubise":"Onion Cream Sauce","Nantua":"Crayfish Cream Sauce","Suprême":"Creamy Chicken Velouté","Allemande":"German-Style Velouté","Normande":"Normandy-Style Cream Sauce","Bercy":"White Wine Shallot Sauce",
+  "Poulette":"Mushroom-Parsley Velouté","Béarnaise":"Tarragon Butter Sauce","Choron":"Tomato Béarnaise Sauce","Foyot":"Meat-Glace Béarnaise Sauce","Mousseline":"Whipped Hollandaise","Maltaise":"Orange Hollandaise",
+  "Noisette":"Brown Butter Sauce","Provençale":"Provence-Style Tomato Sauce",
+  "Salsa Roja":"Red Sauce","Salsa Verde":"Green Sauce","Pico de Gallo":"Fresh Tomato Salsa","Salsa Ranchera":"Ranch-Style Salsa","Salsa Taquera":"Taco-Shop Salsa","Salsa de Chile de Árbol":"Chile de Árbol Salsa",
+  "Salsa Macha":"Oil-Based Chile Salsa","Mole Poblano":"Puebla-Style Mole Sauce","Mole Negro":"Black Mole Sauce","Salsa de Guajillo":"Guajillo Chile Salsa","Salsa de Chipotle":"Chipotle Salsa","Salsa de Tomatillo":"Tomatillo Salsa",
+  "Salsa Borracha":"Drunken Salsa","Salsa de Aguacate":"Avocado Salsa","Salsa Habanero":"Habanero Salsa","Salsa Morita":"Morita Chile Salsa","Salsa de Cacahuate":"Peanut Salsa","Salsa de Molcajete":"Stone-Mortar Salsa","Salsa Xni-Pec":"Yucatecan Habanero Salsa",
+  "Lomo Saltado":"Peruvian Stir-Fried Beef","Ají de Gallina":"Peruvian Creamy Chile Chicken","Ceviche Peruano":"Peruvian Ceviche","Pollo a la Brasa":"Peruvian Rotisserie Chicken","Arroz con Mariscos":"Rice with Seafood",
+  "Seco de Res":"Peruvian Cilantro Beef Stew","Tacu Tacu":"Peruvian Rice and Bean Cake","Causa Rellena":"Stuffed Peruvian Potato Terrine","Anticuchos de Corazón":"Beef Heart Skewers","Papas a la Huancaína":"Potatoes with Huancaína Cheese Sauce",
+  "Causa Limeña":"Lima-Style Potato Terrine","Yuca Frita":"Fried Cassava","Arroz Peruano":"Peruvian Rice","Solterito Arequipeño":"Arequipa-Style Bean and Cheese Salad","Choclo con Queso":"Corn with Cheese","Papa Rellena":"Stuffed Potato",
+  "Tamal Peruano":"Peruvian Tamale","Camote Frito":"Fried Sweet Potato",
+  "Tacos al Pastor":"Shepherd-Style Tacos","Mole Poblano con Pollo":"Chicken with Puebla-Style Mole","Cochinita Pibil":"Yucatan-Style Achiote Pork","Carnitas":"Slow-Cooked Pork","Barbacoa":"Slow-Cooked Barbecue Meat",
+  "Chile Relleno":"Stuffed Chile","Enchiladas Rojas":"Red Enchiladas","Enchiladas Verdes":"Green Enchiladas","Pozole Rojo":"Red Hominy Stew","Chiles en Nogada":"Stuffed Chiles with Walnut Sauce","Carne Asada":"Grilled Beef",
+  "Pescado a la Veracruzana":"Veracruz-Style Fish","Tacos de Pescado":"Fish Tacos","Pollo en Mole Negro":"Chicken in Black Mole","Costillas en Chile Colorado":"Ribs in Red Chile Sauce","Enfrijoladas":"Bean-Sauce Enchiladas","Tinga de Pollo":"Shredded Chicken Tinga",
+  "Cabrito al Pastor":"Shepherd-Style Roasted Kid Goat",
+  "Arroz Rojo":"Red Rice","Arroz Verde":"Green Rice","Frijoles Refritos":"Refried Beans","Frijoles Charros":"Cowboy Beans","Frijoles de la Olla":"Pot Beans","Elote":"Mexican Street Corn","Esquites":"Mexican Corn Cup",
+  "Nopales Asados":"Grilled Cactus Paddles","Ensalada de Nopales":"Cactus Salad","Rajas con Crema":"Roasted Chile Strips with Cream","Calabacitas a la Mexicana":"Mexican-Style Zucchini","Papas con Chorizo":"Potatoes with Chorizo",
+  "Papas a la Mexicana":"Mexican-Style Potatoes","Chiles Toreados":"Blistered Chiles","Cebollitas Asadas":"Grilled Green Onions","Choriqueso":"Chorizo Cheese Dip","Queso Fundido":"Melted Cheese","Chiles Rellenos de Queso":"Cheese-Stuffed Chiles",
+  "Ensalada de Jícama":"Jicama Salad","Ensalada de Aguacate":"Avocado Salad","Coleslaw Estilo Baja":"Baja-Style Coleslaw","Chayotes con Crema":"Chayote with Cream","Ejotes a la Mexicana":"Mexican-Style Green Beans",
+  "Calabaza con Elote":"Squash with Corn","Plátanos Fritos":"Fried Plantains","Yuca con Chile y Limón":"Cassava with Chile and Lime","Tortillas de Maíz Hechas a Mano":"Handmade Corn Tortillas",
+  "Huevos Rancheros":"Ranch-Style Eggs","Chilaquiles Rojos":"Red Chilaquiles","Chilaquiles Verdes":"Green Chilaquiles","Huevos a la Mexicana":"Mexican-Style Eggs","Huevos Divorciados":"Divorced Eggs","Huevos Motuleños":"Motul-Style Eggs",
+  "Huevos con Chorizo":"Eggs with Chorizo","Huevos con Machaca":"Eggs with Dried Shredded Beef","Molletes":"Mexican Bean and Cheese Toasts","Entomatadas":"Tomato-Sauce Tortillas","Migas Mexicanas":"Mexican-Style Migas","Gorditas de Desayuno":"Breakfast Gorditas",
+  "Tamales con Atole":"Tamales with Atole","Quesadillas de Flor de Calabaza":"Squash Blossom Quesadillas","Tacos de Barbacoa":"Barbacoa Tacos","Tacos de Canasta":"Basket Tacos","Birria con Consomé":"Birria with Consommé",
+  "Menudo":"Mexican Tripe Soup","Papas con Chorizo y Huevo":"Potatoes with Chorizo and Egg","Nopales con Huevo":"Cactus with Egg","Pan Dulce con Café de Olla":"Sweet Bread with Spiced Pot Coffee"
+};
+
+function addEnglishRecipeNames() {
+  function translated(title) {
+    title = (title || '').trim();
+    if (!title || /\([^)]*\)\s*$/.test(title)) return title;
+    if (recipeEnglishNames[title]) return title + ' (' + recipeEnglishNames[title] + ')';
+
+    let m = title.match(/^Tacos de (.+)$/);
+    if (m) {
+      const tacoTerms = {
+        "Adobada":"Adobo-Marinated Pork","Bistec":"Steak","Alambre":"Grilled Meat and Peppers","Pastor Negro":"Black-Marinated Shepherd-Style Pork","Mixiote":"Pit-Style Marinated Meat","Machaca":"Dried Shredded Beef","Discada":"Disc-Griddled Mixed Meat","Lechón":"Roast Suckling Pig","Buche":"Pork Stomach","Cachete":"Beef Cheek","Labio":"Beef Lip","Sesos":"Brains","Chicharrón":"Pork Cracklings","Chicharrón Prensado":"Pressed Pork Cracklings","Longaniza":"Mexican Sausage","Pollo Asado":"Grilled Chicken","Tinga":"Shredded Tinga","Mole":"Mole Sauce","Chile Relleno":"Stuffed Chile","Papa":"Potato","Frijoles con Queso":"Beans and Cheese","Flor de Calabaza":"Squash Blossom","Huitlacoche":"Corn Truffle","Hongos":"Mushrooms","Pulpo":"Octopus","Marlín Ahumado":"Smoked Marlin","Pescado Zarandeado":"Grilled Zarandeado Fish","Jaiba":"Crab","Langosta":"Lobster","Chapulines":"Grasshoppers","Pescado Capeado":"Battered Fish","Pescado a la Plancha":"Griddled Fish","Pescado al Pastor":"Shepherd-Style Fish","Pescado al Ajillo":"Garlic Fish","Pescado Ensenada":"Ensenada-Style Fish","Pescado Tikin Xic":"Yucatan Achiote Fish","Pescado Adobado":"Adobo-Marinated Fish","Pescado Ahumado":"Smoked Fish","Pescado a la Veracruzana":"Veracruz-Style Fish","Camarón Capeado":"Battered Shrimp","Camarón al Ajillo":"Garlic Shrimp","Camarón a la Diabla":"Spicy Devil-Style Shrimp","Camarón al Pastor":"Shepherd-Style Shrimp","Camarón con Queso":"Shrimp with Cheese","Camarón Empanizado":"Breaded Shrimp","Camarón a la Plancha":"Griddled Shrimp","Camarón Gobernador":"Governor-Style Shrimp","Pulpo al Ajillo":"Garlic Octopus","Pulpo a la Parrilla":"Grilled Octopus","Pulpo Enamorado":"Creamy Marinated Octopus","Calamar":"Squid","Calamar Frito":"Fried Squid","Atún Sellado":"Seared Tuna","Atún con Aguacate":"Tuna with Avocado","Cazón":"Dogfish","Mantaraya":"Stingray","Ostiones":"Oysters","Callo de Hacha":"Scallops","Mariscos Mixtos":"Mixed Seafood"
+      };
+      if (tacoTerms[m[1]]) return title + ' (' + tacoTerms[m[1]] + ' Tacos)';
+    }
+    return title;
+  }
+
+  document.querySelectorAll('.recipe-card h3').forEach(function(el){ el.textContent = translated(el.textContent); });
+  const detailTitle = document.querySelector('.recipe-detail h1, .recipe-detail h2');
+  if (detailTitle) detailTitle.textContent = translated(detailTitle.textContent);
+}
+
 const cards = [...document.querySelectorAll('.recipe-card')];
 const search = document.getElementById('recipeSearch');
 const cuisineFiltersWrap = document.getElementById('cuisineFilters');
@@ -363,6 +434,7 @@ filters.forEach(button => button.addEventListener('click', () => {
   updateRecipes();
 }));
 
+addEnglishRecipeNames();
 sortRecipesMainFirst();
 populateCuisineFilter();
 populateAsianSubcuisines();
