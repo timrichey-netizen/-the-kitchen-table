@@ -345,7 +345,7 @@ const recipeEnglishNames = {
   "Orejas":"Palmier Pastries","Gelatina de Mosaico":"Mosaic Gelatin",
   "Spaghetti Carbonara":"Spaghetti with Egg, Pecorino and Guanciale","Pasta Cacio e Pepe":"Pasta with Cheese and Pepper","Rigatoni Amatriciana":"Rigatoni with Tomato and Guanciale",
   "Perciatelli alla Gricia":"Perciatelli with Guanciale and Pecorino","Pasta e Ceci":"Pasta and Chickpeas","Penne all’Arrabbiata":"Penne with Spicy Tomato Sauce","Bucatini Amatriciana":"Bucatini with Tomato and Guanciale",
-  "Osso Buco with Red Wine":"Braised Veal Shanks with Red Wine","Pasta alla Norma":"Sicilian Pasta with Eggplant","Pork Chop Milanese":"Milan-Style Breaded Pork Chop","Gnocchi alla Sorrentina":"Sorrento-Style Gnocchi",
+  "Osso Buco with Red Wine":"Braised Veal Shanks with Red Wine","Pasta con le Melanzane e Ricotta Salata":"Pasta with Eggplant and Ricotta Salata","Pasta alla Norma":"Sicilian Pasta with Eggplant","Pork Chop Milanese":"Milan-Style Breaded Pork Chop","Gnocchi alla Sorrentina":"Sorrento-Style Gnocchi",
   "Ricotta and Parmesan Gnudi":"Ricotta and Parmesan Dumplings","Pasta ’Ncasciata":"Sicilian Baked Pasta","Pasta Aglio e Olio":"Pasta with Garlic and Olive Oil","Stracotto di Fassona Piemontese":"Piedmontese Slow-Braised Beef",
   "Boeuf Bourguignon":"Burgundy-Style Braised Beef","Bagna Càuda":"Warm Garlic-Anchovy Dip","Crème Brûlée":"Burnt Cream Custard","Moules Marinières":"Sailor-Style Mussels","Rösti":"Swiss Crispy Potato Cake",
   "Asado Argentino":"Argentine Barbecue","Bife de Chorizo con Chimichurri":"Sirloin Steak with Chimichurri","Milanesa Napolitana":"Neapolitan-Style Breaded Cutlet","Empanadas Argentinas":"Argentine Savory Turnovers",
@@ -411,7 +411,13 @@ function addEnglishRecipeNames() {
     if (!title || /\([^)]*\)\s*$/.test(title)) return title;
     const originalTitle = title;
     const displayTitle = toRecipeTitleCase(title);
-    const englishName = recipeEnglishNames[originalTitle] || recipeEnglishNames[displayTitle];
+    const normalizedTitle = normalizeSearchText(originalTitle);
+    const normalizedKey = Object.keys(recipeEnglishNames).find(function(key){
+      return normalizeSearchText(key) === normalizedTitle;
+    });
+    const englishName = recipeEnglishNames[originalTitle] ||
+      recipeEnglishNames[displayTitle] ||
+      (normalizedKey ? recipeEnglishNames[normalizedKey] : '');
     if (englishName) return displayTitle + ' (' + toRecipeTitleCase(englishName) + ')';
     title = displayTitle;
 
