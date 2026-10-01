@@ -345,7 +345,7 @@ const recipeEnglishNames = {
   "Orejas":"Palmier Pastries","Gelatina de Mosaico":"Mosaic Gelatin",
   "Spaghetti Carbonara":"Spaghetti with Egg, Pecorino and Guanciale","Pasta Cacio e Pepe":"Pasta with Cheese and Pepper","Rigatoni Amatriciana":"Rigatoni with Tomato and Guanciale",
   "Perciatelli alla Gricia":"Perciatelli with Guanciale and Pecorino","Pasta e Ceci":"Pasta and Chickpeas","Penne all’Arrabbiata":"Penne with Spicy Tomato Sauce","Bucatini Amatriciana":"Bucatini with Tomato and Guanciale",
-  "Osso Buco with Red Wine":"Braised Veal Shanks with Red Wine","Pasta con le Melanzane e Ricotta Salata":"Pasta with Eggplant and Ricotta Salata","Pasta alla Norma":"Sicilian Pasta with Eggplant","Pork Chop Milanese":"Milan-Style Breaded Pork Chop","Gnocchi alla Sorrentina":"Sorrento-Style Gnocchi",
+  "Osso Buco with Red Wine":"Braised Veal Shanks with Red Wine","Pasta con i Tenerumi":"Pasta with Sicilian Squash Greens","Pasta con le Melanzane e Ricotta Salata":"Pasta with Eggplant and Ricotta Salata","Pasta alla Norma":"Sicilian Pasta with Eggplant","Pork Chop Milanese":"Milan-Style Breaded Pork Chop","Gnocchi alla Sorrentina":"Sorrento-Style Gnocchi",
   "Ricotta and Parmesan Gnudi":"Ricotta and Parmesan Dumplings","Pasta ’Ncasciata":"Sicilian Baked Pasta","Pasta Aglio e Olio":"Pasta with Garlic and Olive Oil","Stracotto di Fassona Piemontese":"Piedmontese Slow-Braised Beef",
   "Boeuf Bourguignon":"Burgundy-Style Braised Beef","Bagna Càuda":"Warm Garlic-Anchovy Dip","Crème Brûlée":"Burnt Cream Custard","Moules Marinières":"Sailor-Style Mussels","Rösti":"Swiss Crispy Potato Cake",
   "Asado Argentino":"Argentine Barbecue","Bife de Chorizo con Chimichurri":"Sirloin Steak with Chimichurri","Milanesa Napolitana":"Neapolitan-Style Breaded Cutlet","Empanadas Argentinas":"Argentine Savory Turnovers",
@@ -746,30 +746,43 @@ function standardizeRegionalMetadata(root) {
   }
 
   function inferFoodType(container) {
-    const meta=container.querySelector('.recipe-meta');
-    if (meta) {
-      const first=meta.querySelector('span');
-      if (first) {
-        const raw=(first.textContent || '').split(/[·/|]/)[0].trim();
-        const key=norm(raw);
-        if (foodTypes[key]) return foodTypes[key];
-        if (raw && raw.length <= 28 && !/\d/.test(raw)) return raw;
-      }
-    }
+    const categories=(container.dataset && container.dataset.category || '')
+      .split(/\s+/)
+      .filter(Boolean);
 
-    const eyebrow=container.querySelector('.eyebrow');
-    if (eyebrow) {
-      const raw=(eyebrow.textContent || '').split(/[·/|]/)[0].trim();
-      const key=norm(raw);
-      if (foodTypes[key]) return foodTypes[key];
-      if (raw && raw.length <= 28 && !inferCountry(raw) && !/\d/.test(raw)) return raw;
-    }
-
-    const categories=(container.dataset && container.dataset.category || '').split(/\s+/);
+    // Controlled category metadata is the preferred source.
     for (const category of categories) {
       const mapped=foodTypes[norm(category)];
       if (mapped) return mapped;
     }
+
+    // Recognized existing metadata may be used, but unknown cuisine labels
+    // such as "Italian (Sicilian)" must never become the food type.
+    const meta=container.querySelector('.recipe-meta');
+    if (meta) {
+      for (const span of [...meta.querySelectorAll('span')]) {
+        const raw=(span.textContent || '').split(/[·/|]/)[0].trim();
+        const mapped=foodTypes[norm(raw)];
+        if (mapped) return mapped;
+      }
+    }
+
+    // Title is safe for a small set of explicit food-type names.
+    const title=(container.querySelector('h3,h1,h2')?.textContent || '').trim();
+    const titleNorm=norm(title);
+    const titleRules=[
+      ['Pasta', ['pasta','spaghetti','rigatoni','linguine','fettuccine','bucatini','penne','gnocchi','lasagna','lasagne','ravioli','tagliatelle','orecchiette']],
+      ['Tacos', ['taco','tacos']],
+      ['Soup', ['soup','caldo','broth','bisque','chowder','pozole','menudo']],
+      ['Salad', ['salad','ensalada']],
+      ['Seafood', ['fish','seafood','shrimp','mussels','clam','clams','oyster','oysters','lobster','crab','ceviche']],
+      ['Rice', ['rice','risotto','paella','plov','pilaf']],
+      ['Dessert', ['cake','pie','flan','pudding','tiramisu','mousse','brownie','cookie','cookies','ice cream']]
+    ];
+    for (const rule of titleRules) {
+      if (rule[1].some(function(term){ return contains(titleNorm, term); })) return rule[0];
+    }
+
     return 'Food';
   }
 
@@ -807,51 +820,56 @@ function standardizeRegionalMetadata(root) {
   }
 
   function normalizeContainer(container) {
-    const allText=[
-      container.textContent || '',
+    const isCard=container.matches('.recipe-card');
+
+    // IMPORTANT: card metadata must never use free-form description/body text.
+    // Only structured attributes, existing metadata spans, categories and title
+    // may participate in display classification.
+    const metaText=isCard
+      ? [...container.querySelectorAll('.recipe-meta span')].map(function(el){return el.textContent || '';}).join(' ')
+      : (container.textContent || '');
+
+    const structuredText=[
+      metaText,
       container.dataset && container.dataset.search || '',
-      container.dataset && container.dataset.category || ''
+      container.dataset && container.dataset.category || '',
+      container.dataset && container.dataset.country || '',
+      container.querySelector('h3,h1,h2')?.textContent || ''
     ].join(' ');
 
     const foodType=inferFoodType(container);
-    const country=inferCountry(allText);
-    const location=inferLocation(container, country, allText);
-    const label=format(foodType, country, location);
+    const country=(container.dataset && container.dataset.country || '').trim() || inferCountry(structuredText);
 
-    if (container.matches('.recipe-card')) {
+    if (isCard) {
       const meta=container.querySelector('.recipe-meta');
       if (!meta) return;
 
-      // Recipe-card metadata is intentionally two-sided:
-      // FOOD TYPE on the left, COUNTRY on the right.
-      // Do not place city/region, cuisine style, protein, time, or other
-      // secondary metadata in this row.
-      let spans=[...meta.querySelectorAll('span')];
-      let first=spans[0];
-      if (!first) {
-        first=document.createElement('span');
-        meta.appendChild(first);
-      }
-      let second=spans[1];
-      if (!second) {
-        second=document.createElement('span');
-        meta.appendChild(second);
-      }
+      // Enforce exactly two display fields:
+      // FOOD TYPE (left) | COUNTRY (right)
+      meta.innerHTML='';
 
-      first.textContent=(foodType || 'Food').toUpperCase();
-      second.textContent=(country || '').toUpperCase();
-      second.hidden=!country;
+      const left=document.createElement('span');
+      left.className='recipe-food-type';
+      left.textContent=(foodType || 'Food').toUpperCase();
 
-      spans=[...meta.querySelectorAll('span')];
-      spans.slice(2).forEach(function(span){ span.remove(); });
+      const right=document.createElement('span');
+      right.className='recipe-country';
+      right.textContent=(country || '').toUpperCase();
+      right.hidden=!country;
+
+      meta.append(left,right);
       return;
     }
+
+    // Detail pages may still use richer geographic presentation.
+    const allText=structuredText;
+    const location=inferLocation(container, country, allText);
+    const label=format(foodType, country, location);
 
     if (container.matches('.recipe-detail')) {
       const eyebrow=container.querySelector('.eyebrow');
       if (eyebrow) eyebrow.textContent=label;
 
-      // Remove duplicate geographic/cuisine pills while preserving time/yield.
       const stats=container.querySelector('.stats');
       if (stats) {
         [...stats.querySelectorAll('span')].forEach(function(span){
