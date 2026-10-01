@@ -1,3 +1,129 @@
+
+// Site-wide language support: English, Spanish, French.
+(function(){
+  var STORAGE_KEY='kitchenTableLanguage';
+  var supported=['en','es','fr'];
+  var saved='';
+  try{ saved=localStorage.getItem(STORAGE_KEY)||''; }catch(e){}
+  var current=supported.indexOf(saved)>=0?saved:'en';
+
+  var translations={
+    es:{
+      'Recipes':'Recetas','My Meal':'Mi Comida','Pantry to Plate':'Despensa al Plato','Sauces':'Salsas','Guides':'Guías','Plan a Meal':'Planificar una Comida','About':'Acerca de',
+      'Home':'Inicio','Cooking Guides':'Guías de Cocina','Open guide →':'Abrir guía →','View recipe →':'Ver receta →','View sauce →':'Ver salsa →',
+      'Browse recipes':'Explorar recetas','View categories':'Ver categorías','RECIPE OF THE DAY':'RECETA DEL DÍA','A PERSONAL COOKBOOK':'UN RECETARIO PERSONAL',
+      'Recipes worth making again.':'Recetas que vale la pena repetir.','Find something delicious.':'Encuentra algo delicioso.','RECIPE COLLECTION':'COLECCIÓN DE RECETAS',
+      'Search recipes…':'Buscar recetas…','All cuisines':'Todas las cocinas','Cuisine':'Cocina','Food type':'Tipo de comida','All':'Todo','Meat':'Carnes','Pasta':'Pasta','Rice':'Arroz','Seafood':'Mariscos','Vegetables & Sides':'Verduras y Guarniciones','Soups & Salads':'Sopas y Ensaladas','Extras':'Extras','Desserts':'Postres',
+      'Ingredients':'Ingredientes','Preparation':'Preparación','Related Recipes':'Recetas Relacionadas','All recipes':'Todas las recetas','Print Recipe':'Imprimir receta','Print recipe':'Imprimir receta',
+      'Add to My Meal':'Agregar a Mi Comida','Already in My Meal':'Ya está en Mi Comida','Added to My Meal':'Agregado a Mi Comida',
+      'Back to Guides':'Volver a Guías','Back to all recipes':'Volver a todas las recetas','Back to recipes':'Volver a recetas','Cooking Guide':'Guía de Cocina',
+      'PANTRY TO PLATE':'DESPENSA AL PLATO','Cook with what you already have.':'Cocina con lo que ya tienes.','Select the ingredients you already have, and we’ll recommend dishes you can make.':'Selecciona los ingredientes que ya tienes y te recomendaremos platos que puedes preparar.',
+      'ingredients selected':'ingredientes seleccionados','Proteins':'Proteínas','Vegetables':'Verduras','Fruit':'Frutas','Grains':'Granos','Dairy':'Lácteos','Pantry':'Despensa','Herbs & Spices':'Hierbas y Especias','Condiments':'Condimentos',
+      'Find Dishes':'Buscar Platos','Clear selections':'Borrar selección','RECOMMENDED':'RECOMENDADO','Dishes that match your pantry':'Platos que coinciden con tu despensa',
+      'Choose at least one ingredient to get recommendations.':'Selecciona al menos un ingrediente para obtener recomendaciones.','Finding dishes…':'Buscando platos…',
+      'No close matches found yet. Try a broader combination of ingredients.':'No se encontraron coincidencias cercanas. Prueba una combinación más amplia de ingredientes.',
+      'My Meal':'Mi Comida','Finalize Meal':'Finalizar Comida','Ingredient List':'Lista de Ingredientes','Print list':'Imprimir lista',
+      'Mother Sauces':'Salsas Madre','Daughter Sauces by Mother':'Salsas Derivadas por Salsa Madre','Other Sauces':'Otras Salsas','The Five Mother Sauces Guide':'Guía de las Cinco Salsas Madre',
+      'Seafood & Fish Guide':'Guía de Pescados y Mariscos','Pasta Guide':'Guía de Pasta','Mushroom Guide':'Guía de Hongos','Meat Guide':'Guía de Carnes','Tortilla Guide':'Guía de Tortillas'
+    },
+    fr:{
+      'Recipes':'Recettes','My Meal':'Mon Repas','Pantry to Plate':'Du Garde-Manger à l’Assiette','Sauces':'Sauces','Guides':'Guides','Plan a Meal':'Planifier un Repas','About':'À propos',
+      'Home':'Accueil','Cooking Guides':'Guides de Cuisine','Open guide →':'Ouvrir le guide →','View recipe →':'Voir la recette →','View sauce →':'Voir la sauce →',
+      'Browse recipes':'Parcourir les recettes','View categories':'Voir les catégories','RECIPE OF THE DAY':'RECETTE DU JOUR','A PERSONAL COOKBOOK':'UN LIVRE DE RECETTES PERSONNEL',
+      'Recipes worth making again.':'Des recettes à refaire encore et encore.','Find something delicious.':'Trouvez quelque chose de délicieux.','RECIPE COLLECTION':'COLLECTION DE RECETTES',
+      'Search recipes…':'Rechercher des recettes…','All cuisines':'Toutes les cuisines','Cuisine':'Cuisine','Food type':'Type de plat','All':'Tout','Meat':'Viandes','Pasta':'Pâtes','Rice':'Riz','Seafood':'Fruits de mer','Vegetables & Sides':'Légumes et Accompagnements','Soups & Salads':'Soupes et Salades','Extras':'Extras','Desserts':'Desserts',
+      'Ingredients':'Ingrédients','Preparation':'Préparation','Related Recipes':'Recettes Associées','All recipes':'Toutes les recettes','Print Recipe':'Imprimer la recette','Print recipe':'Imprimer la recette',
+      'Add to My Meal':'Ajouter à Mon Repas','Already in My Meal':'Déjà dans Mon Repas','Added to My Meal':'Ajouté à Mon Repas',
+      'Back to Guides':'Retour aux Guides','Back to all recipes':'Retour à toutes les recettes','Back to recipes':'Retour aux recettes','Cooking Guide':'Guide de Cuisine',
+      'PANTRY TO PLATE':'DU GARDE-MANGER À L’ASSIETTE','Cook with what you already have.':'Cuisinez avec ce que vous avez déjà.','Select the ingredients you already have, and we’ll recommend dishes you can make.':'Sélectionnez les ingrédients que vous avez déjà et nous vous proposerons des plats à préparer.',
+      'ingredients selected':'ingrédients sélectionnés','Proteins':'Protéines','Vegetables':'Légumes','Fruit':'Fruits','Grains':'Céréales','Dairy':'Produits Laitiers','Pantry':'Garde-Manger','Herbs & Spices':'Herbes et Épices','Condiments':'Condiments',
+      'Find Dishes':'Trouver des Plats','Clear selections':'Effacer la sélection','RECOMMENDED':'RECOMMANDÉ','Dishes that match your pantry':'Plats correspondant à votre garde-manger',
+      'Choose at least one ingredient to get recommendations.':'Choisissez au moins un ingrédient pour obtenir des recommandations.','Finding dishes…':'Recherche de plats…',
+      'No close matches found yet. Try a broader combination of ingredients.':'Aucune correspondance proche. Essayez une combinaison plus large d’ingrédients.',
+      'Finalize Meal':'Finaliser le Repas','Ingredient List':'Liste des Ingrédients','Print list':'Imprimer la liste',
+      'Mother Sauces':'Sauces Mères','Daughter Sauces by Mother':'Sauces Dérivées par Sauce Mère','Other Sauces':'Autres Sauces','The Five Mother Sauces Guide':'Guide des Cinq Sauces Mères',
+      'Seafood & Fish Guide':'Guide des Poissons et Fruits de Mer','Pasta Guide':'Guide des Pâtes','Mushroom Guide':'Guide des Champignons','Meat Guide':'Guide des Viandes','Tortilla Guide':'Guide des Tortillas'
+    }
+  };
+
+  function translateExact(value){
+    if(current==='en') return value;
+    var trimmed=(value||'').trim();
+    if(!trimmed)return value;
+    var translated=translations[current]&&translations[current][trimmed];
+    if(!translated)return value;
+    var lead=value.match(/^\s*/)[0], tail=value.match(/\s*$/)[0];
+    return lead+translated+tail;
+  }
+
+  function translateDOM(){
+    document.documentElement.lang=current;
+    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+      acceptNode:function(node){
+        var p=node.parentElement;
+        if(!p||/^(SCRIPT|STYLE|TEXTAREA|OPTION)$/i.test(p.tagName))return NodeFilter.FILTER_REJECT;
+        return node.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+      }
+    });
+    var nodes=[],n;
+    while((n=walker.nextNode()))nodes.push(n);
+    nodes.forEach(function(node){
+      if(!node.parentElement.dataset.i18nOriginal) node.parentElement.dataset.i18nOriginal=node.nodeValue;
+      var original=node.parentElement.dataset.i18nOriginal;
+      node.nodeValue=current==='en'?original:translateExact(original);
+    });
+
+    document.querySelectorAll('input[placeholder]').forEach(function(el){
+      if(!el.dataset.i18nPlaceholder)el.dataset.i18nPlaceholder=el.getAttribute('placeholder')||'';
+      var original=el.dataset.i18nPlaceholder;
+      el.setAttribute('placeholder',current==='en'?original:translateExact(original));
+    });
+    document.querySelectorAll('[aria-label]').forEach(function(el){
+      if(!el.dataset.i18nAria)el.dataset.i18nAria=el.getAttribute('aria-label')||'';
+      var original=el.dataset.i18nAria;
+      el.setAttribute('aria-label',current==='en'?original:translateExact(original));
+    });
+  }
+
+  function addSwitcher(){
+    if(document.querySelector('.language-switcher'))return;
+    var host=document.querySelector('.nav-wrap')||document.querySelector('.topbar')||document.querySelector('.site-header');
+    if(!host)return;
+    var wrap=document.createElement('div');
+    wrap.className='language-switcher';
+    wrap.setAttribute('aria-label','Language');
+    wrap.innerHTML='<button type="button" data-lang="en">EN</button><button type="button" data-lang="es">ES</button><button type="button" data-lang="fr">FR</button>';
+    host.appendChild(wrap);
+    wrap.querySelectorAll('button').forEach(function(btn){
+      btn.classList.toggle('active',btn.dataset.lang===current);
+      btn.addEventListener('click',function(){
+        current=btn.dataset.lang;
+        try{localStorage.setItem(STORAGE_KEY,current);}catch(e){}
+        wrap.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.lang===current);});
+        translateDOM();
+        document.dispatchEvent(new CustomEvent('kitchen-table-language-change',{detail:{language:current}}));
+      });
+    });
+  }
+
+  window.KitchenTableI18n={
+    getLanguage:function(){return current;},
+    t:function(value){return current==='en'?value:translateExact(value);},
+    apply:translateDOM
+  };
+
+  function init(){addSwitcher();translateDOM();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else init();
+
+  // Translate controls or status text inserted later by existing site scripts.
+  var observer=new MutationObserver(function(mutations){
+    var changed=mutations.some(function(m){return m.type==='childList'&&m.addedNodes.length;});
+    if(changed&&current!=='en')translateDOM();
+  });
+  if(document.documentElement)observer.observe(document.documentElement,{childList:true,subtree:true});
+})();
+
 // Browser scroll restoration is handled early on the homepage in index.html.
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
