@@ -942,3 +942,145 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
     img.style.display = '';
   });
 });
+
+// Pantry to Plate
+(function(){
+  var selector=document.getElementById('pantrySelector');
+  var findButton=document.getElementById('findPantryDishes');
+  var clearButton=document.getElementById('clearPantryIngredients');
+  var results=document.getElementById('pantryResults');
+  var resultsGrid=document.getElementById('pantryResultsGrid');
+  var resultsSummary=document.getElementById('pantryResultsSummary');
+  var countEl=document.getElementById('pantrySelectionCount');
+  if(!selector||!findButton||!results||!resultsGrid)return;
+
+  var selected=[];
+
+  function normalize(value){
+    return (value||'').toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9]+/g,' ').trim();
+  }
+
+  function aliases(term){
+    var map={
+      'tomato':['tomato','tomatoes'],
+      'onion':['onion','onions'],
+      'mushroom':['mushroom','mushrooms'],
+      'potato':['potato','potatoes'],
+      'tortilla':['tortilla','tortillas'],
+      'green beans':['green beans','green bean'],
+      'canned tomato':['tomato','tomatoes'],
+      'olive oil':['olive oil'],
+      'stock':['stock','broth'],
+      'pepper':['pepper','peppers','chile','chili'],
+      'cheese':['cheese','parmesan','pecorino','mozzarella','ricotta'],
+      'shellfish':['shrimp','mussels','clams','crab','lobster','shellfish']
+    };
+    return map[term]||[term];
+  }
+
+  function updateCount(){
+    if(countEl)countEl.textContent=String(selected.length);
+  }
+
+  selector.querySelectorAll('[data-ingredient]').forEach(function(button){
+    button.addEventListener('click',function(){
+      var value=button.dataset.ingredient;
+      var i=selected.indexOf(value);
+      if(i>=0){
+        selected.splice(i,1);
+        button.classList.remove('selected');
+        button.setAttribute('aria-pressed','false');
+      }else{
+        selected.push(value);
+        button.classList.add('selected');
+        button.setAttribute('aria-pressed','true');
+      }
+      updateCount();
+    });
+    button.setAttribute('aria-pressed','false');
+  });
+
+  function cardData(card){
+    var title=(card.querySelector('h3')||{}).textContent||'';
+    var description=(card.querySelector('p')||{}).textContent||'';
+    var search=card.dataset.search||'';
+    var meta=(card.querySelector('.recipe-meta')||{}).textContent||'';
+    var link=card.querySelector('a[href]');
+    var img=card.querySelector('img');
+    var haystack=normalize([title,description,search,meta].join(' '));
+    return {
+      card:card,title:title.trim(),description:description.trim(),
+      url:link?link.getAttribute('href'):'#',
+      image:img?img.getAttribute('src'):'',
+      alt:img?img.getAttribute('alt')||title:title,
+      haystack:haystack
+    };
+  }
+
+  function scoreRecipe(data){
+    var matched=[];
+    selected.forEach(function(term){
+      var terms=aliases(term);
+      if(terms.some(function(alias){return data.haystack.indexOf(normalize(alias))>=0;})){
+        matched.push(term);
+      }
+    });
+    return {data:data,score:matched.length,matched:matched};
+  }
+
+  function resultCard(item){
+    var image=item.data.image
+      ?'<img src="'+item.data.image+'" alt="'+item.data.alt.replace(/"/g,'&quot;')+'" loading="lazy">'
+      :'';
+    var matchText=item.matched.length
+      ?'<p class="pantry-match">Matches: '+item.matched.join(', ')+'</p>'
+      :'';
+    return '<article class="pantry-result-card">'+image+
+      '<div class="pantry-result-body"><h4>'+item.data.title+'</h4>'+
+      '<p>'+item.data.description+'</p>'+matchText+
+      '<a class="text-link" href="'+item.data.url+'">View recipe →</a></div></article>';
+  }
+
+  findButton.addEventListener('click',function(){
+    if(!selected.length){
+      results.hidden=false;
+      resultsSummary.textContent='Choose at least one ingredient to get recommendations.';
+      resultsGrid.innerHTML='';
+      results.scrollIntoView({behavior:'smooth',block:'start'});
+      return;
+    }
+    var ranked=[].slice.call(document.querySelectorAll('#recipeGrid .recipe-card'))
+      .map(cardData).map(scoreRecipe)
+      .filter(function(x){return x.score>0;})
+      .sort(function(a,b){
+        return b.score-a.score || a.data.title.localeCompare(b.data.title);
+      }).slice(0,12);
+
+    results.hidden=false;
+    if(!ranked.length){
+      resultsSummary.textContent='No close matches found yet. Try a broader combination of ingredients.';
+      resultsGrid.innerHTML='';
+    }else{
+      resultsSummary.textContent='Showing '+ranked.length+' best match'+(ranked.length===1?'':'es')+
+        ' for '+selected.length+' selected ingredient'+(selected.length===1?'':'s')+'.';
+      resultsGrid.innerHTML=ranked.map(resultCard).join('');
+    }
+    results.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  if(clearButton)clearButton.addEventListener('click',function(){
+    selected=[];
+    selector.querySelectorAll('[data-ingredient]').forEach(function(button){
+      button.classList.remove('selected');
+      button.setAttribute('aria-pressed','false');
+    });
+    updateCount();
+    results.hidden=true;
+    resultsGrid.innerHTML='';
+    resultsSummary.textContent='';
+  });
+
+  updateCount();
+})();
