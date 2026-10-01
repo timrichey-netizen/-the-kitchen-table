@@ -11,7 +11,20 @@
   <link rel="stylesheet" href="styles.css" />
 <style>
 .guide-hero-image{width:100%;height:min(42vw,460px);object-fit:cover;display:block;border-radius:22px;box-shadow:var(--shadow);margin:28px 0 34px}
-@media(max-width:700px){.guide-hero-image{height:240px;border-radius:16px;margin:22px 0 28px}}
+.mushroom-types{margin:34px 0}
+.mushroom-types-intro{max-width:760px;color:var(--muted);margin-bottom:18px}
+.mushroom-type-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.mushroom-type-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(78,49,32,.06)}
+.mushroom-type-card img{width:100%;height:190px;object-fit:cover;display:block;background:#eee}
+.mushroom-type-body{padding:18px}
+.mushroom-type-body h3{margin:0 0 8px;font-size:1.35rem}
+.mushroom-type-body p{margin:0 0 8px;color:var(--muted)}
+.mushroom-type-body p:last-child{margin-bottom:0}
+.mushroom-type-body strong{color:var(--text)}
+.mushroom-photo-credit{font-size:.72rem;color:var(--muted);margin-top:9px!important}
+.mushroom-photo-credit a{color:inherit}
+@media(max-width:900px){.mushroom-type-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.guide-hero-image{height:240px;border-radius:16px;margin:22px 0 28px}.mushroom-type-grid{grid-template-columns:1fr}.mushroom-type-card img{height:220px}}
 </style>
 </head>
 <body>
@@ -44,6 +57,80 @@
       <p class="eyebrow" style="margin-top:0">THE GOLDEN RULE</p>
       <h2 style="margin-top:0">Brown first. Sauce second.</h2>
       <p>Mushrooms contain a great deal of water. In a crowded or cool pan they steam in their own liquid. For deeper flavor, cook them in a wide hot pan and wait until the released moisture evaporates before adding cream, wine, stock, or other liquids.</p>
+    </section>
+
+    <section class="mushroom-types" aria-labelledby="mushroom-types-title">
+      <p class="eyebrow">MUSHROOM VARIETIES</p>
+      <h2 id="mushroom-types-title">Types of Mushrooms &amp; How to Use Them</h2>
+      <p class="mushroom-types-intro">Different mushrooms vary greatly in texture, moisture, and intensity. Some are best for everyday sautéing, while others shine when roasted, grilled, braised, or used to build deep savory flavor.</p>
+
+      <div class="mushroom-type-grid">
+        <article class="mushroom-type-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Fruits%20and%20Vegetables%20%2820161028-AMS-LSC-0505%29.jpg" alt="Cremini mushrooms">
+          <div class="mushroom-type-body">
+            <h3>White Button, Cremini &amp; Portobello</h3>
+            <p><strong>Flavor:</strong> Mild when young; deeper and earthier as the mushroom matures.</p>
+            <p><strong>Best uses:</strong> Everyday sautéing, soups, omelets, pasta, pizza, burgers, stuffed mushrooms, roasting, and grilling large portobello caps.</p>
+            <p><strong>Tip:</strong> These are the same species at different stages of maturity, making them among the most versatile mushrooms in the kitchen.</p>
+            <p class="mushroom-photo-credit">Photo: USDA / Lance Cheung, public domain.</p>
+          </div>
+        </article>
+
+        <article class="mushroom-type-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Fruits%20and%20Vegetables%20%2820161028-AMS-LSC-0347%29.jpg" alt="Shiitake mushrooms">
+          <div class="mushroom-type-body">
+            <h3>Shiitake</h3>
+            <p><strong>Flavor:</strong> Deep, woodsy, intensely savory, with strong umami.</p>
+            <p><strong>Best uses:</strong> Stir-fries, noodle soups, ramen, broths, dumplings, rice dishes, braises, and mushroom sauces.</p>
+            <p><strong>Tip:</strong> Remove very tough stems before cooking; save them for stock. Dried shiitakes make exceptionally flavorful broth.</p>
+            <p class="mushroom-photo-credit">Photo: USDA / Lance Cheung, public domain.</p>
+          </div>
+        </article>
+
+        <article class="mushroom-type-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Fruits%20and%20Vegetables%20%2820161028-AMS-LSC-0341%29.jpg" alt="Oyster mushrooms">
+          <div class="mushroom-type-body">
+            <h3>Oyster</h3>
+            <p><strong>Flavor:</strong> Mild, delicately savory, sometimes slightly sweet.</p>
+            <p><strong>Best uses:</strong> High-heat sautéing, stir-fries, pasta, tacos, soups, roasting, and crisp-edged mushroom dishes.</p>
+            <p><strong>Tip:</strong> Tear rather than finely slice large clusters. Their thin edges become especially crisp when cooked over high heat.</p>
+            <p class="mushroom-photo-credit">Photo: USDA / Lance Cheung, public domain.</p>
+          </div>
+        </article>
+
+        <article class="mushroom-type-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Royal%20Trumpet%20mushroom%2020161028-AMS-LSC-0332%20%2830837198135%29.jpg" alt="King oyster or royal trumpet mushrooms">
+          <div class="mushroom-type-body">
+            <h3>King Oyster / Royal Trumpet</h3>
+            <p><strong>Flavor:</strong> Mild and savory with a dense, meaty texture.</p>
+            <p><strong>Best uses:</strong> Thick slices for pan-searing, grilling, roasting, skewers, vegetarian “scallops,” and hearty stir-fries.</p>
+            <p><strong>Tip:</strong> Score thick rounds lightly before searing so they brown well and absorb butter, oil, or sauce.</p>
+            <p class="mushroom-photo-credit">Photo: USDA / Lance Cheung, public domain.</p>
+          </div>
+        </article>
+
+        <article class="mushroom-type-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Maitake%20%28Hen%20of%20the%20Woods%29%20mushroom%2020161028-AMS-LSC-0141%20%2830749388301%29.jpg" alt="Maitake hen of the woods mushroom">
+          <div class="mushroom-type-body">
+            <h3>Maitake / Hen of the Woods</h3>
+            <p><strong>Flavor:</strong> Rich, earthy, peppery, and highly savory.</p>
+            <p><strong>Best uses:</strong> Roasting, hard searing, pasta, risotto, grain bowls, soups, and as a substantial mushroom centerpiece.</p>
+            <p><strong>Tip:</strong> Separate into natural fronds and roast or sear until the edges become deeply browned and crisp.</p>
+            <p class="mushroom-photo-credit">Photo: USDA / Lance Cheung, public domain.</p>
+          </div>
+        </article>
+
+        <article class="mushroom-type-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Enoki%20mushroom.jpg" alt="Enoki mushrooms">
+          <div class="mushroom-type-body">
+            <h3>Enoki</h3>
+            <p><strong>Flavor:</strong> Very mild with a delicate, slightly crisp texture.</p>
+            <p><strong>Best uses:</strong> Hot pot, soups, noodle dishes, stir-fries, and quick-cooked garnishes.</p>
+            <p><strong>Tip:</strong> Trim away the compact root base, separate the strands, and cook them rather than serving them raw.</p>
+            <p class="mushroom-photo-credit">Photo: Mitrofresh / Wikimedia Commons, CC BY-SA 4.0.</p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <div class="recipe-layout">
