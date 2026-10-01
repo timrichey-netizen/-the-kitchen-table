@@ -387,9 +387,27 @@ function addEnglishRecipeNames() {
     return title;
   }
 
-  document.querySelectorAll('.recipe-card h3').forEach(function(el){ el.textContent = translated(el.textContent); });
-  const detailTitle = document.querySelector('.recipe-detail h1, .recipe-detail h2');
-  if (detailTitle) detailTitle.textContent = translated(detailTitle.textContent);
+  function renderTranslatedTitle(el) {
+    if (!el) return;
+    const full = translated(el.textContent);
+    const match = full.match(/^(.*?)\s*\(([^()]*)\)\s*$/);
+    if (!match) {
+      el.textContent = full;
+      return;
+    }
+    el.textContent = '';
+    const original = document.createElement('span');
+    original.className = 'recipe-title-original';
+    original.textContent = match[1].trim();
+    const english = document.createElement('span');
+    english.className = 'recipe-title-english';
+    english.textContent = match[2].trim();
+    el.appendChild(original);
+    el.appendChild(english);
+  }
+
+  document.querySelectorAll('.recipe-card h3').forEach(renderTranslatedTitle);
+  renderTranslatedTitle(document.querySelector('.recipe-detail h1, .recipe-detail h2'));
 }
 
 const cards = [...document.querySelectorAll('.recipe-card')];
