@@ -389,3 +389,33 @@ button,a,input,select{touch-action:manipulation}
   .recipe-rating-picker{grid-template-columns:repeat(5,1fr)}
   .recipe-feedback-form{padding:18px}
 }
+
+/* My Meal */
+.my-meal-page{background:linear-gradient(180deg,#fffaf4,#f2e7da);min-height:calc(100vh - 72px)}
+.my-meal-intro{max-width:780px;margin-bottom:28px}
+.my-meal-panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow);margin-top:24px}
+.my-meal-heading{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:20px}
+.my-meal-heading h2{margin-bottom:6px}
+.my-meal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.my-meal-card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--bg)}
+.my-meal-card img{width:100%;height:180px;object-fit:cover;display:block}
+.my-meal-card-body{padding:18px}
+.my-meal-card-body h3{font-size:1.35rem;margin-bottom:8px}
+.my-meal-card-body p{color:var(--muted);margin:0 0 12px}
+.my-meal-card-actions{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.my-meal-remove{border:0;background:none;color:var(--accent-dark);font:inherit;font-weight:800;cursor:pointer}
+.my-meal-empty{text-align:center;padding:32px 10px}
+.my-meal-empty p{color:var(--muted)}
+.my-meal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.finalized-meal-panel{border-color:rgba(164,68,47,.25)}
+.add-to-my-meal{margin-left:10px}
+.my-meal-nav-count{font-size:.8em;opacity:.75}
+@media(max-width:900px){.my-meal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){
+  .my-meal-panel{padding:18px;border-radius:18px}
+  .my-meal-heading{flex-direction:column}
+  .my-meal-grid{grid-template-columns:1fr}
+  .my-meal-actions{display:grid;grid-template-columns:1fr}
+  .my-meal-actions .button{width:100%}
+  .add-to-my-meal{display:block;margin:10px 0 0;width:100%}
+}
