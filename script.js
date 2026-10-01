@@ -467,9 +467,9 @@ const ASIAN_SUBCUISINES = [
 ];
 
 const CUISINES = [
-  ['European', ['italian','italy','roman','sicilian','venetian','piedmont','piedmontese','campanian','florentine','milanese','sorrentina','amatriciana','carbonara','cacio e pepe','gricia','arrabbiata','bolognese','cioppino','french','france','bourguignon','béchamel','bechamel','veloute','velouté','espagnole','hollandaise','bearnaise','béarnaise','provençale','provencale','british','english','scottish','welsh','sticky toffee','spotted dick','bread pudding','swiss','switzerland','zurich','zürich','rosti','rösti','fondue','belgian','belgium','moules-frites','frites','spanish','spain','catalan','basque','greek','greece','saganaki']],
+  ['European', ['italian','italy','roman','sicilian','venetian','piedmont','piedmontese','campanian','florentine','milanese','sorrentina','amatriciana','carbonara','cacio e pepe','gricia','arrabbiata','bolognese','cioppino','french','france','bourguignon','béchamel','bechamel','veloute','velouté','espagnole','hollandaise','bearnaise','béarnaise','provençale','provencale','british','english','scottish','welsh','sticky toffee','spotted dick','swiss','switzerland','zurich','zürich','rosti','rösti','fondue','belgian','belgium','moules-frites','frites','spanish','spain','catalan','basque','greek','greece','saganaki']],
   ['Mediterranean', ['mediterranean']],
-  ['Latin American', ['latin','mexican','mexico','argentinian','argentine','argentina','uruguayan','uruguay','peruvian','peru','brazilian','brazil','colombian','colombia','venezuelan','venezuela','chilean','chile','cuban','cuba','puerto rican','puerto rico','dominican','dominican republic','guatemalan','guatemala','salvadoran','el salvador','honduran','honduras','nicaraguan','nicaragua','costa rican','costa rica','panamanian','panama','criolla','tomatillo','enchilada','taco','chilaquiles','huevos rancheros','mole','provoleta','milanesa','chimichurri','asado','chivito','ceviche','lomo saltado','aji','feijoada','moqueca','arepa','ajiaco','pabellon','pastel de choclo','ropa vieja','mofongo','mangu']],
+  ['Latin American', ['latin','mexican','mexico','argentinian','argentine','argentina','uruguayan','uruguay','peruvian','peru','brazilian','brazil','colombian','colombia','venezuelan','venezuela','chilean','cuban','cuba','puerto rican','puerto rico','dominican','dominican republic','guatemalan','guatemala','salvadoran','el salvador','honduran','honduras','nicaraguan','nicaragua','costa rican','costa rica','panamanian','panama','criolla','tomatillo','enchilada','taco','chilaquiles','huevos rancheros','mole','provoleta','milanesa','chimichurri','asado','chivito','ceviche','lomo saltado','aji','feijoada','moqueca','arepa','ajiaco','pabellon','pastel de choclo','ropa vieja','mofongo','mangu']],
   ['Asian', ['asian','chinese','moo shu','mandarin','japanese','miso','korean','gochujang','thai','vietnamese','fusion','stir-fry']],
   ['American', ['american','san francisco','cajun','creole','new orleans']]
 ];
@@ -487,10 +487,37 @@ function cardHaystack(card) {
   return normalizeSearchText(`${card.dataset.search || ''} ${card.textContent || ''}`);
 }
 
+function containsCuisineTerm(text, term) {
+  const normalized = normalizeSearchText(term);
+  return (' ' + text + ' ').includes(' ' + normalized + ' ');
+}
+
 function detectCuisine(card) {
+  // Prefer the recipe's explicit metadata over descriptive ingredient/method text.
+  // This prevents terms such as "bread pudding", "chile", "French bread",
+  // or "Italian sausage" from moving a recipe into the wrong cuisine.
+  const meta = normalizeSearchText(
+    (card.querySelector('.recipe-meta')?.textContent || '') + ' ' +
+    (card.dataset.category || '')
+  );
+
+  const explicitGroups = [
+    ['Latin American', ['latin','mexican','mexico','argentinian','argentine','argentina','uruguayan','uruguay','peruvian','peru','brazilian','brazil','colombian','colombia','venezuelan','venezuela','chilean','cuban','puerto rican','dominican','guatemalan','salvadoran','honduran','nicaraguan','costa rican','panamanian']],
+    ['American', ['american','cajun','creole','new orleans']],
+    ['Asian', ['asian','chinese','japanese','korean','thai','vietnamese']],
+    ['Mediterranean', ['mediterranean']],
+    ['European', ['italian','roman','sicilian','venetian','piedmontese','florentine','milanese','french','british','english','scottish','welsh','swiss','belgian','spanish','catalan','basque','greek']]
+  ];
+
+  for (const [label, terms] of explicitGroups) {
+    if (terms.some(term => containsCuisineTerm(meta, term))) return label;
+  }
+
   const text = cardHaystack(card);
+  // Fallback only when the card has no explicit cuisine metadata.
+  // Match complete normalized terms rather than arbitrary substrings.
   for (const [label, terms] of CUISINES) {
-    if (terms.some(term => text.includes(term))) return label;
+    if (terms.some(term => containsCuisineTerm(text, term))) return label;
   }
   return '';
 }
@@ -498,7 +525,7 @@ function detectCuisine(card) {
 function detectAmericanSubcuisine(card) {
   const text = cardHaystack(card);
   for (const [label, terms] of AMERICAN_SUBCUISINES) {
-    if (terms.some(term => text.includes(normalizeSearchText(term)))) return label;
+    if (terms.some(term => containsCuisineTerm(text, term))) return label;
   }
   return '';
 }
@@ -506,7 +533,7 @@ function detectAmericanSubcuisine(card) {
 function detectEuropeanSubcuisine(card) {
   const text = cardHaystack(card);
   for (const [label, terms] of EUROPEAN_SUBCUISINES) {
-    if (terms.some(term => text.includes(normalizeSearchText(term)))) return label;
+    if (terms.some(term => containsCuisineTerm(text, term))) return label;
   }
   return '';
 }
@@ -514,7 +541,7 @@ function detectEuropeanSubcuisine(card) {
 function detectAsianSubcuisine(card) {
   const text = cardHaystack(card);
   for (const [label, terms] of ASIAN_SUBCUISINES) {
-    if (terms.some(term => text.includes(term))) return label;
+    if (terms.some(term => containsCuisineTerm(text, term))) return label;
   }
   return '';
 }
@@ -522,7 +549,7 @@ function detectAsianSubcuisine(card) {
 function detectLatinSubcuisine(card) {
   const text = cardHaystack(card);
   for (const [label, terms] of LATIN_SUBCUISINES) {
-    if (terms.some(term => text.includes(term))) return label;
+    if (terms.some(term => containsCuisineTerm(text, term))) return label;
   }
   return '';
 }
@@ -530,7 +557,7 @@ function detectLatinSubcuisine(card) {
 function detectMexicanSubcategory(card) {
   const text = cardHaystack(card);
   for (const [label, terms] of MEXICAN_SUBCATEGORIES) {
-    if (terms.some(term => text.includes(normalizeSearchText(term)))) return label;
+    if (terms.some(term => containsCuisineTerm(text, term))) return label;
   }
   return 'Other Mexican';
 }
