@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build and finalize your meal from The Kitchen Table recipe collection.">
+  <title>My Meal | The Kitchen Table</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="index.html">The Kitchen Table</a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="index.html#recipes">Recipes</a>
+      <a href="my-meal.html" aria-current="page">My Meal <span id="myMealNavCount"></span></a>
+      <a href="plan-a-meal.html">Plan a Meal</a>
+      <a href="index.html#pantry-to-plate">Pantry to Plate</a>
+    </nav>
+  </div>
+</header>
+
+<main class="section my-meal-page">
+  <div class="container">
+    <div class="my-meal-intro">
+      <p class="eyebrow">MY MEAL</p>
+      <h1>Build your meal.</h1>
+      <p class="recipe-intro">Recipes you add while browsing appear here. Review your selections, remove anything you do not want, then finalize the meal when it looks right.</p>
+    </div>
+
+    <section id="myMealBuilder" class="my-meal-panel">
+      <div class="my-meal-heading">
+        <div>
+          <h2>Selected dishes</h2>
+          <p class="muted-copy" id="myMealSelectedSummary">No dishes selected yet.</p>
+        </div>
+        <button class="button secondary" id="clearMyMeal" type="button">Clear all</button>
+      </div>
+      <div id="myMealSelectedGrid" class="my-meal-grid"></div>
+      <div id="myMealEmpty" class="my-meal-empty">
+        <p>No recipes have been added yet.</p>
+        <a class="button primary" href="index.html#recipes">Browse recipes</a>
+      </div>
+      <div class="my-meal-actions">
+        <button class="button primary" id="finalizeMyMeal" type="button" disabled>Finalize meal</button>
+      </div>
+    </section>
+
+    <section id="finalizedMealSection" class="my-meal-panel finalized-meal-panel" hidden>
+      <div class="my-meal-heading">
+        <div>
+          <p class="eyebrow">FINALIZED MEAL</p>
+          <h2>Your Kitchen Table meal</h2>
+          <p class="muted-copy">These are the dishes currently included in your finalized meal.</p>
+        </div>
+        <button class="button secondary" id="editMyMeal" type="button">Edit meal</button>
+      </div>
+      <div id="finalizedMealGrid" class="my-meal-grid"></div>
+      <div class="my-meal-actions">
+        <button class="button primary" id="createFinalMealIngredients" type="button">Create ingredient list</button>
+      </div>
+
+      <section class="ingredient-list-panel" id="finalMealIngredientPanel" hidden>
+        <div class="ingredient-list-heading">
+          <div>
+            <p class="eyebrow">SHOPPING PREP</p>
+            <h2>Ingredient list</h2>
+            <p class="muted-copy">Built from your finalized meal.</p>
+          </div>
+          <button class="button secondary ingredient-print-button" id="printFinalMealIngredients" type="button">Print list</button>
+        </div>
+        <div id="finalMealIngredientStatus" class="muted-copy"></div>
+        <div id="finalMealIngredientContent"></div>
+      </section>
+    </section>
+  </div>
+</main>
+
+<footer class="footer"><div class="container footer-wrap"><p>© <span id="year"></span> The Kitchen Table</p><a href="index.html">Home</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>
