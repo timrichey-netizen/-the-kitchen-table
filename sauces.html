@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sauces from The Kitchen Table, including the classic French mother sauces and their daughter sauces." />
+  <title>Sauces | The Kitchen Table</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--slate:#30363b;--slate-deep:#20262a;--slate-light:#4b545b;--chalk:#f6f1e7;--muted:#d7d1c6;--accent:#d8a35d;--card:rgba(27,33,37,.84)}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Inter,system-ui,sans-serif;color:var(--chalk)}
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 14% 18%,rgba(255,255,255,.055) 0 1px,transparent 1.5px),
+        radial-gradient(circle at 72% 64%,rgba(255,255,255,.045) 0 1px,transparent 1.6px),
+        linear-gradient(135deg,rgba(255,255,255,.025),transparent 38%),
+        linear-gradient(180deg,var(--slate-light) 0%,var(--slate) 36%,var(--slate-deep) 100%);
+      background-size:17px 17px,23px 23px,100% 100%,100% 100%;
+    }
+    .shell{min-height:100vh}
+    .topbar{
+      position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;
+      gap:18px;padding:18px clamp(18px,5vw,64px);background:rgba(25,30,34,.86);
+      border-bottom:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px)
+    }
+    .brand{font-family:"DM Serif Display",serif;font-size:clamp(1.3rem,2.2vw,1.8rem);color:#fff;text-decoration:none;white-space:nowrap}
+    .topnav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    .topnav a{color:#fff;text-decoration:none;font-weight:600;font-size:.93rem;padding:9px 12px;border-radius:999px}
+    .topnav a:hover,.topnav a:focus-visible{background:rgba(255,255,255,.1)}
+    main{width:min(1180px,92vw);margin:0 auto;padding:58px 0 76px}
+    .intro{text-align:center;max-width:780px;margin:0 auto 40px}
+    .eyebrow{letter-spacing:.2em;text-transform:uppercase;font-size:.76rem;font-weight:700;color:var(--accent);margin:0 0 12px}
+    h1{font-family:"DM Serif Display",serif;font-weight:400;font-size:clamp(3rem,7vw,5.8rem);line-height:.96;margin:0 0 18px;text-shadow:0 2px 10px rgba(0,0,0,.26)}
+    .intro-copy{margin:0 auto;color:var(--muted);font-size:clamp(1rem,2vw,1.16rem);line-height:1.7;max-width:700px}
+    .section-label{font-family:"DM Serif Display",serif;font-size:1.8rem;font-weight:400;margin:36px 0 16px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.16)}
+    .guide-feature{
+      display:grid;grid-template-columns:1.4fr auto;gap:24px;align-items:center;margin-bottom:34px;padding:24px 26px;
+      background:rgba(216,163,93,.11);border:1px solid rgba(216,163,93,.4);border-radius:18px
+    }
+    .guide-feature h2{font-family:"DM Serif Display",serif;font-size:1.75rem;font-weight:400;margin:0 0 6px}
+    .guide-feature p{margin:0;color:var(--muted);line-height:1.55}
+    .feature-link{display:inline-block;color:#1d2225;background:var(--accent);font-weight:700;text-decoration:none;padding:11px 15px;border-radius:999px;white-space:nowrap}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+    .sauce-card{
+      color:var(--chalk);text-decoration:none;background:var(--card);border:1px solid rgba(255,255,255,.13);
+      border-radius:16px;padding:20px;min-height:118px;display:flex;flex-direction:column;justify-content:space-between;
+      box-shadow:0 8px 24px rgba(0,0,0,.16);transition:transform .16s ease,background .16s ease,border-color .16s ease
+    }
+    .sauce-card:hover,.sauce-card:focus-visible{transform:translateY(-2px);background:rgba(38,46,51,.96);border-color:rgba(216,163,93,.48)}
+    .sauce-card strong{font-family:"DM Serif Display",serif;font-size:1.32rem;font-weight:400;line-height:1.15}
+    .sauce-card span{margin-top:12px;color:var(--accent);font-weight:700;font-size:.88rem}
+    .mother{border-color:rgba(216,163,93,.36)}
+    @media (max-width:820px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.guide-feature{grid-template-columns:1fr}.feature-link{justify-self:start}}
+    @media (max-width:620px){
+      .topbar{position:static;align-items:flex-start;flex-direction:column;padding:15px 18px}
+      .topnav{justify-content:flex-start;gap:4px}
+      .topnav a{padding:7px 9px;font-size:.87rem}
+      main{padding:42px 0 58px}
+      .grid{grid-template-columns:1fr}
+      .sauce-card{min-height:auto}
+      .guide-feature{padding:20px}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">The Kitchen Table</a>
+      <nav class="topnav" aria-label="Sauce page navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#recipes">Recipes</a>
+        <a href="guides.html">Guides</a>
+        <a href="plan-a-meal.html">Plan a Meal</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="sauces-title">
+        <p class="eyebrow">THE KITCHEN TABLE</p>
+        <h1 id="sauces-title">Sauces</h1>
+        <p class="intro-copy">From the five classical French mother sauces to their daughter sauces and other kitchen staples, browse the sauce collection in one place.</p>
+      </section>
+
+      <section class="guide-feature" aria-label="Mother sauces guide">
+        <div>
+          <h2>The Five Mother Sauces Guide</h2>
+          <p>Start with Béchamel, Velouté, Espagnole, Sauce Tomate, and Hollandaise, then explore the sauces derived from them.</p>
+        </div>
+        <a class="feature-link" href="mother-sauces-guide.html">Open the guide →</a>
+      </section>
+
+      <h2 class="section-label">Mother Sauces</h2>
+      <section class="grid" aria-label="Mother sauces">
+        <a class="sauce-card mother" href="bechamel-sauce.html"><strong>Béchamel</strong><span>View sauce →</span></a>
+        <a class="sauce-card mother" href="veloute-sauce.html"><strong>Velouté</strong><span>View sauce →</span></a>
+        <a class="sauce-card mother" href="espagnole-sauce.html"><strong>Espagnole</strong><span>View sauce →</span></a>
+        <a class="sauce-card mother" href="sauce-tomate.html"><strong>Sauce Tomate</strong><span>View sauce →</span></a>
+        <a class="sauce-card mother" href="hollandaise-sauce.html"><strong>Hollandaise</strong><span>View sauce →</span></a>
+      </section>
+
+      <h2 class="section-label">Daughter &amp; Classic Sauces</h2>
+      <section class="grid" aria-label="Daughter and classic sauces">
+        <a class="sauce-card" href="allemande-sauce.html"><strong>Allemande Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="aurora-sauce.html"><strong>Aurora Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="bearnaise-sauce.html"><strong>Béarnaise Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="bercy-sauce.html"><strong>Bercy Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="bolognese-sauce-daughter.html"><strong>Bolognese Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="cheddar-cheese-sauce.html"><strong>Cheddar Cheese Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="choron-sauce.html"><strong>Choron Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="creme-sauce.html"><strong>Crème Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="creole-sauce.html"><strong>Creole Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="foyot-sauce.html"><strong>Foyot Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="hungarian-sauce-veloute.html"><strong>Hungarian Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="maltaise-sauce.html"><strong>Maltaise Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="marinara-sauce.html"><strong>Marinara Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="mornay-sauce.html"><strong>Mornay Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="mustard-sauce-bechamel.html"><strong>Mustard Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="nantua-sauce.html"><strong>Nantua Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="neapolitan-sauce.html"><strong>Neapolitan Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="normande-sauce.html"><strong>Normande Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="portuguese-sauce.html"><strong>Portuguese Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="poulette-sauce.html"><strong>Poulette Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="provencale-sauce.html"><strong>Provençale Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="soubise-sauce.html"><strong>Soubise Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="spanish-tomato-sauce.html"><strong>Spanish Tomato Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="supreme-sauce.html"><strong>Suprême Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="venetian-sauce-veloute.html"><strong>Venetian Sauce</strong><span>View sauce →</span></a>
+      </section>
+
+      <h2 class="section-label">Other Sauces</h2>
+      <section class="grid" aria-label="Other sauces">
+        <a class="sauce-card" href="bolognese-meat-sauce.html"><strong>Bolognese Meat Sauce</strong><span>View sauce →</span></a>
+        <a class="sauce-card" href="shrimp-shell-sauce.html"><strong>Shrimp Shell Sauce</strong><span>View sauce →</span></a>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
