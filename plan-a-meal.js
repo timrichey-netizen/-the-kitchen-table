@@ -124,6 +124,7 @@ var recipeIndex={
 };
 
 var state={mood:[],mainIngredients:[],effort:'any',restrictions:[],occasion:'weeknight',dessert:'surprise',avoidText:'',custom:{}};
+var currentMeal={main:null,side:null,veg:null,dessert:null};
 var steps=[].slice.call(document.querySelectorAll('.planner-step')),back=document.getElementById('plannerBack'),next=document.getElementById('plannerNext'),card=document.getElementById('plannerCard'),results=document.getElementById('plannerResults'),progress=document.getElementById('plannerProgressBar'),step=0;
 document.querySelectorAll('.planner-options').forEach(function(group){var key=group.dataset.key,multi=group.classList.contains('multi');group.querySelectorAll('button').forEach(function(button){button.addEventListener('click',function(){if(multi){button.classList.toggle('selected');state[key]=[].slice.call(group.querySelectorAll('button.selected')).map(function(b){return b.dataset.value;});}else{group.querySelectorAll('button').forEach(function(b){b.classList.remove('selected');});button.classList.add('selected');state[key]=button.dataset.value;}});});});
 function showStep(){steps.forEach(function(el,i){el.classList.toggle('active',i===step);});back.disabled=step===0;next.textContent=step===steps.length-1?'Build my meal':'Next';progress.style.width=((step+1)/steps.length*100)+'%';}
@@ -174,19 +175,18 @@ function topPairings(kind,main,count){
     .slice(0,count).map(function(x){return x.x;});
 }
 function renderPairings(main){
-  function links(items){
+  function swapItems(items,slot){
     return items.map(function(x){
-      return '<a class="pairing-item" href="'+x.url+'"><span>'+x.title+'</span><small>View recipe →</small></a>';
+      return '<div class="pairing-item pairing-swap-item"><a href="'+x.url+'"><span>'+x.title+'</span><small>View recipe →</small></a><button type="button" class="pairing-swap" data-slot="'+slot+'" data-title="'+x.title.replace(/"/g,'&quot;')+'" data-url="'+x.url+'">Swap into menu</button></div>';
     }).join('');
   }
-  document.getElementById('pairingSides').innerHTML=links(topPairings('side',main,3));
-  document.getElementById('pairingVegetables').innerHTML=links(topPairings('vegetable',main,3));
-  document.getElementById('pairingSalads').innerHTML=links(topPairings('salad',main,3));
+  document.getElementById('pairingSides').innerHTML=swapItems(topPairings('side',main,3),'side');
+  document.getElementById('pairingVegetables').innerHTML=swapItems(topPairings('vegetable',main,3),'veg');
+  document.getElementById('pairingSalads').innerHTML=swapItems(topPairings('salad',main,3),'veg');
 
   var desserts=dessertChoices();
-  document.getElementById('pairingDesserts').innerHTML=desserts.length?desserts.map(function(d){
-    return '<a class="pairing-item" href="'+d.url+'"><span>'+d.title+'</span><small>View recipe →</small></a>';
-  }).join(''):'<div class="pairing-item pairing-suggestion"><span>No dessert selected</span></div>';
+  document.getElementById('pairingDesserts').innerHTML=desserts.length?swapItems(desserts,'dessert'):'<div class="pairing-item pairing-suggestion"><span>No dessert selected</span></div>';
+  bindSwapButtons();
 }
 function dessertChoices(){
   var all=[
@@ -220,10 +220,79 @@ function readCustomize(){
     equipment:(document.getElementById('customEquipment')||{}).value||''
   };
 }
-function buildMeal(){readCustomize();var main=pick('main',state.mainType),side=pick('side',state.sideType,[main&&main.url]),veg=pick('veg',state.vegType,[main&&main.url,side&&side.url]),meal=[['Main',main],['Side',side],['Vegetable / Salad',veg]];document.getElementById('plannerSummary').textContent=
+function selectedMealItems(){
+  var items=[['Main',currentMeal.main],['Side',currentMeal.side],['Vegetable / Salad',currentMeal.veg]];
+  if(currentMeal.dessert)items.push(['Dessert',currentMeal.dessert]);
+  return items.filter(function(x){return x[1];});
+}
+function renderCurrentMeal(){
+  document.getElementById('plannedMealGrid').innerHTML=selectedMealItems().map(function(item){
+    return '<article class="planned-dish"><p class="eyebrow">'+item[0]+'</p><h3>'+item[1].title+'</h3><a class="text-link" href="'+item[1].url+'">View recipe →</a></article>';
+  }).join('');
+  var ingredientPanel=document.getElementById('ingredientListPanel');
+  if(ingredientPanel)ingredientPanel.hidden=true;
+}
+function bindSwapButtons(){
+  document.querySelectorAll('.pairing-swap').forEach(function(button){
+    button.addEventListener('click',function(){
+      var slot=button.dataset.slot;
+      currentMeal[slot]={title:button.dataset.title,url:button.dataset.url};
+      renderCurrentMeal();
+      button.textContent='Added to menu';
+      setTimeout(function(){button.textContent='Swap into menu';},1200);
+    });
+  });
+}
+function cleanIngredientText(text){
+  return (text||'').replace(/\s+/g,' ').trim();
+}
+function extractIngredients(html){
+  var doc=new DOMParser().parseFromString(html,'text/html');
+  var panel=doc.querySelector('.ingredients-panel');
+  if(!panel)return[];
+  var lis=[].slice.call(panel.querySelectorAll('li')).map(function(li){return cleanIngredientText(li.textContent);}).filter(Boolean);
+  if(lis.length)return lis;
+  return [cleanIngredientText(panel.textContent.replace(/Ingredients?/i,''))].filter(Boolean);
+}
+function createIngredientList(){
+  var panel=document.getElementById('ingredientListPanel');
+  var status=document.getElementById('ingredientListStatus');
+  var content=document.getElementById('ingredientListContent');
+  var items=selectedMealItems();
+  panel.hidden=false;
+  status.textContent='Building ingredient list…';
+  content.innerHTML='';
+  Promise.all(items.map(function(item){
+    return fetch(item[1].url).then(function(response){
+      if(!response.ok)throw new Error('Could not open '+item[1].title);
+      return response.text();
+    }).then(function(html){
+      return {label:item[0],dish:item[1],ingredients:extractIngredients(html)};
+    }).catch(function(){
+      return {label:item[0],dish:item[1],ingredients:[]};
+    });
+  })).then(function(groups){
+    status.textContent='';
+    content.innerHTML=groups.map(function(group){
+      var body=group.ingredients.length
+        ?'<ul>'+group.ingredients.map(function(x){return'<li>'+x+'</li>';}).join('')+'</ul>'
+        :'<p class="muted-copy">Ingredients could not be read automatically. <a href="'+group.dish.url+'">Open recipe</a>.</p>';
+      return '<section class="ingredient-dish-group"><h3>'+group.label+': <a href="'+group.dish.url+'">'+group.dish.title+'</a></h3>'+body+'</section>';
+    }).join('');
+    panel.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+function buildMeal(){readCustomize();var main=pick('main',state.mainType),side=pick('side',state.sideType,[main&&main.url]),veg=pick('veg',state.vegType,[main&&main.url,side&&side.url]);currentMeal={main:main,side:side,veg:veg,dessert:null};document.getElementById('plannerSummary').textContent=
   (state.mood.length?'Mood: '+state.mood.join(', ')+'. ':'')+
   (state.mainIngredients.length?'Main ingredients: '+state.mainIngredients.join(', ')+'. ':'')+
   (state.effort!=='any'?'Effort: '+state.effort+'. ':'')+
-  'Meal type: '+state.occasion+'.';document.getElementById('plannedMealGrid').innerHTML=meal.map(function(item){return'<article class="planned-dish"><p class="eyebrow">'+item[0]+'</p><h3>'+item[1].title+'</h3><a class="text-link" href="'+item[1].url+'">View recipe →</a></article>';}).join('');renderPairings(main);card.hidden=true;results.hidden=false;results.scrollIntoView({behavior:'smooth',block:'start'});}
-next.addEventListener('click',function(){if(step<steps.length-1){step++;showStep();}else buildMeal();});back.addEventListener('click',function(){if(step>0){step--;showStep();}});document.getElementById('plannerRestart').addEventListener('click',function(){step=0;card.hidden=false;results.hidden=true;showStep();window.scrollTo({top:0,behavior:'smooth'});});showStep();
+  'Meal type: '+state.occasion+'.';renderCurrentMeal();renderPairings(main);card.hidden=true;results.hidden=false;results.scrollIntoView({behavior:'smooth',block:'start'});}
+next.addEventListener('click',function(){if(step<steps.length-1){step++;showStep();}else buildMeal();});
+back.addEventListener('click',function(){if(step>0){step--;showStep();}});
+document.getElementById('plannerRestart').addEventListener('click',function(){step=0;currentMeal={main:null,side:null,veg:null,dessert:null};card.hidden=false;results.hidden=true;showStep();window.scrollTo({top:0,behavior:'smooth'});});
+var ingredientButton=document.getElementById('createIngredientList');
+if(ingredientButton)ingredientButton.addEventListener('click',createIngredientList);
+var printButton=document.getElementById('printIngredientList');
+if(printButton)printButton.addEventListener('click',function(){window.print();});
+showStep();
 })();
