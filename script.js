@@ -374,7 +374,7 @@ const recipeEnglishNames = {
 function toRecipeTitleCase(value) {
   const smallWords = new Set([
     'a','an','the','and','but','or','nor','for','so','yet',
-    'of','in','to','with','on','at','by','from'
+    'of','in','to','with','on','at','by','from','de','del','con','al','en','y'
   ]);
   const words = String(value || '').trim().split(/\s+/);
   return words.map(function(word, index) {
@@ -404,12 +404,15 @@ function addEnglishRecipeNames() {
     if (englishName) return displayTitle + ' (' + toRecipeTitleCase(englishName) + ')';
     title = displayTitle;
 
-    let m = title.match(/^Tacos de (.+)$/);
+    let m = title.match(/^Tacos\s+de\s+(.+)$/i);
     if (m) {
       const tacoTerms = {
         "Adobada":"Adobo-Marinated Pork","Bistec":"Steak","Alambre":"Grilled Meat and Peppers","Pastor Negro":"Black-Marinated Shepherd-Style Pork","Mixiote":"Pit-Style Marinated Meat","Machaca":"Dried Shredded Beef","Discada":"Disc-Griddled Mixed Meat","Lechón":"Roast Suckling Pig","Buche":"Pork Stomach","Cachete":"Beef Cheek","Labio":"Beef Lip","Sesos":"Brains","Chicharrón":"Pork Cracklings","Chicharrón Prensado":"Pressed Pork Cracklings","Longaniza":"Mexican Sausage","Pollo Asado":"Grilled Chicken","Tinga":"Shredded Tinga","Mole":"Mole Sauce","Chile Relleno":"Stuffed Chile","Papa":"Potato","Frijoles con Queso":"Beans and Cheese","Flor de Calabaza":"Squash Blossom","Huitlacoche":"Corn Truffle","Hongos":"Mushrooms","Pulpo":"Octopus","Marlín Ahumado":"Smoked Marlin","Pescado Zarandeado":"Grilled Zarandeado Fish","Jaiba":"Crab","Langosta":"Lobster","Chapulines":"Grasshoppers","Pescado Capeado":"Battered Fish","Pescado a la Plancha":"Griddled Fish","Pescado al Pastor":"Shepherd-Style Fish","Pescado al Ajillo":"Garlic Fish","Pescado Ensenada":"Ensenada-Style Fish","Pescado Tikin Xic":"Yucatan Achiote Fish","Pescado Adobado":"Adobo-Marinated Fish","Pescado Ahumado":"Smoked Fish","Pescado a la Veracruzana":"Veracruz-Style Fish","Camarón Capeado":"Battered Shrimp","Camarón al Ajillo":"Garlic Shrimp","Camarón a la Diabla":"Spicy Devil-Style Shrimp","Camarón al Pastor":"Shepherd-Style Shrimp","Camarón con Queso":"Shrimp with Cheese","Camarón Empanizado":"Breaded Shrimp","Camarón a la Plancha":"Griddled Shrimp","Camarón Gobernador":"Governor-Style Shrimp","Pulpo al Ajillo":"Garlic Octopus","Pulpo a la Parrilla":"Grilled Octopus","Pulpo Enamorado":"Creamy Marinated Octopus","Calamar":"Squid","Calamar Frito":"Fried Squid","Atún Sellado":"Seared Tuna","Atún con Aguacate":"Tuna with Avocado","Cazón":"Dogfish","Mantaraya":"Stingray","Ostiones":"Oysters","Callo de Hacha":"Scallops","Mariscos Mixtos":"Mixed Seafood"
       };
-      if (tacoTerms[m[1]]) return title + ' (' + tacoTerms[m[1]] + ' Tacos)';
+      const tacoKey = Object.keys(tacoTerms).find(function(key){
+        return normalizeSearchText(key) === normalizeSearchText(m[1]);
+      });
+      if (tacoKey) return title + ' (' + tacoTerms[tacoKey] + ' Tacos)';
     }
     return title;
   }
