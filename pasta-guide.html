@@ -12,6 +12,9 @@
 .pasta-guide-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .pasta-guide-table th,.pasta-guide-table td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
 .pasta-guide-table th{font-weight:700;background:#faf7f2}
+.pasta-shape-image{width:132px;height:92px;object-fit:cover;border-radius:12px;display:block;background:#f2eee8;border:1px solid var(--line)}
+.pasta-image-cell{width:148px}
+.pasta-name-cell{font-weight:700;white-space:nowrap}
 .pasta-guide-table tr:last-child td{border-bottom:0}
 .pasta-family{margin-top:42px}
 .pasta-family h2{margin-bottom:10px}
@@ -19,7 +22,7 @@
 .pasta-index{margin-top:52px}
 .pasta-index td:first-child{font-weight:600}
 .pasta-tip{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:28px}
-@media(max-width:760px){.pasta-guide-table{display:block;overflow-x:auto}.pasta-guide-table th,.pasta-guide-table td{min-width:150px}}
+@media(max-width:760px){.pasta-guide-table{display:block;overflow-x:auto}.pasta-guide-table th,.pasta-guide-table td{min-width:150px}.pasta-image-cell{min-width:140px!important}.pasta-shape-image{width:120px;height:84px}}
 </style>
 <style>
 .guide-hero-image{width:100%;height:min(42vw,460px);object-fit:cover;display:block;border-radius:22px;box-shadow:var(--shadow);margin:28px 0 34px}
@@ -33,27 +36,27 @@
 <div class="container"><img class="guide-hero-image" src="assets/fresh-pasta-hard-soft-flour.png" alt="Fresh pasta dough and pasta shapes"></div>
 
 <section class="pasta-family"><h2>Long strands</h2>
-<table class="pasta-guide-table"><thead><tr><th>Pasta</th><th>Best sauces</th><th>Best additions</th><th>Why it works</th></tr></thead><tbody>
-<tr><td>Spaghetti</td><td>Tomato, carbonara, aglio e olio, seafood, lemon-butter</td><td>Clams, mussels, shrimp, guanciale, herbs, chile</td><td>Its round, moderate thickness carries emulsified sauces without overpowering delicate ingredients.</td></tr>
-<tr><td>Linguine</td><td>Seafood, pesto, lemon, light cream</td><td>Clams, shrimp, scallops, herbs</td><td>The slightly flattened strand gives seafood and silky sauces more surface area to cling to.</td></tr>
-<tr><td>Bucatini / Perciatelli</td><td>Amatriciana, gricia, robust tomato sauces</td><td>Guanciale, pancetta, Pecorino, chile</td><td>The hollow center and substantial bite stand up to salty, fatty Roman sauces.</td></tr>
-<tr><td>Fettuccine / Tagliatelle</td><td>Alfredo, Bolognese, mushroom cream, slow ragù</td><td>Beef, pork, mushrooms, Parmigiano</td><td>Broad ribbons carry heavy sauces and distribute chunks of meat evenly.</td></tr>
+<table class="pasta-guide-table"><thead><tr><th>Picture</th><th>Pasta</th><th>Best sauces</th><th>Best additions</th><th>Why it works</th></tr></thead><tbody>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="assets/spaghetti-carbonara.png" alt="Spaghetti pasta"></td><td class="pasta-name-cell">Spaghetti</td><td>Tomato, carbonara, aglio e olio, seafood, lemon-butter</td><td>Clams, mussels, shrimp, guanciale, herbs, chile</td><td>Its round, moderate thickness carries emulsified sauces without overpowering delicate ingredients.</td></tr>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Linguine.jpg" alt="Linguine pasta" onerror="this.src='assets/fresh-pasta-hard-soft-flour.png'"></td><td class="pasta-name-cell">Linguine</td><td>Seafood, pesto, lemon, light cream</td><td>Clams, shrimp, scallops, herbs</td><td>The slightly flattened strand gives seafood and silky sauces more surface area to cling to.</td></tr>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="assets/perciatelli-alla-gricia.png" alt="Bucatini or perciatelli pasta"></td><td class="pasta-name-cell">Bucatini / Perciatelli</td><td>Amatriciana, gricia, robust tomato sauces</td><td>Guanciale, pancetta, Pecorino, chile</td><td>The hollow center and substantial bite stand up to salty, fatty Roman sauces.</td></tr>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="assets/fettuccine-alfredo.png" alt="Fettuccine pasta"></td><td class="pasta-name-cell">Fettuccine / Tagliatelle</td><td>Alfredo, Bolognese, mushroom cream, slow ragù</td><td>Beef, pork, mushrooms, Parmigiano</td><td>Broad ribbons carry heavy sauces and distribute chunks of meat evenly.</td></tr>
 </tbody></table></section>
 
 <section class="pasta-family"><h2>Short tubes and sturdy shapes</h2>
-<table class="pasta-guide-table"><thead><tr><th>Pasta</th><th>Best sauces</th><th>Best additions</th><th>Why it works</th></tr></thead><tbody>
-<tr><td>Rigatoni</td><td>Meat ragù, Amatriciana, baked pasta, chunky tomato sauces</td><td>Sausage, pork, ricotta, Pecorino, eggplant</td><td>Wide openings catch chunks while ridges hold thick sauce.</td></tr>
-<tr><td>Penne</td><td>Arrabbiata, vodka sauce, pesto, vegetable sauces</td><td>Chile, tomato, chicken, zucchini, peas</td><td>Diagonal tubes scoop sauce and small additions into each bite.</td></tr>
-<tr><td>Paccheri</td><td>Seafood ragù, rich tomato, braised meat sauces</td><td>Shellfish, sausage, eggplant, ricotta</td><td>Oversized tubes are ideal for chunky, dramatic sauces.</td></tr>
-<tr><td>Orecchiette</td><td>Sausage and greens, pesto, vegetable sauces</td><td>Broccoli rabe, sausage, peas, beans</td><td>The cup shape catches small pieces and glossy sauce.</td></tr>
+<table class="pasta-guide-table"><thead><tr><th>Picture</th><th>Pasta</th><th>Best sauces</th><th>Best additions</th><th>Why it works</th></tr></thead><tbody>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="assets/rigatoni-amatriciana.png" alt="Rigatoni pasta"></td><td class="pasta-name-cell">Rigatoni</td><td>Meat ragù, Amatriciana, baked pasta, chunky tomato sauces</td><td>Sausage, pork, ricotta, Pecorino, eggplant</td><td>Wide openings catch chunks while ridges hold thick sauce.</td></tr>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="assets/penne-arrabbiata.png" alt="Penne pasta"></td><td class="pasta-name-cell">Penne</td><td>Arrabbiata, vodka sauce, pesto, vegetable sauces</td><td>Chile, tomato, chicken, zucchini, peas</td><td>Diagonal tubes scoop sauce and small additions into each bite.</td></tr>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Paccheri%20pasta.jpg" alt="Paccheri pasta" onerror="this.src='assets/rigatoni-amatriciana.png'"></td><td class="pasta-name-cell">Paccheri</td><td>Seafood ragù, rich tomato, braised meat sauces</td><td>Shellfish, sausage, eggplant, ricotta</td><td>Oversized tubes are ideal for chunky, dramatic sauces.</td></tr>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Orecchiette%20Pasta.JPG" alt="Orecchiette pasta" onerror="this.src='assets/fresh-pasta-hard-soft-flour.png'"></td><td class="pasta-name-cell">Orecchiette</td><td>Sausage and greens, pesto, vegetable sauces</td><td>Broccoli rabe, sausage, peas, beans</td><td>The cup shape catches small pieces and glossy sauce.</td></tr>
 </tbody></table></section>
 
 <section class="pasta-family"><h2>Filled, baked, and dumpling-style pasta</h2>
-<table class="pasta-guide-table"><thead><tr><th>Pasta</th><th>Best sauces</th><th>Best additions</th><th>Why it works</th></tr></thead><tbody>
-<tr><td>Ravioli</td><td>Brown butter, light cream, sage, simple tomato</td><td>Sage, nuts, Parmigiano, browned butter</td><td>The filling is already the star, so restrained sauces work best.</td></tr>
-<tr><td>Gnocchi</td><td>Gorgonzola cream, tomato-mozzarella, brown butter, pesto</td><td>Blue cheese, sage, mushrooms, tomato, fresh mozzarella</td><td>Soft potato dumplings are best with smooth sauces that coat gently.</td></tr>
-<tr><td>Gnudi</td><td>Brown butter, sage, simple tomato</td><td>Sage, Parmigiano, toasted nuts</td><td>Delicate ricotta dumplings need light sauces that do not mask their texture.</td></tr>
-<tr><td>Lasagna / baked pasta</td><td>Ragù, béchamel, tomato, cheese sauces</td><td>Ricotta, mozzarella, sausage, eggplant</td><td>Layered pasta supports substantial sauces and cheese through long baking.</td></tr>
+<table class="pasta-guide-table"><thead><tr><th>Picture</th><th>Pasta</th><th>Best sauces</th><th>Best additions</th><th>Why it works</th></tr></thead><tbody>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="assets/butternut-squash-ravioli-brown-butter-sage.png" alt="Ravioli pasta"></td><td class="pasta-name-cell">Ravioli</td><td>Brown butter, light cream, sage, simple tomato</td><td>Sage, nuts, Parmigiano, browned butter</td><td>The filling is already the star, so restrained sauces work best.</td></tr>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="assets/gnocchi-alla-sorrentina.png" alt="Gnocchi"></td><td class="pasta-name-cell">Gnocchi</td><td>Gorgonzola cream, tomato-mozzarella, brown butter, pesto</td><td>Blue cheese, sage, mushrooms, tomato, fresh mozzarella</td><td>Soft potato dumplings are best with smooth sauces that coat gently.</td></tr>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="assets/ricotta-parmesan-gnudi.png" alt="Ricotta gnudi"></td><td class="pasta-name-cell">Gnudi</td><td>Brown butter, sage, simple tomato</td><td>Sage, Parmigiano, toasted nuts</td><td>Delicate ricotta dumplings need light sauces that do not mask their texture.</td></tr>
+<tr><td class="pasta-image-cell"><img class="pasta-shape-image" src="assets/fresh-pasta-hard-soft-flour.png" alt="Fresh pasta sheets for lasagna"></td><td class="pasta-name-cell">Lasagna / baked pasta</td><td>Ragù, béchamel, tomato, cheese sauces</td><td>Ricotta, mozzarella, sausage, eggplant</td><td>Layered pasta supports substantial sauces and cheese through long baking.</td></tr>
 </tbody></table></section>
 
 <div class="pasta-tip"><strong>Pasta water is an ingredient:</strong> Before draining pasta, reserve 1 to 2 cups of the hot, starchy cooking water. Add it to the sauce in small splashes while tossing vigorously. The dissolved starch helps emulsify butter, olive oil, cheese, cream, rendered pork fat, and tomato sauce so the sauce becomes glossy, cohesive, and better able to cling to the pasta. Use only as much as needed, and salt the cooking water a little more cautiously for salty sauces such as carbonara, gricia, cacio e pepe, or Amatriciana.</div><div class="pasta-tip"><strong>General rule:</strong> pair delicate pasta with delicate sauce and sturdy pasta with sturdy sauce. For chunky sauces, choose shapes with ridges, cups, or tubes. For smooth emulsified sauces, choose strands or broad ribbons.</div>
