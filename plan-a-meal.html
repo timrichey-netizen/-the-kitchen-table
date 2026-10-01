@@ -152,6 +152,29 @@
       </div>
       <div id="ingredientListStatus" class="muted-copy"></div>
       <div id="ingredientListContent"></div>
+      <section class="ingredient-share" aria-labelledby="ingredientShareTitle">
+        <div class="ingredient-share-heading">
+          <h3 id="ingredientShareTitle">Send this list</h3>
+          <p class="muted-copy">Email or text the current ingredient list.</p>
+        </div>
+        <div class="ingredient-share-grid">
+          <form class="ingredient-share-form" id="emailIngredientForm">
+            <label for="ingredientEmail">Email address</label>
+            <div class="ingredient-share-row">
+              <input id="ingredientEmail" type="email" autocomplete="email" placeholder="name@example.com" required>
+              <button class="button secondary" type="submit">Email list</button>
+            </div>
+          </form>
+          <form class="ingredient-share-form" id="textIngredientForm">
+            <label for="ingredientPhone">Mobile number</label>
+            <div class="ingredient-share-row">
+              <input id="ingredientPhone" type="tel" autocomplete="tel" placeholder="+1 555 123 4567" required>
+              <button class="button secondary" type="submit">Text list</button>
+            </div>
+          </form>
+        </div>
+        <p id="ingredientShareStatus" class="ingredient-share-status" role="status" aria-live="polite"></p>
+      </section>
     </section>
     </section>
 </div></main>
