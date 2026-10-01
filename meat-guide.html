@@ -22,6 +22,20 @@
 .guide-recipe-credit a{color:var(--accent-dark);font-weight:700;text-decoration:none}
 .guide-recipe-credit a:hover{text-decoration:underline}
 .pasta-image-cell .guide-recipe-credit{max-width:132px}
+
+.cut-guide{margin:30px 0}
+.cut-guide-intro{max-width:850px}
+.cut-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:20px}
+.cut-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}
+.cut-panel h3{font-family:'DM Serif Display',serif;font-size:1.55rem;margin:0 0 14px}
+.cut-list{display:grid;gap:12px}
+.cut-item{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.cut-item:last-child{padding-bottom:0;border-bottom:0}
+.cut-item strong{display:block;margin-bottom:3px}
+.cut-item p{margin:0;color:var(--muted);line-height:1.5}
+.cut-key{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.cut-key span{background:#f5efe7;border-radius:999px;padding:6px 10px;font-size:.8rem;font-weight:700}
+@media(max-width:700px){.cut-grid{grid-template-columns:1fr}.cut-panel{padding:18px}}
 </style>
 </head><body>
 <header class="site-header"><div class="container nav-wrap"><a class="brand" href="index.html">The Kitchen Table</a><button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button><nav class="nav" aria-label="Primary navigation"><a href="index.html#recipes">Recipes</a><a href="pasta-guide.html">Pasta Guide</a><a href="mushroom-guide.html">Mushroom Guide</a><a href="meat-guide.html">Meat Guide</a><a href="plan-a-meal.html">Plan a Meal</a><a href="index.html#categories">Categories</a></nav></div></header>
@@ -31,6 +45,44 @@
 <div class="container"><img class="guide-hero-image" src="assets/florentine-steak-balsamic-rosemary.png" alt="Seared steak with rosemary"><span class="guide-recipe-credit">From: <a href="florentine-steak-balsamic-rosemary.html">Balsamic and Rosemary-Marinated Florentine Steak</a></span></div>
 
 <div class="container" style="max-width:1000px;margin-top:28px">
+<section class="cut-guide">
+<p class="eyebrow">START WITH THE CUT</p>
+<h2>Beef &amp; Pork Cuts</h2>
+<p class="cut-guide-intro">Where a cut comes from helps predict tenderness, fat, flavor, and the cooking method that suits it. Muscles that do less work are generally more tender and favor fast dry heat; heavily worked muscles contain more connective tissue and become tender through slower cooking.</p>
+<div class="cut-grid">
+<section class="cut-panel">
+<h3>Beef Cuts</h3>
+<div class="cut-list">
+<div class="cut-item"><strong>Chuck</strong><p>Rich, beefy shoulder meat with connective tissue. Best for pot roast, braising, stew, ground beef, and slow-cooked ragù.</p></div>
+<div class="cut-item"><strong>Rib</strong><p>Well-marbled and tender. Includes ribeye steaks and prime rib. Excellent for grilling, pan-searing, and roasting.</p></div>
+<div class="cut-item"><strong>Short Loin</strong><p>Very tender section yielding strip steak, T-bone, and porterhouse. Best with high-heat grilling or pan-searing.</p></div>
+<div class="cut-item"><strong>Tenderloin</strong><p>The most tender major beef muscle; filet mignon is cut from it. Mild and lean, so cook quickly and avoid overcooking.</p></div>
+<div class="cut-item"><strong>Sirloin</strong><p>Flavorful and moderately tender. Top sirloin works well as steaks or roasts; other sirloin cuts benefit from careful slicing across the grain.</p></div>
+<div class="cut-item"><strong>Round</strong><p>Lean hind-leg cuts such as eye of round and top round. Useful for roast beef, thin slicing, and braising; generally less tender than loin cuts.</p></div>
+<div class="cut-item"><strong>Brisket</strong><p>Firm, collagen-rich breast meat. Ideal for smoking, braising, corned beef, and other long, slow preparations.</p></div>
+<div class="cut-item"><strong>Plate &amp; Flank</strong><p>Deeply flavored cuts including skirt and flank steak and some short ribs. Cook quickly to medium-rare and slice thinly across the grain, or braise appropriate rib cuts.</p></div>
+<div class="cut-item"><strong>Shank</strong><p>Very tough, collagen-rich leg meat. Best braised slowly until gelatin-rich and tender.</p></div>
+</div>
+<div class="cut-key"><span>Steaks: rib · loin · tenderloin</span><span>Slow cook: chuck · brisket · shank</span></div>
+</section>
+<section class="cut-panel">
+<h3>Pork Cuts</h3>
+<div class="cut-list">
+<div class="cut-item"><strong>Shoulder / Boston Butt</strong><p>Richly marbled and connective-tissue-heavy. Ideal for pulled pork, carnitas, smoking, braising, and slow roasting.</p></div>
+<div class="cut-item"><strong>Picnic Shoulder</strong><p>Lower shoulder with robust flavor and more connective tissue. Excellent for slow roasting, smoking, and braising.</p></div>
+<div class="cut-item"><strong>Loin</strong><p>Lean, tender back section producing loin roasts and many pork chops. Roast, grill, or pan-sear while protecting it from overcooking.</p></div>
+<div class="cut-item"><strong>Tenderloin</strong><p>Small, exceptionally tender and very lean muscle. Best roasted or seared quickly; it cooks much faster than pork loin.</p></div>
+<div class="cut-item"><strong>Rib &amp; Loin Chops</strong><p>Bone-in or boneless chops from the loin area. Rib chops tend to be especially tender; thick chops are excellent for reverse searing.</p></div>
+<div class="cut-item"><strong>Belly</strong><p>Fat-rich cut used for bacon and fresh pork belly. Roast, braise, cure, or cook slowly before crisping.</p></div>
+<div class="cut-item"><strong>Spare Ribs &amp; Baby Back Ribs</strong><p>Spare ribs come from the belly-side rib cage; baby backs come from nearer the loin. Both benefit from controlled, relatively slow cooking.</p></div>
+<div class="cut-item"><strong>Ham / Leg</strong><p>Large, comparatively lean hind leg sold fresh or cured. Roast fresh ham gently; cured ham is commonly baked or smoked.</p></div>
+<div class="cut-item"><strong>Hock</strong><p>Collagen-rich lower leg, often cured or smoked. Excellent for beans, greens, soups, and long braises.</p></div>
+</div>
+<div class="cut-key"><span>Quick cook: chops · tenderloin</span><span>Slow cook: shoulder · belly · ribs · hock</span></div>
+</section>
+</div>
+</section>
+
 <section style="padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff;margin-bottom:24px"><p class="eyebrow" style="margin-top:0">FIRST PRINCIPLE</p><h2 style="margin-top:0">Match the method to the cut.</h2><p>Tender cuts usually benefit from fast, dry heat. Tough, collagen-rich cuts become tender with time and moisture. Thick steaks are easier to cook evenly with a two-stage method; thin cutlets are better with fast pan heat.</p></section>
 
 <div class="recipe-layout">
