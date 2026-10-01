@@ -452,7 +452,7 @@ if (!window.__ktAmericanRegionObserver) {
         );
       });
     });
-    if (hasRecipeContent) standardizeAmericanRegionalMetadata(document);
+    if (hasRecipeContent) standardizeRegionalMetadata(document);
   });
   window.__ktAmericanRegionObserver.observe(document.body,{childList:true,subtree:true});
 }
@@ -548,7 +548,7 @@ function normalizeSearchText(value) {
     .trim();
 }
 
-function standardizeAmericanRegionalMetadata(root) {
+function standardizeRegionalMetadata(root) {
   const scope = root || document;
 
   function leafElements(container) {
@@ -557,84 +557,161 @@ function standardizeAmericanRegionalMetadata(root) {
     });
   }
 
-  function cleanUSLocation(value) {
-    return String(value || '')
-      .replace(/\s*,?\s*(United States(?: of America)?|USA|U\.S\.A\.|U\.S\.)\s*$/i, '')
-      .replace(/\s*,\s*$/, '')
-      .trim();
+  function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^\$\{\}()|[\]\\]/g, '\\$&');
   }
 
-  function regionFromAmericanLabel(value) {
-    const text=String(value || '').trim();
-    let m=text.match(/^American\s*\(([^)]+)\)$/i);
-    if(m) return m[1].trim();
-    m=text.match(/^American\s*[·•|-]\s*(.+)$/i);
-    return m ? m[1].trim() : '';
+  function cleanCountrySuffix(value, countryTerms) {
+    let text=String(value || '').trim();
+    countryTerms.forEach(function(term){
+      const re=new RegExp('\\s*,?\\s*'+escapeRegExp(term)+'\\s*$','i');
+      text=text.replace(re,'');
+    });
+    return text.replace(/\s*,\s*$/,'').trim();
+  }
+
+  const countryRules=[
+    {label:'American',countries:['United States of America','United States','USA','U.S.A.','U.S.']},
+    {label:'Mexican',countries:['Mexico']},
+    {label:'Argentine',countries:['Argentina']},
+    {label:'Argentinian',countries:['Argentina']},
+    {label:'Uruguayan',countries:['Uruguay']},
+    {label:'Peruvian',countries:['Peru']},
+    {label:'Brazilian',countries:['Brazil']},
+    {label:'Colombian',countries:['Colombia']},
+    {label:'Venezuelan',countries:['Venezuela']},
+    {label:'Chilean',countries:['Chile']},
+    {label:'Cuban',countries:['Cuba']},
+    {label:'Puerto Rican',countries:['Puerto Rico']},
+    {label:'Dominican',countries:['Dominican Republic']},
+    {label:'Guatemalan',countries:['Guatemala']},
+    {label:'Salvadoran',countries:['El Salvador']},
+    {label:'Honduran',countries:['Honduras']},
+    {label:'Nicaraguan',countries:['Nicaragua']},
+    {label:'Costa Rican',countries:['Costa Rica']},
+    {label:'Panamanian',countries:['Panama']},
+    {label:'Italian',countries:['Italy']},
+    {label:'French',countries:['France']},
+    {label:'British',countries:['United Kingdom','UK']},
+    {label:'English',countries:['England','United Kingdom','UK']},
+    {label:'Scottish',countries:['Scotland','United Kingdom','UK']},
+    {label:'Welsh',countries:['Wales','United Kingdom','UK']},
+    {label:'Swiss',countries:['Switzerland']},
+    {label:'Belgian',countries:['Belgium']},
+    {label:'Spanish',countries:['Spain']},
+    {label:'Greek',countries:['Greece']},
+    {label:'Portuguese',countries:['Portugal']},
+    {label:'German',countries:['Germany']},
+    {label:'Austrian',countries:['Austria']},
+    {label:'Irish',countries:['Ireland']},
+    {label:'Polish',countries:['Poland']},
+    {label:'Hungarian',countries:['Hungary']},
+    {label:'Czech',countries:['Czech Republic','Czechia']},
+    {label:'Slovak',countries:['Slovakia']},
+    {label:'Romanian',countries:['Romania']},
+    {label:'Bulgarian',countries:['Bulgaria']},
+    {label:'Croatian',countries:['Croatia']},
+    {label:'Serbian',countries:['Serbia']},
+    {label:'Bosnian',countries:['Bosnia and Herzegovina','Bosnia']},
+    {label:'Slovenian',countries:['Slovenia']},
+    {label:'Albanian',countries:['Albania']},
+    {label:'Georgian',countries:['Georgia']},
+    {label:'Armenian',countries:['Armenia']},
+    {label:'Azerbaijani',countries:['Azerbaijan']},
+    {label:'Turkish',countries:['Turkey','Türkiye']},
+    {label:'Chinese',countries:['China']},
+    {label:'Japanese',countries:['Japan']},
+    {label:'Korean',countries:['South Korea','Korea']},
+    {label:'Thai',countries:['Thailand']},
+    {label:'Vietnamese',countries:['Vietnam']},
+    {label:'Indian',countries:['India']},
+    {label:'Indonesian',countries:['Indonesia']},
+    {label:'Filipino',countries:['Philippines']},
+    {label:'Malaysian',countries:['Malaysia']},
+    {label:'Singaporean',countries:['Singapore']},
+    {label:'Lebanese',countries:['Lebanon']},
+    {label:'Moroccan',countries:['Morocco']},
+    {label:'Egyptian',countries:['Egypt']},
+    {label:'Tunisian',countries:['Tunisia']},
+    {label:'Ethiopian',countries:['Ethiopia']},
+    {label:'Nigerian',countries:['Nigeria']},
+    {label:'South African',countries:['South Africa']},
+    {label:'Australian',countries:['Australia']},
+    {label:'New Zealand',countries:['New Zealand']}
+  ];
+
+  function getCuisineLabel(text) {
+    const raw=String(text || '').trim();
+    for(const rule of countryRules){
+      const esc=escapeRegExp(rule.label);
+      let m=raw.match(new RegExp('^'+esc+'\\s*\\(([^)]+)\\)$','i'));
+      if(m) return {rule:rule,region:m[1].trim()};
+      m=raw.match(new RegExp('^'+esc+'\\s*[·•|-]\\s*(.+)$','i'));
+      if(m) return {rule:rule,region:m[1].trim()};
+    }
+    return null;
   }
 
   function normalizeContainer(container) {
     const leaves=leafElements(container);
-    const americanEl=leaves.find(function(el) {
-      return /^American\s*\([^)]+\)$/i.test((el.textContent||'').trim()) ||
-             /^American\s*[·•|-]\s*.+$/i.test((el.textContent||'').trim());
-    });
-    if(!americanEl) return;
+    let cuisineEl=null;
+    let parsed=null;
 
-    const region=regionFromAmericanLabel(americanEl.textContent);
-    if(!region) return;
-    const regionNorm=normalizeSearchText(region);
+    for(const el of leaves){
+      const p=getCuisineLabel(el.textContent);
+      if(p){ cuisineEl=el; parsed=p; break; }
+    }
+    if(!cuisineEl || !parsed || !parsed.region) return;
 
-    // Prefer a fuller separate U.S. location when it expands the region,
-    // e.g. "Los Angeles, California, United States" over "Los Angeles".
+    const regionNorm=normalizeSearchText(parsed.region);
     let fuller='';
     let fullerEl=null;
-    leaves.forEach(function(el) {
-      if(el===americanEl) return;
+
+    leaves.forEach(function(el){
+      if(el===cuisineEl) return;
       const raw=(el.textContent||'').trim();
-      if(!/United States(?: of America)?|USA|U\.S\.A\.|U\.S\./i.test(raw)) return;
-      const cleaned=cleanUSLocation(raw);
+      if(!raw) return;
+
+      const hasCountry=parsed.rule.countries.some(function(country){
+        return (' '+normalizeSearchText(raw)+' ').includes(' '+normalizeSearchText(country)+' ');
+      });
+      if(!hasCountry) return;
+
+      const cleaned=cleanCountrySuffix(raw,parsed.rule.countries);
       const cleanedNorm=normalizeSearchText(cleaned);
       if(!cleanedNorm) return;
-      if(
-        cleanedNorm===regionNorm ||
-        cleanedNorm.startsWith(regionNorm+' ') ||
-        regionNorm.startsWith(cleanedNorm+' ')
-      ){
-        if(cleaned.length>fuller.length){
-          fuller=cleaned;
-          fullerEl=el;
-        }
+
+      if(cleanedNorm===regionNorm || cleanedNorm.startsWith(regionNorm+' ') || regionNorm.startsWith(cleanedNorm+' ')){
+        if(cleaned.length>fuller.length){ fuller=cleaned; fullerEl=el; }
       }
     });
 
-    const displayRegion=fuller || region;
-    americanEl.textContent='American · '+displayRegion;
+    const displayRegion=fuller || parsed.region;
+    cuisineEl.textContent=parsed.rule.label+' · '+displayRegion;
 
-    // Remove the duplicate location once its useful detail has been merged
-    // into the single American regional label.
     if(fullerEl) fullerEl.remove();
 
-    // Remove any other exact duplicate U.S. location labels for the same region.
-    leafElements(container).forEach(function(el) {
-      if(el===americanEl) return;
+    leafElements(container).forEach(function(el){
+      if(el===cuisineEl) return;
       const raw=(el.textContent||'').trim();
-      if(!/United States(?: of America)?|USA|U\.S\.A\.|U\.S\./i.test(raw)) return;
-      const cleaned=cleanUSLocation(raw);
+      const hasCountry=parsed.rule.countries.some(function(country){
+        return (' '+normalizeSearchText(raw)+' ').includes(' '+normalizeSearchText(country)+' ');
+      });
+      if(!hasCountry) return;
+      const cleaned=cleanCountrySuffix(raw,parsed.rule.countries);
       if(normalizeSearchText(cleaned)===normalizeSearchText(displayRegion)) el.remove();
     });
   }
 
   scope.querySelectorAll('.recipe-card').forEach(normalizeContainer);
-
   const detail=scope.matches && scope.matches('.recipe-detail')
     ? scope
     : scope.querySelector && scope.querySelector('.recipe-detail');
   if(detail) normalizeContainer(detail);
 }
 
-// Keep the legacy function name because existing initialization calls it.
 function removeRedundantRecipeCardMetadata() {
-  standardizeAmericanRegionalMetadata(document);
+  standardizeRegionalMetadata(document);
 }
 
 function cardHaystack(card) {
