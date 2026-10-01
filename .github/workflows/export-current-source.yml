@@ -1,0 +1,40 @@
+name: Export current website source
+on:
+  push:
+    paths:
+      - ".github/workflows/export-current-source.yml"
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify recipe inventory
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path("index.html").read_text(encoding="utf-8")
+          cards=re.findall(r'<article\b[^>]*class="[^"]*recipe-card[^"]*"[^>]*>[\s\S]*?</article>',s,re.I)
+          pages=[]
+          for c in cards:
+              m=re.search(r'<a\b[^>]*href="([^"]+)"[^>]*>\s*View recipe',c,re.I)
+              if m: pages.append(m.group(1))
+          missing=[p for p in pages if not Path(p).exists()]
+          print("recipe_cards=",len(cards))
+          print("recipe_pages=",len(pages))
+          print("missing=",len(missing))
+          if len(cards)!=424 or len(pages)!=424 or missing:
+              raise SystemExit("Recipe inventory verification failed")
+          PY
+      - name: Stage website source
+        run: |
+          mkdir export
+          find . -maxdepth 1 -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.json" \) -exec cp {} export/ \;
+          if [ -d assets ]; then cp -R assets export/assets; fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: the-kitchen-table-current-source
+          path: export
+          if-no-files-found: error
