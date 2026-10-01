@@ -18,11 +18,29 @@ const search = document.getElementById('recipeSearch');
 const cuisineFiltersWrap = document.getElementById('cuisineFilters');
 const asianSubcuisineGroup = document.getElementById('asianSubcuisineGroup');
 const asianSubcuisineFilters = document.getElementById('asianSubcuisineFilters');
+const latinSubcuisineGroup = document.getElementById('latinSubcuisineGroup');
+const latinSubcuisineFilters = document.getElementById('latinSubcuisineFilters');
 const filters = [...document.querySelectorAll('.filter')];
 const noResults = document.getElementById('noResults');
 let activeFilter = 'all';
 let activeCuisine = 'all';
 let activeAsianSubcuisine = 'all';
+let activeLatinSubcuisine = 'all';
+
+const LATIN_SUBCUISINES = [
+  ['Mexico', ['mexican','mexico','tomatillo','enchilada','taco','chilaquiles','huevos rancheros','mole']],
+  ['Argentina', ['argentine','argentina','criolla','provoleta','milanesa','chimichurri','asado']],
+  ['Uruguay', ['uruguayan','uruguay','chivito']],
+  ['Peru', ['peruvian','peru','ceviche','lomo saltado','aji']],
+  ['Brazil', ['brazilian','brazil','feijoada','moqueca']],
+  ['Colombia', ['colombian','colombia','arepa','ajiaco']],
+  ['Venezuela', ['venezuelan','venezuela','arepa','pabellon']],
+  ['Chile', ['chilean','chile','pastel de choclo']],
+  ['Cuba', ['cuban','cuba','ropa vieja']],
+  ['Puerto Rico', ['puerto rican','puerto rico','mofongo']],
+  ['Dominican Republic', ['dominican','dominican republic','mangu']],
+  ['Central America', ['guatemalan','guatemala','salvadoran','el salvador','honduran','honduras','nicaraguan','nicaragua','costa rican','costa rica','panamanian','panama']]
+];
 
 const ASIAN_SUBCUISINES = [
   ['Chinese', ['chinese','moo shu','mandarin']],
@@ -78,6 +96,37 @@ function detectAsianSubcuisine(card) {
   return '';
 }
 
+function detectLatinSubcuisine(card) {
+  const text = cardHaystack(card);
+  for (const [label, terms] of LATIN_SUBCUISINES) {
+    if (terms.some(term => text.includes(term))) return label;
+  }
+  return '';
+}
+
+function populateLatinSubcuisines() {
+  if (!latinSubcuisineFilters) return;
+  const latinCards = cards.filter(card => detectCuisine(card) === 'Latin American');
+  const represented = [...new Set(latinCards.map(detectLatinSubcuisine).filter(Boolean))]
+    .sort((a,b) => a.localeCompare(b));
+
+  latinSubcuisineFilters.innerHTML =
+    '<button class="cuisine-filter active" data-latin="all">All Latin American</button>' +
+    represented.map(name =>
+      `<button class="cuisine-filter" data-latin="${name}">${name}</button>`
+    ).join('');
+
+  latinSubcuisineFilters.querySelectorAll('.cuisine-filter').forEach(button => {
+    button.addEventListener('click', () => {
+      latinSubcuisineFilters.querySelectorAll('.cuisine-filter')
+        .forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+      activeLatinSubcuisine = button.dataset.latin || 'all';
+      updateRecipes();
+    });
+  });
+}
+
 function populateAsianSubcuisines() {
   if (!asianSubcuisineFilters) return;
   const asianCards = cards.filter(card => detectCuisine(card) === 'Asian');
@@ -119,11 +168,16 @@ function populateCuisineFilter() {
       button.classList.add('active');
       activeCuisine = button.dataset.cuisine || 'all';
       activeAsianSubcuisine = 'all';
+      activeLatinSubcuisine = 'all';
 
       if (asianSubcuisineGroup) {
         asianSubcuisineGroup.hidden = activeCuisine !== 'Asian';
       }
+      if (latinSubcuisineGroup) {
+        latinSubcuisineGroup.hidden = activeCuisine !== 'Latin American';
+      }
       if (activeCuisine === 'Asian') populateAsianSubcuisines();
+      if (activeCuisine === 'Latin American') populateLatinSubcuisines();
 
       // Cuisine is the primary filter: reset food type to All when cuisine changes.
       activeFilter = 'all';
@@ -220,6 +274,7 @@ filters.forEach(button => button.addEventListener('click', () => {
 
 populateCuisineFilter();
 populateAsianSubcuisines();
+populateLatinSubcuisines();
 updateRecipes();
 
 // Recipe images are served only from local GitHub Pages assets.
