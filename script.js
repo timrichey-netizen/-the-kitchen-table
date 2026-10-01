@@ -934,6 +934,125 @@ updateRecipes();
   setTimeout(moveAlternatives,100);
 })();
 
+
+/* Link ingredient names to existing Kitchen Table recipes.
+   Stock and broth are treated as equivalent ingredient terms for cross-references. */
+(function linkRecipeIngredients(){
+  const ingredientMap = [
+    {aliases:['beef stock','beef broth'],href:'beef-broth.html',title:'Beef Broth'},
+    {aliases:['veal stock','veal broth'],href:'veal-broth.html',title:'Veal Broth'},
+    {aliases:['chicken stock','chicken broth'],href:'chicken-broth.html',title:'Chicken Broth'},
+    {aliases:['turkey stock','turkey broth'],href:'turkey-broth.html',title:'Turkey Broth'},
+    {aliases:['pork stock','pork broth'],href:'pork-broth.html',title:'Pork Broth'},
+    {aliases:['vegetable stock','vegetable broth'],href:'vegetable-broth.html',title:'Vegetable Broth'},
+    {aliases:['mushroom stock','mushroom broth'],href:'mushroom-broth.html',title:'Mushroom Broth'},
+    {aliases:['lamb stock','lamb broth'],href:'lamb-broth.html',title:'Lamb Broth'},
+    {aliases:['clam stock','clam broth'],href:'clam-broth.html',title:'Clam Broth'},
+    {aliases:['crab stock','crab broth'],href:'crab-broth.html',title:'Crab Broth'},
+    {aliases:['lobster stock','lobster broth'],href:'lobster-broth.html',title:'Lobster Broth'},
+    {aliases:['shrimp stock','shrimp broth'],href:'shrimp-broth.html',title:'Shrimp Broth'},
+    {aliases:['shellfish stock','shellfish broth','seafood stock','seafood broth'],href:'shellfish-broth.html',title:'Shellfish Broth'},
+    {aliases:['fish stock'],href:'fish-stock.html',title:'Fish Stock'},
+    {aliases:['fish broth'],href:'fish-broth.html',title:'Fish Broth'},
+    {aliases:['bone broth','bone stock'],href:'bone-broth.html',title:'Bone Broth'},
+    {aliases:['beef bone broth','beef bone stock'],href:'beef-bone-broth.html',title:'Beef Bone Broth'},
+    {aliases:['chicken bone broth','chicken bone stock'],href:'chicken-bone-broth.html',title:'Chicken Bone Broth'},
+    {aliases:['consommé','consomme'],href:'consomme.html',title:'Consommé'},
+    {aliases:['hollandaise'],href:'hollandaise-sauce.html',title:'Hollandaise'},
+    {aliases:['béarnaise','bearnaise'],href:'bearnaise-sauce.html',title:'Béarnaise'},
+    {aliases:['béchamel','bechamel'],href:'bechamel-sauce.html',title:'Béchamel'},
+    {aliases:['velouté','veloute'],href:'veloute-sauce.html',title:'Velouté'},
+    {aliases:['espagnole'],href:'espagnole-sauce.html',title:'Espagnole'},
+    {aliases:['mornay'],href:'mornay-sauce.html',title:'Mornay'},
+    {aliases:['marinara sauce','marinara'],href:'marinara-sauce.html',title:'Marinara Sauce'},
+    {aliases:['vodka sauce'],href:'vodka-sauce.html',title:'Vodka Sauce'},
+    {aliases:['chimichurri'],href:'chimichurri.html',title:'Chimichurri'},
+    {aliases:['pesto alla genovese'],href:'pesto-alla-genovese.html',title:'Pesto alla Genovese'},
+    {aliases:['pesto'],href:'pesto.html',title:'Pesto'},
+    {aliases:['salsa verde'],href:'salsa-verde.html',title:'Salsa Verde'},
+    {aliases:['salsa roja'],href:'salsa-roja.html',title:'Salsa Roja'},
+    {aliases:['salsa taquera'],href:'salsa-taquera.html',title:'Salsa Taquera'},
+    {aliases:['salsa macha'],href:'salsa-macha.html',title:'Salsa Macha'},
+    {aliases:['salsa ranchera'],href:'salsa-ranchera.html',title:'Salsa Ranchera'},
+    {aliases:['pico de gallo'],href:'pico-de-gallo.html',title:'Pico de Gallo'},
+    {aliases:['mole poblano'],href:'mole-poblano.html',title:'Mole Poblano'},
+    {aliases:['mole negro'],href:'mole-negro.html',title:'Mole Negro'},
+    {aliases:['mexican adobo','adobo sauce'],href:'mexican-adobo.html',title:'Mexican Adobo'},
+    {aliases:['cajun seasoning','cajun seasoning mix'],href:'cajun-seasoning-mix.html',title:'Cajun Seasoning Mix'},
+    {aliases:['fresh pasta'],href:'fresh-pasta-hard-soft-flour.html',title:'Fresh Pasta with Hard + Soft Flour'},
+    {aliases:['corn tortillas','corn tortilla'],href:'tortillas-maiz-hechas-mano.html',title:'Handmade Corn Tortillas'}
+  ];
+
+  const aliases=[];
+  ingredientMap.forEach(item=>{
+    item.aliases.forEach(alias=>aliases.push({
+      alias:alias,
+      normalized:alias.toLowerCase(),
+      href:item.href,
+      title:item.title
+    }));
+  });
+  aliases.sort((a,b)=>b.alias.length-a.alias.length);
+
+  function linkTextNode(node){
+    if(!node.nodeValue || !node.nodeValue.trim()) return;
+    if(node.parentElement && node.parentElement.closest('a')) return;
+
+    const original=node.nodeValue;
+    const lower=original.toLowerCase();
+    let best=null;
+
+    aliases.forEach(item=>{
+      const idx=lower.indexOf(item.normalized);
+      if(idx<0) return;
+      const before=idx===0?' ':lower[idx-1];
+      const after=idx+item.normalized.length>=lower.length?' ':lower[idx+item.normalized.length];
+      if(/[a-z0-9]/i.test(before) || /[a-z0-9]/i.test(after)) return;
+      if(!best || idx<best.idx || (idx===best.idx && item.alias.length>best.item.alias.length)){
+        best={idx:idx,item:item};
+      }
+    });
+
+    if(!best) return;
+
+    const frag=document.createDocumentFragment();
+    const before=original.slice(0,best.idx);
+    const matched=original.slice(best.idx,best.idx+best.item.alias.length);
+    const after=original.slice(best.idx+best.item.alias.length);
+
+    if(before) frag.appendChild(document.createTextNode(before));
+    const a=document.createElement('a');
+    a.href=best.item.href;
+    a.className='ingredient-recipe-link';
+    a.textContent=matched;
+    a.title='Open '+best.item.title+' recipe';
+    frag.appendChild(a);
+    if(after) frag.appendChild(document.createTextNode(after));
+    node.replaceWith(frag);
+  }
+
+  function applyIngredientLinks(){
+    const panels=document.querySelectorAll('.ingredients-panel');
+    if(!panels.length) return;
+    panels.forEach(panel=>{
+      const walker=document.createTreeWalker(panel,NodeFilter.SHOW_TEXT,{
+        acceptNode:function(node){
+          const p=node.parentElement;
+          if(!p || p.closest('a,script,style')) return NodeFilter.FILTER_REJECT;
+          return node.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+        }
+      });
+      const nodes=[];
+      let n;
+      while((n=walker.nextNode())) nodes.push(n);
+      nodes.forEach(linkTextNode);
+    });
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',applyIngredientLinks);
+  else applyIngredientLinks();
+})();
+
 // Recipe images are served only from local GitHub Pages assets.
 
 
