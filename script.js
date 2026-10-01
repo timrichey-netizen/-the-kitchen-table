@@ -892,6 +892,48 @@ populateMexicanSubcategories();
 syncMexicanSubcategoryVisibility();
 updateRecipes();
 
+
+// Keep optional methods, sauce pairings, and technique alternatives below the recipe itself.
+(function moveRecipeAlternativesBelowRecipe(){
+  function moveAlternatives(){
+    const detail=document.querySelector('.recipe-detail');
+    const recipe=detail?.querySelector('.recipe-layout');
+    if(!detail || !recipe) return;
+
+    const selectors=[
+      '.mother-sauce-tip',
+      '.daughter-sauce-tip',
+      '.veloute-daughter-tip',
+      '.hollandaise-daughter-tip',
+      '.tomate-daughter-tip',
+      '.mexican-sauce-tip',
+      '.mexican-sauce-tip-2',
+      '.meat-tip'
+    ];
+    const alternatives=[...detail.querySelectorAll(selectors.join(','))];
+    if(!alternatives.length) return;
+
+    let section=detail.querySelector('.recipe-alternatives');
+    if(!section){
+      section=document.createElement('section');
+      section.className='container recipe-alternatives';
+      section.style.cssText='margin-top:28px';
+      section.innerHTML='<h2 style="margin:0 0 14px">Alternative Methods & Pairings</h2>';
+    }
+
+    alternatives.forEach(el=>section.appendChild(el));
+
+    const broth=detail.querySelector('.broth-xref');
+    if(broth) detail.insertBefore(section,broth);
+    else recipe.insertAdjacentElement('afterend',section);
+  }
+
+  // Pairing panels are created elsewhere in this script. Queue relocation after
+  // those initializers have finished, and repeat once for any late DOM additions.
+  setTimeout(moveAlternatives,0);
+  setTimeout(moveAlternatives,100);
+})();
+
 // Recipe images are served only from local GitHub Pages assets.
 
 
