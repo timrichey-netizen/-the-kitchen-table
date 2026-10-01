@@ -123,8 +123,20 @@
 .pairing-item small{display:block;color:var(--muted);margin-top:3px}
 a.pairing-item:hover span{text-decoration:underline}
 .pairing-suggestion{cursor:default}
+.pairing-swap-item>a{display:block;color:var(--text);text-decoration:none}
+.pairing-swap{margin-top:9px;width:100%;border:1px solid var(--line);background:#fff;color:var(--accent-dark);font:inherit;font-size:.82rem;font-weight:800;padding:8px 10px;border-radius:999px;cursor:pointer}
+.pairing-swap:hover,.pairing-swap:focus-visible{background:var(--text);color:#fff;border-color:var(--text)}
+.ingredient-list-panel{margin-top:28px;padding:26px;background:var(--bg);border:1px solid var(--line);border-radius:20px}
+.ingredient-list-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:16px}
+.ingredient-list-heading h2{margin-bottom:5px}
+.ingredient-dish-group{padding:18px 0;border-top:1px solid var(--line)}
+.ingredient-dish-group:first-child{border-top:0}
+.ingredient-dish-group h3{font-size:1.16rem;margin-bottom:10px}
+.ingredient-dish-group h3 a{color:var(--text)}
+.ingredient-dish-group ul{margin:0;padding-left:22px;columns:2;column-gap:34px}
+.ingredient-dish-group li{margin:6px 0;break-inside:avoid}
 @media(max-width:900px){.pairing-index-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.pairing-index-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.pairing-index-grid{grid-template-columns:1fr}.ingredient-list-heading{flex-direction:column}.ingredient-print-button{width:100%}.ingredient-dish-group ul{columns:1}}
 
 .dessert-sprite{background-image:url('assets/dessert-recipe-sprite.png');background-repeat:no-repeat;background-size:300% 300%;background-color:#f4e9dc}
 .recipe-photo.dessert-sprite{display:block;width:100%;height:220px}
@@ -276,3 +288,18 @@ button,a,input,select{touch-action:manipulation}
 .latin-subcuisine-group[hidden]{display:none}
 .latin-subcuisine-group .filter-group-label{color:var(--accent-dark)}
 .latin-subcuisine-group .cuisine-filter{padding:8px 13px;font-size:.92rem}
+
+@media print{
+  .meal-planner-page .meal-planner-intro,
+  .meal-planner-page .planner-progress,
+  .meal-planner-page .planner-card,
+  .meal-planner-page #plannerSummary,
+  .meal-planner-page #plannedMealGrid,
+  .meal-planner-page #pairingIndex,
+  .meal-planner-page .planner-result-actions,
+  .meal-planner-page .site-header,
+  .meal-planner-page .footer{display:none!important}
+  .meal-planner-page .planner-results{display:block!important;border:0;box-shadow:none;padding:0;margin:0}
+  .meal-planner-page .ingredient-list-panel{display:block!important;border:0;padding:0;margin:0}
+  .meal-planner-page .ingredient-print-button{display:none!important}
+}
