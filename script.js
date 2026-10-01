@@ -442,6 +442,21 @@ function addEnglishRecipeNames() {
 
 removeRedundantRecipeCardMetadata();
 
+if (!window.__ktAmericanRegionObserver) {
+  window.__ktAmericanRegionObserver = new MutationObserver(function(mutations) {
+    const hasRecipeContent = mutations.some(function(m) {
+      return [...m.addedNodes].some(function(node) {
+        return node.nodeType===1 && (
+          node.matches?.('.recipe-card,.recipe-detail') ||
+          node.querySelector?.('.recipe-card,.recipe-detail')
+        );
+      });
+    });
+    if (hasRecipeContent) standardizeAmericanRegionalMetadata(document);
+  });
+  window.__ktAmericanRegionObserver.observe(document.body,{childList:true,subtree:true});
+}
+
 const cards = [...document.querySelectorAll('.recipe-card')];
 const search = document.getElementById('recipeSearch');
 const cuisineFiltersWrap = document.getElementById('cuisineFilters');
@@ -533,70 +548,93 @@ function normalizeSearchText(value) {
     .trim();
 }
 
-function removeRedundantRecipeCardMetadata() {
-  document.querySelectorAll('.recipe-card').forEach(function(card) {
-    const allElements=[...card.querySelectorAll('*')];
+function standardizeAmericanRegionalMetadata(root) {
+  const scope = root || document;
 
-    // General rule for regional American labels:
-    // If the card already says "American (Boston)", "American (Chicago)",
-    // "American (New York)", etc., suppress a second label that simply repeats
-    // that same place as "Boston, United States", "Chicago, United States", etc.
-    let americanRegion='';
-    allElements.forEach(function(el){
-      const text=(el.textContent||'').trim();
-      const m=text.match(/^American\s*\(([^)]+)\)$/i);
-      if(m && !americanRegion) americanRegion=normalizeSearchText(m[1]);
+  function leafElements(container) {
+    return [...container.querySelectorAll('*')].filter(function(el) {
+      return !el.children.length && (el.textContent || '').trim();
     });
+  }
 
-    if(americanRegion){
-      allElements.forEach(function(el){
-        const text=(el.textContent||'').trim();
-        const normalized=normalizeSearchText(text);
-        const stripped=normalized
-          .replace(/\bunited states\b/g,'')
-          .replace(/\busa\b/g,'')
-          .replace(/\bus\b/g,'')
-          .trim();
+  function cleanUSLocation(value) {
+    return String(value || '')
+      .replace(/\s*,?\s*(United States(?: of America)?|USA|U\.S\.A\.|U\.S\.)\s*$/i, '')
+      .replace(/\s*,\s*$/, '')
+      .trim();
+  }
 
-        if(
-          stripped===americanRegion &&
-          /united states|\busa\b|\bu\.?s\.?\b/i.test(text)
-        ){
-          el.remove();
+  function regionFromAmericanLabel(value) {
+    const text=String(value || '').trim();
+    let m=text.match(/^American\s*\(([^)]+)\)$/i);
+    if(m) return m[1].trim();
+    m=text.match(/^American\s*[·•|-]\s*(.+)$/i);
+    return m ? m[1].trim() : '';
+  }
+
+  function normalizeContainer(container) {
+    const leaves=leafElements(container);
+    const americanEl=leaves.find(function(el) {
+      return /^American\s*\([^)]+\)$/i.test((el.textContent||'').trim()) ||
+             /^American\s*[·•|-]\s*.+$/i.test((el.textContent||'').trim());
+    });
+    if(!americanEl) return;
+
+    const region=regionFromAmericanLabel(americanEl.textContent);
+    if(!region) return;
+    const regionNorm=normalizeSearchText(region);
+
+    // Prefer a fuller separate U.S. location when it expands the region,
+    // e.g. "Los Angeles, California, United States" over "Los Angeles".
+    let fuller='';
+    let fullerEl=null;
+    leaves.forEach(function(el) {
+      if(el===americanEl) return;
+      const raw=(el.textContent||'').trim();
+      if(!/United States(?: of America)?|USA|U\.S\.A\.|U\.S\./i.test(raw)) return;
+      const cleaned=cleanUSLocation(raw);
+      const cleanedNorm=normalizeSearchText(cleaned);
+      if(!cleanedNorm) return;
+      if(
+        cleanedNorm===regionNorm ||
+        cleanedNorm.startsWith(regionNorm+' ') ||
+        regionNorm.startsWith(cleanedNorm+' ')
+      ){
+        if(cleaned.length>fuller.length){
+          fuller=cleaned;
+          fullerEl=el;
         }
-      });
-    }
-
-    // Also retain the prior generic duplicate-location cleanup for metadata rows.
-    const meta = card.querySelector('.recipe-meta');
-    if (!meta) return;
-
-    const parts = [...meta.children];
-    if (parts.length < 2) return;
-
-    const normalized = parts.map(function(el){ return normalizeSearchText(el.textContent); });
-
-    parts.forEach(function(el, index) {
-      const value = normalized[index];
-      if (!value) return;
-
-      const locationBits = value.split(' ').filter(function(bit) {
-        return !['united','states','usa','us'].includes(bit);
-      });
-      if (!locationBits.length) return;
-
-      const redundant = normalized.some(function(other, otherIndex) {
-        if (otherIndex === index) return false;
-        return locationBits.every(function(bit) {
-          return (' ' + other + ' ').includes(' ' + bit + ' ');
-        });
-      });
-
-      if (redundant && /united states|\busa\b|\bu s\b/.test(value)) {
-        el.remove();
       }
     });
-  });
+
+    const displayRegion=fuller || region;
+    americanEl.textContent='American · '+displayRegion;
+
+    // Remove the duplicate location once its useful detail has been merged
+    // into the single American regional label.
+    if(fullerEl) fullerEl.remove();
+
+    // Remove any other exact duplicate U.S. location labels for the same region.
+    leafElements(container).forEach(function(el) {
+      if(el===americanEl) return;
+      const raw=(el.textContent||'').trim();
+      if(!/United States(?: of America)?|USA|U\.S\.A\.|U\.S\./i.test(raw)) return;
+      const cleaned=cleanUSLocation(raw);
+      if(normalizeSearchText(cleaned)===normalizeSearchText(displayRegion)) el.remove();
+    });
+  }
+
+  scope.querySelectorAll('.recipe-card').forEach(normalizeContainer);
+
+  const detail=scope.matches && scope.matches('.recipe-detail')
+    ? scope
+    : scope.querySelector && scope.querySelector('.recipe-detail');
+  if(detail) normalizeContainer(detail);
+}
+
+// Keep the legacy function name because existing initialization calls it.
+function removeRedundantRecipeCardMetadata() {
+  standardizeAmericanRegionalMetadata(document);
 }
 
 function cardHaystack(card) {
