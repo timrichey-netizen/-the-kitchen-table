@@ -323,6 +323,17 @@ function addMetricIngredientMeasurements(root) {
 }
 
 const recipeEnglishNames = {
+  "Osh Plov":"Uzbek Rice Pilaf","Plov":"Azerbaijani Rice Pilaf","Turkmen Palaw":"Turkmen Rice Pilaf",
+  "Lagman":"Uzbek Noodle Soup","Uzbek Manti":"Uzbek Steamed Dumplings","Manti":"Steamed Meat Dumplings","Samsa":"Uzbek Baked Meat Pastries","Shurpa":"Uzbek Meat and Vegetable Soup",
+  "Dimlama":"Uzbek Layered Meat and Vegetable Stew","Norin":"Uzbek Noodles with Meat","Mastava":"Uzbek Rice Soup","Chuchvara":"Uzbek Meat Dumplings",
+  "Khinkali":"Georgian Soup Dumplings","Khachapuri":"Georgian Cheese Bread","Khachapuri Adjaruli":"Adjarian Cheese Bread with Egg","Chakhokhbili":"Georgian Chicken Stew",
+  "Satsivi":"Georgian Walnut Sauce with Poultry","Shkmeruli":"Georgian Garlic Chicken","Mtsvadi":"Georgian Grilled Meat Skewers","Lobio":"Georgian Bean Stew",
+  "Chanakhi":"Georgian Lamb and Vegetable Stew","Kharcho":"Georgian Beef and Walnut Soup","Ojakhuri":"Georgian Meat and Potatoes",
+  "Khorovats":"Armenian Grilled Meat","Harissa":"Armenian Wheat and Chicken Porridge","Dolma":"Stuffed Grape Leaves and Vegetables","Khash":"Armenian Slow-Cooked Beef Soup",
+  "Ghapama":"Armenian Stuffed Pumpkin","Tjvjik":"Armenian Liver and Onion Dish","Lahmajoun":"Armenian Flatbread with Spiced Meat",
+  "Dushbara":"Azerbaijani Tiny Meat Dumpling Soup","Qutab":"Azerbaijani Stuffed Flatbread","Piti":"Azerbaijani Lamb and Chickpea Stew","Kufta Bozbash":"Azerbaijani Meatball and Chickpea Soup",
+  "Govurma":"Azerbaijani Braised Meat","Dovga":"Azerbaijani Yogurt and Herb Soup","Azerbaijani Dolma":"Azerbaijani Stuffed Grape Leaves",
+  "Dograma":"Turkmen Bread and Meat Soup","Dograma Bread":"Turkmen Flatbread for Dograma",
   "Dashi":"Japanese Soup Stock","Kombu Dashi":"Kelp Soup Stock","Shiitake Dashi":"Shiitake Mushroom Soup Stock",
   "Tonkotsu Broth":"Pork Bone Broth","Pho Broth":"Vietnamese Noodle Soup Broth","Tom Yum Broth":"Thai Hot and Sour Soup Broth","Tom Kha Broth":"Thai Coconut Soup Broth",
   "Mexican Caldo de Pollo":"Mexican Chicken Soup","Mexican Caldo de Res":"Mexican Beef Soup","Consommé":"Clear Broth","Court-Bouillon":"Quick Aromatic Broth","Italian Brodo":"Italian Broth",
@@ -442,8 +453,8 @@ function addEnglishRecipeNames() {
 
 removeRedundantRecipeCardMetadata();
 
-if (!window.__ktAmericanRegionObserver) {
-  window.__ktAmericanRegionObserver = new MutationObserver(function(mutations) {
+if (!window.__ktRegionalMetadataObserver) {
+  window.__ktRegionalMetadataObserver = new MutationObserver(function(mutations) {
     const hasRecipeContent = mutations.some(function(m) {
       return [...m.addedNodes].some(function(node) {
         return node.nodeType===1 && (
@@ -454,7 +465,7 @@ if (!window.__ktAmericanRegionObserver) {
     });
     if (hasRecipeContent) standardizeRegionalMetadata(document);
   });
-  window.__ktAmericanRegionObserver.observe(document.body,{childList:true,subtree:true});
+  window.__ktRegionalMetadataObserver.observe(document.body,{childList:true,subtree:true});
 }
 
 const cards = [...document.querySelectorAll('.recipe-card')];
