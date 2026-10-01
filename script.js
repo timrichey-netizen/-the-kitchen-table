@@ -1272,6 +1272,17 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
       '<a class="text-link" href="'+item.data.url+'">View recipe →</a></div></article>';
   }
 
+  function recipeCardsForPantry(){
+    var local=[].slice.call(document.querySelectorAll('#recipeGrid .recipe-card'));
+    if(local.length)return Promise.resolve(local);
+    return fetch('index.html')
+      .then(function(response){if(!response.ok)throw new Error('Recipe catalog unavailable');return response.text();})
+      .then(function(html){
+        var doc=new DOMParser().parseFromString(html,'text/html');
+        return [].slice.call(doc.querySelectorAll('#recipeGrid .recipe-card'));
+      });
+  }
+
   findButton.addEventListener('click',function(){
     if(!selected.length){
       results.hidden=false;
@@ -1280,23 +1291,31 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
       results.scrollIntoView({behavior:'smooth',block:'start'});
       return;
     }
-    var ranked=[].slice.call(document.querySelectorAll('#recipeGrid .recipe-card'))
-      .map(cardData).map(scoreRecipe)
-      .filter(function(x){return x.score>0;})
-      .sort(function(a,b){
-        return b.score-a.score || a.data.title.localeCompare(b.data.title);
-      }).slice(0,12);
-
-    results.hidden=false;
-    if(!ranked.length){
-      resultsSummary.textContent='No close matches found yet. Try a broader combination of ingredients.';
+    findButton.disabled=true;
+    findButton.textContent='Finding dishes…';
+    recipeCardsForPantry().then(function(recipeCards){
+      var ranked=recipeCards.map(cardData).map(scoreRecipe)
+        .filter(function(x){return x.score>0;})
+        .sort(function(a,b){return b.score-a.score || a.data.title.localeCompare(b.data.title);})
+        .slice(0,12);
+      results.hidden=false;
+      if(!ranked.length){
+        resultsSummary.textContent='No close matches found yet. Try a broader combination of ingredients.';
+        resultsGrid.innerHTML='';
+      }else{
+        resultsSummary.textContent='Showing '+ranked.length+' best match'+(ranked.length===1?'':'es')+
+          ' for '+selected.length+' selected ingredient'+(selected.length===1?'':'s')+'.';
+        resultsGrid.innerHTML=ranked.map(resultCard).join('');
+      }
+      results.scrollIntoView({behavior:'smooth',block:'start'});
+    }).catch(function(){
+      results.hidden=false;
+      resultsSummary.textContent='The recipe catalog could not be loaded. Please try again.';
       resultsGrid.innerHTML='';
-    }else{
-      resultsSummary.textContent='Showing '+ranked.length+' best match'+(ranked.length===1?'':'es')+
-        ' for '+selected.length+' selected ingredient'+(selected.length===1?'':'s')+'.';
-      resultsGrid.innerHTML=ranked.map(resultCard).join('');
-    }
-    results.scrollIntoView({behavior:'smooth',block:'start'});
+    }).finally(function(){
+      findButton.disabled=false;
+      findButton.textContent='Find Dishes';
+    });
   });
 
   if(clearButton)clearButton.addEventListener('click',function(){
