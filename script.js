@@ -1303,7 +1303,18 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
       description:intro?intro.textContent.trim():''
     };
   }
+  function ensureMyMealNav(){
+    var nav=document.querySelector('.site-header .nav');
+    if(!nav||nav.querySelector('a[href="my-meal.html"]'))return;
+    var link=document.createElement('a');
+    link.href='my-meal.html';
+    link.innerHTML='My Meal <span class="my-meal-nav-count" data-my-meal-count></span>';
+    var plan=nav.querySelector('a[href*="plan-a-meal.html"]');
+    if(plan)nav.insertBefore(link,plan);
+    else nav.appendChild(link);
+  }
   function updateCounts(){
+    ensureMyMealNav();
     var count=read(STORAGE_KEY).length;
     document.querySelectorAll('[data-my-meal-count]').forEach(function(el){
       el.textContent=count?'('+count+')':'';
