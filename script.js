@@ -745,6 +745,42 @@ function standardizeRegionalMetadata(root) {
     return out.replace(/^[,·/\s]+|[,·/\s]+$/g,'').trim();
   }
 
+  function inferSpecificCardType(container) {
+    const structured=[
+      container.dataset && container.dataset.category || '',
+      container.dataset && container.dataset.search || '',
+      [...container.querySelectorAll('.recipe-meta span')].map(function(el){return el.textContent || '';}).join(' '),
+      container.querySelector('h3,h1,h2')?.textContent || ''
+    ].join(' ');
+    const text=norm(structured);
+
+    const proteinRules=[
+      ['Chicken',['chicken','pollo']],
+      ['Beef',['beef','steak','bistec','carne asada','short rib','brisket','veal beef']],
+      ['Pork',['pork','porc','pig','ham','bacon','guanciale','pancetta','chorizo','sausage','carnitas','adobada']],
+      ['Lamb',['lamb','mutton']],
+      ['Veal',['veal','vitello','osso buco']],
+      ['Duck',['duck']],
+      ['Turkey',['turkey']],
+      ['Goat',['goat','cabrito']],
+      ['Fish',['fish','pescado','cod','salmon','tuna','atun','trout','halibut','snapper','redfish','mahi','swordfish']],
+      ['Shrimp',['shrimp','prawn','camarón','camaron']],
+      ['Mussels',['mussel','mussels','moules']],
+      ['Clams',['clam','clams']],
+      ['Crab',['crab','jaiba']],
+      ['Lobster',['lobster','langosta']],
+      ['Scallops',['scallop','scallops','callo de hacha']],
+      ['Octopus',['octopus','pulpo']],
+      ['Squid',['squid','calamar']]
+    ];
+
+    for (const rule of proteinRules) {
+      if (rule[1].some(function(term){ return contains(text, term); })) return rule[0];
+    }
+
+    return inferFoodType(container);
+  }
+
   function inferFoodType(container) {
     const categories=(container.dataset && container.dataset.category || '')
       .split(/\s+/)
@@ -837,7 +873,7 @@ function standardizeRegionalMetadata(root) {
       container.querySelector('h3,h1,h2')?.textContent || ''
     ].join(' ');
 
-    const foodType=inferFoodType(container);
+    const foodType=isCard ? inferSpecificCardType(container) : inferFoodType(container);
     const country=(container.dataset && container.dataset.country || '').trim() || inferCountry(structuredText);
 
     if (isCard) {
