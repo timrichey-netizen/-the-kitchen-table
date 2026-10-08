@@ -192,7 +192,18 @@
 /* Match the recipe browser editorial headings to the homepage display family. */
 .editorial-recipe-browser>h2{font-family:'DM Serif Display',Georgia,serif!important;font-weight:400!important;letter-spacing:-.025em!important;line-height:1.08!important}
 .editorial-recipe-browser>.eyebrow,.editorial-recipe-browser .browser-brand{font-family:Inter,Arial,sans-serif!important}
-</style><style id="favorite-control-style">.recipe-card{position:relative}.favorite-toggle{display:inline-flex;align-items:center;justify-content:center;width:43px;height:43px;cursor:pointer;background:#fffaf3;border:1px solid #cba48b;border-radius:50%;color:#974330;transition:transform .15s,background .15s}.favorite-toggle:hover,.favorite-toggle:focus-visible{background:#f5e5dc;transform:scale(1.05)}.favorite-toggle.is-favorite{background:#a94732;color:#fff}.favorite-toggle.is-favorite svg{fill:currentColor}.recipe-card>.favorite-toggle{position:absolute;top:17px;right:16px;z-index:5;width:34px;height:34px}.recipe-card>.favorite-toggle svg{width:18px;height:18px}.favorite-filter-hidden{display:none!important}.favorite-filter-label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;margin:4px 0 8px;color:#82402d;font:700 14px Inter,Arial,sans-serif}.favorite-filter-label input{accent-color:#a94732;width:17px;height:17px}.favorite-visible-count{font:13px Inter,sans-serif;color:#76665b}.favorite-page-button{width:51px;height:51px}.about-section h2{font-family:"DM Serif Display",Georgia,serif!important;font-weight:400!important;letter-spacing:-.025em!important;line-height:1.12!important}.about-section p:not(.eyebrow){font-family:Inter,Arial,sans-serif;line-height:1.7}@media print{.favorite-toggle{display:none!important}}</style></head>
+</style><style id="favorite-control-style">.recipe-card{position:relative}.favorite-toggle{display:inline-flex;align-items:center;justify-content:center;width:43px;height:43px;cursor:pointer;background:#fffaf3;border:1px solid #cba48b;border-radius:50%;color:#974330;transition:transform .15s,background .15s}.favorite-toggle:hover,.favorite-toggle:focus-visible{background:#f5e5dc;transform:scale(1.05)}.favorite-toggle.is-favorite{background:#a94732;color:#fff}.favorite-toggle.is-favorite svg{fill:currentColor}.recipe-card>.favorite-toggle{position:absolute;top:17px;right:16px;z-index:5;width:34px;height:34px}.recipe-card>.favorite-toggle svg{width:18px;height:18px}.favorite-filter-hidden{display:none!important}.favorite-filter-label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;margin:4px 0 8px;color:#82402d;font:700 14px Inter,Arial,sans-serif}.favorite-filter-label input{accent-color:#a94732;width:17px;height:17px}.favorite-visible-count{font:13px Inter,sans-serif;color:#76665b}.favorite-page-button{width:51px;height:51px}.about-section h2{font-family:"DM Serif Display",Georgia,serif!important;font-weight:400!important;letter-spacing:-.025em!important;line-height:1.12!important}.about-section p:not(.eyebrow){font-family:Inter,Arial,sans-serif;line-height:1.7}@media print{.favorite-toggle{display:none!important}}</style><style id="personal-rating-style">
+.personal-recipe-rating{text-align:center;border:1px solid #dec7b4;background:#fffaf3;border-radius:16px;max-width:430px;margin:15px auto 28px;padding:17px 20px;color:#352922}
+.personal-rating-heading{font:800 12px Inter,Arial,sans-serif;letter-spacing:.13em;color:#a74632}
+.personal-rating-buttons{display:flex;justify-content:center;gap:3px;margin-top:7px}
+.personal-rating-buttons button{appearance:none;border:0;background:transparent;color:#cfc3b5;font-size:36px;line-height:1.2;cursor:pointer;padding:3px;transition:color .15s,transform .15s}
+.personal-rating-buttons button.chosen,.personal-rating-buttons button:hover{color:#b34b33}
+.personal-rating-buttons button:focus-visible{outline:2px solid #b34b33;border-radius:5px}
+.personal-rating-buttons button:hover{transform:scale(1.12)}
+.personal-rating-status{margin:2px 0 0;color:#76695e;font:500 13px Inter,Arial,sans-serif}
+.personal-card-rating{font:700 12px Inter,Arial,sans-serif;color:#a74732;margin-bottom:9px}
+@media print{.personal-recipe-rating{display:none!important}}
+</style></head>
 <body>
   <header class="site-header">
     <div class="container nav-wrap">
@@ -342,5 +353,5 @@
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',display,{once:true});else display();
 })();
-</script><script src="favorites.js"></script></body>
+</script><script src="favorites.js"></script><script src="personal-ratings.js"></script></body>
 </html>
