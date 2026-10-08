@@ -445,3 +445,17 @@ Object.assign(window.KitchenTableLocaleContent.fr, {
   "Use a smaller amount of cured or fatty meat and increase vegetables or aromatics — preserves savory depth while reducing heaviness and salt.": "Utilisez moins de viande salée ou grasse et davantage de légumes ou d’aromates pour conserver la richesse du goût tout en réduisant le gras et le sel.",
   "8 servings": "8 portions"
 });
+
+/* Translation completeness: equipment and instruction-section title. */
+Object.assign(window.KitchenTableLocaleContent.es, {
+  "Rectangular baking dish high of ca. cm 33 x 23, Stand mixer with dough hook, Pasta machine, Frigo, Kitchen towels dry, Baking dish, Oven": "Fuente de horno rectangular y alta de unos 33 × 23 cm, amasadora con gancho, máquina para pasta, frigorífico, paños de cocina secos, fuente de horno y horno",
+  "Pastry board, Plastic wrap, Slotted spoon, Clean kitchen towel, Shallow pan, Small saucepan, Rectangular baking dish, Oven": "Tabla de amasar, film transparente, espumadera, paño de cocina limpio, sartén amplia y poco profunda, cazo pequeño, fuente de horno rectangular y horno",
+  "Colander, Saucepan": "Colador y cacerola",
+  "Neapolitan Lasagna": "Lasaña napolitana"
+});
+Object.assign(window.KitchenTableLocaleContent.fr, {
+  "Rectangular baking dish high of ca. cm 33 x 23, Stand mixer with dough hook, Pasta machine, Frigo, Kitchen towels dry, Baking dish, Oven": "Plat à gratin rectangulaire haut d’environ 33 × 23 cm, robot pétrisseur avec crochet, machine à pâtes, réfrigérateur, torchons secs, plat de cuisson et four",
+  "Pastry board, Plastic wrap, Slotted spoon, Clean kitchen towel, Shallow pan, Small saucepan, Rectangular baking dish, Oven": "Planche à pâtisserie, film alimentaire, écumoire, torchon propre, sauteuse peu profonde, petite casserole, plat à gratin rectangulaire et four",
+  "Colander, Saucepan": "Passoire et casserole",
+  "Neapolitan Lasagna": "Lasagnes napolitaines"
+});
