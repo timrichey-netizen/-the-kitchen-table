@@ -109,6 +109,25 @@
 #recipeGrid .recipe-card-body>a:hover{background:#853321!important}
 @media(max-width:780px){#recipeGrid .recipe-card-heading{min-height:195px!important;padding:23px 16px 17px!important}#recipeGrid .recipe-card-heading h3{font-size:clamp(22px,5.3vw,31px)!important}#recipeGrid .recipe-card-brand{font-size:10px;letter-spacing:.15em}#recipeGrid .recipe-card-heading+a>img{aspect-ratio:4/3.6!important}#recipeGrid .recipe-card-body p{font-size:16px!important}}
 @media(max-width:420px){#recipeGrid .recipe-card-heading{min-height:190px!important}#recipeGrid .recipe-card-heading h3{font-size:27px!important}#recipeGrid .recipe-card-heading+a>img{aspect-ratio:4/4!important}}
+</style><style id="daily-editorial-banner-style">
+.editorial-daily-section{padding:44px 0 68px;background:#faf2e8}
+.daily-banner{position:relative;isolation:isolate;min-height:clamp(510px,53vw,760px);border:1px solid #d8bd9f;border-radius:30px;overflow:hidden;background:#eee3d5;box-shadow:0 12px 38px rgba(68,46,30,.08)}
+.daily-banner:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border:1px solid rgba(255,255,255,.8);border-radius:24px;margin:15px}
+.daily-banner-photo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-height:none!important;object-fit:cover!important;object-position:78% center!important;border-radius:0!important;margin:0!important;display:block!important;z-index:0}
+.daily-banner:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,rgba(251,245,235,.99) 0%,rgba(251,245,235,.96) 31%,rgba(251,245,235,.84) 42%,rgba(251,245,235,.05) 69%)}
+.daily-banner-content{position:relative;z-index:2;width:min(53%,650px);min-height:inherit;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:66px clamp(34px,5vw,88px);box-sizing:border-box}
+.daily-brand{font:500 clamp(11px,1.15vw,16px)/1.3 Arial,sans-serif;letter-spacing:.21em;color:#302821;white-space:nowrap;margin-bottom:27px}
+.daily-label{color:#a53e2c!important;font:700 clamp(12px,1.35vw,19px)/1.2 Arial,sans-serif!important;letter-spacing:.16em!important;margin:0 0 20px!important}
+.daily-banner #featuredRecipeTitle{font-family:Georgia,'Times New Roman',serif!important;font-size:clamp(36px,4.5vw,72px)!important;line-height:1.01!important;font-variant:small-caps!important;color:#241b17!important;margin:0 0 12px!important;width:100%;letter-spacing:-.025em!important}
+.daily-banner #featuredRecipeTitle .featured-local-name{font-size:1em!important;line-height:1.01!important;display:block;color:#241b17!important}
+.daily-banner #featuredRecipeTitle .featured-english-name{display:block;font-size:.48em!important;font-weight:400!important;line-height:1.16!important;margin-top:9px!important;color:#342921!important;letter-spacing:0!important}
+.daily-location{font:700 clamp(11px,1.2vw,15px)/1.35 Arial,sans-serif;letter-spacing:.20em;color:#917c6c;margin:15px 0 27px}
+.daily-location:after{content:"";display:block;width:68px;height:2px;background:#aa4835;margin:18px 0 0}
+.daily-banner #featuredRecipeDescription{font:400 clamp(16px,1.65vw,23px)/1.5 Georgia,serif;color:#342b25;margin:0 0 30px;max-width:500px}
+.daily-recipe-link{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:#aa432e;color:#fff!important;text-decoration:none!important;font:700 clamp(12px,1.2vw,16px)/1.2 Arial,sans-serif;letter-spacing:.15em;padding:18px 29px}
+.daily-recipe-link:hover,.daily-recipe-link:focus-visible{background:#873521}
+@media(max-width:800px){.editorial-daily-section{padding:20px 0 45px}.daily-banner{min-height:760px}.daily-banner-photo{height:56%!important;inset:auto 0 0!important;object-position:center center!important}.daily-banner:after{background:linear-gradient(180deg,#fcf5eb 0%,#fcf5eb 44%,rgba(252,245,235,.75) 57%,rgba(252,245,235,0) 80%)}.daily-banner-content{min-height:0;width:100%;padding:48px 36px 300px;justify-content:flex-start}.daily-banner #featuredRecipeTitle{font-size:clamp(35px,7vw,58px)!important}.daily-banner #featuredRecipeDescription{font-size:16px;max-width:540px}.daily-brand{margin-bottom:17px}.daily-label{margin-bottom:12px!important}.daily-location{margin:10px 0 17px}.daily-location:after{margin-top:10px}.daily-recipe-link{padding:13px 22px}}
+@media(max-width:480px){.daily-banner{min-height:720px;border-radius:22px}.daily-banner:before{margin:9px;border-radius:16px}.daily-banner-content{padding:35px 25px 290px}.daily-banner #featuredRecipeTitle{font-size:clamp(30px,9vw,43px)!important}.daily-banner #featuredRecipeTitle .featured-english-name{font-size:.56em!important}.daily-brand{font-size:10px;letter-spacing:.15em}.daily-location{font-size:10px;letter-spacing:.11em}.daily-banner #featuredRecipeDescription{font-size:15px;line-height:1.35;margin-bottom:15px}.daily-banner-photo{height:48%!important}}
 </style></head>
 <body>
   <header class="site-header">
@@ -128,26 +147,21 @@
     <a class="opening-explore" href="#recipes" aria-label="Explore recipes"></a>
   </section>
 <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <p class="eyebrow">A PERSONAL COOKBOOK</p>
-          <h1>Recipes worth making again.</h1>
-          <p class="hero-copy">A growing collection of favorite recipes for family dinners, weekends, holidays, and everything in between.</p>
-          <div class="hero-actions">
-            <a class="button primary" href="#recipes">Browse recipes</a>
-            <a class="button secondary" href="#categories">View categories</a>
-          </div>
-        </div>
-        <div class="featured-card" id="recipeOfTheDay">
-          <img class="featured-photo" id="featuredRecipeImage" src="https://drive.google.com/thumbnail?id=1pHGUhj8Cr7Yuih773ENAfMp8sX_a-4IP&amp;sz=w1200" alt="Lasagna Napoletana">
-          <p class="eyebrow">RECIPE OF THE DAY</p>
-          <h2 id="featuredRecipeTitle"><span class="featured-local-name">Lasagna Napoletana</span><span class="featured-english-name">(Neapolitan Lasagna)</span></h2>
-          <p id="featuredRecipeDescription">An extravagant baked centerpiece layered with slow-cooked ragù, creamy ricotta, melting cheese, tender lasagna, miniature meatballs, and hard-boiled eggs. Every slice is deeply savory, luxurious, and festive—the kind of dish designed for a long family meal.</p>
-          <a id="featuredRecipeLink" class="text-link" href="neapolitan-lasagna.html">View recipe →</a>
-        </div>
+    <section class="hero editorial-daily-section">
+  <div class="container">
+    <div class="daily-banner" id="recipeOfTheDay">
+      <img class="featured-photo daily-banner-photo" id="featuredRecipeImage" src="https://drive.google.com/thumbnail?id=1pHGUhj8Cr7Yuih773ENAfMp8sX_a-4IP&amp;sz=w1200" alt="Lasagna Napoletana">
+      <div class="daily-banner-content">
+        <div class="daily-brand">THE KITCHEN TABLE</div>
+        <p class="eyebrow daily-label">RECIPE OF THE DAY</p>
+        <h2 id="featuredRecipeTitle"><span class="featured-local-name">Lasagna Napoletana</span><span class="featured-english-name">(Neapolitan Lasagna)</span></h2>
+        <p id="featuredRecipeLocation" class="daily-location">PASTA · ITALY · CAMPANIA</p>
+        <p id="featuredRecipeDescription">An extravagant baked centerpiece layered with slow-cooked ragù, creamy ricotta, melting cheese, tender lasagna, miniature meatballs, and hard-boiled eggs.</p>
+        <a id="featuredRecipeLink" class="daily-recipe-link" href="neapolitan-lasagna.html">VIEW RECIPE →</a>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
     <section id="recipes" class="section">
       <div class="container">
