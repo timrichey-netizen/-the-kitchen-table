@@ -563,3 +563,29 @@ button,a,input,select{touch-action:manipulation}
 :where(button,a):is(.favorite-toggle,.recipe-icon-button,.personal-rating-buttons button,.community-rating-stars button){
   /* Icon and rating controls keep their purpose-built appearance. */
 }
+
+/* Recipe card action anchors and common utility controls */
+.recipe-card .recipe-card-body > a,
+.recipe-card-body > a,
+a.daily-recipe-link,
+a.opening-hero-cta,
+a.opening-hero-secondary,
+button.filter,button.cuisine-filter,
+button.button,a.button,input[type="submit"].button,
+button.ingredient-print-button,
+button.community-rating-submit,
+a.guide-back-floating{
+  border-radius:3px!important;
+}
+.recipe-card .recipe-card-body > a,
+.recipe-card-body > a{
+  background:#f7eddc!important;
+  border:1px solid #cdbb9e!important;
+  color:#3a4638!important;
+  box-shadow:0 1px 3px rgba(48,38,28,.12)!important;
+}
+.recipe-card .recipe-card-body > a:hover,
+.recipe-card .recipe-card-body > a:focus-visible{
+  background:#efe0c7!important;
+  color:#2d392b!important;
+}
