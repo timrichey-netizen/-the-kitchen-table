@@ -81,7 +81,7 @@
 #recipeGrid .recipe-card-heading+ a{display:block;width:100%;line-height:0}
 #recipeGrid .recipe-card-heading+ a>img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center}
 @media(max-width:600px){#recipeGrid .recipe-card-heading{grid-template-columns:minmax(0,1fr) 76px;gap:8px;height:145px;padding:14px 12px}#recipeGrid .recipe-card-heading h3{font-size:19px!important}#recipeGrid .recipe-card-location{font-size:9px}}
-</style></head>
+</style><style id="featured-bilingual-style">#featuredRecipeTitle{font-size:clamp(2rem,4.2vw,4.3rem);line-height:1.1}#featuredRecipeTitle .featured-local-name{display:block;font-size:1em;font-weight:700}#featuredRecipeTitle .featured-english-name{display:block;font-size:.42em;line-height:1.25;font-weight:500;color:#756d65;margin-top:.35em}</style></head>
 <body>
   <header class="site-header">
     <div class="container nav-wrap">
@@ -114,7 +114,7 @@
         <div class="featured-card" id="recipeOfTheDay">
           <img class="featured-photo" id="featuredRecipeImage" src="https://drive.google.com/thumbnail?id=1pHGUhj8Cr7Yuih773ENAfMp8sX_a-4IP&amp;sz=w1200" alt="Lasagna Napoletana">
           <p class="eyebrow">RECIPE OF THE DAY</p>
-          <h2 id="featuredRecipeTitle">Lasagna Napoletana</h2>
+          <h2 id="featuredRecipeTitle"><span class="featured-local-name">Lasagna Napoletana</span><span class="featured-english-name">(Neapolitan Lasagna)</span></h2>
           <p id="featuredRecipeDescription">An extravagant baked centerpiece layered with slow-cooked ragù, creamy ricotta, melting cheese, tender lasagna, miniature meatballs, and hard-boiled eggs. Every slice is deeply savory, luxurious, and festive—the kind of dish designed for a long family meal.</p>
           <a id="featuredRecipeLink" class="text-link" href="neapolitan-lasagna.html">View recipe →</a>
         </div>
@@ -231,7 +231,11 @@
     var link=document.getElementById('featuredRecipeLink');
     var image=document.getElementById('featuredRecipeImage');
     if(!el||!desc||!link||!name||!url)return;
-    el.textContent=name+(translation?' '+translation:'');
+    var normalized=function(v){return (v||'').replace(/[()]/g,'').trim().toLocaleLowerCase();};
+    var english=translation&&normalized(translation)!==normalized(name)?translation:'';
+    el.replaceChildren();
+    var first=document.createElement('span');first.className='featured-local-name';first.textContent=name;el.appendChild(first);
+    if(english){var second=document.createElement('span');second.className='featured-english-name';second.textContent=english.charAt(0)==='('?english:'('+english+')';el.appendChild(second);}
     desc.textContent=summary;link.href=url;link.hidden=false;
     if(image&&picture){image.src=picture;image.alt=name;image.hidden=false;image.onerror=function(){image.hidden=true};}
   }
