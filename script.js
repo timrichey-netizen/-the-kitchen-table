@@ -1499,14 +1499,16 @@ updateRecipes();
 // Recipe images are served only from local GitHub Pages assets.
 
 
-/* Featured recipe: rotate daily through the recipe cards actually published on this site. */
+/* Featured recipe: rotate daily across the full published entree portfolio. */
 function setRecipeOfTheDay() {
   const image = document.getElementById('featuredRecipeImage');
   const title = document.getElementById('featuredRecipeTitle');
   const description = document.getElementById('featuredRecipeDescription');
   const link = document.getElementById('featuredRecipeLink');
   if (!image || !title || !description || !link) return;
-  const recipes = Array.from(document.querySelectorAll('#recipeGrid .recipe-card')).map(card => {
+  const recipes = Array.from(document.querySelectorAll('#recipeGrid .recipe-card'))
+    .filter(card => recipeDisplayPriority(card) === 0)
+    .map(card => {
     const anchor = card.querySelector('.recipe-card-heading h3 a');
     const photo = card.querySelector('img');
     const name = card.querySelector('.recipe-title-original');
@@ -1517,7 +1519,8 @@ function setRecipeOfTheDay() {
       subtitle: subtitle && subtitle.textContent.trim(),
       description: text && text.textContent.trim(),
       image: photo && photo.getAttribute('src') };
-  }).filter(recipe => recipe.href && recipe.title);
+  }).filter(recipe => recipe.href && recipe.title)
+    .sort((a, b) => a.href.localeCompare(b.href));
   if (!recipes.length) return;
   const now = new Date();
   const dayKey = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
