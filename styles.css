@@ -589,3 +589,6 @@ a.guide-back-floating{
   background:#efe0c7!important;
   color:#2d392b!important;
 }
+
+/* Filtered recipe cards must remain hidden despite editorial display declarations. */
+#recipeGrid .recipe-card[hidden],#recipeGrid .recipe-card.favorite-filter-hidden{display:none!important}
