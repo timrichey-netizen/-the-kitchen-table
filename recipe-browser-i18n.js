@@ -14,9 +14,10 @@ const dishTypeTranslations={
 function update(){
  const lang=language();
  const d=labels[lang];
+ const titles={'all':'All recipes','appetizers-starters':'Appetizers & Starters','entrees-mains':'Entrees & Mains','soups-stews-broths':'Soups, Stews & Broths','salads-sides':'Salads & Sides','breakfast-breads':'Breakfast & Baked Breads','sauces-seasonings':'Sauces, Gravies & Seasonings','desserts-baked':'Desserts (Baked & Confections)','desserts-chilled':'Desserts (Chilled & Creamy)','beverages':'Beverages','preserved-accompaniments':'Preserved Foods & Accompaniments'};
  document.querySelectorAll('#categories button[data-filter]').forEach(button=>{
-   if(!button.dataset.dishTypeOriginal)button.dataset.dishTypeOriginal=button.textContent.trim();
-   button.textContent=dishTypeTranslations[lang]?.[button.dataset.dishTypeOriginal]||button.dataset.dishTypeOriginal;
+   const english=titles[button.dataset.filter];
+   if(english)button.textContent=dishTypeTranslations[lang]?.[english]||english;
  });
  fields.forEach(([id,key,index])=>{
  const sel=document.getElementById(id);if(!sel)return;
