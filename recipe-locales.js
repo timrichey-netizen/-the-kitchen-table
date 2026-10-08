@@ -89,3 +89,31 @@ window.KitchenTableLocaleContent={
     "4 servings": "4 portions"
   }
 };
+
+/* Supplemental reviewed content for the bottarga pilot and shared metadata labels. */
+Object.assign(window.KitchenTableLocaleContent.es, {
+  "Bottarga has deep Mediterranean roots; its name derives from Arabic butārikh, meaning salted fish roe. In Sicily, tuna bottarga is especially associated with places such as Favignana, Trapani, San Vito Lo Capo, and Marzamemi, where tuna preservation has long shaped coastal foodways. Its legacy endures.": "La bottarga tiene raíces mediterráneas profundas; su nombre procede del árabe butārikh, que significa huevas de pescado saladas. En Sicilia, la bottarga de atún se asocia especialmente con Favignana, Trapani, San Vito Lo Capo y Marzamemi, donde la conservación del atún ha marcado durante siglos la gastronomía costera.",
+  "Hot pasta is coated with garlic, olive oil, chili, parsley, and finely grated cured tuna roe added off the heat. Salty, marine, aromatic, and intensely savory, it delivers remarkable depth with a short ingredient list.": "Pasta caliente mezclada con ajo, aceite de oliva, chile, perejil y huevas de atún curadas finamente ralladas, añadidas fuera del fuego. Salina, marina, aromática e intensamente sabrosa, consigue una gran profundidad de sabor con pocos ingredientes.",
+  "Recipe Classification": "Clasificación de la receta",
+  "Preparation Classification": "Dificultad de preparación",
+  "Entree": "Plato principal",
+  "Easy": "Fácil",
+  "Southern Europe": "Europa meridional",
+  "Sicilia": "Sicilia",
+  "ITALY": "ITALIA",
+  "SICILIA": "SICILIA",
+  "PASTA": "PASTA"
+});
+Object.assign(window.KitchenTableLocaleContent.fr, {
+  "Bottarga has deep Mediterranean roots; its name derives from Arabic butārikh, meaning salted fish roe. In Sicily, tuna bottarga is especially associated with places such as Favignana, Trapani, San Vito Lo Capo, and Marzamemi, where tuna preservation has long shaped coastal foodways. Its legacy endures.": "La boutargue est profondément ancrée dans la culture méditerranéenne ; son nom vient de l’arabe butārikh, qui désigne des œufs de poisson salés. En Sicile, la boutargue de thon est particulièrement associée à Favignana, Trapani, San Vito Lo Capo et Marzamemi, où la conservation du thon façonne depuis longtemps les traditions culinaires côtières.",
+  "Hot pasta is coated with garlic, olive oil, chili, parsley, and finely grated cured tuna roe added off the heat. Salty, marine, aromatic, and intensely savory, it delivers remarkable depth with a short ingredient list.": "Des pâtes chaudes mêlées à l’ail, à l’huile d’olive, au piment, au persil et à la boutargue de thon finement râpée, ajoutée hors du feu. Salin, marin, parfumé et puissamment savoureux, ce plat révèle une grande profondeur de goût avec peu d’ingrédients.",
+  "Recipe Classification": "Classification de la recette",
+  "Preparation Classification": "Niveau de préparation",
+  "Entree": "Plat principal",
+  "Easy": "Facile",
+  "Southern Europe": "Europe du Sud",
+  "Sicilia": "Sicile",
+  "ITALY": "ITALIE",
+  "SICILIA": "SICILE",
+  "PASTA": "PÂTES"
+});
