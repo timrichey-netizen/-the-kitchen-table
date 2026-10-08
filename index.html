@@ -203,7 +203,59 @@
 .personal-rating-status{margin:2px 0 0;color:#76695e;font:500 13px Inter,Arial,sans-serif}
 .personal-card-rating{font:700 12px Inter,Arial,sans-serif;color:#a74732;margin-bottom:9px}
 @media print{.personal-recipe-rating{display:none!important}}
-</style><style id="community-reviews-style">.community-reviews{background:#fffaf3;border:1px solid #dec9b5;border-radius:20px;padding:24px;margin:24px 0 48px}.community-reviews h2{font-family:"DM Serif Display",Georgia,serif;font-weight:400;margin:0 0 12px}.community-stats,.community-card-rating{font:700 13px Inter,Arial,sans-serif;color:#a74732}.community-card-rating{margin:5px 0}.community-review{padding:15px 0;border-top:1px solid #eee0d1}.community-review strong{font:700 13px Inter,Arial,sans-serif}.community-review p{margin:7px 0;font:15px/1.6 Georgia,serif}@media print{.community-reviews{display:none!important}}</style></head>
+</style><style id="community-reviews-style">.community-reviews{background:#fffaf3;border:1px solid #dec9b5;border-radius:20px;padding:24px;margin:24px 0 48px}.community-reviews h2{font-family:"DM Serif Display",Georgia,serif;font-weight:400;margin:0 0 12px}.community-stats,.community-card-rating{font:700 13px Inter,Arial,sans-serif;color:#a74732}.community-card-rating{margin:5px 0}.community-review{padding:15px 0;border-top:1px solid #eee0d1}.community-review strong{font:700 13px Inter,Arial,sans-serif}.community-review p{margin:7px 0;font:15px/1.6 Georgia,serif}@media print{.community-reviews{display:none!important}}</style><style id="opening-hero-type-and-alignment">
+/* Comfortable inset: never allow the opening copy to touch the viewport edge. */
+.opening-hero .opening-hero-inner{
+  box-sizing:border-box!important;
+  width:min(100%,1440px)!important;
+  max-width:1440px!important;
+  margin-inline:auto!important;
+  padding-left:clamp(32px,9vw,160px)!important;
+  padding-right:clamp(28px,5vw,90px)!important;
+}
+.opening-hero .opening-hero-copy{max-width:620px!important;margin:0!important}
+.opening-hero .opening-hero-eyebrow{
+  font-family:Inter,Arial,sans-serif!important;
+  font-variant-caps:all-small-caps;
+  font-size:clamp(12px,1.15vw,15px)!important;
+  letter-spacing:.19em!important;
+  font-weight:700!important;
+}
+.opening-hero .opening-hero-copy h1{
+  font-family:'DM Serif Display',Georgia,serif!important;
+  font-weight:400!important;
+  font-size:clamp(49px,5.3vw,84px)!important;
+  line-height:1.09!important;
+  letter-spacing:-.025em!important;
+  font-variant-caps:normal!important;
+  max-width:630px!important;
+}
+.opening-hero .opening-hero-copy h1 em{font-style:italic;font-weight:400}
+.opening-hero .opening-hero-description{
+  font-family:Inter,Arial,sans-serif!important;
+  font-size:clamp(15px,1.3vw,18px)!important;
+  line-height:1.65!important;
+  max-width:495px!important;
+}
+.opening-hero .opening-hero-actions a{
+  font-family:Inter,Arial,sans-serif!important;
+  font-variant-caps:all-small-caps;
+  font-size:15px!important;
+  letter-spacing:.12em!important;
+  border-radius:3px!important;
+}
+@media(max-width:800px){
+  .opening-hero .opening-hero-inner{padding-left:clamp(28px,6vw,60px)!important;padding-right:28px!important}
+  .opening-hero .opening-hero-copy{max-width:540px!important}
+  .opening-hero .opening-hero-copy h1{font-size:clamp(49px,7.5vw,69px)!important}
+}
+@media(max-width:560px){
+  .opening-hero .opening-hero-inner{padding-left:26px!important;padding-right:24px!important}
+  .opening-hero .opening-hero-copy h1{font-size:clamp(43px,10vw,58px)!important}
+  .opening-hero .opening-hero-description{font-size:15px!important}
+  .opening-hero .opening-hero-actions a{font-size:13px!important}
+}
+</style></head>
 <body>
   <header class="site-header">
     <div class="container nav-wrap">
