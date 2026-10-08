@@ -691,3 +691,35 @@ a.guide-back-floating{
 /* Dish Type chips: regular-weight editorial labels */
 #categories.browser-chips .filter,
 #categories.browser-chips button.filter{font-weight:400!important}
+
+/* Shared light editorial surfaces across every page, excluding photographic hero. */
+@media screen{
+ :root{--bg:#fbf7f0;--paper:#fffdf9;--soft:#f5efe6;--line:#ddcfc0}
+ html,body{background:#fbf7f0!important;color:#211d19}
+ body .site-header{background:#fffaf4!important}
+ body .section.alt,
+ body .alt,
+ body .my-meal-page,
+ body .meal-planner-page,
+ body .pantry-to-plate-section,
+ body .about-section,
+ body .composer-section,
+ body .composer-main,
+ body .shell,
+ body .shell>main{background:#fbf7f0!important}
+ body :is(.recipe-panel,.recipe-card,.my-meal-card,.composer-panel,.composer-preview,.planner-step,.finalized-meal-panel,.selected-meal-panel,.pantry-selector,.pantry-group,.pantry-results,.pantry-result-card,.guide-card,.featured-card,.recipe-browser,.editorial-recipe-browser,.community-reviews,.personal-recipe-rating,.ingredient-dish-group){
+   background:#fffdf9!important;
+   color:#211d19!important;
+ }
+ body :is(input,select,textarea){background-color:#fffdf9!important;color:#211d19}
+ body .shell :is(.intro,.intro-copy,.section-label,.muted-copy,.guide-card p,.guide-card-note){color:#5e554c!important}
+ body .shell :is(.grid,.guide-card,.sauce-card,.sauce-family,.sauce-group,.family-card,.family-section,.intro){
+   background-color:#fffdf9!important;
+   color:#211d19!important;
+ }
+ body .shell :is(p,small,span,li,a:not(.button)){color:inherit}
+ body .shell .eyebrow{color:#a74732!important}
+ /* Preserve the full-color photography and its separate subtle left fade. */
+ body .opening-hero,body .opening-hero-backdrop,body .opening-hero-wash,
+ body .daily-banner,body .daily-banner-content{background-color:transparent}
+}
