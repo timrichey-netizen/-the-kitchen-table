@@ -2182,6 +2182,31 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
     button.setAttribute('aria-pressed','false');
   });
 
+  // User-entered ingredients participate in the same search as preset choices.
+  selector.querySelectorAll('.pantry-group').forEach(function(group){
+    var input=group.querySelector('.pantry-other-input');
+    var add=group.querySelector('.pantry-other-add');
+    var tags=group.querySelector('.pantry-other-tags');
+    if(!input||!add||!tags)return;
+    function appendCustom(){
+      var display=input.value.trim().replace(/\\s+/g,' ');
+      var value=normalize(display);
+      if(!value)return;
+      if(value.length<2){input.setCustomValidity('Enter at least two characters');input.reportValidity();return}
+      input.setCustomValidity('');
+      if(selected.indexOf(value)>=0){input.value='';return}
+      selected.push(value);
+      var tag=document.createElement('span');tag.className='pantry-other-tag';
+      var label=document.createElement('span');label.textContent=display;
+      var remove=document.createElement('button');remove.type='button';remove.textContent='×';remove.setAttribute('aria-label','Remove '+display);
+      remove.addEventListener('click',function(){selected=selected.filter(function(v){return v!==value});tag.remove();updateCount()});
+      tag.append(label,remove);tags.appendChild(tag);
+      input.value='';updateCount();
+    }
+    add.addEventListener('click',appendCustom);
+    input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();appendCustom()}});
+  });
+
   function cardData(card){
     var title=(card.querySelector('h3')||{}).textContent||'';
     var description=(card.querySelector('p')||{}).textContent||'';
@@ -2189,7 +2214,7 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
     var meta=(card.querySelector('.recipe-meta')||{}).textContent||'';
     var link=card.querySelector('a[href]');
     var img=card.querySelector('img');
-    var haystack=normalize([title,description,search,meta].join(' '));
+    var haystack=normalize([title,description,search,meta,card.dataset.ingredients||''].join(' '));
     return {
       card:card,title:title.trim(),description:description.trim(),
       url:link?link.getAttribute('href'):'#',
@@ -2271,6 +2296,8 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
 
   if(clearButton)clearButton.addEventListener('click',function(){
     selected=[];
+    selector.querySelectorAll('.pantry-other-tags').forEach(function(tags){tags.replaceChildren()});
+    selector.querySelectorAll('.pantry-other-input').forEach(function(input){input.value='';input.setCustomValidity('')});
     selector.querySelectorAll('[data-ingredient]').forEach(function(button){
       button.classList.remove('selected');
       button.setAttribute('aria-pressed','false');
