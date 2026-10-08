@@ -279,6 +279,9 @@
     var first=document.createElement('span');first.className='featured-local-name';first.textContent=name;el.appendChild(first);
     if(english){var second=document.createElement('span');second.className='featured-english-name';second.textContent=english.charAt(0)==='('?english:'('+english+')';el.appendChild(second);}
     desc.textContent=summary;link.href=url;link.hidden=false;
+    var locationEl=document.getElementById('featuredRecipeLocation');
+    var meta=card.querySelector('.recipe-card-location');
+    if(locationEl&&meta){locationEl.textContent=Array.from(meta.querySelectorAll('span')).map(function(span){return span.textContent.trim()}).filter(Boolean).join(' · ');}
     if(image&&picture){image.src=picture;image.alt=name;image.hidden=false;image.onerror=function(){image.hidden=true};}
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',display,{once:true});else display();
