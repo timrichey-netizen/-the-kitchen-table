@@ -166,6 +166,28 @@
 .legacy-recipe-filters{display:none!important}
 @media(max-width:900px){.browser-selects{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:530px){.editorial-recipe-browser{padding:23px 18px;border-radius:19px}.browser-brand{margin-bottom:22px;letter-spacing:.14em}.editorial-recipe-browser>h2{font-size:clamp(32px,9vw,43px)!important}.browser-chips button{font-size:12px!important;padding:10px 13px!important}.browser-selects{gap:12px}.browser-selects select{font-size:12px}.browser-selects label span{font-size:10px}}
+</style><style id="modern-opening-hero-style">
+.opening-hero{position:relative;isolation:isolate;min-height:min(790px,calc(100svh - 70px));min-height:max(570px,min(790px,calc(100svh - 70px)));display:flex;align-items:center;overflow:hidden;background:#d8d8c5}
+.opening-hero-backdrop{position:absolute;inset:0;z-index:-2;background-image:url('assets/the-kitchen-table-hero.png');background-size:cover;background-position:center 54%;transform:scale(1.015)}
+.opening-hero-wash{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(250,245,236,.95) 0%,rgba(250,245,236,.87) 29%,rgba(250,245,236,.45) 46%,rgba(250,245,236,.05) 72%),linear-gradient(0deg,rgba(34,30,21,.18),transparent 27%)}
+.opening-hero-inner{width:100%;padding-block:110px 115px}
+.opening-hero-copy{max-width:660px}
+.opening-hero-eyebrow{display:flex;gap:12px;align-items:center;margin:0 0 24px;font:700 clamp(11px,1vw,14px)/1.4 Inter,Arial,sans-serif;letter-spacing:.22em;color:#a54732}
+.opening-hero-eyebrow span{color:#bd9988}
+.opening-hero h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(53px,6.8vw,108px);font-weight:400;letter-spacing:-.04em;line-height:1.02;color:#302922;margin:0;max-width:740px}
+.opening-hero h1 em{font-weight:400;color:#52634b}
+.opening-hero-description{font:400 clamp(16px,1.55vw,21px)/1.6 Inter,Arial,sans-serif;max-width:525px;margin:26px 0 31px;color:#564f46}
+.opening-hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px}
+.opening-hero-cta,.opening-hero-secondary{display:inline-flex;align-items:center;gap:25px;justify-content:center;min-height:53px;border-radius:999px;padding:0 25px;text-decoration:none!important;font:700 14px Inter,Arial,sans-serif;transition:transform .15s,background .15s}
+.opening-hero-cta{background:#a74732;color:white!important;box-shadow:0 6px 20px rgba(109,46,29,.17)}
+.opening-hero-cta:hover{background:#823420;transform:translateY(-2px)}
+.opening-hero-secondary{background:rgba(255,250,243,.8);border:1px solid #d7bdab;color:#3f342d!important}
+.opening-hero-secondary:hover{background:#fff;transform:translateY(-2px)}
+.opening-hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;color:white;text-shadow:0 1px 6px #3b332c;text-decoration:none;font:700 10px Inter,Arial,sans-serif;letter-spacing:.18em}
+.opening-hero-scroll span{font-size:18px}
+@media(max-width:800px){.opening-hero{min-height:640px}.opening-hero-backdrop{background-position:64% center}.opening-hero-wash{background:linear-gradient(90deg,rgba(250,245,236,.94),rgba(250,245,236,.74) 55%,rgba(250,245,236,.2))}.opening-hero-inner{padding-block:90px 100px}.opening-hero h1{font-size:clamp(52px,9vw,78px)}}
+@media(max-width:560px){.opening-hero{min-height:630px;align-items:flex-start}.opening-hero-backdrop{background-position:62% center}.opening-hero-wash{background:linear-gradient(180deg,rgba(250,245,236,.97) 0%,rgba(250,245,236,.88) 44%,rgba(250,245,236,.3) 76%,rgba(34,30,21,.18) 100%)}.opening-hero-inner{padding-block:80px 80px}.opening-hero h1{font-size:clamp(48px,12vw,70px)}.opening-hero-description{font-size:15px;max-width:350px}.opening-hero-actions{gap:10px}.opening-hero-cta,.opening-hero-secondary{font-size:12px;min-height:46px;padding:0 16px;gap:9px}.opening-hero-eyebrow{font-size:10px;gap:7px;letter-spacing:.12em}.opening-hero-scroll{bottom:17px}}
+@media(prefers-reduced-motion:reduce){.opening-hero-cta,.opening-hero-secondary{transition:none}}
 </style></head>
 <body>
   <header class="site-header">
@@ -185,7 +207,23 @@
     <a class="opening-explore" href="#recipes" aria-label="Explore recipes"></a>
   </section>
 <main>
-    <section class="hero editorial-daily-section">
+    <section class="opening-hero" aria-label="Welcome to The Kitchen Table">
+  <div class="opening-hero-backdrop" role="img" aria-label="A welcoming table in the countryside"></div>
+  <div class="opening-hero-wash"></div>
+  <div class="container opening-hero-inner">
+    <div class="opening-hero-copy">
+      <p class="opening-hero-eyebrow">RECIPES <span>·</span> PLACES <span>·</span> PEOPLE</p>
+      <h1>Food brings<br><em>people together.</em></h1>
+      <p class="opening-hero-description">Discover dishes and traditions from around the world—and bring a little of each place to your own table.</p>
+      <div class="opening-hero-actions">
+        <a class="opening-hero-cta" href="#recipes">Explore recipes <span aria-hidden="true">↗</span></a>
+        <a class="opening-hero-secondary" href="#recipeOfTheDay">Today's recipe <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+  </div>
+  <a class="opening-hero-scroll" href="#recipeOfTheDay" aria-label="Scroll to Recipe of the Day"><span aria-hidden="true">↓</span> DISCOVER MORE</a>
+</section>
+<section class="hero editorial-daily-section">
   <div class="container">
     <div class="daily-banner" id="recipeOfTheDay">
       <img class="featured-photo daily-banner-photo" id="featuredRecipeImage" src="https://drive.google.com/thumbnail?id=1pHGUhj8Cr7Yuih773ENAfMp8sX_a-4IP&amp;sz=w1200" alt="Lasagna Napoletana">
