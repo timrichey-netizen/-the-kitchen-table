@@ -614,3 +614,54 @@ a.guide-back-floating{
  .site-header .nav a{font-size:15px;white-space:normal;text-align:left;padding:12px 5px;border-bottom:1px solid var(--line)}
 }
 @media(max-width:450px){.site-header .brand{font-size:1.1rem}.site-header .nav-wrap{gap:6px}.site-header .language-switcher button{padding:5px 6px}}
+
+/* Unified editorial heading system — consistent sizes and small caps. */
+@media screen {
+  :root{
+    --kt-title-xl:clamp(2.5rem,4.8vw,4.5rem);
+    --kt-title-lg:clamp(2rem,3.2vw,3.15rem);
+    --kt-title-md:clamp(1.42rem,2vw,1.9rem);
+  }
+  h1,h2,h3,h4,
+  .composer-title,.recipe-name-local,.recipe-name-english,
+  .recipe-title-original,.recipe-title-english,
+  .my-meal-recipe-name,.recipe-instruction-dish,
+  .featured-local-name,.featured-english-name {
+    font-family:'DM Serif Display',Georgia,serif!important;
+    font-variant-caps:small-caps!important;
+    font-weight:400!important;
+    letter-spacing:-.012em!important;
+    line-height:1.12!important;
+    text-transform:none!important;
+  }
+  h1,.composer-title,.meal-planner-intro h1,
+  .opening-hero .opening-hero-copy h1,
+  .recipe-detail h1,.recipe-name-local{
+    font-size:var(--kt-title-xl)!important;
+  }
+  h2,.editorial-recipe-browser>h2,.about-section h2,
+  .planner-step h2,.pairing-index-heading h2,
+  .recipe-feedback-heading h2{
+    font-size:var(--kt-title-lg)!important;
+  }
+  h3,.recipe-card h3,.planned-dish h3,
+  .ingredient-dish-group h3,.pairing-column h3{
+    font-size:var(--kt-title-md)!important;
+  }
+  h4{font-size:1.16rem!important}
+  .recipe-name-english,.recipe-title-english,.featured-english-name{
+    font-size:.65em!important;
+    line-height:1.2!important;
+  }
+  .recipe-card h3 a{font:inherit!important;font-variant-caps:small-caps!important}
+  .recipe-card .recipe-title-original,.recipe-card .recipe-title-english{
+    font-size:inherit!important;
+  }
+  .recipe-card .recipe-title-english{font-size:.65em!important}
+  .opening-hero .opening-hero-copy h1 em{
+    font-family:inherit!important;
+    font-size:inherit!important;
+    font-variant-caps:small-caps!important;
+    font-style:normal!important;
+  }
+}
