@@ -255,6 +255,30 @@
   .opening-hero .opening-hero-description{font-size:15px!important}
   .opening-hero .opening-hero-actions a{font-size:13px!important}
 }
+</style><style id="opening-hero-clean-title">
+/* The background asset contains an old headline baked into its sky.
+   Mask that upper-left area rather than displaying the duplicate lettering. */
+.opening-hero .opening-hero-wash{
+ background:
+ radial-gradient(ellipse 74% 42% at 25% 0%, #faf5ec 0%, #faf5ec 59%, rgba(250,245,236,.90) 75%, rgba(250,245,236,0) 100%),
+ linear-gradient(90deg,rgba(250,245,236,.95) 0%,rgba(250,245,236,.84) 30%,rgba(250,245,236,.38) 50%,rgba(250,245,236,.02) 76%),
+ linear-gradient(0deg,rgba(34,30,21,.16),transparent 27%)!important;
+}
+.opening-hero .opening-hero-copy h1{
+ font-variant-caps:small-caps!important;
+ font-style:normal!important;
+ letter-spacing:-.015em!important;
+ line-height:1.04!important;
+}
+.opening-hero .opening-hero-copy h1 em{
+ font-variant-caps:small-caps!important;
+ font-style:normal!important;
+}
+@media(max-width:560px){
+ .opening-hero .opening-hero-wash{
+  background:linear-gradient(180deg,#faf5ec 0%,rgba(250,245,236,.98) 22%,rgba(250,245,236,.87) 48%,rgba(250,245,236,.25) 83%)!important;
+ }
+}
 </style></head>
 <body>
   <header class="site-header">
