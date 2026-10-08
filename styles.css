@@ -512,3 +512,22 @@ button,a,input,select{touch-action:manipulation}
 .recipe-detail h2:has(.recipe-title-original){
   text-align:center;
 }
+
+/* Consistent small caps for dish names across the website. */
+.recipe-card h3,
+.recipe-card h3 a,
+.recipe-title-original,
+.recipe-title-english,
+.recipe-name-local,
+.recipe-name-english,
+.recipe-instruction-dish,
+#featuredRecipeTitle,
+#featuredRecipeTitle .featured-local-name,
+#featuredRecipeTitle .featured-english-name,
+.recipe-detail h1,
+.recipe-detail .recipe-title-original,
+.recipe-detail .recipe-title-english,
+.recipe-card-rating + h3,
+.my-meal-recipe-name {
+  font-variant-caps: small-caps !important;
+}
