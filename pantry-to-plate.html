@@ -2,7 +2,9 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Pantry to Plate — find Kitchen Table recipes using ingredients you already have.">
 <title>Pantry to Plate | The Kitchen Table</title><link rel="stylesheet" href="styles.css">
-</head><body>
+<style id="pantry-other-style">
+.pantry-other{margin:12px 0 5px}.pantry-other>label{display:block;font:600 13px Inter,Arial,sans-serif;margin:0 0 7px;color:#55483e}.pantry-other-row{display:flex;gap:8px;max-width:480px}.pantry-other-input{flex:1;min-width:0;padding:11px 12px;border:1px solid #d2bda9;background:#fff;color:#302923;font:14px Inter,Arial,sans-serif}.pantry-other-add{padding:10px 17px;border:1px solid #b78e73;background:#f7eddb;color:#382d24;font:600 13px Inter,Arial,sans-serif;cursor:pointer}.pantry-other-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.pantry-other-tag{display:inline-flex;align-items:center;gap:8px;border:1px solid #d3b9a3;padding:5px 9px;background:#fffaf4;font:13px Inter,Arial,sans-serif}.pantry-other-tag button{border:0;background:none;color:#9d3f2d;cursor:pointer;font-size:17px;line-height:1}@media(max-width:540px){.pantry-other-row{max-width:100%}}
+</style></head><body>
 <header class="site-header"><div class="container nav-wrap"><a class="brand" href="index.html">The Kitchen Table</a><button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button><nav class="nav"><a href="index.html">Home</a><a href="index.html#recipes">Recipes</a><a href="index.html?favorites=1" data-favorites-nav>My Favorites</a><a href="my-meal.html">My Meal</a><a href="pantry-to-plate.html" aria-current="page">Pantry to Plate</a><a href="sauces.html">Sauces</a><a href="guides.html">Guides</a><a href="plan-a-meal.html">Plan a Meal</a></nav></div></header>
 <main><section id="pantry-to-plate" class="section pantry-to-plate-section"><div class="container">
         <div class="pantry-heading">
@@ -34,6 +36,7 @@
               <button type="button" data-ingredient="sausage">Sausage</button>
               <button type="button" data-ingredient="duck">Duck</button>
             </div>
+            <div class="pantry-other"><label for="pantryOther1">Other ingredient</label><div class="pantry-other-row"><input id="pantryOther1" type="text" class="pantry-other-input" placeholder="Enter another ingredient" maxlength="80" autocomplete="off"><button type="button" class="pantry-other-add">Add</button></div><div class="pantry-other-tags" aria-live="polite"></div></div>
           </section>
 
           <section class="pantry-group">
@@ -54,6 +57,7 @@
               <button type="button" data-ingredient="asparagus">Asparagus</button>
               <button type="button" data-ingredient="cabbage">Cabbage</button>
             </div>
+            <div class="pantry-other"><label for="pantryOther2">Other ingredient</label><div class="pantry-other-row"><input id="pantryOther2" type="text" class="pantry-other-input" placeholder="Enter another ingredient" maxlength="80" autocomplete="off"><button type="button" class="pantry-other-add">Add</button></div><div class="pantry-other-tags" aria-live="polite"></div></div>
           </section>
 
           <section class="pantry-group">
@@ -72,6 +76,7 @@
               <button type="button" data-ingredient="avocados">Avocados</button>
               <button type="button" data-ingredient="mangoes">Mangoes</button>
             </div>
+            <div class="pantry-other"><label for="pantryOther3">Other ingredient</label><div class="pantry-other-row"><input id="pantryOther3" type="text" class="pantry-other-input" placeholder="Enter another ingredient" maxlength="80" autocomplete="off"><button type="button" class="pantry-other-add">Add</button></div><div class="pantry-other-tags" aria-live="polite"></div></div>
           </section>
 
           <section class="pantry-group">
@@ -93,6 +98,7 @@
               <button type="button" data-ingredient="freekeh">Freekeh</button>
               <button type="button" data-ingredient="wheat berries">Wheat Berries</button>
             </div>
+            <div class="pantry-other"><label for="pantryOther4">Other ingredient</label><div class="pantry-other-row"><input id="pantryOther4" type="text" class="pantry-other-input" placeholder="Enter another ingredient" maxlength="80" autocomplete="off"><button type="button" class="pantry-other-add">Add</button></div><div class="pantry-other-tags" aria-live="polite"></div></div>
           </section>
 
           <section class="pantry-group">
@@ -111,6 +117,7 @@
               <button type="button" data-ingredient="ricotta cheese">Ricotta Cheese</button>
               <button type="button" data-ingredient="evaporated milk">Evaporated Milk</button>
             </div>
+            <div class="pantry-other"><label for="pantryOther5">Other ingredient</label><div class="pantry-other-row"><input id="pantryOther5" type="text" class="pantry-other-input" placeholder="Enter another ingredient" maxlength="80" autocomplete="off"><button type="button" class="pantry-other-add">Add</button></div><div class="pantry-other-tags" aria-live="polite"></div></div>
           </section>
 
           <section class="pantry-group">
@@ -132,6 +139,7 @@
               <button type="button" data-ingredient="baking powder">Baking Powder</button>
               <button type="button" data-ingredient="baking soda">Baking Soda</button>
             </div>
+            <div class="pantry-other"><label for="pantryOther6">Other ingredient</label><div class="pantry-other-row"><input id="pantryOther6" type="text" class="pantry-other-input" placeholder="Enter another ingredient" maxlength="80" autocomplete="off"><button type="button" class="pantry-other-add">Add</button></div><div class="pantry-other-tags" aria-live="polite"></div></div>
           </section>
 
           <section class="pantry-group">
@@ -153,6 +161,7 @@
               <button type="button" data-ingredient="turmeric">Turmeric</button>
               <button type="button" data-ingredient="cayenne pepper">Cayenne Pepper</button>
             </div>
+            <div class="pantry-other"><label for="pantryOther7">Other ingredient</label><div class="pantry-other-row"><input id="pantryOther7" type="text" class="pantry-other-input" placeholder="Enter another ingredient" maxlength="80" autocomplete="off"><button type="button" class="pantry-other-add">Add</button></div><div class="pantry-other-tags" aria-live="polite"></div></div>
           </section>
 
           <section class="pantry-group">
@@ -174,6 +183,7 @@
               <button type="button" data-ingredient="olives">Olives</button>
               <button type="button" data-ingredient="relish">Relish</button>
             </div>
+            <div class="pantry-other"><label for="pantryOther8">Other ingredient</label><div class="pantry-other-row"><input id="pantryOther8" type="text" class="pantry-other-input" placeholder="Enter another ingredient" maxlength="80" autocomplete="off"><button type="button" class="pantry-other-add">Add</button></div><div class="pantry-other-tags" aria-live="polite"></div></div>
           </section>
         </div>
 
