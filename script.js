@@ -1218,39 +1218,10 @@ function populateCuisineFilter() {
 
 function matchesBroadCategory(card, filter) {
   if (filter === 'all') return true;
-  const categories = (card.dataset.category || '').toLowerCase();
-  const text = cardHaystack(card);
-
-  switch (filter) {
-    case 'meat':
-      return /(chicken|beef|pork|veal)/.test(categories) ||
-             /steak|chicken|pork|veal|osso buco|stracotto|boeuf|bolognese|ragù|ragu/.test(text);
-    case 'pasta':
-      return categories.includes('pasta') ||
-             /spaghetti|rigatoni|fettuccine|bucatini|gnocchi|ravioli|pasta|carbonara/.test(text);
-    case 'rice':
-      return categories.includes('rice') ||
-             /risotto|rice|cauliflower rice/.test(text);
-    case 'seafood':
-      return categories.includes('seafood') ||
-             /shrimp|salmon|branzino|swordfish|mussels|cioppino/.test(text);
-    case 'vegetables':
-      return categories.includes('vegetable') ||
-             /cauliflower|broccoli|zucchini|potato|eggplant|green beans|fennel/.test(text);
-    case 'soups-salads':
-      return categories.includes('soup') || categories.includes('salad') ||
-             /soup|chowder|bisque|salad/.test(text);
-    case 'sauces-broths':
-      return categories.includes('sauce') || categories.includes('broth') || categories.includes('stock') ||
-             /\bsauce\b|\bsalsa\b|\bbroth\b|\bstock\b|demi glace|demi-glace|béchamel|bechamel|velouté|veloute|espagnole|hollandaise|béarnaise|bearnaise|mornay|soubise|marinara|chimichurri/.test(text);
-    case 'extras':
-      return categories.includes('sauce') || categories.includes('seasoning') ||
-             /seasoning|sauce|salsa|stock|fresh pasta/.test(text);
-    case 'dessert':
-      return categories.includes('dessert') || /tiramisu|brûlée|brulee|lava cake|crumble|lemon square|brownie|pie/.test(text);
-    default:
-      return true;
-  }
+  // Category is assigned from the recipe's published dish-type metadata.
+  // Do not infer a dish category from ingredients or text: a pasta dish
+  // containing vegetables must not also appear under Salads & Sides.
+  return (card.dataset.category || '').trim().toLowerCase() === filter;
 }
 
 function recipeDisplayPriority(card) {
@@ -1264,7 +1235,7 @@ function recipeDisplayPriority(card) {
   if (clearlyNonMain) return 1;
 
   const mainDish =
-    /chicken|beef|pork|veal|lamb|turkey|duck|sausage|fish|seafood|pasta|rice|main|entree|entrée/.test(categories) ||
+    /chicken|beef|pork|veal|lamb|turkey|duck|sausage|fish|seafood|pasta|rice|main|entree|entrée|entrees-mains/.test(categories) ||
     /chicken|steak|beef|pork|veal|lamb|turkey|duck|sausage|salmon|shrimp|fish|mussels|pasta|spaghetti|rigatoni|risotto/.test(text);
   return mainDish ? 0 : 1;
 }
