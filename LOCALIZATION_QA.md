@@ -18,7 +18,7 @@
 
 ## Current coverage
 - Full English: four published recipes.
-- Spanish/French: shared interface dictionaries; Bottarga has a first-pass translated ingredients and preparation set, but its history/card text and all remaining content still need review.
+- Spanish/French: shared interface dictionaries; Bottarga and Pasta alla Norma have first-pass translated ingredients, preparation, notes, history, and card summaries; both remain in editorial review.
 - Other three Italian test recipes: full Spanish/French recipe translations are not yet provided.
 - Beyond four test recipes: recipes are not currently published as pages, so no verified multilingual catalog exists.
 
