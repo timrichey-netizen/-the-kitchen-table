@@ -665,3 +665,14 @@ a.guide-back-floating{
     font-style:normal!important;
   }
 }
+
+/* Site-wide square-corner design: panels, buttons, fields, menus and recipe cards.
+   Intentional circular symbols (hearts, action icons, plate illustration) stay circular. */
+@media screen {
+  body :where(*){
+    border-radius:0!important;
+  }
+  body :where(.favorite-toggle,.recipe-icon-button,.favorite-page-button,.plate-ring){
+    border-radius:50%!important;
+  }
+}
