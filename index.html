@@ -112,11 +112,11 @@
           </div>
         </div>
         <div class="featured-card" id="recipeOfTheDay">
-          <img class="featured-photo" id="featuredRecipeImage" alt="" hidden>
+          <img class="featured-photo" id="featuredRecipeImage" src="https://drive.google.com/thumbnail?id=1pHGUhj8Cr7Yuih773ENAfMp8sX_a-4IP&amp;sz=w1200" alt="Lasagna Napoletana">
           <p class="eyebrow">RECIPE OF THE DAY</p>
-          <h2 id="featuredRecipeTitle">Recipes will appear here.</h2>
-          <p id="featuredRecipeDescription">The collection is ready for new recipes, photos, and directions.</p>
-          <a id="featuredRecipeLink" class="text-link" hidden>View recipe →</a>
+          <h2 id="featuredRecipeTitle">Lasagna Napoletana</h2>
+          <p id="featuredRecipeDescription">An extravagant baked centerpiece layered with slow-cooked ragù, creamy ricotta, melting cheese, tender lasagna, miniature meatballs, and hard-boiled eggs. Every slice is deeply savory, luxurious, and festive—the kind of dish designed for a long family meal.</p>
+          <a id="featuredRecipeLink" class="text-link" href="neapolitan-lasagna.html">View recipe →</a>
         </div>
       </div>
     </section>
@@ -208,5 +208,34 @@
   <footer class="footer"><div class="container footer-wrap"><p>© <span id="year"></span> The Kitchen Table</p><a href="#top">Back to top ↑</a></div></footer>
   <script src="recipe-catalog.js"></script>
   <script src="script.js"></script>
-<script src="recipe-name-fit.js" defer></script></body>
+<script src="recipe-name-fit.js" defer></script><script id="independent-featured-recipe">
+(function(){
+  function display(){
+    var cards=Array.from(document.querySelectorAll('#recipeGrid .recipe-card')).filter(function(card){
+      var category=(card.getAttribute('data-category')||'').toLowerCase();
+      return /pasta|rice|meat|poultry|fish|seafood|entree|entrée|main/.test(category)
+        && !/dessert|salad|soup|sauce|side|appetizer/.test(category);
+    });
+    if(!cards.length)return;
+    cards.sort(function(a,b){return (a.querySelector('h3 a')?.getAttribute('href')||'').localeCompare(b.querySelector('h3 a')?.getAttribute('href')||'')});
+    var today=new Date();
+    var index=Math.floor(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate())/86400000)%cards.length;
+    var card=cards[index];
+    var name=card.querySelector('.recipe-title-original')?.textContent?.trim()||card.querySelector('h3')?.textContent?.trim();
+    var translation=card.querySelector('.recipe-title-english')?.textContent?.trim()||'';
+    var url=card.querySelector('h3 a')?.getAttribute('href');
+    var picture=card.querySelector('img')?.getAttribute('src');
+    var summary=card.querySelector('.recipe-card-body p')?.textContent?.trim()||'';
+    var el=document.getElementById('featuredRecipeTitle');
+    var desc=document.getElementById('featuredRecipeDescription');
+    var link=document.getElementById('featuredRecipeLink');
+    var image=document.getElementById('featuredRecipeImage');
+    if(!el||!desc||!link||!name||!url)return;
+    el.textContent=name+(translation?' '+translation:'');
+    desc.textContent=summary;link.href=url;link.hidden=false;
+    if(image&&picture){image.src=picture;image.alt=name;image.hidden=false;image.onerror=function(){image.hidden=true};}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',display,{once:true});else display();
+})();
+</script></body>
 </html>
