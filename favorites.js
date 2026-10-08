@@ -1,0 +1,14 @@
+(function(){
+'use strict';
+const KEY='kitchen-table-favorites-v1';
+function get(){try{const v=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(v)?v:[]}catch(e){return[]}}
+function save(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
+function slug(url){try{return new URL(url,location.href).pathname.split('/').pop()}catch(e){return url}}
+function toggle(id){const list=get();const next=list.includes(id)?list.filter(x=>x!==id):[...list,id];save(next);refresh()}
+function make(id){const b=document.createElement('button');b.type='button';b.className='favorite-toggle';b.dataset.favoriteId=id;b.setAttribute('aria-label','Save recipe to favorites');b.innerHTML='<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>';b.addEventListener('click',()=>toggle(id));return b}
+function refresh(){const saved=get();document.querySelectorAll('[data-favorite-id]').forEach(b=>{const yes=saved.includes(b.dataset.favoriteId);b.classList.toggle('is-favorite',yes);b.setAttribute('aria-pressed',String(yes));b.setAttribute('aria-label',yes?'Remove from favorites':'Save recipe to favorites');b.title=yes?'Remove from favorites':'Save to favorites'});const count=document.getElementById('favoriteCount');if(count)count.textContent=saved.length?' ('+saved.length+')':'';const only=document.getElementById('favoritesOnly');if(only&&only.checked)filter();else if(document.getElementById('favoritesOnly'))filter()}
+function filter(){const check=document.getElementById('favoritesOnly');if(!check)return;const saved=get();document.querySelectorAll('#recipeGrid .recipe-card').forEach(c=>{const id=c.querySelector('[data-favorite-id]')?.dataset.favoriteId;const filtered=check.checked&&!saved.includes(id);c.classList.toggle('favorite-filter-hidden',filtered)});const count=document.getElementById('favoriteVisibleCount');if(count)count.textContent=check.checked?saved.length+' saved recipe'+(saved.length===1?'':'s'):''}
+function init(){document.querySelectorAll('#recipeGrid .recipe-card').forEach(c=>{const a=c.querySelector('h3 a');if(!a)return;const id=slug(a.href);if(!c.querySelector('.favorite-toggle'))c.appendChild(make(id))});const page=document.querySelector('.recipe-page.recipe-detail');if(page&&!page.querySelector('.favorite-toggle')){const id=slug(location.href);const toolbar=page.querySelector('.recipe-print-toolbar');const b=make(id);b.classList.add('favorite-page-button');if(toolbar)toolbar.appendChild(b);else page.prepend(b)}document.getElementById('favoritesOnly')?.addEventListener('change',filter);refresh()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+window.addEventListener('storage',refresh);
+})();
