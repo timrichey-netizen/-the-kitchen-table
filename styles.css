@@ -676,3 +676,14 @@ a.guide-back-floating{
     border-radius:50%!important;
   }
 }
+
+/* Consistent black title typography site-wide, including hero emphasis. */
+@media screen {
+  body :is(h1,h2,h3,h4,h5,h6),
+  body :is(h1,h2,h3,h4,h5,h6) :is(span,em,strong,a),
+  body :is(.recipe-name-local,.recipe-name-english,.recipe-title-original,.recipe-title-english,.featured-local-name,.featured-english-name,.composer-title,.my-meal-recipe-name),
+  .opening-hero .opening-hero-copy h1,
+  .opening-hero .opening-hero-copy h1 em {
+    color:#211d19!important;
+  }
+}
