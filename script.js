@@ -2504,11 +2504,33 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
   var STORAGE_KEY='kitchenTableMyMeal';
   var FINAL_KEY='kitchenTableFinalizedMeal';
 
+  // The only published recipes are the four source-spreadsheet records.
+  // Purge obsolete sample recipes previously saved in browser meal lists.
+  var PUBLISHED_RECIPES=new Set([
+    'neapolitan-lasagna.html',
+    'vincisgrassi.html',
+    'pasta-alla-norma.html',
+    'pasta-with-bottarga.html'
+  ]);
+  function permitted(item){
+    if(!item||typeof item.url!=='string')return false;
+    try{
+      var url=new URL(item.url,window.location.href);
+      return url.origin===window.location.origin &&
+        PUBLISHED_RECIPES.has(url.pathname.split('/').pop().toLowerCase());
+    }catch(e){return false;}
+  }
   function read(key){
-    try{return JSON.parse(localStorage.getItem(key)||'[]');}catch(e){return[];}
+    try{
+      var stored=JSON.parse(localStorage.getItem(key)||'[]');
+      if(!Array.isArray(stored))stored=[];
+      var valid=stored.filter(permitted);
+      if(valid.length!==stored.length)localStorage.setItem(key,JSON.stringify(valid));
+      return valid;
+    }catch(e){return[];}
   }
   function write(key,value){
-    localStorage.setItem(key,JSON.stringify(value));
+    localStorage.setItem(key,JSON.stringify((Array.isArray(value)?value:[]).filter(permitted)));
     updateCounts();
   }
   function normalizeUrl(url){
@@ -2555,6 +2577,7 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
     // Never add meal-planning controls to guide/reference pages.
     var path=(window.location.pathname.split('/').pop() || '').toLowerCase();
     if(path.includes('guide') || document.querySelector('a[href="guides.html"]'))return;
+    if(!permitted(info))return;
     if(!detail||detail.querySelector('.add-to-my-meal'))return;
     var print=detail.querySelector('.print-button');
     var button=document.createElement('button');
