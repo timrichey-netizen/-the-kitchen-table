@@ -7,8 +7,17 @@ const labels={
 };
 const fields=[['browserWorldRegion','world',0],['browserCountry','country',1],['browserClassification','classification',2],['browserDifficulty','difficulty',3],['browserRegion','region',4]];
 function language(){const v=window.KitchenTableI18n?.getLanguage?.()||document.documentElement.lang||'en';return labels[v]?v:'en'}
+const dishTypeTranslations={
+ es:{'All recipes':'Todas las recetas','Appetizers & Starters':'Aperitivos y entrantes','Entrees & Mains':'Platos principales','Soups, Stews & Broths':'Sopas, guisos y caldos','Salads & Sides':'Ensaladas y guarniciones','Breakfast & Baked Breads':'Desayunos y panes horneados','Sauces, Gravies & Seasonings':'Salsas, jugos y condimentos','Desserts (Baked & Confections)':'Postres (horneados y dulces)','Desserts (Chilled & Creamy)':'Postres (fríos y cremosos)','Beverages':'Bebidas','Preserved Foods & Accompaniments':'Conservas y acompañamientos'},
+ fr:{'All recipes':'Toutes les recettes','Appetizers & Starters':'Apéritifs et entrées','Entrees & Mains':'Plats principaux','Soups, Stews & Broths':'Soupes, ragoûts et bouillons','Salads & Sides':'Salades et accompagnements','Breakfast & Baked Breads':'Petits-déjeuners et pains','Sauces, Gravies & Seasonings':'Sauces, jus et assaisonnements','Desserts (Baked & Confections)':'Desserts (gâteaux et confiseries)','Desserts (Chilled & Creamy)':'Desserts (frais et crémeux)','Beverages':'Boissons','Preserved Foods & Accompaniments':'Conserves et accompagnements'}
+};
 function update(){
- const d=labels[language()];
+ const lang=language();
+ const d=labels[lang];
+ document.querySelectorAll('#categories button[data-filter]').forEach(button=>{
+   if(!button.dataset.dishTypeOriginal)button.dataset.dishTypeOriginal=button.textContent.trim();
+   button.textContent=dishTypeTranslations[lang]?.[button.dataset.dishTypeOriginal]||button.dataset.dishTypeOriginal;
+ });
  fields.forEach(([id,key,index])=>{
  const sel=document.getElementById(id);if(!sel)return;
  const label=sel.closest('label')?.querySelector('span');if(label)label.textContent=d[key];
