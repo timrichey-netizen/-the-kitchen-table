@@ -531,3 +531,35 @@ button,a,input,select{touch-action:manipulation}
 .my-meal-recipe-name {
   font-variant-caps: small-caps !important;
 }
+
+/* Site-wide editorial action controls: restrained, squared-off outline buttons.
+   Circular icon-only and star controls are intentionally excluded. */
+:where(a,button,input[type="button"],input[type="submit"]):is(
+.button,.btn,.primary,.secondary,.opening-hero-cta,.opening-hero-secondary,
+.daily-recipe-link,.daily-banner a.daily-recipe-link,.recipe-card .button,
+.recipe-card-body a.button,.recipe-card-body a,.filter,.cuisine-filter,
+.browser-chips button,.browser-clear,#browserClear,.menu-toggle,
+.guide-back-floating,.ingredient-print-button,.community-rating-submit
+){
+  border-radius:3px!important;
+}
+:where(a,button):is(.opening-hero-cta,.daily-recipe-link,.recipe-card-body a.button,.browser-clear,#browserClear){
+  background:#f7eddc!important;
+  border:1px solid #cdbb9e!important;
+  color:#3a4638!important;
+  box-shadow:0 1px 3px rgba(48,38,28,.12)!important;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+}
+:where(a,button):is(.opening-hero-cta,.daily-recipe-link,.recipe-card-body a.button,.browser-clear,#browserClear):hover,
+:where(a,button):is(.opening-hero-cta,.daily-recipe-link,.recipe-card-body a.button,.browser-clear,#browserClear):focus-visible{
+  background:#efe0c7!important;
+  border-color:#bda27c!important;
+  color:#2d392b!important;
+}
+:where(a,button):is(.opening-hero-cta,.opening-hero-secondary,.daily-recipe-link){
+  border-radius:3px!important;
+}
+:where(button,a):is(.favorite-toggle,.recipe-icon-button,.personal-rating-buttons button,.community-rating-stars button){
+  /* Icon and rating controls keep their purpose-built appearance. */
+}
