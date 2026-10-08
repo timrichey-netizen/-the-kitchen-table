@@ -46,6 +46,34 @@ function init(){
   const stat=document.createElement('p');stat.className='community-stats';stat.textContent='Loading community ratings…';
   const comments=document.createElement('div');comments.className='community-comments';
   box.append(title,stat,comments);
+  if(cfg.googleClientId){
+   const panel=document.createElement('div');panel.className='community-submit';
+   const heading=document.createElement('h3');heading.textContent='Submit your community rating';
+   const help=document.createElement('p');help.textContent='Sign in with Google to submit one rating per recipe. Comments are reviewed before appearing publicly.';
+   const login=document.createElement('div');
+   const stars=document.createElement('div');stars.className='community-rating-stars';stars.setAttribute('role','group');stars.setAttribute('aria-label','Choose one to five stars');
+   let chosen=0,credential='';
+   const comment=document.createElement('textarea');comment.placeholder='Optional comment (up to 1,200 characters)';comment.maxLength=1200;comment.rows=3;
+   const submit=document.createElement('button');submit.type='button';submit.className='community-rating-submit';submit.textContent='Submit community rating';submit.disabled=true;
+   const status=document.createElement('p');status.setAttribute('role','status');
+   for(let n=1;n<=5;n++){const b=document.createElement('button');b.type='button';b.textContent='★';b.title=n+' stars';b.setAttribute('aria-label',n+' stars');b.addEventListener('click',()=>{chosen=n;stars.querySelectorAll('button').forEach((x,i)=>x.classList.toggle('chosen',i<n));submit.disabled=!credential});stars.appendChild(b)}
+   submit.addEventListener('click',()=>{
+     if(!credential||!chosen)return;
+     const form=document.createElement('form');form.method='POST';form.action=cfg.appsScriptUrl;form.target='_blank';
+     const entries={recipe:id,rating:String(chosen),comment:comment.value,idToken:credential,action:'review'};
+     Object.entries(entries).forEach(([name,value])=>{const input=document.createElement('input');input.type='hidden';input.name=name;input.value=value;form.appendChild(input)});
+     document.body.appendChild(form);form.submit();form.remove();
+     status.textContent='A Google confirmation tab has opened. Return here and refresh to view the updated community average. Comments await approval.';
+   });
+   panel.append(heading,help,login,stars,comment,submit,status);box.appendChild(panel);
+   function renderGoogleSignIn(){
+    if(!window.google?.accounts?.id)return;
+    google.accounts.id.initialize({client_id:cfg.googleClientId,callback:response=>{credential=response.credential;submit.disabled=!chosen;status.textContent='Signed in. Choose a star rating.'}});
+    google.accounts.id.renderButton(login,{theme:'outline',size:'medium',text:'signin_with'});
+   }
+   if(window.google?.accounts?.id)renderGoogleSignIn();
+   else{const script=document.createElement('script');script.src='https://accounts.google.com/gsi/client';script.async=true;script.onload=renderGoogleSignIn;document.head.appendChild(script)}
+  }
   const anchor=page.querySelector('.recipe-cols');if(anchor)anchor.insertAdjacentElement('afterend',box);
   load(id,data=>display(data,id));
  }
