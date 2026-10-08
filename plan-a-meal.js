@@ -6,93 +6,23 @@ var recipes=[
 {title:'Pasta con la Bottarga',url:'pasta-with-bottarga.html',role:'main',type:'pasta',cuisine:'Italian',tags:['pasta','fish']}
 ];
 var planningIndex={
-'mediterranean-lemon-shallot-chicken.html':{moods:['light','elegant','mediterranean','healthy'],ingredients:['chicken'],effort:'moderate',avoid:[],occasions:['weeknight','family','date','entertaining']},
-'sage-mushroom-chicken-skillet.html':{moods:['comfort','rustic','hearty'],ingredients:['chicken','mushroom'],effort:'moderate',avoid:['mushroom'],occasions:['weeknight','family']},
-'veal-piccata.html':{moods:['light','elegant','italian'],ingredients:['veal'],effort:'quick',avoid:[],occasions:['date','entertaining','special']},
-'boeuf-bourguignon.html':{moods:['comfort','hearty','french','rustic'],ingredients:['beef'],effort:'slow',avoid:[],occasions:['family','entertaining','special','holiday']},
-'pork-chop-milanese.html':{moods:['comfort','italian'],ingredients:['pork'],effort:'moderate',avoid:['no-pork'],occasions:['weeknight','family']},
-'shrimp-piccata-skewers.html':{moods:['light','mediterranean','elegant'],ingredients:['shrimp','shellfish'],effort:'quick',avoid:['shellfish-free'],occasions:['weeknight','date','outdoor']},
-'shrimp-saganaki.html':{moods:['mediterranean','hearty','rustic'],ingredients:['shrimp','shellfish','cheese'],effort:'moderate',avoid:['shellfish-free','dairy-free'],occasions:['family','entertaining']},
-'lemon-stuffed-grilled-branzino.html':{moods:['light','mediterranean','elegant','healthy'],ingredients:['fish'],effort:'moderate',avoid:[],occasions:['date','entertaining','outdoor','special']},
-'herb-crusted-salmon.html':{moods:['light','healthy','elegant'],ingredients:['fish'],effort:'quick',avoid:[],occasions:['weeknight','date','family']},
-'shrimp-herb-stir-fry.html':{moods:['light','healthy','spicy'],ingredients:['shrimp','shellfish'],effort:'quick',avoid:['shellfish-free'],occasions:['weeknight']},
-'spaghetti-carbonara.html':{moods:['comfort','hearty','italian','indulgent'],ingredients:['pasta','eggs','pork','cheese'],effort:'quick',avoid:['no-pork','dairy-free','gluten-free'],occasions:['weeknight','date']},
-'pasta-cacio-e-pepe.html':{moods:['comfort','italian','indulgent'],ingredients:['pasta','cheese'],effort:'quick',avoid:['dairy-free','gluten-free'],occasions:['weeknight','date']},
-'pasta-alla-norma.html':{moods:['italian','mediterranean','rustic'],ingredients:['pasta','vegetables','cheese'],effort:'moderate',avoid:['dairy-free','gluten-free'],occasions:['family','weeknight']},
-'miso-mushroom-leek-pasta.html':{moods:['comfort','rustic'],ingredients:['pasta','mushroom'],effort:'quick',avoid:['mushroom','gluten-free'],occasions:['weeknight']},
-'creamy-seafood-risotto.html':{moods:['elegant','indulgent','italian'],ingredients:['rice','shrimp','shellfish','fish','cheese'],effort:'project',avoid:['shellfish-free','dairy-free'],occasions:['date','entertaining','special']},
-'zucchini-risotto-shrimp.html':{moods:['light','italian','mediterranean'],ingredients:['rice','shrimp','shellfish','vegetables'],effort:'moderate',avoid:['shellfish-free','dairy-free'],occasions:['family','date']},
-'zucchini-lasagna.html':{moods:['comfort','italian','healthy'],ingredients:['vegetables','cheese','eggs'],effort:'project',avoid:['dairy-free'],occasions:['family']}
+ 'neapolitan-lasagna.html':{moods:['comfort','italian','hearty'],ingredients:['pasta','beef','cheese'],effort:'project',avoid:['dairy-free','gluten-free'],occasions:['family','entertaining','special']},
+ 'vincisgrassi.html':{moods:['comfort','italian','hearty'],ingredients:['pasta','meat','cheese'],effort:'project',avoid:['dairy-free','gluten-free'],occasions:['family','entertaining','special']},
+ 'pasta-alla-norma.html':{moods:['italian','mediterranean','rustic'],ingredients:['pasta','vegetables','cheese'],effort:'moderate',avoid:['dairy-free','gluten-free'],occasions:['family','weeknight']},
+ 'pasta-with-bottarga.html':{moods:['italian','mediterranean','elegant'],ingredients:['pasta','fish'],effort:'quick',avoid:['gluten-free','fish-free'],occasions:['weeknight','date']}
 };
 
-var pairingDishes=[
-{title:'Elegant Roasted Potato Stacks',url:'elegant-roasted-potato-stacks.html',kind:'side',cuisines:['French','Italian','Mediterranean'],tags:['beef','chicken','pork','veal','fish']},
-{title:'Pasta Aglio e Olio',url:'pasta-aglio-e-olio.html',kind:'side',cuisines:['Italian','Mediterranean'],tags:['chicken','veal','fish','shrimp']},
-{title:'Tomatillo-Avocado Salsa over Cauliflower Rice',url:'tomatillo-avocado-salsa-cauliflower-rice.html',kind:'side',cuisines:['Latin-Inspired'],tags:['shrimp','fish','chicken']},
-{title:'Roasted Hasselback Vegetable Bake',url:'roasted-hasselback-vegetable-bake.html',kind:'side',cuisines:['French','Mediterranean','Italian'],tags:['beef','chicken','pork','veal']},
-{title:'Roasted Zucchini with Lemon and Thyme',url:'roasted-zucchini-lemon-thyme.html',kind:'vegetable',cuisines:['Mediterranean','Italian','Greek'],tags:['chicken','fish','shrimp','veal']},
-{title:'Roasted Broccoli with Lemon & Almonds',url:'roasted-broccoli-lemon-almonds.html',kind:'vegetable',cuisines:['Mediterranean','Italian'],tags:['chicken','fish','shrimp','pork']},
-{title:'Roasted Green Beans with Parmesan',url:'roasted-green-beans-parmesan.html',kind:'vegetable',cuisines:['Italian','French'],tags:['beef','chicken','pork','veal']},
-{title:'Sautéed Spinach with Garlic',url:'sauteed-spinach-garlic.html',kind:'vegetable',cuisines:['Italian','Mediterranean','Greek'],tags:['beef','chicken','veal','fish','shrimp']},
-{title:'Roasted Eggplant & Cherry Tomatoes',url:'roasted-eggplant-cherry-tomatoes.html',kind:'vegetable',cuisines:['Italian','Mediterranean','Greek'],tags:['chicken','fish','shrimp','pasta']},
-{title:'Baked Cauliflower',url:'baked-cauliflower.html',kind:'vegetable',cuisines:['French','Italian'],tags:['beef','chicken','pork']},
-{title:'Spinach Salad with Bagna Càuda Dressing',url:'spinach-salad-bagna-cauda.html',kind:'salad',cuisines:['Italian'],tags:['beef','chicken','pork','veal','pasta']},
-{title:'Roasted Tomato Caprese Salad',url:'roasted-tomato-caprese-salad.html',kind:'salad',cuisines:['Italian','Mediterranean'],tags:['chicken','fish','shrimp','pasta']},
-{title:'Salsa Criolla',url:'salsa-criolla.html',kind:'salad',cuisines:['Latin-Inspired'],tags:['beef','chicken','fish','shrimp']}
-];
+var pairingDishes=[];
 
-var dessertRecipes={
-'Italian':[{title:'Tiramisu',url:'tiramisu.html'}],
-'French':[{title:'Crème Brûlée',url:'creme-brulee.html'},{title:'Chocolate Lava Cake',url:'chocolate-lava-cake.html'}],
-'Mediterranean':[{title:'Lemon Squares',url:'lemon-squares.html'},{title:'Key Lime Pie',url:'key-lime-pie.html'}],
-'Greek':[{title:'Lemon Squares',url:'lemon-squares.html'}],
-'Cajun / Creole':[{title:'Classic American Apple Pie',url:'classic-american-apple-pie.html'},{title:'Brownies',url:'brownies.html'}],
-'Asian-Inspired':[{title:'Key Lime Pie',url:'key-lime-pie.html'},{title:'Lemon Squares',url:'lemon-squares.html'}],
-'Latin-Inspired':[{title:'Key Lime Pie',url:'key-lime-pie.html'},{title:'Peach Pie',url:'peach-pie.html'}],
-'Any':[{title:'Apple Crumble',url:'apple-crumble.html'},{title:'Brownies',url:'brownies.html'},{title:'Classic American Apple Pie',url:'classic-american-apple-pie.html'}]
-};
+var dessertRecipes={};
 
-var dessertPairings={
-'Italian':['Tiramisu','Panna Cotta with Berries','Lemon Sorbet'],
-'French':['Tarte Tatin','Chocolate Mousse','Crème Brûlée'],
-'Mediterranean':['Lemon Olive-Oil Cake','Fresh Berries with Mascarpone','Honey Yogurt with Walnuts'],
-'Greek':['Baklava','Greek Yogurt with Honey and Walnuts','Orange Semolina Cake'],
-'Cajun / Creole':['Bread Pudding with Bourbon Sauce','Bananas Foster','Pecan Praline Ice Cream'],
-'Asian-Inspired':['Mango with Coconut Cream','Ginger Ice Cream','Sesame Shortbread'],
-'Latin-Inspired':['Flan','Tres Leches Cake','Cinnamon-Chocolate Pots de Crème'],
-'Any':['Seasonal Fruit Tart','Vanilla Panna Cotta','Dark Chocolate Mousse']
-};
+var dessertPairings={};
 
 var recipeIndex={
-'mediterranean-lemon-shallot-chicken.html':{proteins:['chicken'],prep:['low-carb','high-protein','mediterranean','saute','one-pan','quick']},
-'sage-mushroom-chicken-skillet.html':{proteins:['chicken','mushroom'],prep:['low-carb','high-protein','saute','one-pan','quick']},
-'veal-piccata.html':{proteins:['veal'],prep:['low-carb','high-protein','saute','one-pan','quick']},
-'boeuf-bourguignon.html':{proteins:['beef'],prep:['high-protein','braise']},
-'pork-chop-milanese.html':{proteins:['pork'],prep:['high-protein','saute','quick']},
-'shrimp-piccata-skewers.html':{proteins:['shrimp','shellfish'],prep:['low-carb','high-protein','grill','mediterranean','quick']},
-'shrimp-saganaki.html':{proteins:['shrimp','shellfish','cheese'],prep:['low-carb','high-protein','mediterranean','bake','one-pan','quick']},
-'lemon-stuffed-grilled-branzino.html':{proteins:['fish'],prep:['low-carb','high-protein','mediterranean','grill']},
-'herb-crusted-salmon.html':{proteins:['fish'],prep:['low-carb','high-protein','bake','roast','quick','mediterranean']},
-'shrimp-herb-stir-fry.html':{proteins:['shrimp','shellfish'],prep:['low-carb','high-protein','stir-fry','quick','one-pan']},
-'spaghetti-carbonara.html':{proteins:['eggs','pork','cheese'],prep:['high-protein','saute','quick']},
-'pasta-cacio-e-pepe.html':{proteins:['cheese'],prep:['quick']},
-'pasta-alla-norma.html':{proteins:['cheese'],prep:['mediterranean','saute']},
-'miso-mushroom-leek-pasta.html':{proteins:['mushroom','tofu'],prep:['saute','quick']},
-'creamy-seafood-risotto.html':{proteins:['shrimp','shellfish','fish','cheese'],prep:['high-protein','saute']},
-'zucchini-risotto-shrimp.html':{proteins:['shrimp','shellfish','cheese'],prep:['high-protein','mediterranean','saute']},
-'zucchini-lasagna.html':{proteins:['cheese','eggs'],prep:['low-carb','high-protein','bake','mediterranean']},
-'elegant-roasted-potato-stacks.html':{proteins:['cheese'],prep:['bake','roast']},
-'roasted-zucchini-lemon-thyme.html':{proteins:[],prep:['low-carb','mediterranean','roast','quick']},
-'roasted-broccoli-lemon-almonds.html':{proteins:['nuts'],prep:['low-carb','mediterranean','roast','quick']},
-'roasted-green-beans-parmesan.html':{proteins:['cheese'],prep:['low-carb','roast','quick']},
-'pasta-aglio-e-olio.html':{proteins:[],prep:['saute','quick','mediterranean']},
-'tomatillo-avocado-salsa-cauliflower-rice.html':{proteins:[],prep:['low-carb','quick']},
-'lemon-tomatillo-salsa-verde.html':{proteins:[],prep:['low-carb','quick']},
-'spinach-salad-bagna-cauda.html':{proteins:['fish','cheese'],prep:['low-carb','mediterranean','quick']},
-'roasted-tomato-caprese-salad.html':{proteins:['cheese'],prep:['low-carb','mediterranean','roast','quick']},
-'sauteed-spinach-garlic.html':{proteins:[],prep:['low-carb','saute','quick']},
-'roasted-eggplant-cherry-tomatoes.html':{proteins:[],prep:['low-carb','mediterranean','roast']},
-'baked-cauliflower.html':{proteins:['cheese'],prep:['low-carb','bake','roast']}
+ 'neapolitan-lasagna.html':{proteins:['beef','cheese','eggs'],prep:['bake']},
+ 'vincisgrassi.html':{proteins:['meat','cheese','eggs'],prep:['bake']},
+ 'pasta-alla-norma.html':{proteins:['cheese'],prep:['mediterranean','saute']},
+ 'pasta-with-bottarga.html':{proteins:['fish'],prep:['mediterranean','quick']}
 };
 
 var state={mood:[],mainIngredients:[],effort:'any',restrictions:[],occasion:'weeknight',dessert:'surprise',avoidText:'',custom:{}};
