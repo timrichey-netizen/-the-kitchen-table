@@ -14,18 +14,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="index.html">The Kitchen Table</a>
-      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="index.html#recipes">Recipes</a><a href="plan-a-meal.html">Plan a Meal</a><a href="plan-a-meal.html">Plan a Meal</a>
-        <a href="index.html#categories">Categories</a>
-        <a href="index.html#about">About</a>
-        <a href="plate-composer.html?v=20260930-1916" aria-current="page">Plate Composer</a>
-      </nav>
-    </div>
-  </header>
+  <header class="site-header"><div class="container nav-wrap"><a class="brand" href="index.html#top">The Kitchen Table</a><button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button><nav class="nav" aria-label="Primary navigation"><a href="index.html#recipes">Recipes</a><a href="index.html?favorites=1" data-favorites-nav>My Favorites</a><a href="my-meal.html">My Meal <span class="my-meal-nav-count" data-my-meal-count></span></a><a href="pantry-to-plate.html">Pantry to Plate</a><a href="sauces.html">Sauces</a><a href="guides.html">Guides</a><a href="plan-a-meal.html">Plan a Meal</a><a href="index.html#about">About</a></nav></div></header>
 
   <main class="section plate-composer-page">
     <div class="container">
@@ -210,7 +199,7 @@
     </div>
   </main>
 
-  <script src="script.js"></script>
+  <script src="site-i18n.js"></script><script src="script.js"></script>
   <script>
 (() => {
   const STORAGE_KEY='kitchenTableWorkerUrl';
