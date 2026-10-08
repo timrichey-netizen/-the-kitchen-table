@@ -4,6 +4,16 @@
     document.querySelectorAll('.recipe-card-heading h3, .recipe-top .recipe-name-local, .recipe-top .recipe-name-english').forEach(function(holder){
       var targets=holder.matches('h3')?Array.from(holder.querySelectorAll('.recipe-title-original,.recipe-title-english')):[holder];
       targets.forEach(function(el){
+        if(el.classList.contains('recipe-title-original')){
+          el.style.display='block';
+          el.style.whiteSpace='normal';
+          el.style.maxWidth='100%';
+          el.style.overflow='visible';
+          el.style.textOverflow='clip';
+          el.style.fontSize='';
+          el.style.width='';
+          return;
+        }
         el.style.display='block';
         el.style.whiteSpace='nowrap';
         el.style.maxWidth='100%';
