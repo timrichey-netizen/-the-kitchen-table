@@ -530,6 +530,7 @@ const mexicanSubcategoryGroup = document.getElementById('mexicanSubcategoryGroup
 const mexicanSubcategoryFilters = document.getElementById('mexicanSubcategoryFilters');
 const filters = [...document.querySelectorAll('.filter')];
 const noResults = document.getElementById('noResults');
+const browserWorldRegion=document.getElementById('browserWorldRegion');
 const browserCountry=document.getElementById('browserCountry');
 const browserRegion=document.getElementById('browserRegion');
 const browserClassification=document.getElementById('browserClassification');
@@ -542,17 +543,17 @@ function browserCardValue(card,type){
   return card.dataset[type]||'';
 }
 function populateBrowserOptions(){
-  [[browserCountry,'country'],[browserRegion,'region'],[browserClassification,'classification'],[browserDifficulty,'difficulty']].forEach(([select,type])=>{
+  [[browserWorldRegion,'worldRegion'],[browserCountry,'country'],[browserRegion,'region'],[browserClassification,'classification'],[browserDifficulty,'difficulty']].forEach(([select,type])=>{
     if(!select)return;
     const values=[...new Set(cards.map(card=>browserCardValue(card,type)).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
     values.forEach(value=>{const option=document.createElement('option');option.value=value;option.textContent=value;select.appendChild(option);});
   });
 }
 populateBrowserOptions();
-[browserCountry,browserRegion,browserClassification,browserDifficulty].forEach(select=>select?.addEventListener('change',updateRecipes));
+[browserWorldRegion,browserCountry,browserRegion,browserClassification,browserDifficulty].forEach(select=>select?.addEventListener('change',updateRecipes));
 browserClear?.addEventListener('click',()=>{
   if(search)search.value='';
-  [browserCountry,browserRegion,browserClassification,browserDifficulty].forEach(select=>{if(select)select.value='all';});
+  [browserWorldRegion,browserCountry,browserRegion,browserClassification,browserDifficulty].forEach(select=>{if(select)select.value='all';});
   activeFilter='all';
   filters.forEach(button=>button.classList.toggle('active',button.dataset.filter==='all'));
   activeCuisine='all';
@@ -1327,7 +1328,7 @@ function updateRecipes() {
       activeMexicanSubcategory === 'all' ||
       mexicanSubcategory === activeMexicanSubcategory;
     const matchesSearch = terms.length === 0 || terms.every(term => haystack.includes(term));
-    const browserMatches=[[browserCountry,'country'],[browserRegion,'region'],[browserClassification,'classification'],[browserDifficulty,'difficulty']].every(([select,type])=>!select||select.value==='all'||browserCardValue(card,type)===select.value);
+    const browserMatches=[[browserWorldRegion,'worldRegion'],[browserCountry,'country'],[browserRegion,'region'],[browserClassification,'classification'],[browserDifficulty,'difficulty']].every(([select,type])=>!select||select.value==='all'||browserCardValue(card,type)===select.value);
     const show = matchesCategory && matchesCuisine && matchesAmericanSubcuisine && matchesEuropeanSubcuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch && browserMatches;
 
     card.hidden = !show;
