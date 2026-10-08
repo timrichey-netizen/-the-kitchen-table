@@ -1332,7 +1332,8 @@ function updateRecipes() {
     const show = matchesCategory && matchesCuisine && matchesAmericanSubcuisine && matchesEuropeanSubcuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch && browserMatches;
 
     card.hidden = !show;
-    card.style.display = show ? '' : 'none';
+    if (show) card.style.removeProperty('display');
+    else card.style.setProperty('display','none','important');
     if (show) visible++;
   });
 
