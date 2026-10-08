@@ -142,6 +142,30 @@
 #recipeGrid .recipe-card-heading h3{margin:0!important;flex:1 1 auto!important;display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;padding-top:33px!important;padding-bottom:10px!important;min-height:0!important}
 #recipeGrid .recipe-card-heading .recipe-card-location{flex:0 0 auto!important;align-self:center!important;margin-top:auto!important;margin-bottom:0!important;padding-bottom:0!important;justify-content:center!important}
 #recipeGrid .recipe-card-heading .recipe-card-location:after{margin-top:10px!important}
+</style><style id="editorial-recipe-browser-style">
+#recipes{padding-top:55px;background:#faf5ef}
+.editorial-recipe-browser{background:#fffaf3;border:1px solid #d9baa1;border-radius:25px;padding:clamp(22px,4vw,52px);box-shadow:0 12px 34px rgba(69,42,26,.05);margin-bottom:30px}
+.browser-brand{display:flex;gap:16px;align-items:center;justify-content:center;color:#514036;letter-spacing:.22em;font:600 11px Arial,sans-serif;margin-bottom:28px}
+.browser-brand:before,.browser-brand:after{content:"";display:block;width:70px;max-width:15%;height:1px;background:#c4a58f}
+.editorial-recipe-browser>.eyebrow{color:#a94631!important;margin:0 0 9px!important}
+.editorial-recipe-browser>h2{font-family:Georgia,serif!important;font-size:clamp(34px,4.3vw,66px)!important;line-height:1.12!important;color:#302720;margin:0 0 27px}
+.browser-search{display:flex;align-items:center;gap:12px;max-width:710px;background:white;border:1px solid #decbbd;border-radius:40px;padding:0 22px;color:#89776a;min-height:57px}
+.browser-search:focus-within{outline:2px solid #ae4b35;outline-offset:2px}
+.browser-search input{flex:1;min-width:0;border:0!important;outline:0!important;box-shadow:none!important;font:400 16px Arial,sans-serif;background:transparent!important;padding:15px 0!important;width:100%}
+.browser-label{font:800 12px Arial,sans-serif;letter-spacing:.11em;color:#736358;margin:31px 0 13px}
+.browser-chips{display:flex;flex-wrap:wrap;gap:9px!important;margin-bottom:25px}
+.browser-chips button{border:1px solid #e1cebf!important;border-radius:40px!important;background:#fff!important;color:#352921!important;font:700 13px Arial,sans-serif!important;padding:12px 17px!important;cursor:pointer}
+.browser-chips button.active{background:#312720!important;border-color:#312720!important;color:#fff!important}
+.browser-chips button:hover{border-color:#ad4932!important}
+.browser-selects{border-top:1px solid #e9d9ca;padding-top:25px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.browser-selects label{display:flex;flex-direction:column;gap:8px;min-width:0}
+.browser-selects label span{font:800 11px Arial,sans-serif;color:#77665a;letter-spacing:.05em}
+.browser-selects select{height:48px;max-width:100%;width:100%;border:1px solid #decbbd;border-radius:10px;background:#fff;color:#352b24;font:500 14px Arial,sans-serif;padding:0 11px;cursor:pointer}
+.browser-results{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:25px;font:500 13px Arial,sans-serif;color:#76685c}
+#browserClear{background:transparent;border:0;color:#a94631;font:800 13px Arial,sans-serif;cursor:pointer;padding:6px}
+.legacy-recipe-filters{display:none!important}
+@media(max-width:900px){.browser-selects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:530px){.editorial-recipe-browser{padding:23px 18px;border-radius:19px}.browser-brand{margin-bottom:22px;letter-spacing:.14em}.editorial-recipe-browser>h2{font-size:clamp(32px,9vw,43px)!important}.browser-chips button{font-size:12px!important;padding:10px 13px!important}.browser-selects{gap:12px}.browser-selects select{font-size:12px}.browser-selects label span{font-size:10px}}
 </style></head>
 <body>
   <header class="site-header">
@@ -179,71 +203,46 @@
 
     <section id="recipes" class="section">
       <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">RECIPE COLLECTION</p>
-            <h2>Find something delicious.</h2>
+        <div class="editorial-recipe-browser">
+          <div class="browser-brand">THE KITCHEN TABLE</div>
+          <p class="eyebrow">RECIPE COLLECTION</p>
+          <h2>Find something delicious.</h2>
+          <label class="browser-search"><span class="sr-only">Search recipes</span><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="recipeSearch" type="search" placeholder="Search by dish, ingredient, or place…" autocomplete="off"></label>
+          <div class="browser-label">EXPLORE BY FOOD TYPE</div>
+          <div id="categories" class="browser-chips filters" aria-label="Food type">
+            <button class="filter active" data-filter="all">All recipes</button>
+            <button class="filter" data-filter="pasta">Pasta</button>
+            <button class="filter" data-filter="meat">Meat</button>
+            <button class="filter" data-filter="seafood">Seafood</button>
+            <button class="filter" data-filter="vegetables">Vegetables &amp; Sides</button>
+            <button class="filter" data-filter="dessert">Desserts</button>
+            <button class="filter" data-filter="rice">Rice</button>
+            <button class="filter" data-filter="soups-salads">Soups &amp; Salads</button>
+            <button class="filter" data-filter="sauces-broths">Sauces / Broths</button>
+            <button class="filter" data-filter="extras">Extras</button>
           </div>
-          <div class="recipe-search-controls">
-            <label class="search-wrap">
-              <span class="sr-only">Search recipes</span>
-              <input id="recipeSearch" type="search" placeholder="Search recipes…" autocomplete="off" />
-            </label>
+          <div class="browser-selects">
+            <label><span>Cuisine / Country</span><select id="browserCountry"><option value="all">All countries</option></select></label>
+            <label><span>Recipe Classification</span><select id="browserClassification"><option value="all">All classifications</option></select></label>
+            <label><span>Preparation Difficulty</span><select id="browserDifficulty"><option value="all">All difficulties</option></select></label>
+            <label><span>Region</span><select id="browserRegion"><option value="all">All regions</option></select></label>
           </div>
+          <div class="browser-results"><span id="browserResultCount" aria-live="polite">4 recipes found</span><button id="browserClear" type="button">Clear filters</button></div>
         </div>
-
-        <div class="filter-group primary-filter-group">
-          <div class="filter-group-label">Cuisine</div>
-          <div id="cuisineFilters" class="filters cuisine-filters" aria-label="Cuisine filters">
-            <button class="cuisine-filter active" data-cuisine="all">All cuisines</button>
-          </div>
-        </div>
-
-        <div id="americanSubcuisineGroup" class="filter-group american-subcuisine-group" hidden>
-          <div class="filter-group-label">American cuisine</div>
-          <div id="americanSubcuisineFilters" class="filters cuisine-filters" aria-label="American cuisine filters"></div>
-        </div>
-
-        <div id="europeanSubcuisineGroup" class="filter-group european-subcuisine-group" hidden>
-          <div class="filter-group-label">European country</div>
-          <div id="europeanSubcuisineFilters" class="filters cuisine-filters" aria-label="European country filters"></div>
-        </div>
-
-        <div id="asianSubcuisineGroup" class="filter-group asian-subcuisine-group" hidden>
-          <div class="filter-group-label">Asian cuisine</div>
-          <div id="asianSubcuisineFilters" class="filters cuisine-filters" aria-label="Asian cuisine subcategories"></div>
-        </div>
-
-        <div id="latinSubcuisineGroup" class="filter-group latin-subcuisine-group" hidden>
-          <div class="filter-group-label">Latin American country</div>
-          <div id="latinSubcuisineFilters" class="filters cuisine-filters" aria-label="Latin American country subcategories"></div>
-        </div>
-
-        <div id="mexicanSubcategoryGroup" class="filter-group mexican-subcategory-group" hidden>
-          <div class="filter-group-label">Mexican food</div>
-          <div id="mexicanSubcategoryFilters" class="filters cuisine-filters" aria-label="Mexican food subcategories"></div>
-        </div>
-
-        <div class="filter-group secondary-filter-group">
-          <div class="filter-group-label">Food type</div>
-          <div id="categories" class="filters" aria-label="Recipe categories">
-          <button class="filter active" data-filter="all">All</button>
-          <button class="filter" data-filter="meat">Meat</button>
-          <button class="filter" data-filter="pasta">Pasta</button>
-          <button class="filter" data-filter="rice">Rice</button>
-          <button class="filter" data-filter="seafood">Seafood</button>
-          <button class="filter" data-filter="vegetables">Vegetables &amp; Sides</button>
-          <button class="filter" data-filter="soups-salads">Soups &amp; Salads</button>
-          <button class="filter" data-filter="sauces-broths">Sauces / Broths</button>
-          <button class="filter" data-filter="extras">Extras</button><button class="filter" data-filter="dessert">Desserts</button>
-          </div>
+        <div class="legacy-recipe-filters" hidden>
+          <div id="cuisineFilters"><button class="cuisine-filter active" data-cuisine="all">All cuisines</button></div>
+          <div id="americanSubcuisineGroup" hidden><div id="americanSubcuisineFilters"></div></div>
+          <div id="europeanSubcuisineGroup" hidden><div id="europeanSubcuisineFilters"></div></div>
+          <div id="asianSubcuisineGroup" hidden><div id="asianSubcuisineFilters"></div></div>
+          <div id="latinSubcuisineGroup" hidden><div id="latinSubcuisineFilters"></div></div>
+          <div id="mexicanSubcategoryGroup" hidden><div id="mexicanSubcategoryFilters"></div></div>
         </div>
 
         <div class="recipe-grid" id="recipeGrid">
-<article class="recipe-card" data-category="pasta" data-search="Lasagna Napoletana Neapolitan Lasagna Italy Campania"><div class="recipe-card-heading"><div class="recipe-card-brand">THE KITCHEN TABLE</div><h3><a href="neapolitan-lasagna.html"><span class="recipe-title-original">Lasagna Napoletana</span><span class="recipe-title-english">(Neapolitan Lasagna)</span></a></h3><div class="recipe-card-location"><span class="card-food-type">PASTA</span><span class="card-country">ITALY</span><span class="card-region">CAMPANIA</span></div></div><a href="neapolitan-lasagna.html"><img src="https://drive.google.com/thumbnail?id=1pHGUhj8Cr7Yuih773ENAfMp8sX_a-4IP&amp;sz=w1200" alt="Lasagna Napoletana" loading="lazy" onerror="this.hidden=true"></a><div class="recipe-card-body"><p>An extravagant baked centerpiece layered with slow-cooked ragù, creamy ricotta, melting cheese, tender lasagna, miniature meatballs, and hard-boiled eggs. Every slice is deeply savory, luxurious, and festive—the kind of dish designed for a long family meal.</p><a href="neapolitan-lasagna.html">View recipe →</a></div></article>
-<article class="recipe-card" data-category="pasta" data-search="Vincisgrassi Vincisgrassi Italy Marche"><div class="recipe-card-heading"><div class="recipe-card-brand">THE KITCHEN TABLE</div><h3><a href="vincisgrassi.html"><span class="recipe-title-original">Vincisgrassi</span></a></h3><div class="recipe-card-location"><span class="card-food-type">PASTA</span><span class="card-country">ITALY</span><span class="card-region">MARCHE</span></div></div><a href="vincisgrassi.html"><img src="https://drive.google.com/thumbnail?id=1NV6Bp4rvljFGfSeHQ-pWnOXuO3nk9hba&amp;sz=w1200" alt="Vincisgrassi" loading="lazy" onerror="this.hidden=true"></a><div class="recipe-card-body"><p>Thin pasta sheets alternate with an intensely savory ragù of meats and chicken offal, creamy béchamel, and aged cheese. The result is deeply layered, aromatic, rustic yet refined, and built for the grandest holiday table.</p><a href="vincisgrassi.html">View recipe →</a></div></article>
-<article class="recipe-card" data-category="pasta" data-search="Pasta alla Norma Pasta alla Norma Italy Sicilia"><div class="recipe-card-heading"><div class="recipe-card-brand">THE KITCHEN TABLE</div><h3><a href="pasta-alla-norma.html"><span class="recipe-title-original">Pasta alla Norma</span></a></h3><div class="recipe-card-location"><span class="card-food-type">PASTA</span><span class="card-country">ITALY</span><span class="card-region">SICILIA</span></div></div><a href="pasta-alla-norma.html"><img src="https://drive.google.com/thumbnail?id=1nyaXVKS54iHgJMLFd9-022BO50t-fXmJ&amp;sz=w1200" alt="Pasta alla Norma" loading="lazy" onerror="this.hidden=true"></a><div class="recipe-card-body"><p>Classic Catania penne with tomato sauce, fried eggplant, ricotta salata, and basil.</p><a href="pasta-alla-norma.html">View recipe →</a></div></article>
-<article class="recipe-card" data-category="pasta" data-search="Pasta con la Bottarga Pasta with Bottarga Italy Sicilia"><div class="recipe-card-heading"><div class="recipe-card-brand">THE KITCHEN TABLE</div><h3><a href="pasta-with-bottarga.html"><span class="recipe-title-original">Pasta con la Bottarga</span><span class="recipe-title-english">(Pasta with Bottarga)</span></a></h3><div class="recipe-card-location"><span class="card-food-type">PASTA</span><span class="card-country">ITALY</span><span class="card-region">SICILIA</span></div></div><a href="pasta-with-bottarga.html"><img src="https://drive.google.com/thumbnail?id=1ARuukNqXeHcAkWHqmheo9SQCR5udWTnO&amp;sz=w1200" alt="Pasta con la Bottarga" loading="lazy" onerror="this.hidden=true"></a><div class="recipe-card-body"><p>Hot pasta is coated with garlic, olive oil, chili, parsley, and finely grated cured tuna roe added off the heat. Salty, marine, aromatic, and intensely savory, it delivers remarkable depth with a short ingredient list.</p><a href="pasta-with-bottarga.html">View recipe →</a></div></article>
+<article class="recipe-card" data-category="pasta" data-search="Lasagna Napoletana Neapolitan Lasagna Italy Campania" data-classification="Entree" data-difficulty="Challenging"><div class="recipe-card-heading"><div class="recipe-card-brand">THE KITCHEN TABLE</div><h3><a href="neapolitan-lasagna.html"><span class="recipe-title-original">Lasagna Napoletana</span><span class="recipe-title-english">(Neapolitan Lasagna)</span></a></h3><div class="recipe-card-location"><span class="card-food-type">PASTA</span><span class="card-country">ITALY</span><span class="card-region">CAMPANIA</span></div></div><a href="neapolitan-lasagna.html"><img src="https://drive.google.com/thumbnail?id=1pHGUhj8Cr7Yuih773ENAfMp8sX_a-4IP&amp;sz=w1200" alt="Lasagna Napoletana" loading="lazy" onerror="this.hidden=true"></a><div class="recipe-card-body"><p>An extravagant baked centerpiece layered with slow-cooked ragù, creamy ricotta, melting cheese, tender lasagna, miniature meatballs, and hard-boiled eggs. Every slice is deeply savory, luxurious, and festive—the kind of dish designed for a long family meal.</p><a href="neapolitan-lasagna.html">View recipe →</a></div></article>
+<article class="recipe-card" data-category="pasta" data-search="Vincisgrassi Vincisgrassi Italy Marche" data-classification="Entree" data-difficulty="Challenging"><div class="recipe-card-heading"><div class="recipe-card-brand">THE KITCHEN TABLE</div><h3><a href="vincisgrassi.html"><span class="recipe-title-original">Vincisgrassi</span></a></h3><div class="recipe-card-location"><span class="card-food-type">PASTA</span><span class="card-country">ITALY</span><span class="card-region">MARCHE</span></div></div><a href="vincisgrassi.html"><img src="https://drive.google.com/thumbnail?id=1NV6Bp4rvljFGfSeHQ-pWnOXuO3nk9hba&amp;sz=w1200" alt="Vincisgrassi" loading="lazy" onerror="this.hidden=true"></a><div class="recipe-card-body"><p>Thin pasta sheets alternate with an intensely savory ragù of meats and chicken offal, creamy béchamel, and aged cheese. The result is deeply layered, aromatic, rustic yet refined, and built for the grandest holiday table.</p><a href="vincisgrassi.html">View recipe →</a></div></article>
+<article class="recipe-card" data-category="pasta" data-search="Pasta alla Norma Pasta alla Norma Italy Sicilia" data-classification="Entree" data-difficulty="Moderate"><div class="recipe-card-heading"><div class="recipe-card-brand">THE KITCHEN TABLE</div><h3><a href="pasta-alla-norma.html"><span class="recipe-title-original">Pasta alla Norma</span></a></h3><div class="recipe-card-location"><span class="card-food-type">PASTA</span><span class="card-country">ITALY</span><span class="card-region">SICILIA</span></div></div><a href="pasta-alla-norma.html"><img src="https://drive.google.com/thumbnail?id=1nyaXVKS54iHgJMLFd9-022BO50t-fXmJ&amp;sz=w1200" alt="Pasta alla Norma" loading="lazy" onerror="this.hidden=true"></a><div class="recipe-card-body"><p>Classic Catania penne with tomato sauce, fried eggplant, ricotta salata, and basil.</p><a href="pasta-alla-norma.html">View recipe →</a></div></article>
+<article class="recipe-card" data-category="pasta" data-search="Pasta con la Bottarga Pasta with Bottarga Italy Sicilia" data-classification="Entree" data-difficulty="Easy"><div class="recipe-card-heading"><div class="recipe-card-brand">THE KITCHEN TABLE</div><h3><a href="pasta-with-bottarga.html"><span class="recipe-title-original">Pasta con la Bottarga</span><span class="recipe-title-english">(Pasta with Bottarga)</span></a></h3><div class="recipe-card-location"><span class="card-food-type">PASTA</span><span class="card-country">ITALY</span><span class="card-region">SICILIA</span></div></div><a href="pasta-with-bottarga.html"><img src="https://drive.google.com/thumbnail?id=1ARuukNqXeHcAkWHqmheo9SQCR5udWTnO&amp;sz=w1200" alt="Pasta con la Bottarga" loading="lazy" onerror="this.hidden=true"></a><div class="recipe-card-body"><p>Hot pasta is coated with garlic, olive oil, chili, parsley, and finely grated cured tuna roe added off the heat. Salty, marine, aromatic, and intensely savory, it delivers remarkable depth with a short ingredient list.</p><a href="pasta-with-bottarga.html">View recipe →</a></div></article>
         </div>
         <p id="noResults" class="no-results" hidden>No recipes match your search.</p>
       </div>
