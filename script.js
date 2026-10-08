@@ -2189,7 +2189,7 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
     var tags=group.querySelector('.pantry-other-tags');
     if(!input||!add||!tags)return;
     function appendCustom(){
-      var display=input.value.trim().replace(/\\s+/g,' ');
+      var display=input.value.trim().replace(/\s+/g,' ');
       var value=normalize(display);
       if(!value)return;
       if(value.length<2){input.setCustomValidity('Enter at least two characters');input.reportValidity();return}
