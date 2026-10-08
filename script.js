@@ -1532,7 +1532,18 @@ function setRecipeOfTheDay() {
   const now = new Date();
   const dayKey = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
   const recipe = recipes[((dayKey % recipes.length) + recipes.length) % recipes.length];
-  title.textContent = recipe.title + (recipe.subtitle ? ' ' + recipe.subtitle : '');
+  title.replaceChildren();
+  const local = document.createElement('span');
+  local.className = 'featured-local-name';
+  local.textContent = recipe.title;
+  title.appendChild(local);
+  const normalized = x => String(x || '').replace(/[()]/g, '').trim().toLocaleLowerCase();
+  if (recipe.subtitle && normalized(recipe.subtitle) !== normalized(recipe.title)) {
+    const english = document.createElement('span');
+    english.className = 'featured-english-name';
+    english.textContent = recipe.subtitle.startsWith('(') ? recipe.subtitle : '(' + recipe.subtitle + ')';
+    title.appendChild(english);
+  }
   description.textContent = recipe.description || '';
   link.href = recipe.href;
   link.hidden = false;
