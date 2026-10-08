@@ -19,6 +19,23 @@ function update(){
    const english=titles[button.dataset.filter];
    if(english)button.textContent=dishTypeTranslations[lang]?.[english]||english;
  });
+ const terms={
+  en:{label:'Exclude Allergen',all:'No exclusions',note:'Allergen information is ingredient-based and does not address cross-contact. Recipes with unknown allergen information are excluded when an allergen is selected.'},
+  es:{label:'Excluir alérgeno',all:'Sin exclusiones',note:'La información sobre alérgenos se basa en los ingredientes y no contempla la contaminación cruzada. Las recetas con datos desconocidos se excluyen al seleccionar un alérgeno.'},
+  fr:{label:'Exclure un allergène',all:'Aucune exclusion',note:'Les allergènes indiqués proviennent des ingrédients et ne couvrent pas les contaminations croisées. Les recettes dont les données sont inconnues sont exclues lorsqu’un allergène est sélectionné.'}
+ };
+ const names={
+  es:{'Milk':'Leche','Eggs':'Huevos','Fish':'Pescado','Crustacean Shellfish':'Crustáceos','Tree Nuts':'Frutos secos','Peanuts':'Cacahuetes','Wheat':'Trigo','Soy':'Soja','Sesame':'Sésamo','Molluscan Shellfish':'Moluscos'},
+  fr:{'Milk':'Lait','Eggs':'Œufs','Fish':'Poisson','Crustacean Shellfish':'Crustacés','Tree Nuts':'Fruits à coque','Peanuts':'Arachides','Wheat':'Blé','Soy':'Soja','Sesame':'Sésame','Molluscan Shellfish':'Mollusques'}
+ };
+ const allergen=document.getElementById('browserAllergen');
+ if(allergen){
+  const label=allergen.closest('label')?.querySelector('span');
+  if(label)label.textContent=terms[lang].label;
+  [...allergen.options].forEach(opt=>{opt.textContent=opt.value==='all'?terms[lang].all:(names[lang]?.[opt.value]||opt.value)});
+ }
+ const allergenNote=document.querySelector('.allergen-filter-note');
+ if(allergenNote)allergenNote.textContent=terms[lang].note;
  fields.forEach(([id,key,index])=>{
  const sel=document.getElementById(id);if(!sel)return;
  const label=sel.closest('label')?.querySelector('span');if(label)label.textContent=d[key];
