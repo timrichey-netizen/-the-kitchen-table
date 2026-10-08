@@ -535,6 +535,7 @@ const browserCountry=document.getElementById('browserCountry');
 const browserRegion=document.getElementById('browserRegion');
 const browserClassification=document.getElementById('browserClassification');
 const browserDifficulty=document.getElementById('browserDifficulty');
+const browserAllergen=document.getElementById('browserAllergen');
 const browserCount=document.getElementById('browserResultCount');
 const browserClear=document.getElementById('browserClear');
 function browserCardValue(card,type){
@@ -550,10 +551,10 @@ function populateBrowserOptions(){
   });
 }
 populateBrowserOptions();
-[browserWorldRegion,browserCountry,browserRegion,browserClassification,browserDifficulty].forEach(select=>select?.addEventListener('change',updateRecipes));
+[browserWorldRegion,browserCountry,browserRegion,browserClassification,browserDifficulty,browserAllergen].forEach(select=>select?.addEventListener('change',updateRecipes));
 browserClear?.addEventListener('click',()=>{
   if(search)search.value='';
-  [browserWorldRegion,browserCountry,browserRegion,browserClassification,browserDifficulty].forEach(select=>{if(select)select.value='all';});
+  [browserWorldRegion,browserCountry,browserRegion,browserClassification,browserDifficulty,browserAllergen].forEach(select=>{if(select)select.value='all';});
   activeFilter='all';
   filters.forEach(button=>button.classList.toggle('active',button.dataset.filter==='all'));
   activeCuisine='all';
@@ -1300,7 +1301,9 @@ function updateRecipes() {
       mexicanSubcategory === activeMexicanSubcategory;
     const matchesSearch = terms.length === 0 || terms.every(term => haystack.includes(term));
     const browserMatches=[[browserWorldRegion,'worldRegion'],[browserCountry,'country'],[browserRegion,'region'],[browserClassification,'classification'],[browserDifficulty,'difficulty']].every(([select,type])=>!select||select.value==='all'||browserCardValue(card,type)===select.value);
-    const show = matchesCategory && matchesCuisine && matchesAmericanSubcuisine && matchesEuropeanSubcuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch && browserMatches;
+    const allergens=(card.dataset.allergens||'').split(',').map(x=>x.trim()).filter(Boolean);
+    const matchesAllergen=!browserAllergen||browserAllergen.value==='all'||(allergens.length>0&&!allergens.includes(browserAllergen.value));
+    const show = matchesAllergen && matchesCategory && matchesCuisine && matchesAmericanSubcuisine && matchesEuropeanSubcuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch && browserMatches;
 
     card.hidden = !show;
     if (show) card.style.removeProperty('display');
