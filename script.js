@@ -1499,26 +1499,42 @@ updateRecipes();
 // Recipe images are served only from local GitHub Pages assets.
 
 
-const FEATURED_MAINS = [];
-
+/* Featured recipe: rotate daily through the recipe cards actually published on this site. */
 function setRecipeOfTheDay() {
   const image = document.getElementById('featuredRecipeImage');
   const title = document.getElementById('featuredRecipeTitle');
   const description = document.getElementById('featuredRecipeDescription');
   const link = document.getElementById('featuredRecipeLink');
-  if (!image || !title || !description || !link || !FEATURED_MAINS.length) return;
-
+  if (!image || !title || !description || !link) return;
+  const recipes = Array.from(document.querySelectorAll('#recipeGrid .recipe-card')).map(card => {
+    const anchor = card.querySelector('.recipe-card-heading h3 a');
+    const photo = card.querySelector('img');
+    const name = card.querySelector('.recipe-title-original');
+    const subtitle = card.querySelector('.recipe-title-english');
+    const text = card.querySelector('.recipe-card-body p');
+    return { href: anchor && anchor.getAttribute('href'),
+      title: name && name.textContent.trim(),
+      subtitle: subtitle && subtitle.textContent.trim(),
+      description: text && text.textContent.trim(),
+      image: photo && photo.getAttribute('src') };
+  }).filter(recipe => recipe.href && recipe.title);
+  if (!recipes.length) return;
   const now = new Date();
   const dayKey = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
-  const recipe = FEATURED_MAINS[((dayKey % FEATURED_MAINS.length) + FEATURED_MAINS.length) % FEATURED_MAINS.length];
-
-  image.src = 'assets/' + recipe.slug + '.png';
-  image.alt = recipe.title;
-  title.textContent = recipe.title;
-  description.textContent = recipe.description;
-  link.href = recipe.slug + '.html';
+  const recipe = recipes[((dayKey % recipes.length) + recipes.length) % recipes.length];
+  title.textContent = recipe.title + (recipe.subtitle ? ' ' + recipe.subtitle : '');
+  description.textContent = recipe.description || '';
+  link.href = recipe.href;
+  link.hidden = false;
+  if (recipe.image) {
+    image.onerror = () => { image.hidden = true; };
+    image.src = recipe.image;
+    image.alt = recipe.title;
+    image.hidden = false;
+  } else {
+    image.hidden = true;
+  }
 }
-
 setRecipeOfTheDay();
 
 const MOTHER_SAUCE_LINKS = {
