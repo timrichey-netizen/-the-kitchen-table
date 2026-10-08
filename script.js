@@ -451,6 +451,13 @@ function addEnglishRecipeNames() {
   function renderTranslatedTitle(el) {
     if (!el) return;
 
+    // Spreadsheet-managed titles are authoritative. Do not replace Column Q
+    // with legacy translations or erase already-formatted local/English spans.
+    if (el.querySelector('.recipe-title-original')) return;
+    if (el.classList.contains('recipe-name-local')) return;
+    if (el.closest('.recipe-detail') &&
+        el.closest('.recipe-detail').querySelector('.recipe-name-local')) return;
+
     const card=el.closest('.recipe-card');
     const detail=el.closest('.recipe-detail');
     let explicitEnglish='';
