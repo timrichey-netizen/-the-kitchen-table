@@ -1,0 +1,21 @@
+name: Validate recipe translations
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'recipe-locales.js'
+      - 'index.html'
+      - '*.html'
+      - 'tools/audit-recipe-locales.js'
+      - '.github/workflows/validate-recipe-translations.yml'
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Audit published recipe translations
+        run: node tools/audit-recipe-locales.js
