@@ -17,10 +17,12 @@
 6. Do not hide English fallback or show a claim of complete translation while gaps remain.
 
 ## Current coverage
-- Full English: four published recipes.
-- Spanish/French: shared interface dictionaries; Bottarga and Pasta alla Norma have first-pass translated ingredients, preparation, notes, history, and card summaries; both remain in editorial review.
-- Other three Italian test recipes: full Spanish/French recipe translations are not yet provided.
-- Beyond four test recipes: recipes are not currently published as pages, so no verified multilingual catalog exists.
+- English: full content on the four published recipe pages.
+- Spanish and French: first-pass translations added for the four published Italian recipes (Lasagna Napoletana, Vincisgrassi, Pasta alla Norma, Pasta con la Bottarga).
+- Automated completeness audit: all ingredient/equipment/direction lines are present in both languages, and the publish checks pass. Run `node tools/audit-recipe-locales.js`.
+- Every Spanish/French recipe remains marked **draft / editorial review** until checked by a proficient human editor. Automated coverage is not a certificate of translation accuracy.
+- Legacy guides and all other unpublished recipe catalog rows do not have fully translated content.
+- Interface strings beyond the existing bilingual dictionaries may still be untranslated and require continuing inventory.
 
 ## Scaling design
 For each new published recipe, import its canonical source row, build separate `es` and `fr` content payloads, run completeness and quantity checks, have an editorial language review, then enable the language switcher's translated content only after approval.
