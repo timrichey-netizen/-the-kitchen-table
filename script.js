@@ -530,6 +530,35 @@ const mexicanSubcategoryGroup = document.getElementById('mexicanSubcategoryGroup
 const mexicanSubcategoryFilters = document.getElementById('mexicanSubcategoryFilters');
 const filters = [...document.querySelectorAll('.filter')];
 const noResults = document.getElementById('noResults');
+const browserCountry=document.getElementById('browserCountry');
+const browserRegion=document.getElementById('browserRegion');
+const browserClassification=document.getElementById('browserClassification');
+const browserDifficulty=document.getElementById('browserDifficulty');
+const browserCount=document.getElementById('browserResultCount');
+const browserClear=document.getElementById('browserClear');
+function browserCardValue(card,type){
+  if(type==='country')return card.querySelector('.card-country')?.textContent.trim()||'';
+  if(type==='region')return card.querySelector('.card-region')?.textContent.trim()||'';
+  return card.dataset[type]||'';
+}
+function populateBrowserOptions(){
+  [[browserCountry,'country'],[browserRegion,'region'],[browserClassification,'classification'],[browserDifficulty,'difficulty']].forEach(([select,type])=>{
+    if(!select)return;
+    const values=[...new Set(cards.map(card=>browserCardValue(card,type)).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+    values.forEach(value=>{const option=document.createElement('option');option.value=value;option.textContent=value;select.appendChild(option);});
+  });
+}
+populateBrowserOptions();
+[browserCountry,browserRegion,browserClassification,browserDifficulty].forEach(select=>select?.addEventListener('change',updateRecipes));
+browserClear?.addEventListener('click',()=>{
+  if(search)search.value='';
+  [browserCountry,browserRegion,browserClassification,browserDifficulty].forEach(select=>{if(select)select.value='all';});
+  activeFilter='all';
+  filters.forEach(button=>button.classList.toggle('active',button.dataset.filter==='all'));
+  activeCuisine='all';
+  updateRecipes();
+});
+
 let activeFilter = 'all';
 let activeCuisine = 'all';
 let activeAmericanSubcuisine = 'all';
@@ -1298,7 +1327,8 @@ function updateRecipes() {
       activeMexicanSubcategory === 'all' ||
       mexicanSubcategory === activeMexicanSubcategory;
     const matchesSearch = terms.length === 0 || terms.every(term => haystack.includes(term));
-    const show = matchesCategory && matchesCuisine && matchesAmericanSubcuisine && matchesEuropeanSubcuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch;
+    const browserMatches=[[browserCountry,'country'],[browserRegion,'region'],[browserClassification,'classification'],[browserDifficulty,'difficulty']].every(([select,type])=>!select||select.value==='all'||browserCardValue(card,type)===select.value);
+    const show = matchesCategory && matchesCuisine && matchesAmericanSubcuisine && matchesEuropeanSubcuisine && matchesAsianSubcuisine && matchesLatinSubcuisine && matchesMexicanSubcategory && matchesSearch && browserMatches;
 
     card.hidden = !show;
     card.style.display = show ? '' : 'none';
@@ -1306,6 +1336,7 @@ function updateRecipes() {
   });
 
   if (noResults) noResults.hidden = visible !== 0;
+  if (browserCount) browserCount.textContent = visible + (visible===1?' recipe found':' recipes found');
 }
 
 search?.addEventListener('input', () => {
