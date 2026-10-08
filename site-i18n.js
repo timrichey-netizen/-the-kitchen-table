@@ -91,7 +91,7 @@
   function translateDOM(){
     document.documentElement.lang=current;
     document.querySelectorAll('[data-i18n-lang-content]').forEach(function(block){var lang=block.getAttribute('data-i18n-lang-content');block.hidden=lang!==current;});
-    var notice=document.getElementById('recipeTranslationNotice');if(notice){notice.hidden=current==='en';notice.textContent=current==='es'?'Esta receta aún no tiene una traducción verificada. Los ingredientes y las instrucciones se muestran en inglés.':current==='fr'?'Cette recette ne dispose pas encore d’une traduction vérifiée. Les ingrédients et les instructions sont affichés en anglais.':'';}
+    var notice=document.getElementById('recipeTranslationNotice');if(notice){notice.hidden=current==='en';var draft=document.body.hasAttribute('data-recipe-translation-draft');notice.textContent=current==='es'?(draft?'Traducción al español en revisión editorial; compruebe las cantidades con la receta original.':'Esta receta aún no tiene una traducción verificada. Los ingredientes y las instrucciones se muestran en inglés.'):(current==='fr'?(draft?'Traduction française en cours de révision éditoriale ; vérifiez les quantités dans la recette d’origine.':'Cette recette ne dispose pas encore d’une traduction vérifiée. Les ingrédients et les instructions sont affichés en anglais.'):'');}
     var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
       acceptNode:function(node){
         var p=node.parentElement;
