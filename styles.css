@@ -687,3 +687,7 @@ a.guide-back-floating{
     color:#211d19!important;
   }
 }
+
+/* Dish Type chips: regular-weight editorial labels */
+#categories.browser-chips .filter,
+#categories.browser-chips button.filter{font-weight:400!important}
