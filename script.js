@@ -2744,3 +2744,19 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
   initMyMealPage();
   updateCounts();
 })();
+
+/* Site-wide legal disclosure navigation. Public recipes remain accessible. */
+(function(){
+  function installLegalLinks(){
+    if(document.getElementById('ktLegalLinks'))return;
+    var host=document.querySelector('footer.footer') || document.querySelector('footer') || document.body;
+    var nav=document.createElement('nav');
+    nav.id='ktLegalLinks';nav.setAttribute('aria-label','Legal information');
+    nav.style.cssText='display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px 19px;padding:17px 18px;border-top:1px solid #ddcfc0;background:#fbf7f0;font:12px/1.5 Inter,Arial,sans-serif';
+    [['privacy.html','Privacy'],['cookies.html','Cookies'],['disclosures.html','Advertising & Affiliates'],['terms.html','Terms'],['copyright.html','Copyright'],['contact.html','Contact']].forEach(function(item){
+      var link=document.createElement('a');link.href=item[0];link.textContent=item[1];link.style.cssText='color:#65483c;text-decoration:none';nav.appendChild(link);
+    });
+    if(host===document.body)document.body.appendChild(nav);else host.appendChild(nav);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installLegalLinks,{once:true});else installLegalLinks();
+})();
