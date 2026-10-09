@@ -1,0 +1,7 @@
+/* Shared accessible focus, keyboard navigation and reduced-motion defaults */
+.skip-link{position:fixed;z-index:99999;top:8px;left:8px;transform:translateY(-160%);background:#fffdf9;color:#211d19;padding:12px 18px;border:2px solid #aa4430;text-decoration:none;font:600 15px Arial,sans-serif}
+.skip-link:focus{transform:none}
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #1c60bd!important;outline-offset:3px!important}
+:where(button,a,input,select,textarea){touch-action:manipulation}
+@media(prefers-reduced-motion:reduce){html:focus-within{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media print{.skip-link{display:none!important}}
