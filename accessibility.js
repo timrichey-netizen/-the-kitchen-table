@@ -38,3 +38,6 @@ function init(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
+
+/* Load Our Table destination photography only on the homepage. */
+(function(){if(!document.querySelector('.opening-hero'))return;var script=document.createElement('script');script.src='our-table-rotation.js';script.defer=true;document.head.appendChild(script);})();
