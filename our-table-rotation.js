@@ -1,0 +1,1 @@
+/* Our Table destination carousel asset. */
