@@ -12,7 +12,7 @@ function cardFromPage(file,doc){
  var root=doc.querySelector('.recipe-page.recipe-detail');if(!root)return null;
  var title=root.querySelector('.recipe-name-local')?.textContent.trim();
  if(!title)return null;
- var english=(root.querySelector('.recipe-name-english')?.textContent||'').replace(/^\\(|\\)$/g,'').trim();
+ var english=(root.querySelector('.recipe-name-english')?.textContent||'').replace(/^\(|\)$/g,'').trim();
  var meta=(root.querySelector('.recipe-compact-meta')?.textContent||'').split('·').map(s=>s.trim());
  var world=meta[0]||'',country=meta[1]||'',region=meta[2]||'',classification=meta[3]||'';
  var difficulty=root.querySelector('.recipe-preparation-classification strong')?.textContent.trim()||'';
@@ -21,7 +21,7 @@ function cardFromPage(file,doc){
  var image=root.querySelector('.recipe-image-large')?.getAttribute('src')||'';
  var panels=[...root.querySelectorAll('.recipe-cols .recipe-panel')];
  var ingredients=(panels[0]?.innerText||panels[0]?.textContent||'').slice(0,5000);
- var allergenText=(root.textContent.match(/Allergens?\\s*[:：]\\s*([^\\n]+)/i)||[])[1]||'';
+ var allergenText=(root.textContent.match(/Allergens?\s*[:：]\s*([^\n]+)/i)||[])[1]||'';
  var category=/dessert/i.test(classification)?'desserts-baked':/appetizer|starter/i.test(classification)?'appetizers-starters':/soup|stew|broth/i.test(classification)?'soups-stews-broths':/salad|side/i.test(classification)?'salads-sides':/breakfast|bread/i.test(classification)?'breakfast-breads':/sauce|seasoning/i.test(classification)?'sauces-seasonings':/beverage|drink/i.test(classification)?'beverages':'entrees-mains';
  var card=el('article','recipe-card');card.dataset.category=category;card.dataset.worldRegion=world;card.dataset.classification=classification;card.dataset.difficulty=difficulty;card.dataset.ingredients=ingredients;card.dataset.allergens=allergenText;card.dataset.search=[title,english,country,region].join(' ');
  var heading=el('div','recipe-card-heading');heading.appendChild(el('div','recipe-card-brand','THE KITCHEN TABLE'));
@@ -38,7 +38,7 @@ async function discover(){
   var response=await fetch(api,{headers:{Accept:'application/vnd.github+json'}});
   if(!response.ok)throw Error('Published catalog listing unavailable');
   var files=await response.json();if(!Array.isArray(files))return;
-  var paths=files.filter(x=>x.type==='file'&&/^[a-z0-9-]+\\.html$/.test(x.name)&&!exclude.has(x.name)&&!/-guide\\.html$/.test(x.name));
+  var paths=files.filter(x=>x.type==='file'&&/^[a-z0-9-]+\.html$/.test(x.name)&&!exclude.has(x.name)&&!/-guide\.html$/.test(x.name));
   var existing=new Set([...grid.querySelectorAll('article.recipe-card h3 a')].map(a=>a.getAttribute('href')?.split('?')[0]));
   var pending=paths.filter(x=>!existing.has(x.name));
   for(var index=0;index<pending.length;index+=6){
