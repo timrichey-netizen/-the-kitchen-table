@@ -1,0 +1,9 @@
+(function(){'use strict';const cfg=window.KITCHEN_TABLE_SHOP;const grid=document.getElementById('shopGrid');if(!cfg||!grid)return;
+const symbols={Tools:'✦',Cookware:'◈',Pasta:'◎',Table:'◇',Pantry:'✳'};
+function paint(category){grid.replaceChildren();cfg.products.filter(item=>category==='All'||item.category===category).forEach(item=>{
+ const card=document.createElement('article');card.className='shop-card';const visual=document.createElement('div');visual.className='shop-card-visual';visual.setAttribute('aria-hidden','true');const mark=document.createElement('span');mark.className='shop-symbol';mark.textContent=symbols[item.category]||'◇';visual.append(mark);
+ const body=document.createElement('div');body.className='shop-card-body';const type=document.createElement('span');type.className='shop-card-category';type.textContent=item.category;const title=document.createElement('h2');title.textContent=item.name;const desc=document.createElement('p');desc.textContent=item.detail;const note=document.createElement('p');note.className='shop-note';note.textContent=item.note;const availability=document.createElement('span');availability.className='shop-availability';availability.textContent='Purchase links coming later';const button=document.createElement('button');button.type='button';button.className='shop-action';button.textContent='Not yet available';button.disabled=true;body.append(type,title,desc,note,availability,button);card.append(visual,body);grid.append(card);
+ });}
+document.querySelectorAll('[data-shop-filter]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-shop-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));paint(btn.dataset.shopFilter)}));
+const note=document.getElementById('affiliateDisclosure');if(note)note.textContent=cfg.affiliateDisclosure;paint('All');
+})();
