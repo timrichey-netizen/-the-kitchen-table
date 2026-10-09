@@ -24,7 +24,7 @@ function doPost(e){
  try{
   const user=verify(String(x.idToken||''));
   const action=String(x.action||'list');
-  if(!['list','add','remove','email-get','email-save'].includes(action))throw Error('Invalid action');
+  if(!['list','add','remove','email-get','email-save','newsletter-signup'].includes(action))throw Error('Invalid action');
   const recipe=String(x.recipe||'');
   if(['add','remove'].includes(action)&&!ALLOWED.includes(recipe))throw Error('Unpublished recipe');
   const lock=LockService.getScriptLock();lock.waitLock(15000);
@@ -39,6 +39,19 @@ function doPost(e){
    if(action==='add'&&!existing)fs.appendRow([user.id,recipe,now]);
    if(action==='remove'&&existing)fs.deleteRow(existing.index);
    favorites=data('Favorites').filter(r=>String(r[0])===user.id&&ALLOWED.includes(String(r[1]))).map(r=>String(r[1]));
+   if(action==='newsletter-signup'){
+     // Explicit affirmative opt-in only; never subscribe on ordinary registration.
+     const sheet=tab('EmailSubscriptions');
+     if(!sheet)throw Error('EmailSubscriptions tab not configured');
+     const rows=sheet.getDataRange().getValues();
+     const position=rows.findIndex((r,i)=>i>0&&String(r[0])===user.id);
+     const previous=position>=0?rows[position]:null;
+     // Preserve a previously configured category/frequency selection.
+     const values=[user.id,user.email,'active',previous?.[3]||'weekly',previous?.[4]||3,
+       previous?.[5]||'[]',previous?.[6]||'',now,previous?.[8]||''];
+     if(position>=0)sheet.getRange(position+1,1,1,values.length).setValues([values]);
+     else sheet.appendRow(values);
+   }
    if(action==='email-get'||action==='email-save'){
      const sheet=tab('EmailSubscriptions');
      if(!sheet)throw Error('EmailSubscriptions tab not configured');
