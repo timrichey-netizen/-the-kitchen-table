@@ -1,0 +1,34 @@
+name: Refresh public recipe search index
+on:
+  schedule:
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: recipe-search-index
+  cancel-in-progress: false
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Google Sheets read client
+        run: pip install 'google-auth>=2,<3' 'requests>=2,<3'
+      - name: Generate search index and sitemap
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          RECIPE_SHEET_ID: '1oEtKwzuGu0uo1UFdrZM81hWjz4aM02CCjx99n8psi5Y'
+        run: python tools/build-search-index.py
+      - name: Commit index changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add recipe-index.html sitemap.xml
+          if ! git diff --cached --quiet; then
+            git commit -m "Daily refresh of public recipe search index"
+            git push
+          fi
