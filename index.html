@@ -256,24 +256,36 @@
   .opening-hero .opening-hero-actions a{font-size:13px!important}
 }
 </style><style id="opening-hero-clean-title">
-/* Light left-side fade only; preserve color and detail in the rest of the photograph. */
+/* Crop past the legacy lettering baked into the source photo.
+   A faint localized fade preserves readability without obscuring the terrace. */
+.opening-hero .opening-hero-backdrop{
+  background-size:auto 145%!important;
+  background-position:right center!important;
+  transform:none!important;
+}
 .opening-hero .opening-hero-wash{
- background:linear-gradient(90deg,
-   rgba(250,245,236,.78) 0%,
-   rgba(250,245,236,.56) 20%,
-   rgba(250,245,236,.26) 37%,
-   rgba(250,245,236,.06) 52%,
-   rgba(250,245,236,0) 63%)!important;
+  background:linear-gradient(90deg,
+    rgba(250,245,236,.38) 0%,
+    rgba(250,245,236,.20) 26%,
+    rgba(250,245,236,.06) 46%,
+    rgba(250,245,236,0) 62%)!important;
 }
 .opening-hero .opening-hero-copy h1,
 .opening-hero .opening-hero-copy h1 em{
- font-variant-caps:small-caps!important;
- font-style:normal!important;
- color:#211d19!important;
+  color:#211d19!important;
+  font-variant-caps:small-caps!important;
+  font-style:normal!important;
 }
-@media(max-width:560px){
+@media(max-width:800px){
+ .opening-hero .opening-hero-backdrop{
+   background-size:auto 115%!important;
+   background-position:right center!important;
+ }
  .opening-hero .opening-hero-wash{
-  background:linear-gradient(90deg,rgba(250,245,236,.76),rgba(250,245,236,.34) 55%,transparent 100%)!important;
+   background:linear-gradient(90deg,
+     rgba(250,245,236,.45) 0%,
+     rgba(250,245,236,.27) 44%,
+     rgba(250,245,236,0) 100%)!important;
  }
 }
 </style><style id="allergen-filter-note-style">.allergen-filter-note{font:12px/1.5 Inter,Arial,sans-serif;color:#71655d;margin:10px 0 14px}</style></head>
