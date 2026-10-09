@@ -10,11 +10,6 @@ function render(){const values=read();document.querySelectorAll('[data-recipe-ra
  const status=widget.querySelector('.personal-rating-status');
  if(status)status.textContent=current?'Your rating: '+current+' of 5 stars':'Select a star to rate this recipe';
 });
- document.querySelectorAll('#recipeGrid .recipe-card').forEach(card=>{
- const page=id(card.querySelector('h3 a')?.href||'');const slot=card.querySelector('.personal-card-rating');if(!slot)return;
- const current=Number(values[page]||0);
- slot.textContent=current?'★ '+current+'/5 · Your rating':'☆ Not rated yet';
- });
 }
 function initPage(){
  const page=document.querySelector('.recipe-page.recipe-detail');if(!page)return;
@@ -28,8 +23,7 @@ function initPage(){
  const line=document.createElement('p');line.className='personal-rating-status';line.setAttribute('role','status');panel.append(heading,buttons,line);
  if(toolbar)toolbar.insertAdjacentElement('afterend',panel);else image.insertAdjacentElement('afterend',panel);
 }
-function initCards(){document.querySelectorAll('#recipeGrid .recipe-card').forEach(card=>{if(card.querySelector('.personal-card-rating'))return;const summary=document.createElement('span');summary.className='personal-card-rating';const body=card.querySelector('.recipe-card-body');if(body)body.prepend(summary);});}
-function init(){initPage();initCards();render()}
+function init(){initPage();document.querySelectorAll('#recipeGrid .personal-card-rating').forEach(node=>node.remove());render()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 window.addEventListener('storage',render);
 })();
