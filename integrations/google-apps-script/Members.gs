@@ -24,11 +24,11 @@ function doPost(e){
  try{
   const user=verify(String(x.idToken||''));
   const action=String(x.action||'list');
-  if(!['list','add','remove'].includes(action))throw Error('Invalid action');
+  if(!['list','add','remove','email-get','email-save'].includes(action))throw Error('Invalid action');
   const recipe=String(x.recipe||'');
-  if(action!=='list'&&!ALLOWED.includes(recipe))throw Error('Unpublished recipe');
+  if(['add','remove'].includes(action)&&!ALLOWED.includes(recipe))throw Error('Unpublished recipe');
   const lock=LockService.getScriptLock();lock.waitLock(15000);
-  let favorites=[];
+  let favorites=[],subscription=null;
   try{
    const ms=tab('Members'),members=data('Members'),found=members.findIndex(row=>String(row[0])===user.id),now=new Date().toISOString();
    if(found<0)ms.appendRow([user.id,user.email,user.name,now,now,'active']);
@@ -39,8 +39,26 @@ function doPost(e){
    if(action==='add'&&!existing)fs.appendRow([user.id,recipe,now]);
    if(action==='remove'&&existing)fs.deleteRow(existing.index);
    favorites=data('Favorites').filter(r=>String(r[0])===user.id&&ALLOWED.includes(String(r[1]))).map(r=>String(r[1]));
+   if(action==='email-get'||action==='email-save'){
+     const sheet=tab('EmailSubscriptions');
+     if(!sheet)throw Error('EmailSubscriptions tab not configured');
+     const rows=sheet.getDataRange().getValues();
+     const position=rows.findIndex((r,i)=>i>0&&String(r[0])===user.id);
+     if(action==='email-save'){
+       const allowedTypes=['Appetizers & Starters','Entrees & Mains','Soups, Stews & Broths','Salads & Sides','Breakfast & Baked Breads','Sauces, Gravies & Seasonings','Desserts (Baked & Confections)','Desserts (Chilled & Creamy)','Beverages','Preserved Foods & Accompaniments'];
+       if(recipe.length>3000)throw Error('Preference payload too large');
+       let p;try{p=JSON.parse(recipe)}catch(e){throw Error('Invalid preferences')}
+       if(typeof p.enabled!=='boolean'||!['daily','weekly','biweekly','monthly'].includes(p.frequency)||![1,2,3,5,10].includes(p.count)||!Array.isArray(p.categories)||p.categories.length>10||!p.categories.every(v=>allowedTypes.includes(v)))throw Error('Invalid subscription settings');
+       if(p.enabled&&!p.categories.length)throw Error('Choose at least one category');
+       const previous=position>=0?rows[position]:null;
+       const values=[user.id,user.email,p.enabled?'active':'paused',p.frequency,p.count,JSON.stringify([...new Set(p.categories)]),previous?.[6]||'',now,previous?.[8]||''];
+       if(position>=0)sheet.getRange(position+1,1,1,values.length).setValues([values]);else sheet.appendRow(values);
+     }
+     const current=sheet.getDataRange().getValues().slice(1).find(r=>String(r[0])===user.id);
+     subscription=current?{enabled:current[2]==='active',frequency:String(current[3]),count:Number(current[4]),categories:JSON.parse(String(current[5]||'[]'))}:{enabled:false,frequency:'weekly',count:3,categories:[]};
+   }
   }finally{lock.releaseLock()}
-  return html({ok:true,requestId,user:{name:user.name,email:user.email},favorites:[...new Set(favorites)]});
+  return html({ok:true,requestId,user:{name:user.name,email:user.email},favorites:[...new Set(favorites)],subscription});
  }catch(err){return html({ok:false,requestId,error:String(err.message||'Request failed')})}
 }
 function doGet(){return ContentService.createTextOutput('Member service is running. Authenticated POST required.')}
