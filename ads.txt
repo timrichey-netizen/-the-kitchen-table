@@ -1,0 +1,2 @@
+# Advertising is not enabled. After publisher approval, replace this placeholder
+# with the exact authorized-seller line supplied by Google AdSense.
