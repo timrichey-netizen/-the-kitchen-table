@@ -1,8 +1,8 @@
 (function(){'use strict';
 const key='kitchen-table-favorites-v1';
 const catalog=[
-{id:'neapolitan-lasagna.html',name:'Lasagna Napoletana',english:'Neapolitan Lasagna',place:'Italy · Campania',desc:'Traditional Neapolitan lasagna',image:''},
-{id:'vincisgrassi.html',name:'Vincisgrassi',english:'',place:'Italy · Marche',desc:'Traditional layered pasta from Marche',image:''},
+{id:'neapolitan-lasagna.html',name:'Lasagna Napoletana',english:'Neapolitan Lasagna',place:'Italy · Campania',desc:'Traditional Neapolitan lasagna',image:'https://drive.google.com/thumbnail?id=1pHGUhj8Cr7Yuih773ENAfMp8sX_a-4IP&sz=w1200'},
+{id:'vincisgrassi.html',name:'Vincisgrassi',english:'',place:'Italy · Marche',desc:'Traditional layered pasta from Marche',image:'https://drive.google.com/thumbnail?id=1NV6Bp4rvljFGfSeHQ-pWnOXuO3nk9hba&sz=w1200'},
 {id:'pasta-alla-norma.html',name:'Pasta alla Norma',english:'',place:'Italy · Sicilia',desc:'Tomato, eggplant, ricotta salata and basil',image:'https://drive.google.com/thumbnail?id=1nyaXVKS54iHgJMLFd9-022BO50t-fXmJ&sz=w1200'},
 {id:'pasta-with-bottarga.html',name:'Pasta con la Bottarga',english:'Pasta with Bottarga',place:'Italy · Sicilia',desc:'Pasta with cured tuna roe, olive oil and garlic',image:'https://drive.google.com/thumbnail?id=1ARuukNqXeHcAkWHqmheo9SQCR5udWTnO&sz=w1200'}
 ];
