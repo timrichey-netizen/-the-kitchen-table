@@ -5,5 +5,10 @@ function paint(category){grid.replaceChildren();cfg.products.filter(item=>catego
  const body=document.createElement('div');body.className='shop-card-body';const type=document.createElement('span');type.className='shop-card-category';type.textContent=item.category;const title=document.createElement('h2');title.textContent=item.name;const desc=document.createElement('p');desc.textContent=item.detail;const note=document.createElement('p');note.className='shop-note';note.textContent=item.note;const availability=document.createElement('span');availability.className='shop-availability';availability.textContent='Purchase links coming later';const button=document.createElement('button');button.type='button';button.className='shop-action';button.textContent='Not yet available';button.disabled=true;body.append(type,title,desc,note,availability,button);card.append(visual,body);grid.append(card);
  });}
 document.querySelectorAll('[data-shop-filter]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-shop-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));paint(btn.dataset.shopFilter)}));
-const note=document.getElementById('affiliateDisclosure');if(note)note.textContent=cfg.affiliateDisclosure;paint('All');
+const note=document.getElementById('affiliateDisclosure');if(note)note.textContent=cfg.affiliateDisclosure;
+const requested=new URLSearchParams(window.location.search).get('category');
+const categories=new Set(['All','Tools','Cookware','Pasta','Table','Pantry']);
+const initial=categories.has(requested)?requested:'All';
+document.querySelectorAll('[data-shop-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.shopFilter===initial)));
+paint(initial);
 })();
