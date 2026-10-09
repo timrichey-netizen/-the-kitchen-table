@@ -1,0 +1,32 @@
+name: Browser accessibility tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  browser-accessibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser test dependencies
+        run: npm install --no-save --no-package-lock playwright axe-core
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start local static site
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/kitchen-table-server.log 2>&1 &
+          sleep 3
+      - name: Test keyboard, navigation, filters, favorites, account and live regions
+        run: node tools/test-accessibility-browser.mjs
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-browser-report
+          path: test-results/accessibility-browser.json
+          if-no-files-found: ignore
