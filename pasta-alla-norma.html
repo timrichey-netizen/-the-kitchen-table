@@ -130,4 +130,13 @@ async function copyCurrentRecipeLink(button){
  const status=document.getElementById('recipeShareStatus');if(status)status.textContent='Recipe link copied.';
  if(button){button.textContent='Copied!';setTimeout(()=>button.textContent='Copy Link',1800);}
 }
-</script><script src="account-config.js"></script><script src="account.js"></script><script src="favorites.js"></script><script src="personal-ratings.js"></script><script src="reviews-config.js"></script><script src="community-reviews.js"></script><script src="ads-config.js"></script><script src="ads.js"></script></body></html>
+</script><script src="account-config.js"></script><script src="account.js"></script><script src="favorites.js"></script><script src="personal-ratings.js"></script><script src="reviews-config.js"></script><script src="community-reviews.js"></script><script src="ads-config.js"></script><script src="ads.js"></script><script id="favorites-print-entry">
+(function(){
+ if(new URLSearchParams(location.search).get('print')!=='1')return;
+ window.addEventListener('load',function(){
+  var imgs=Array.from(document.querySelectorAll('.recipe-page img'));
+  Promise.all(imgs.map(function(img){if(img.complete)return Promise.resolve();return new Promise(function(resolve){img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true})})}))
+  .then(function(){setTimeout(function(){window.print()},250)});
+ },{once:true});
+})();
+</script></body></html>
