@@ -1,0 +1,1 @@
+window.KITCHEN_TABLE_COMMERCE=Object.freeze({affiliateEnabled:false,newsletterEnabled:false,newsletterEndpoint:'',newsletterProvider:'',affiliateDisclosure:'Some product links may earn us a commission at no additional cost to you. Recommendations are editorially selected.'});
