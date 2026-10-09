@@ -1,0 +1,40 @@
+/* Progressive accessibility improvements; all content stays public. */
+(function(){
+'use strict';
+function init(){
+ var nav=document.querySelector('.site-header .nav');
+ var toggle=document.querySelector('.site-header .menu-toggle');
+ var main=document.querySelector('main');
+ if(main){
+  if(!main.id)main.id='main-content';
+  if(!document.querySelector('.skip-link')){
+   var skip=document.createElement('a');skip.className='skip-link';skip.href='#'+main.id;skip.textContent='Skip to main content';
+   document.body.insertBefore(skip,document.body.firstChild);
+  }
+  main.setAttribute('tabindex','-1');
+ }
+ if(nav&&toggle){
+  if(!nav.id)nav.id='site-primary-nav';
+  toggle.setAttribute('aria-controls',nav.id);
+  toggle.setAttribute('aria-label','Open navigation menu');
+  function close(){
+   nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');
+   toggle.setAttribute('aria-label','Open navigation menu');
+  }
+  function update(){toggle.setAttribute('aria-label',nav.classList.contains('open')?'Close navigation menu':'Open navigation menu')}
+  toggle.addEventListener('click',update);
+  nav.addEventListener('click',function(e){if(e.target.closest('a[href]')){close()}});
+  window.addEventListener('hashchange',close);
+  document.addEventListener('pointerdown',function(e){if(nav.classList.contains('open')&&!nav.contains(e.target)&&!toggle.contains(e.target))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){close();toggle.focus()}});
+  window.addEventListener('resize',function(){if(window.innerWidth>1050)close()});
+  update();
+ }
+ document.querySelectorAll('img:not([alt])').forEach(function(img){img.alt=''});
+ document.querySelectorAll('input[type="search"]').forEach(function(input){
+  if(!input.getAttribute('aria-label')&&!input.labels?.length)input.setAttribute('aria-label','Search recipes');
+ });
+ document.querySelectorAll('[data-ad-placement]').forEach(function(el){if(el.hidden)el.setAttribute('aria-hidden','true')});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
