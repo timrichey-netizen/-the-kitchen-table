@@ -2,13 +2,13 @@
   'use strict';
   var config=window.KITCHEN_TABLE_ADS;
   if(!config || config.enabled!==true || config.consentReady!==true)return;
-  if(!/^ca-pub-\\d{16}$/.test(config.publisherId))return;
+  if(!/^ca-pub-\d{16}$/.test(config.publisherId))return;
   var slots=document.querySelectorAll('[data-ad-placement]');
   var valid=[];
   slots.forEach(function(host){
     var type=host.dataset.adPlacement;
     var slot=config.slots && config.slots[type];
-    if(!/^\\d+$/.test(String(slot||'')))return;
+    if(!/^\d+$/.test(String(slot||'')))return;
     var label=document.createElement('div');label.className='ad-label';label.textContent='Advertisement';
     var ins=document.createElement('ins');ins.className='adsbygoogle';ins.style.display='block';
     ins.dataset.adClient=config.publisherId;ins.dataset.adSlot=slot;
