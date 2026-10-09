@@ -17,7 +17,7 @@ function verify(token){
 function html(obj){
  const encoded=JSON.stringify(obj).replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/&/g,'\\u0026');
  // Response is sent to the calling page; the caller checks requestId and iframe source.
- return HtmlService.createHtmlOutput('<!doctype html><meta charset="utf-8"><script>parent.postMessage('+encoded+', "*")<\\/script>');
+ return HtmlService.createHtmlOutput('<!doctype html><meta charset="utf-8"><script>parent.postMessage('+encoded+', "*")</scr'+'ipt>');
 }
 function doPost(e){
  const x=e.parameter||{},requestId=String(x.requestId||'').slice(0,100);
