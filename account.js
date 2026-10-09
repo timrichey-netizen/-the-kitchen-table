@@ -11,7 +11,7 @@ function status(message){const el=document.getElementById('accountStatus');if(el
 function notify(){document.querySelectorAll('[data-account-link]').forEach(a=>a.textContent=user?'My Account':'Sign In');const guest=document.getElementById('accountGuest'),member=document.getElementById('accountMember');if(guest)guest.hidden=!!user;if(member)member.hidden=!user;const email=document.getElementById('accountEmail');if(email)email.textContent=user?.email||'';document.dispatchEvent(new CustomEvent('kitchen-table-account-change',{detail:{signedIn:!!user}}))}
 function request(action,recipe){
  if(!enabled||!credential)return Promise.reject(new Error('Sign in with Google first'));
- if(!['list','add','remove','email-get','email-save'].includes(action))return Promise.reject(new Error('Invalid action'));
+ if(!['list','add','remove','email-get','email-save','newsletter-signup'].includes(action))return Promise.reject(new Error('Invalid action'));
  const id='kt'+Date.now()+Math.random().toString(36).slice(2);
  return new Promise((resolve,reject)=>{
   const iframe=document.createElement('iframe');iframe.hidden=true;iframe.name=id;iframe.title='Private account synchronization';document.body.appendChild(iframe);
@@ -46,6 +46,13 @@ async function signIn(response){
    user=result.user;favorites=result.favorites;
    status('Signed in. Your favorites are synchronized with your account.');
    notify();
+   const optIn=document.getElementById('accountNewsletterOptIn');
+   if(optIn?.checked){
+     try{
+       await request('newsletter-signup');
+       status('Signed in. Your favorites are synchronized and your newsletter signup was saved.');
+     }catch(err){status('Signed in. Favorites are synchronized, but newsletter signup was not saved: '+err.message)}
+   }
  }catch(err){credential='';user=null;favorites=null;try{sessionStorage.removeItem(SESSION_KEY)}catch(e){}status('Sign-in could not be completed: '+err.message);notify()}
 }
 function initGoogle(){
