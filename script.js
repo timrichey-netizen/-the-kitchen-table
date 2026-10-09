@@ -525,7 +525,7 @@ if (!window.__ktRegionalMetadataObserver) {
   window.__ktRegionalMetadataObserver.observe(document.body,{childList:true,subtree:true});
 }
 
-const cards = [...document.querySelectorAll('.recipe-card')];
+let cards = [...document.querySelectorAll('.recipe-card')];
 const search = document.getElementById('recipeSearch');
 const cuisineFiltersWrap = document.getElementById('cuisineFilters');
 const europeanSubcuisineGroup = document.getElementById('europeanSubcuisineGroup');
@@ -1273,6 +1273,20 @@ function shuffleMainRecipesOnLoad() {
   [...main, ...other].forEach(item => grid.appendChild(item.card));
 }
 
+window.KitchenTableRefreshLibrary=function(){
+ cards=[...document.querySelectorAll('#recipeGrid .recipe-card')];
+ [[browserWorldRegion,'worldRegion'],[browserCountry,'country'],[browserRegion,'region'],[browserClassification,'classification'],[browserDifficulty,'difficulty']].forEach(([select,type])=>{
+  if(!select)return;
+  const chosen=select.value;
+  [...select.options].slice(1).forEach(option=>option.remove());
+  [...new Set(cards.map(card=>browserCardValue(card,type)).filter(Boolean))].sort((a,b)=>a.localeCompare(b)).forEach(value=>{
+   const option=document.createElement('option');option.value=value;option.textContent=value;select.appendChild(option);
+  });
+  select.value=[...select.options].some(o=>o.value===chosen)?chosen:'all';
+ });
+ updateRecipes();
+ document.dispatchEvent(new CustomEvent('kitchen-table-library-updated'));
+};
 function updateRecipes() {
   const q = normalizeSearchText(search?.value || '');
   const terms = q ? q.split(/\s+/).filter(Boolean) : [];
