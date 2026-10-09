@@ -44,7 +44,6 @@ function init(){document.querySelectorAll('#recipeGrid .recipe-card').forEach(c=
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 window.addEventListener('storage',refresh);
 document.addEventListener('kitchen-table-account-change',loadCloud);
-})();
 // Expand the published-ID set whenever a new public recipe page is discovered.
 document.addEventListener('kitchen-table-library-updated',function(){
  document.querySelectorAll('#recipeGrid .recipe-card').forEach(function(card){
@@ -55,3 +54,5 @@ document.addEventListener('kitchen-table-library-updated',function(){
  });
  refresh();
 });
+
+})();
