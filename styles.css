@@ -739,3 +739,12 @@ body.favorites-view #recipeGrid .recipe-card:not([hidden]):not(.favorite-filter-
 .recipe-line .recipe-cross-reference{display:inline-block;margin-left:6px;font:600 12px/1.5 Inter,Arial,sans-serif;color:#a74732!important;text-decoration:underline;text-underline-offset:3px}
 .recipe-line .recipe-cross-reference:hover,.recipe-line .recipe-cross-reference:focus-visible{color:#732d20!important}
 @media print{.recipe-line .recipe-cross-reference{display:none!important}}
+
+/* Public recipe collections: shared links require no authentication. */
+.favorite-collection-tools{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:22px 0 18px;padding:16px;border:1px solid #dfcfc0;background:#fffdf9}
+.favorite-collection-heading{font:400 21px 'DM Serif Display',Georgia,serif;font-variant-caps:small-caps;color:#211d19}
+.favorite-collection-description{font:13px/1.5 Inter,Arial,sans-serif;color:#726357;flex:1 1 210px}
+.favorite-collection-button{padding:10px 14px;background:#fffaf4;border:1px solid #cfb6a2;color:#342921;cursor:pointer;font:400 13px Inter,Arial,sans-serif}
+.favorite-collection-status{font:12px Inter,Arial,sans-serif;color:#6a5440}
+#recipeGrid .recipe-card.shared-collection-hidden{display:none!important}
+@media print{.favorite-collection-tools{display:none!important}}
