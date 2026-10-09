@@ -3,6 +3,7 @@
 const cfg=window.KITCHEN_TABLE_ACCOUNT_CONFIG||{};
 const enabled=cfg.enabled===true&&/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(cfg.appsScriptUrl||'')&&/\.apps\.googleusercontent\.com$/.test(cfg.googleClientId||'');
 let credential='',user=null,favorites=null;
+const SESSION_KEY='kt-google-id-token-session';
 const pending=new Map();
 const api={ready:enabled,get user(){return user},get favorites(){return favorites?favorites.slice():null},request};
 window.KitchenTableAccount=api;
@@ -39,12 +40,13 @@ window.addEventListener('message',function(event){
 async function signIn(response){
  credential=response?.credential||'';
  if(!credential)return;
+ try{sessionStorage.setItem(SESSION_KEY,credential)}catch(e){}
  try{
    const result=await request('list');
    user=result.user;favorites=result.favorites;
    status('Signed in. Your favorites are synchronized with your account.');
    notify();
- }catch(err){credential='';user=null;favorites=null;status('Sign-in could not be completed: '+err.message);notify()}
+ }catch(err){credential='';user=null;favorites=null;try{sessionStorage.removeItem(SESSION_KEY)}catch(e){}status('Sign-in could not be completed: '+err.message);notify()}
 }
 function initGoogle(){
  if(!window.google?.accounts?.id)return;
@@ -55,10 +57,12 @@ function init(){
  notify();
  if(!enabled){status('Member sign-in is not activated yet. All recipes and local favorites remain available without an account.');return}
  status('Continue with Google to register or sign in and sync favorites.');
+ try{credential=sessionStorage.getItem(SESSION_KEY)||''}catch(e){}
+ if(credential){request('list').then(result=>{user=result.user;favorites=result.favorites;status('Signed in. Favorites are available across this browsing session.');notify()}).catch(()=>{credential='';try{sessionStorage.removeItem(SESSION_KEY)}catch(e){}notify()})}
  if(window.google?.accounts?.id)initGoogle();
  else{const script=document.createElement('script');script.src='https://accounts.google.com/gsi/client';script.async=true;script.onload=initGoogle;script.onerror=()=>status('Google sign-in is temporarily unavailable');document.head.appendChild(script)}
  const signOut=document.getElementById('accountSignOut');
- signOut?.addEventListener('click',()=>{credential='';user=null;favorites=null;window.google?.accounts?.id?.disableAutoSelect();status('Signed out. Local recipe access remains unrestricted.');notify()});
+ signOut?.addEventListener('click',()=>{credential='';user=null;favorites=null;try{sessionStorage.removeItem(SESSION_KEY)}catch(e){}window.google?.accounts?.id?.disableAutoSelect();status('Signed out. Local recipe access remains unrestricted.');notify()});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
