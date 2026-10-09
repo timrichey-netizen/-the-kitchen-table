@@ -734,3 +734,8 @@ body.favorites-view #recipeGrid .recipe-card:not([hidden]):not(.favorite-filter-
  font:400 13px/1.2 Inter,Arial,sans-serif;cursor:pointer;min-height:39px}
 .favorite-card-action:hover,.favorite-card-action:focus-visible{border-color:#a74732;color:#a74732!important}
 @media print{.favorite-card-actions{display:none!important}}
+
+/* Ingredient cross-references to published recipes. */
+.recipe-line .recipe-cross-reference{display:inline-block;margin-left:6px;font:600 12px/1.5 Inter,Arial,sans-serif;color:#a74732!important;text-decoration:underline;text-underline-offset:3px}
+.recipe-line .recipe-cross-reference:hover,.recipe-line .recipe-cross-reference:focus-visible{color:#732d20!important}
+@media print{.recipe-line .recipe-cross-reference{display:none!important}}
