@@ -31,11 +31,6 @@ function display(data,id){
      if(!comments.children.length)comments.textContent='No approved comments yet.';
    }
  }
- document.querySelectorAll('#recipeGrid .recipe-card').forEach(card=>{
-  if(slug(card.querySelector('h3 a')?.href)!==id)return;
-  let label=card.querySelector('.community-card-rating');if(!label){label=document.createElement('div');label.className='community-card-rating';card.querySelector('.recipe-card-body')?.prepend(label)}
-  if(label)label.textContent=summaryText(data.rating);
- });
 }
 function init(){
  const page=document.querySelector('.recipe-page.recipe-detail');
@@ -77,7 +72,7 @@ function init(){
   const anchor=page.querySelector('.recipe-cols');if(anchor)anchor.insertAdjacentElement('afterend',box);
   load(id,data=>display(data,id));
  }
- document.querySelectorAll('#recipeGrid .recipe-card').forEach(card=>{const id=slug(card.querySelector('h3 a')?.href);if(id)load(id,data=>display(data,id))});
+ // Recipe cards use the single aggregated rating from /api/recipe-feedback.
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
