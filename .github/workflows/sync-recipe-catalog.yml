@@ -1,0 +1,36 @@
+name: Sync public recipe catalog
+on:
+  schedule:
+    - cron: '23 */12 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: recipe-catalog-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only Google Sheets dependencies
+        run: pip install 'google-auth>=2,<3' 'requests>=2,<3'
+      - name: Import public catalog
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          RECIPE_SHEET_ID: '1oEtKwzuGu0uo1UFdrZM81hWjz4aM02CCjx99n8psi5Y'
+        run: python tools/sync-recipe-catalog.py
+      - name: Commit changes only when spreadsheet data differs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/recipe-catalog.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Sync public recipe catalog from Google Sheets"
+            git push
+          fi
