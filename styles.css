@@ -723,3 +723,14 @@ a.guide-back-floating{
  body .opening-hero,body .opening-hero-backdrop,body .opening-hero-wash,
  body .daily-banner,body .daily-banner-content{background-color:transparent}
 }
+
+/* Print and share tools appear with saved cards in My Favorites view. */
+.favorite-card-actions{display:none}
+body.favorites-view #recipeGrid .recipe-card:not([hidden]):not(.favorite-filter-hidden) .favorite-card-actions{
+ display:flex!important;gap:9px;align-items:center;flex-wrap:wrap;margin:10px 17px 18px
+}
+.favorite-card-action{display:inline-flex;justify-content:center;align-items:center;padding:9px 15px;
+ background:#fffdf9;border:1px solid #cdb9a9;color:#352a23!important;text-decoration:none!important;
+ font:400 13px/1.2 Inter,Arial,sans-serif;cursor:pointer;min-height:39px}
+.favorite-card-action:hover,.favorite-card-action:focus-visible{border-color:#a74732;color:#a74732!important}
+@media print{.favorite-card-actions{display:none!important}}
