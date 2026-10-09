@@ -47,7 +47,7 @@ function render(){
  if(!loggedIn()){host.textContent='Sign in to use optional member recommendations.';return}
  if(!read().consent){host.textContent='Enable activity-based recommendations above to see suggestions.';return}
  const suggestions=recommend();if(!suggestions.length){host.textContent='You have seen all available recommendations recently. Check back as new recipes are added.';return}
- suggestions.slice(0,3).forEach(s=>{const p=document.createElement('p');const link=document.createElement('a');link.href=s.id;link.textContent=s.title;p.append(link);host.append(p)});
+ suggestions.slice(0,3).forEach(s=>{record('recommended',{recipe:s.id});const p=document.createElement('p');const link=document.createElement('a');link.href=s.id;link.textContent=s.title;p.append(link);host.append(p)});
 }
 document.addEventListener('click',e=>{
  const link=e.target.closest('a[href$=".html"]');
@@ -61,6 +61,9 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('change',e=>{if(e.target.matches('#browserWorldRegion,#browserCountry,#browserRegion,#browserClassification,#browserDifficulty,#browserAllergen'))record('filter',{filter:e.target.id+':'+e.target.value})});
 document.addEventListener('submit',e=>{if(e.target.matches('form[role="search"]'))record('search')});
+let searchTouched=false;
+document.addEventListener('input',e=>{if(e.target.id==='recipeSearch'&&!searchTouched&&e.target.value.trim()){searchTouched=true;record('search')}});
+document.addEventListener('change',e=>{if(e.target.id==='recipeSearch')searchTouched=false});
 window.addEventListener('beforeprint',()=>record('print'));
 document.addEventListener('kitchen-table-account-change',render);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',widget);else widget();
