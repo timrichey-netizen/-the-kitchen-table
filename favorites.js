@@ -3,9 +3,19 @@
 const KEY='kitchen-table-favorites-v1';
 let cloudFavorites=null;
 const allowedIds=new Set(['neapolitan-lasagna.html','vincisgrassi.html','pasta-alla-norma.html','pasta-with-bottarga.html']);
-function backend(){const a=window.KitchenTableAccount;return a&&a.ready&&a.user&&a.client()?a:null}
-async function loadCloud(){const a=backend();if(!a){cloudFavorites=null;refresh();return}const {data,error}=await a.client().from('user_favorites').select('recipe_id').eq('user_id',a.user.id);if(error){console.warn('Favorites sync unavailable',error.message);cloudFavorites=null;return}cloudFavorites=data.map(x=>x.recipe_id).filter(id=>allowedIds.has(id));refresh()}
-async function persistCloud(id,on){const a=backend();if(!a)return;const q=a.client().from('user_favorites');const {error}=on?await q.upsert({user_id:a.user.id,recipe_id:id}):await q.delete().eq('user_id',a.user.id).eq('recipe_id',id);if(error){console.warn('Favorites could not sync',error.message);await loadCloud()}}
+function backend(){const a=window.KitchenTableAccount;return a&&a.ready&&a.user?a:null}
+async function loadCloud(){
+ const a=backend();
+ if(!a){cloudFavorites=null;refresh();return}
+ if(Array.isArray(a.favorites)){cloudFavorites=a.favorites.filter(id=>allowedIds.has(id));refresh();return}
+ try{const response=await a.request('list');cloudFavorites=response.favorites.filter(id=>allowedIds.has(id));refresh()}
+ catch(err){console.warn('Favorites sync unavailable:',err.message);cloudFavorites=null;refresh()}
+}
+async function persistCloud(id,on){
+ const a=backend();if(!a)return;
+ try{const result=await a.request(on?'add':'remove',id);cloudFavorites=result.favorites.filter(x=>allowedIds.has(x));refresh()}
+ catch(err){console.warn('Favorites could not sync:',err.message);await loadCloud()}
+}
 
 function get(){if(backend()&&cloudFavorites!==null)return cloudFavorites.slice();if(backend())return [];try{const v=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(v)?v.filter(x=>allowedIds.has(x)):[]}catch(e){return[]}}
 function save(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
