@@ -2,7 +2,7 @@
 
 Google Sheet: https://docs.google.com/spreadsheets/d/1iVB86SYtzu6jTIK0OJx2o3vwyypNkCjSR5-D8KLF5Ow/edit
 
-The Sheet has four tabs: Members, Favorites, Preferences and Activity Log.
+The member sheet should include Members, Favorites, Preferences, Activity Log, and **EmailSubscriptions**. If EmailSubscriptions is missing, create it with columns: Member ID, Email, Status, Frequency, Recipe Count, Categories JSON, Last Sent, Updated At, Reserved.
 Never share this member spreadsheet publicly: it contains account email addresses.
 
 ## Deploy (owner must do this once)
@@ -25,3 +25,10 @@ Never share this member spreadsheet publicly: it contains account email addresse
 
 ## Security and operations
 The published Apps Script deployment is publicly addressable but rejects unauthenticated requests after verifying ID token audience/issuer/email verification with Google. Keep Sheets private. Rate limits, account-deletion workflow, privacy contact and full policy disclosures should be added before inviting public registrations. Apps Script has quotas and is best suited to modest traffic.
+
+## Newsletter opt-in during registration
+- The account page displays an **unchecked** optional newsletter subscription checkbox before the Google sign-in button.
+- After a verified successful sign-in, the checkbox triggers the `newsletter-signup` action only when expressly checked. Leaving it unchecked does not modify newsletter preferences.
+- The Apps Script records this preference under the verified member ID in the private `EmailSubscriptions` sheet, without creating duplicates.
+- **Redeploy the updated Members.gs** and configure `EmailSubscriptions` for this feature to work. If signup fails, the account remains signed in and the UI reports that the newsletter opt-in was not saved.
+- Newsletter *delivery*, unsubscribe workflow, confirmation/consent compliance, and final privacy policy text must be completed before sending campaigns. Recording an opt-in is not itself a mail-delivery system.
