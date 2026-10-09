@@ -22,5 +22,15 @@ const payload=JSON.stringify({enabled:consent,frequency:frequency.value,count:Nu
 status.textContent='Saving preferences…';
 try{await window.KitchenTableAccount.request('email-save',payload);status.textContent=consent?'Preferences saved. Recipe emails will begin after the email service is activated.':'Email subscription disabled.'}catch(e){status.textContent='Could not save preferences: '+e.message}
 });
+section.querySelector('#unsubscribeAll')?.addEventListener('click',async()=>{
+  if(!window.KitchenTableAccount?.user){status.textContent='Sign in to change account subscriptions.';return}
+  status.textContent='Turning off all messages…';
+  const payload=JSON.stringify({enabled:false,frequency:frequency.value,count:Number(amount.value),categories:[]});
+  try{
+    await window.KitchenTableAccount.request('email-save',payload);
+    section.querySelector('[name="emailOptIn"]').checked=false;
+    status.textContent='Unsubscribed from recipe emails. No push notifications are currently sent by this website.';
+  }catch(e){status.textContent='Unsubscribe could not be confirmed: '+e.message}
+});
 document.addEventListener('kitchen-table-account-change',updateAccess);updateAccess();
 })();
