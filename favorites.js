@@ -45,3 +45,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 window.addEventListener('storage',refresh);
 document.addEventListener('kitchen-table-account-change',loadCloud);
 })();
+// Expand the published-ID set whenever a new public recipe page is discovered.
+document.addEventListener('kitchen-table-library-updated',function(){
+ document.querySelectorAll('#recipeGrid .recipe-card').forEach(function(card){
+  const link=card.querySelector('h3 a[href]');if(!link)return;
+  const id=slug(link.href);allowedIds.add(id);
+  if(!card.querySelector('.favorite-toggle'))card.appendChild(make(id));
+  addFavoriteActions(card);
+ });
+ refresh();
+});
