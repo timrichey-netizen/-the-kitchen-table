@@ -204,9 +204,19 @@ if (year) year.textContent = new Date().getFullYear();
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
 if (menuButton && nav) {
+  function closeMobileMenu() {
+    nav.classList.remove('open');
+    menuButton.setAttribute('aria-expanded', 'false');
+  }
   menuButton.addEventListener('click', () => {
     const isOpen = nav.classList.toggle('open');
     menuButton.setAttribute('aria-expanded', String(isOpen));
+  });
+  nav.addEventListener('click', event => {
+    if (event.target.closest('a[href]')) closeMobileMenu();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMobileMenu();
   });
 }
 
