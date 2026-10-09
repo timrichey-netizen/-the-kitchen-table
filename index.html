@@ -288,16 +288,53 @@
      rgba(250,245,236,0) 100%)!important;
  }
 }
-</style><style id="allergen-filter-note-style">.allergen-filter-note{font:12px/1.5 Inter,Arial,sans-serif;color:#71655d;margin:10px 0 14px}</style><link rel="stylesheet" href="ads.css"><link rel="stylesheet" href="accessibility.css"><link rel="stylesheet" href="commerce.css"><link rel="stylesheet" href="favorites-workspace.css"><style id="imported-recipe-catalog-style">.imported-recipes{padding:40px 0 15px}.imported-recipes>h2{font-size:clamp(26px,2.6vw,38px)!important;margin:0 0 10px!important}.imported-status{font-size:14px;color:#776a5f;margin:0 0 22px}.imported-recipe-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.imported-recipe-card{background:#fffdf9;border:1px solid #e3d5c7;padding:22px;min-height:200px}.imported-recipe-card h3{font-size:24px!important;margin:9px 0!important}.imported-recipe-card h3 a{color:#211d19;text-decoration:none}.imported-recipe-card h3 a:hover{text-decoration:underline}.imported-recipe-card p{margin:7px 0}.imported-recipe-card .eyebrow{font-size:10px}.imported-meta{font-size:12px;color:#75685f}@media(max-width:850px){.imported-recipe-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:550px){.imported-recipe-grid{grid-template-columns:1fr}}</style><style id="all-recipes-browse-style">.all-recipes-browse{margin:24px 0;text-align:center}.all-recipes-browse a{display:inline-block;border:1px solid #ab4a35;padding:15px 24px;background:#ab4a35;color:#fff;text-decoration:none;font:500 14px Inter,Arial,sans-serif;letter-spacing:.06em;font-variant:small-caps}</style></head>
+</style><style id="allergen-filter-note-style">.allergen-filter-note{font:12px/1.5 Inter,Arial,sans-serif;color:#71655d;margin:10px 0 14px}</style><link rel="stylesheet" href="ads.css"><link rel="stylesheet" href="accessibility.css"><link rel="stylesheet" href="commerce.css"><link rel="stylesheet" href="favorites-workspace.css"><style id="imported-recipe-catalog-style">.imported-recipes{padding:40px 0 15px}.imported-recipes>h2{font-size:clamp(26px,2.6vw,38px)!important;margin:0 0 10px!important}.imported-status{font-size:14px;color:#776a5f;margin:0 0 22px}.imported-recipe-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.imported-recipe-card{background:#fffdf9;border:1px solid #e3d5c7;padding:22px;min-height:200px}.imported-recipe-card h3{font-size:24px!important;margin:9px 0!important}.imported-recipe-card h3 a{color:#211d19;text-decoration:none}.imported-recipe-card h3 a:hover{text-decoration:underline}.imported-recipe-card p{margin:7px 0}.imported-recipe-card .eyebrow{font-size:10px}.imported-meta{font-size:12px;color:#75685f}@media(max-width:850px){.imported-recipe-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:550px){.imported-recipe-grid{grid-template-columns:1fr}}</style><style id="all-recipes-browse-style">.all-recipes-browse{margin:24px 0;text-align:center}.all-recipes-browse a{display:inline-block;border:1px solid #ab4a35;padding:15px 24px;background:#ab4a35;color:#fff;text-decoration:none;font:500 14px Inter,Arial,sans-serif;letter-spacing:.06em;font-variant:small-caps}</style><style id="editorial-header-navigation">
+/* Six-item editorial navigation; retains all original destinations. */
+.site-header.editorial-header .nav-wrap{width:min(1660px,calc(100% - 52px));min-height:82px;display:flex;gap:clamp(18px,2vw,36px);align-items:center}
+.site-header.editorial-header .brand{flex:0 0 auto;font:400 clamp(23px,2vw,35px)/1.1 'DM Serif Display',Georgia,serif;white-space:nowrap}
+.site-header.editorial-header .editorial-nav{flex:1 1 auto;display:flex;justify-content:center;align-items:center;gap:clamp(13px,1.65vw,30px);min-width:0}
+.site-header.editorial-header .nav-group{position:relative;display:flex;align-items:center;flex:0 0 auto;gap:1px}
+.site-header.editorial-header .nav-main{display:block;white-space:nowrap;font:700 clamp(11px,.89vw,14px)/1.2 Inter,Arial,sans-serif;letter-spacing:.065em;text-transform:uppercase;text-decoration:none;color:#342a23;padding:18px 0}
+.site-header.editorial-header .nav-main:hover,.site-header.editorial-header .nav-main:focus-visible{color:#a54430}
+.site-header.editorial-header .nav-expand{cursor:pointer;flex:0 0 auto;border:0;background:transparent;padding:8px 4px;color:#74675b;font-size:17px;line-height:1}
+.site-header.editorial-header .nav-submenu{display:none;position:absolute;top:100%;left:-16px;min-width:205px;z-index:30;padding:9px;background:#fffaf4;border:1px solid #e5d7c9;box-shadow:0 12px 28px rgba(59,39,27,.14);border-radius:8px}
+.site-header.editorial-header .nav-submenu a{display:block;text-align:left;white-space:nowrap;text-transform:none;font:600 13px/1.4 Inter,Arial,sans-serif;padding:11px 12px;color:#342a23;text-decoration:none}
+.site-header.editorial-header .nav-submenu a:hover,.site-header.editorial-header .nav-submenu a:focus-visible{background:#f4e8d9}
+.site-header.editorial-header .nav-group:hover>.nav-submenu,.site-header.editorial-header .nav-group:focus-within>.nav-submenu,.site-header.editorial-header .nav-group.expanded>.nav-submenu{display:block}
+.site-header.editorial-header .header-actions{display:flex;align-items:center;gap:14px;flex:0 0 auto}
+.site-header.editorial-header .header-action{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;text-decoration:none;color:#342a23;font:700 12px/1 Inter,Arial,sans-serif;min-height:36px}
+.site-header.editorial-header [data-favorites-nav]{font-size:28px;font-weight:400}
+.site-header.editorial-header .language-switcher{margin-left:0;flex:0 0 auto}
+@media(max-width:1150px){
+.site-header.editorial-header .nav-wrap{width:calc(100% - 32px);min-height:68px;gap:14px}
+.site-header.editorial-header .menu-toggle{display:flex!important;order:3;align-items:center;justify-content:center;flex:0 0 40px}
+.site-header.editorial-header .header-actions{order:1;margin-left:auto;gap:10px}
+.site-header.editorial-header .language-switcher{order:2}
+.site-header.editorial-header .editorial-nav{display:none;position:absolute;top:100%;left:0;right:0;max-height:calc(100svh - 68px);overflow-y:auto;flex-direction:column;align-items:stretch;gap:0;padding:10px 24px 22px;background:#fffaf4;border-bottom:1px solid #e5d7c9;box-shadow:0 12px 20px rgba(59,39,27,.12)}
+.site-header.editorial-header .editorial-nav.open{display:flex}
+.site-header.editorial-header .nav-group{display:flex;flex-wrap:wrap;justify-content:space-between;border-bottom:1px solid #eee2d8}
+.site-header.editorial-header .nav-main{flex:1;font-size:14px;padding:14px 5px;border:0;text-align:left}
+.site-header.editorial-header .nav-expand{min-width:40px;min-height:44px}
+.site-header.editorial-header .nav-submenu{display:none!important;position:static;flex-basis:100%;min-width:0;padding:0 0 10px 12px;border:0;box-shadow:none;background:transparent}
+.site-header.editorial-header .nav-group.expanded>.nav-submenu{display:block!important}
+.site-header.editorial-header .nav-submenu a{padding:10px 8px;white-space:normal}
+}
+@media(max-width:550px){.site-header.editorial-header .brand{font-size:21px}.site-header.editorial-header .account-action{font-size:10px}.site-header.editorial-header .header-actions{gap:7px}.site-header.editorial-header .nav-wrap{gap:8px}}
+</style></head>
 <body>
-  <header class="site-header">
+  <header class="site-header editorial-header">
     <div class="container nav-wrap">
       <a class="brand" href="#top">The Kitchen Table</a>
       <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="all-recipes.html">Recipes</a><a href="favorites.html" id="myFavoritesNav" data-favorites-nav>My Favorites</a><a href="my-meal.html">My Meal <span class="my-meal-nav-count" data-my-meal-count></span></a><a href="pantry-to-plate.html">Pantry to Plate</a><a href="sauces.html">Sauces</a><a href="guides.html">Guides</a><a href="cooking-library.html">Cooking Library</a><a href="plan-a-meal.html">Plan a Meal</a>
-        <a href="shop.html">Shop</a><a href="#about">About</a>
-      <a href="account.html" data-account-link>Sign In</a></nav>
+      <nav class="nav editorial-nav" aria-label="Primary navigation">
+        <div class="nav-group"><a class="nav-main" href="all-recipes.html">Recipes</a><button class="nav-expand" aria-label="Recipes submenu" aria-expanded="false" type="button">⌄</button><div class="nav-submenu"><a href="all-recipes.html">All Recipes</a><a href="recipe-index.html">Recipe Index</a><a href="sauces.html">Sauces</a></div></div>
+        <div class="nav-group"><a class="nav-main" href="pantry-to-plate.html">Explore</a><button class="nav-expand" aria-label="Explore submenu" aria-expanded="false" type="button">⌄</button><div class="nav-submenu"><a href="pantry-to-plate.html">Pantry to Plate</a><a href="all-recipes.html">Explore Recipes</a></div></div>
+        <div class="nav-group"><a class="nav-main" href="cooking-library.html">Cooking &amp; Guides</a><button class="nav-expand" aria-label="Cooking and Guides submenu" aria-expanded="false" type="button">⌄</button><div class="nav-submenu"><a href="cooking-library.html">Cooking Library</a><a href="guides.html">Guides</a><a href="sauces.html">Sauces</a></div></div>
+        <div class="nav-group"><a class="nav-main" href="plan-a-meal.html">Plan a Meal</a><button class="nav-expand" aria-label="Plan a Meal submenu" aria-expanded="false" type="button">⌄</button><div class="nav-submenu"><a href="plan-a-meal.html">Meal Planner</a><a href="my-meal.html">My Meal <span class="my-meal-nav-count" data-my-meal-count></span></a><a href="favorites.html">My Favorites</a></div></div>
+        <div class="nav-group"><a class="nav-main" href="shop.html">Shop</a></div>
+        <div class="nav-group"><a class="nav-main" href="#about">About</a></div>
+      </nav>
+      <div class="header-actions"><a href="favorites.html" id="myFavoritesNav" data-favorites-nav class="header-action" aria-label="My Favorites" title="My Favorites">♡</a><a href="account.html" data-account-link class="header-action account-action" aria-label="Sign In" title="Sign In">Sign In</a></div>
     </div>
   </header>
 
@@ -437,5 +474,10 @@
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',display,{once:true});else display();
 })();
-</script><script src="account-config.js"></script><script src="account.js"></script><script src="favorites.js"></script><script src="personal-ratings.js"></script><script src="reviews-config.js"></script><script src="community-reviews.js"></script><script src="recipe-browser-i18n.js"></script><script src="ads-config.js"></script><script src="ads.js"></script><a class="site-recipe-index-link" href="recipe-index.html" style="display:block;text-align:center;padding:8px 12px;font-size:12px">Recipe Index</a><a class="site-privacy-link" href="privacy.html" style="display:block;text-align:center;padding:12px;font-size:12px">Privacy Policy</a><script src="recipe-preferences.js"></script><script src="member-interests.js"></script><script src="analytics-config.js"></script><script src="analytics.js"></script><script src="accessibility.js"></script><script src="dynamic-recipe-library.js"></script><script src="recipe-image-status.js"></script><script src="commerce-config.js"></script><script src="commerce.js"></script><script src="favorites-workspace.js"></script><script src="catalog-browser.js"></script><script src="recipe-source-sync.js"></script></body>
+</script><script src="account-config.js"></script><script src="account.js"></script><script src="favorites.js"></script><script src="personal-ratings.js"></script><script src="reviews-config.js"></script><script src="community-reviews.js"></script><script src="recipe-browser-i18n.js"></script><script src="ads-config.js"></script><script src="ads.js"></script><a class="site-recipe-index-link" href="recipe-index.html" style="display:block;text-align:center;padding:8px 12px;font-size:12px">Recipe Index</a><a class="site-privacy-link" href="privacy.html" style="display:block;text-align:center;padding:12px;font-size:12px">Privacy Policy</a><script src="recipe-preferences.js"></script><script src="member-interests.js"></script><script src="analytics-config.js"></script><script src="analytics.js"></script><script src="accessibility.js"></script><script src="dynamic-recipe-library.js"></script><script src="recipe-image-status.js"></script><script src="commerce-config.js"></script><script src="commerce.js"></script><script src="favorites-workspace.js"></script><script src="catalog-browser.js"></script><script src="recipe-source-sync.js"></script><script id="editorial-header-menu-script">
+(function(){var nav=document.querySelector('.editorial-nav');if(!nav)return;
+nav.querySelectorAll('.nav-expand').forEach(function(btn){btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var group=btn.closest('.nav-group');var wasOpen=group.classList.contains('expanded');nav.querySelectorAll('.nav-group.expanded').forEach(function(g){g.classList.remove('expanded');var b=g.querySelector('.nav-expand');if(b)b.setAttribute('aria-expanded','false')});if(!wasOpen){group.classList.add('expanded');btn.setAttribute('aria-expanded','true')}})});
+document.addEventListener('click',function(e){if(!e.target.closest('.editorial-nav'))nav.querySelectorAll('.nav-group.expanded').forEach(function(g){g.classList.remove('expanded');var b=g.querySelector('.nav-expand');if(b)b.setAttribute('aria-expanded','false')})});
+})();
+</script></body>
 </html>
