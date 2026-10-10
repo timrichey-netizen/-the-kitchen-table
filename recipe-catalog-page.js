@@ -13,7 +13,7 @@ function render(){
   article.appendChild(node('h2','',r.name));
   if(r.english&&r.english!==r.name)article.appendChild(node('div','catalog-subtitle',r.english));
   article.appendChild(node('div','catalog-place',[r.country,r.region].filter(Boolean).join(' · ')));
-  if(r.status==='available'&&/^[a-z0-9-]+\.html$/.test(r.url||'')){
+  if(r.status==='available'&&/^(?:[a-z0-9-]+\.html|catalog-recipe\.html\?row=\d+)$/.test(r.url||'')){
     const link=node('a','', 'View recipe →');link.href=r.url;article.appendChild(link);
   }else article.appendChild(node('span','catalog-status','Not yet available'));
   frag.appendChild(article);

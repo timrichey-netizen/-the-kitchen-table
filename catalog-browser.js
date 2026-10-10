@@ -37,8 +37,9 @@ function draw(reset){if(reset)page=0;
  if(count){const visible=[...grid.querySelectorAll('.recipe-card')].filter(x=>!x.hidden&&getComputedStyle(x).display!=='none').length;count.textContent=(visible+filtered.length)+' recipes found'}
 }
 function refresh(){draw(true)}
-fetch('catalog/recipe-index.json').then(r=>{if(!r.ok)throw Error();return r.json()}).then(rows=>{
- entries=rows.filter(x=>!published.has(x.row));[['browserWorldRegion','world'],['browserCountry','country'],['browserRegion','region'],['browserClassification','classification'],['browserDifficulty','difficulty']].forEach(x=>addOptions(...x));
+Promise.all([fetch('catalog/recipe-index.json').then(r=>{if(!r.ok)throw Error();return r.json()}),fetch('data/recipe-catalog.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.json()})]).then(([rows,catalog])=>{
+ const approved=new Map((catalog.recipes||[]).filter(x=>x.status==='available').map(x=>[Number(x.id.slice(6)),x]));
+ entries=rows.filter(x=>{const r=approved.get(x.row);return !published.has(x.row)&&r&&r.name===x.local&&r.english===x.name&&r.country===x.country&&r.region===x.region});[['browserWorldRegion','world'],['browserCountry','country'],['browserRegion','region'],['browserClassification','classification'],['browserDifficulty','difficulty']].forEach(x=>addOptions(...x));
  document.querySelectorAll('#categories .filter').forEach(x=>x.addEventListener('click',()=>setTimeout(refresh,0)));
  selectors.forEach(id=>get(id)?.addEventListener('change',()=>setTimeout(refresh,0)));
  get('recipeSearch')?.addEventListener('input',()=>setTimeout(refresh,0));

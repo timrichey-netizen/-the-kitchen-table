@@ -20,14 +20,14 @@ if(root){
  function filter(){keyword=document.getElementById('catalogSearch').value.trim().toLowerCase();selected=document.getElementById('catalogType').value;region=document.getElementById('catalogRegion').value;country=document.getElementById('catalogCountry').value;difficulty=document.getElementById('catalogDifficulty').value;matched=recipes.filter(x=>(selected==='all'||x.ae===selected)&&(region==='all'||x.h===region)&&(country==='all'||x.f===country)&&(difficulty==='all'||x.af===difficulty)&&(!keyword||[x.p,x.q,x.c,x.f,x.g,x.u].join(' ').toLowerCase().includes(keyword)));render(true)}
  ['catalogSearch','catalogType','catalogRegion','catalogCountry','catalogDifficulty'].forEach(id=>document.getElementById(id).addEventListener(id==='catalogSearch'?'input':'change',filter));
  more.addEventListener('click',()=>render(false));
- Promise.all(files.map(get)).then(parts=>{recipes=parts.flat().filter(x=>x.p&&x.c&&x.s);choices('catalogType','ae');choices('catalogRegion','h');choices('catalogCountry','f');choices('catalogDifficulty','af');filter()}).catch(()=>count.textContent='Recipe collection is temporarily unavailable.');
+ Promise.all([...files.map(get),get('data/recipe-catalog.json')]).then(parts=>{const catalog=parts.pop();const approved=new Map((catalog.recipes||[]).filter(x=>x.status==='available').map(x=>[Number(x.id.slice(6)),x]));recipes=parts.flat().filter(x=>{const r=approved.get(x.id);return r&&r.name===x.p&&r.english===x.q&&r.country===x.f&&r.region===x.g&&x.p&&x.c&&x.s});choices('catalogType','ae');choices('catalogRegion','h');choices('catalogCountry','f');choices('catalogDifficulty','af');filter()}).catch(()=>count.textContent='Recipe collection is temporarily unavailable.');
 }
 if(detail){
  const row=Number(new URLSearchParams(location.search).get('row'));
  if(!Number.isInteger(row)||row<3||row>1004){detail.textContent='Recipe not found';return}
  const bucket=3+Math.floor((row-3)/50)*50;
- get('catalog/recipes-'+bucket+'.json').then(items=>{
-  const r=items.find(x=>x.id===row);if(!r){detail.textContent='Recipe not published';return}
+ Promise.all([get('catalog/recipes-'+bucket+'.json'),get('data/recipe-catalog.json')]).then(([items,catalog])=>{
+  const r=items.find(x=>x.id===row),published=(catalog.recipes||[]).find(x=>x.id==='sheet-'+row);if(!r||!published||published.status!=='available'||published.name!==r.p||published.english!==r.q||published.country!==r.f||published.region!==r.g){detail.textContent='Recipe not published';return}
   document.title=r.p+' | The Kitchen Table';
   const image=r.y?'<img class="catalog-detail-image" src="https://drive.google.com/thumbnail?id='+encodeURIComponent(r.y)+'&sz=w1200" alt="'+esc(r.p)+'" onerror="this.remove()">':'';
   const body=(r.s||'').split(/\n/).map(x=>x.trim()).filter(Boolean);
