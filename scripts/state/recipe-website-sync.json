@@ -19,7 +19,7 @@
   },
   "imageStatus": "No image changes; DONE status is not explicit image QC approval.",
   "publicationPolicy": "Preserve existing approved pages and availability states; metadata updates do not approve recipes.",
-  "pendingDeployment": true,
+  "pendingDeployment": false,
   "records": [
     {
       "id": "sheet-2",
@@ -6021,5 +6021,13 @@
       "fieldHash": "ef63725416acd186",
       "publishState": "unavailable"
     }
-  ]
+  ],
+  "deploymentVerification": {
+    "contentCommit": "b27cea8fc145dec76fdc2345bca2001f0b276ed9",
+    "result": "github_pages_workflow_success",
+    "githubPagesRunId": 38049922055,
+    "verifiedAtUTC": "2026-10-10T11:52:49Z",
+    "actionsURL": "https://github.com/timrichey-netizen/-the-kitchen-table/actions/runs/38049922055",
+    "liveHTTPVerification": "not_performed_this_run"
+  }
 }
