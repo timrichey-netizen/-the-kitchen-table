@@ -2774,99 +2774,84 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installLegalLinks,{once:true});else installLegalLinks();
 })();
-\n\n
-/* Recipe request form: visitors can suggest a dish missing from the collection. */
-(function(){
-  function initRecipeRequestForm(){
-    if(document.getElementById('recipeRequestSection')) return;
-    var recipes=document.getElementById('recipes');
-    if(!recipes) return;
 
+/* Recipe request form: search independently, let the visitor verify, then submit. */
+(function(){
+  function init(){
+    if(document.getElementById('recipeRequestSection'))return;
+    var recipes=document.getElementById('recipes');if(!recipes)return;
     var section=document.createElement('section');
     section.id='recipeRequestSection';
     section.className='recipe-request-section';
     section.setAttribute('aria-labelledby','recipeRequestTitle');
-    section.innerHTML =
-      '<div class="container recipe-request-card">'+
-        '<p class="eyebrow">CAN\'T FIND IT?</p>'+
-        '<h2 id="recipeRequestTitle">Request a Recipe</h2>'+
-        '<p class="recipe-request-copy">Tell us the name of a dish you would like to see added to The Kitchen Table. Enter the English name, the local-language name, or both.</p>'+
-        '<form id="recipeRequestForm" class="recipe-request-form">'+
-          '<div class="recipe-request-fields">'+
-            '<label><span>Local / Non-English Dish Name</span><input id="recipeRequestLocal" name="localName" type="text" maxlength="160" autocomplete="off" placeholder="e.g., Soupe à l\'oignon"></label>'+
-            '<label><span>English Dish Name</span><input id="recipeRequestEnglish" name="englishName" type="text" maxlength="160" autocomplete="off" placeholder="e.g., French Onion Soup"></label>'+
-          '</div>'+
-          '<label class="recipe-request-hp" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>'+
-          '<button class="button primary" type="submit">Submit Recipe Request</button>'+
-          '<p class="recipe-request-status" role="status" aria-live="polite"></p>'+
-        '</form>'+
-      '</div>';
-
+    section.innerHTML = '<div class="container recipe-request-card">'+
+      '<p class="eyebrow">CAN\'T FIND IT?</p><h2 id="recipeRequestTitle">Request a Recipe</h2>'+
+      '<p class="recipe-request-copy">Enter the dish name in English, its local language, or both. We will search for it and ask you to confirm the name before adding it to our request list.</p>'+
+      '<form id="recipeRequestForm" class="recipe-request-form">'+
+      '<div class="recipe-request-fields">'+
+      '<label><span>Local / Non-English Dish Name</span><input name="localName" maxlength="160" placeholder="e.g., Soupe à l\'oignon"></label>'+
+      '<label><span>English Dish Name</span><input name="englishName" maxlength="160" placeholder="e.g., French Onion Soup"></label>'+
+      '</div><label class="recipe-request-hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>'+
+      '<button class="button primary" type="submit">Research Dish Name</button>'+
+      '<p class="recipe-request-status" aria-live="polite" role="status"></p>'+
+      '<div class="recipe-request-review" hidden><h3>Review the dish name</h3>'+
+      '<p>Here are related web results. They may show a different spelling or translation. Check the sources and correct either name above if necessary. These results are not definitive verification.</p>'+
+      '<ul class="recipe-request-sources"></ul>'+
+      '<label class="recipe-request-confirm"><input type="checkbox" name="confirmed"> I have reviewed the results and confirm the dish name(s) above.</label>'+
+      '<button type="button" class="button primary recipe-request-save">Confirm &amp; Submit Request</button>'+
+      '</div></form></div>';
     recipes.insertAdjacentElement('afterend',section);
-
     if(!document.getElementById('recipe-request-styles')){
-      var style=document.createElement('style');
-      style.id='recipe-request-styles';
-      style.textContent =
-        '.recipe-request-section{padding:74px 0;background:#f7efe6;border-top:1px solid #eadfd4;border-bottom:1px solid #eadfd4}'+
-        '.recipe-request-card{max-width:900px;text-align:center}'+
-        '.recipe-request-card h2{margin-bottom:14px}'+
-        '.recipe-request-copy{max-width:680px;margin:0 auto 28px;color:#766a61;font-size:1.04rem}'+
-        '.recipe-request-form{max-width:760px;margin:0 auto}'+
-        '.recipe-request-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left;margin-bottom:20px}'+
-        '.recipe-request-fields label span{display:block;margin:0 0 7px;font:700 12px Inter,Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#4b4038}'+
-        '.recipe-request-fields input{width:100%;min-height:50px;padding:12px 14px;border:1px solid #d7c6b7;border-radius:10px;background:#fff;font:inherit;color:#2c251f}'+
-        '.recipe-request-fields input:focus{outline:2px solid #a4442f;outline-offset:2px;border-color:#a4442f}'+
-        '.recipe-request-form button{min-width:220px}'+
-        '.recipe-request-status{min-height:24px;margin:14px 0 0;font:600 14px Inter,Arial,sans-serif;color:#675c54}'+
-        '.recipe-request-status.success{color:#2f6b3a}.recipe-request-status.error{color:#9b3828}'+
-        '.recipe-request-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}'+
-        '@media(max-width:680px){.recipe-request-section{padding:56px 0}.recipe-request-fields{grid-template-columns:1fr}.recipe-request-form button{width:100%}}';
+      var style=document.createElement('style');style.id='recipe-request-styles';
+      style.textContent='.recipe-request-section{padding:74px 0;background:#f7efe6;border-top:1px solid #eadfd4;border-bottom:1px solid #eadfd4}.recipe-request-card{max-width:900px;text-align:center}.recipe-request-copy{max-width:680px;margin:0 auto 28px;color:#766a61}.recipe-request-form{max-width:760px;margin:auto}.recipe-request-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left;margin-bottom:20px}.recipe-request-fields label span{display:block;margin-bottom:7px;font:700 12px Inter,Arial,sans-serif;text-transform:uppercase}.recipe-request-fields input{width:100%;min-height:50px;padding:12px 14px;border:1px solid #d7c6b7;border-radius:10px;background:#fff;font:inherit}.recipe-request-status{min-height:24px;margin:14px 0;font:600 14px Inter,Arial,sans-serif}.recipe-request-status.error{color:#9b3828}.recipe-request-status.success{color:#2f6b3a}.recipe-request-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}.recipe-request-review{margin-top:28px;text-align:left;padding:24px;border:1px solid #d7c6b7;background:#fffaf4;border-radius:14px}.recipe-request-review h3{margin:0 0 9px}.recipe-request-sources li{margin-bottom:12px}.recipe-request-sources small{display:block;color:#766a61}.recipe-request-confirm{display:flex;gap:9px;margin:18px 0}.recipe-request-confirm input{align-self:start;margin-top:5px}@media(max-width:680px){.recipe-request-fields{grid-template-columns:1fr}.recipe-request-section{padding:54px 0}}';
       document.head.appendChild(style);
     }
-
-    var form=document.getElementById('recipeRequestForm');
-    var status=form.querySelector('.recipe-request-status');
+    var form=section.querySelector('form'),status=section.querySelector('.recipe-request-status');
+    var review=section.querySelector('.recipe-request-review'),list=section.querySelector('.recipe-request-sources');
+    var researchButton=form.querySelector('button[type=submit]'),saveButton=form.querySelector('.recipe-request-save');
+    var token='',originalLocal='',originalEnglish='';
+    function message(s,error,success){status.textContent=s;status.className='recipe-request-status'+(error?' error':success?' success':'');}
+    function values(){return {localName:form.elements.localName.value.trim(),englishName:form.elements.englishName.value.trim()};}
+    async function post(payload){
+      var response=await fetch('/api/request-recipe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      var data=await response.json().catch(function(){return{};});
+      if(!response.ok)throw new Error(data.error||'Request could not be processed.');
+      return data;
+    }
     form.addEventListener('submit',async function(event){
-      event.preventDefault();
-      var localName=form.elements.localName.value.trim();
-      var englishName=form.elements.englishName.value.trim();
-      if(!localName&&!englishName){
-        status.className='recipe-request-status error';
-        status.textContent='Enter the dish name in English, the local language, or both.';
-        return;
-      }
-
-      var button=form.querySelector('button[type="submit"]');
-      button.disabled=true;
-      status.className='recipe-request-status';
-      status.textContent='Submitting your request…';
-
+      event.preventDefault();var names=values();
+      review.hidden=true;token='';
+      if(!names.localName&&!names.englishName){message('Enter a local name, an English name, or both.',true);return;}
+      researchButton.disabled=true;message('Searching recipe sources…');
       try{
-        var response=await fetch('/api/request-recipe',{
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({
-            localName:localName,
-            englishName:englishName,
-            website:form.elements.website.value
-          })
+        var result=await post(Object.assign({phase:'research',website:form.elements.website.value},names));
+        token=result.reviewToken;originalLocal=names.localName;originalEnglish=names.englishName;
+        list.replaceChildren();
+        (result.sources||[]).forEach(function(source){
+          var li=document.createElement('li'),a=document.createElement('a'),small=document.createElement('small');
+          a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=source.title||source.url;
+          small.textContent=source.description||'';li.appendChild(a);li.appendChild(small);list.appendChild(li);
         });
-        var data=await response.json().catch(function(){return{};});
-        if(!response.ok) throw new Error(data.error||'Could not submit your request.');
-
-        form.reset();
-        status.className='recipe-request-status success';
-        status.textContent='Thank you — your recipe request has been added to our list.';
-      }catch(error){
-        status.className='recipe-request-status error';
-        status.textContent=error&&error.message?error.message:'Could not submit your request.';
-      }finally{
-        button.disabled=false;
-      }
+        if(!list.childNodes.length){var li=document.createElement('li');li.textContent='No matching sources found. Please confirm the spelling carefully.';list.appendChild(li);}
+        form.elements.confirmed.checked=false;review.hidden=false;
+        message('Review the sources and confirm the intended dish name before submitting.');
+      }catch(error){message(error.message||'Research unavailable. No request has been saved.',true);}
+      finally{researchButton.disabled=false;}
+    });
+    saveButton.addEventListener('click',async function(){
+      if(!token){message('Research the name first.',true);return;}
+      if(!form.elements.confirmed.checked){message('Please confirm that you reviewed the dish name.',true);return;}
+      var names=values();
+      if(!names.localName&&!names.englishName){message('Enter a dish name.',true);return;}
+      saveButton.disabled=true;message('Saving your confirmed recipe request…');
+      try{
+        await post(Object.assign({phase:'confirm',reviewToken:token,userConfirmed:true,
+          originalLocalName:originalLocal,originalEnglishName:originalEnglish,website:form.elements.website.value},names));
+        form.reset();review.hidden=true;token='';
+        message('Thank you — your confirmed dish names have been submitted for addition to our recipe list.',false,true);
+      }catch(error){message(error.message||'Could not save the request.',true);}
+      finally{saveButton.disabled=false;}
     });
   }
-
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initRecipeRequestForm,{once:true});
-  else initRecipeRequestForm();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
