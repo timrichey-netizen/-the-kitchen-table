@@ -1,0 +1,20 @@
+name: Recipe availability notifications
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Match published recipes and notify subscribers
+        env:
+          RECIPE_SITE_URL: ${{ secrets.RECIPE_SITE_URL }}
+          RECIPE_REQUEST_CRON_SECRET: ${{ secrets.RECIPE_REQUEST_CRON_SECRET }}
+        run: |
+          test -n "$RECIPE_SITE_URL"
+          test -n "$RECIPE_REQUEST_CRON_SECRET"
+          curl --fail --silent --show-error --retry 2 --max-time 90 \
+            -X POST \
+            -H "Authorization: Bearer $RECIPE_REQUEST_CRON_SECRET" \
+            "$RECIPE_SITE_URL/api/check-recipe-requests"
