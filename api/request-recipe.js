@@ -101,6 +101,59 @@ module.exports = async function handler(req, res) {
       return json(res, 400, { error: 'Enter the dish name in English, the local language, or both.' });
     }
 
+    // Preview must succeed before confirmation can write to Google Sheets.
+    const phase = cleanText(body.phase, 20);
+    if (phase === 'research') {
+      const key = process.env.BRAVE_SEARCH_API_KEY || '';
+      const secret = process.env.RECIPE_REQUEST_SIGNING_SECRET || '';
+      if (!key || !secret) return json(res, 503, { error: 'Recipe research is not configured yet. No request has been saved.' });
+
+      const query = [localName, englishName, 'traditional recipe dish'].filter(Boolean).join(' ');
+      const search = await fetch('https://api.search.brave.com/res/v1/web/search?q=' +
+        encodeURIComponent(query) + '&count=5', {
+        headers: { 'X-Subscription-Token': key, 'Accept': 'application/json' }
+      });
+      if (!search.ok) throw new Error('Recipe research is temporarily unavailable. No request has been saved.');
+      const result = await search.json();
+      const sources = (result.web && result.web.results || []).slice(0, 5)
+        .filter(item => /^https:\/\//i.test(item.url || ''))
+        .map(item => ({
+          title: cleanText(item.title, 160),
+          description: cleanText(item.description, 350),
+          url: item.url
+        }));
+
+      const preview = { localName, englishName, expires: Date.now() + 10 * 60 * 1000 };
+      const payload = b64url(JSON.stringify(preview));
+      const signature = crypto.createHmac('sha256', secret).update(payload).digest('hex');
+      return json(res, 200, {
+        ok: true,
+        sources,
+        reviewToken: payload + '.' + signature,
+        note: 'Review source titles and descriptions. Search results are evidence to inspect, not automatic name verification.'
+      });
+    }
+
+    if (phase !== 'confirm') return json(res, 400, { error: 'Research and confirmation are required before submission.' });
+    const secret = process.env.RECIPE_REQUEST_SIGNING_SECRET || '';
+    const token = String(body.reviewToken || '');
+    const parts = token.split('.');
+    if (!secret || parts.length !== 2 || !/^[a-f0-9]{64}$/.test(parts[1])) {
+      return json(res, 400, { error: 'Research this dish again before confirming.' });
+    }
+    const expected = crypto.createHmac('sha256', secret).update(parts[0]).digest('hex');
+    if (!crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(parts[1]))) {
+      return json(res, 400, { error: 'Invalid research confirmation.' });
+    }
+    let reviewed;
+    try { reviewed = JSON.parse(Buffer.from(parts[0], 'base64url').toString('utf8')); }
+    catch (e) { return json(res, 400, { error: 'Invalid research confirmation.' }); }
+    if (!reviewed || reviewed.expires < Date.now() ||
+        reviewed.localName !== cleanText(body.originalLocalName, 160) ||
+        reviewed.englishName !== cleanText(body.originalEnglishName, 160) ||
+        body.userConfirmed !== true) {
+      return json(res, 400, { error: 'Research confirmation expired or does not match. Research again.' });
+    }
     await appendRequest(localName, englishName);
     return json(res, 200, { ok: true });
   } catch (error) {
