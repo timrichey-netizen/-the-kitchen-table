@@ -2774,3 +2774,99 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installLegalLinks,{once:true});else installLegalLinks();
 })();
+\n\n
+/* Recipe request form: visitors can suggest a dish missing from the collection. */
+(function(){
+  function initRecipeRequestForm(){
+    if(document.getElementById('recipeRequestSection')) return;
+    var recipes=document.getElementById('recipes');
+    if(!recipes) return;
+
+    var section=document.createElement('section');
+    section.id='recipeRequestSection';
+    section.className='recipe-request-section';
+    section.setAttribute('aria-labelledby','recipeRequestTitle');
+    section.innerHTML =
+      '<div class="container recipe-request-card">'+
+        '<p class="eyebrow">CAN\'T FIND IT?</p>'+
+        '<h2 id="recipeRequestTitle">Request a Recipe</h2>'+
+        '<p class="recipe-request-copy">Tell us the name of a dish you would like to see added to The Kitchen Table. Enter the English name, the local-language name, or both.</p>'+
+        '<form id="recipeRequestForm" class="recipe-request-form">'+
+          '<div class="recipe-request-fields">'+
+            '<label><span>Local / Non-English Dish Name</span><input id="recipeRequestLocal" name="localName" type="text" maxlength="160" autocomplete="off" placeholder="e.g., Soupe à l\'oignon"></label>'+
+            '<label><span>English Dish Name</span><input id="recipeRequestEnglish" name="englishName" type="text" maxlength="160" autocomplete="off" placeholder="e.g., French Onion Soup"></label>'+
+          '</div>'+
+          '<label class="recipe-request-hp" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>'+
+          '<button class="button primary" type="submit">Submit Recipe Request</button>'+
+          '<p class="recipe-request-status" role="status" aria-live="polite"></p>'+
+        '</form>'+
+      '</div>';
+
+    recipes.insertAdjacentElement('afterend',section);
+
+    if(!document.getElementById('recipe-request-styles')){
+      var style=document.createElement('style');
+      style.id='recipe-request-styles';
+      style.textContent =
+        '.recipe-request-section{padding:74px 0;background:#f7efe6;border-top:1px solid #eadfd4;border-bottom:1px solid #eadfd4}'+
+        '.recipe-request-card{max-width:900px;text-align:center}'+
+        '.recipe-request-card h2{margin-bottom:14px}'+
+        '.recipe-request-copy{max-width:680px;margin:0 auto 28px;color:#766a61;font-size:1.04rem}'+
+        '.recipe-request-form{max-width:760px;margin:0 auto}'+
+        '.recipe-request-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left;margin-bottom:20px}'+
+        '.recipe-request-fields label span{display:block;margin:0 0 7px;font:700 12px Inter,Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#4b4038}'+
+        '.recipe-request-fields input{width:100%;min-height:50px;padding:12px 14px;border:1px solid #d7c6b7;border-radius:10px;background:#fff;font:inherit;color:#2c251f}'+
+        '.recipe-request-fields input:focus{outline:2px solid #a4442f;outline-offset:2px;border-color:#a4442f}'+
+        '.recipe-request-form button{min-width:220px}'+
+        '.recipe-request-status{min-height:24px;margin:14px 0 0;font:600 14px Inter,Arial,sans-serif;color:#675c54}'+
+        '.recipe-request-status.success{color:#2f6b3a}.recipe-request-status.error{color:#9b3828}'+
+        '.recipe-request-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}'+
+        '@media(max-width:680px){.recipe-request-section{padding:56px 0}.recipe-request-fields{grid-template-columns:1fr}.recipe-request-form button{width:100%}}';
+      document.head.appendChild(style);
+    }
+
+    var form=document.getElementById('recipeRequestForm');
+    var status=form.querySelector('.recipe-request-status');
+    form.addEventListener('submit',async function(event){
+      event.preventDefault();
+      var localName=form.elements.localName.value.trim();
+      var englishName=form.elements.englishName.value.trim();
+      if(!localName&&!englishName){
+        status.className='recipe-request-status error';
+        status.textContent='Enter the dish name in English, the local language, or both.';
+        return;
+      }
+
+      var button=form.querySelector('button[type="submit"]');
+      button.disabled=true;
+      status.className='recipe-request-status';
+      status.textContent='Submitting your request…';
+
+      try{
+        var response=await fetch('/api/request-recipe',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            localName:localName,
+            englishName:englishName,
+            website:form.elements.website.value
+          })
+        });
+        var data=await response.json().catch(function(){return{};});
+        if(!response.ok) throw new Error(data.error||'Could not submit your request.');
+
+        form.reset();
+        status.className='recipe-request-status success';
+        status.textContent='Thank you — your recipe request has been added to our list.';
+      }catch(error){
+        status.className='recipe-request-status error';
+        status.textContent=error&&error.message?error.message:'Could not submit your request.';
+      }finally{
+        button.disabled=false;
+      }
+    });
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initRecipeRequestForm,{once:true});
+  else initRecipeRequestForm();
+})();
