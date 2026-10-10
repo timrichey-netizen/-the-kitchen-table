@@ -2857,8 +2857,9 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
       try{
         await post(Object.assign({phase:'confirm',reviewToken:token,userConfirmed:true,
           originalLocalName:originalLocal,originalEnglishName:originalEnglish,website:form.elements.website.value,notify:notify.checked,email:notify.checked?form.elements.email.value.trim():''},names));
-        form.reset();review.hidden=true;token='';
-        message('Your request is saved.'+(notify.checked?' We will email you when the recipe is published.':''),false,true);
+        var optedIn=notify.checked;
+        form.reset();updateNotify();review.hidden=true;token='';
+        message('Your request is saved.'+(optedIn?' We will email you when the recipe is published.':''),false,true);
       }catch(error){message(error.message||'Could not save the request.',true);}
       finally{saveButton.disabled=false;}
     });
