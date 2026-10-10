@@ -29,7 +29,9 @@ function draw(reset){if(reset)page=0;
  const subtitle=document.createElement('p');subtitle.textContent=r.name!==r.local?r.name:'';
  const meta=document.createElement('p');meta.className='imported-meta';meta.textContent=r.classification+(r.difficulty?' · '+r.difficulty:'');
  article.append(label,title,subtitle,meta);cards.append(article)});
- host.replaceChildren(cards);
+ // A filter/search reset replaces the result set; Show more appends the next page.
+ if(reset)host.replaceChildren(cards);
+ else host.appendChild(cards);
  const more=get('catalogMore');if(more){more.hidden=(page+1)*PAGE>=filtered.length;more.textContent='Show more recipes'}
  const status=get('catalogStatus');if(status)status.textContent='Showing '+Math.min((page+1)*PAGE,filtered.length)+' of '+filtered.length+' additional recipes (photographs pending)';
  if(count){const visible=[...grid.querySelectorAll('.recipe-card')].filter(x=>!x.hidden&&getComputedStyle(x).display!=='none').length;count.textContent=(visible+filtered.length)+' recipes found'}
