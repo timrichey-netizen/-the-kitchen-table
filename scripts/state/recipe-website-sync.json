@@ -21,7 +21,7 @@
   },
   "imageStatus": "60 images are DONE with Drive references, but no explicit positive QC approval in Sheet1; no photo assets were uploaded.",
   "publicationPolicy": "All valid complete non-photo recipe records are approved; missing photographs or optional videos do not block publication; images require separate positive QC approval before replacement.",
-  "pendingDeployment": true,
+  "pendingDeployment": false,
   "records": [
     {
       "id": "sheet-2",
@@ -6025,9 +6025,19 @@
     }
   ],
   "deploymentVerification": {
-    "result": "pending",
-    "priorVerifiedCommit": "b27cea8fc145dec76fdc2345bca2001f0b276ed9",
-    "priorVerificationUTC": "2026-10-10T11:52:49Z"
+    "contentCommit": "9efff070c461593b55b127f1df889bfcdbbb14c4",
+    "result": "github_pages_workflow_success",
+    "githubPagesRunId": 38065494626,
+    "verifiedAtUTC": "2026-10-10T15:57:24.542Z",
+    "actionsURL": "https://github.com/timrichey-netizen/-the-kitchen-table/actions/runs/38065494626",
+    "liveHTTPVerification": "confirmed",
+    "liveCatalogAvailable": 569,
+    "liveCatalogTotal": 1000,
+    "checkedLivePages": [
+      "https://timrichey-netizen.github.io/-the-kitchen-table/catalog-recipe.html?row=6",
+      "https://timrichey-netizen.github.io/-the-kitchen-table/catalog-recipe.html?row=964"
+    ],
+    "checkedRejectedPage": "https://timrichey-netizen.github.io/-the-kitchen-table/catalog-recipe.html?row=25"
   },
   "publicationApprovedCount": 569,
   "publicationValidation": {
@@ -6048,6 +6058,5 @@
     "photoCandidatesPendingQC": 60,
     "allEligibleNonPhotoSiteSnapshotFieldsPreviouslyVerified": true
   },
-  "pendingCommitBase": "c3572f05ef93ff41d6b9b0cdbb9e3cf3e61491c1",
-  "pendingCatalogBlobSha": "9eb22a05a5076961319172a00d89723243979e67"
+  "lastUploadedCommit": "9efff070c461593b55b127f1df889bfcdbbb14c4"
 }
