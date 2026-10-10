@@ -105,23 +105,40 @@ module.exports = async function handler(req, res) {
     const phase = cleanText(body.phase, 20);
     if (phase === 'research') {
       const key = process.env.BRAVE_SEARCH_API_KEY || '';
-      const secret = process.env.RECIPE_REQUEST_SIGNING_SECRET || '';
-      if (!key || !secret) return json(res, 503, { error: 'Automatic dish-name research is not configured. Please contact the site administrator. Nothing has been submitted.' });
+      const secret = process.env.RECIPE_REQUEST_SIGNING_SECRET || process.env.UPSTASH_REDIS_REST_TOKEN || '';
+      if (!secret) return json(res, 503, { error: 'Recipe request storage is not configured. Please contact the site administrator.' });
 
       const query = [localName, englishName, 'traditional recipe dish'].filter(Boolean).join(' ');
-      const search = await fetch('https://api.search.brave.com/res/v1/web/search?q=' +
-        encodeURIComponent(query) + '&count=5', {
-        headers: { 'X-Subscription-Token': key, 'Accept': 'application/json' }
-      });
-      if (!search.ok) throw new Error('Recipe research is temporarily unavailable. No request has been saved.');
-      const result = await search.json();
-      const sources = (result.web && result.web.results || []).slice(0, 5)
-        .filter(item => /^https:\/\//i.test(item.url || ''))
-        .map(item => ({
-          title: cleanText(item.title, 160),
-          description: cleanText(item.description, 350),
-          url: item.url
-        }));
+      let sources = [];
+      if (key) {
+        const search = await fetch('https://api.search.brave.com/res/v1/web/search?q=' +
+          encodeURIComponent(query) + '&count=5', {
+          headers: { 'X-Subscription-Token': key, 'Accept': 'application/json' }
+        });
+        if (search.ok) {
+          const result = await search.json();
+          sources = (result.web && result.web.results || []).slice(0, 5)
+            .filter(item => /^https:\/\//i.test(item.url || ''))
+            .map(item => ({
+              title: cleanText(item.title, 160),
+              description: cleanText(item.description, 350),
+              url: item.url
+            }));
+        }
+      }
+      if (!sources.length) {
+        // Public encyclopedia search works without a commercial search API key.
+        const wiki = await fetch('https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srlimit=5&srsearch=' +
+          encodeURIComponent([localName, englishName].filter(Boolean).join(' ')));
+        if (wiki.ok) {
+          const data = await wiki.json();
+          sources = ((data.query && data.query.search) || []).map(item => ({
+            title: cleanText(item.title, 160),
+            description: 'Related encyclopedia entry; please verify the name and check a culinary source.',
+            url: 'https://en.wikipedia.org/wiki/' + encodeURIComponent(item.title.replace(/ /g, '_'))
+          }));
+        }
+      }
 
       const preview = { localName, englishName, expires: Date.now() + 10 * 60 * 1000 };
       const payload = b64url(JSON.stringify(preview));
