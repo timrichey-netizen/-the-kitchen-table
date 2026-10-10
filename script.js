@@ -2791,7 +2791,7 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
       '<div class="recipe-request-fields">'+
       '<label><span>Local / Non-English Dish Name</span><input name="localName" maxlength="160" placeholder="e.g., Soupe à l\'oignon"></label>'+
       '<label><span>English Dish Name</span><input name="englishName" maxlength="160" placeholder="e.g., French Onion Soup"></label>'+
-      '</div><label class="recipe-request-hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>'+
+      '</div><label class="recipe-request-notify"><input type="checkbox" name="notify"> Email me when this recipe is published</label><label class="recipe-request-email" hidden><span>Email address</span><input type="email" name="email" autocomplete="email" placeholder="you@example.com"></label><label class="recipe-request-hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>'+
       '<button class="button primary" type="submit">Research Dish Name</button>'+
       '<p class="recipe-request-status" aria-live="polite" role="status"></p>'+
       '<div class="recipe-request-review" hidden><h3>Review the dish name</h3>'+
@@ -2807,6 +2807,15 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
       document.head.appendChild(style);
     }
     var form=section.querySelector('form'),status=section.querySelector('.recipe-request-status');
+    var notify=form.elements.notify,emailField=section.querySelector('.recipe-request-email');
+    function updateNotify(){emailField.hidden=!notify.checked;form.elements.email.required=notify.checked;
+      if(notify.checked&&window.KitchenTableAccount&&window.KitchenTableAccount.user&&window.KitchenTableAccount.user.email){
+        form.elements.email.value=window.KitchenTableAccount.user.email;
+      }
+    }
+    notify.addEventListener('change',updateNotify);
+    document.addEventListener('kitchen-table-account-change',updateNotify);
+    updateNotify();
     var review=section.querySelector('.recipe-request-review'),list=section.querySelector('.recipe-request-sources');
     var researchButton=form.querySelector('button[type=submit]'),saveButton=form.querySelector('.recipe-request-save');
     var token='',originalLocal='',originalEnglish='';
@@ -2843,12 +2852,13 @@ document.querySelectorAll('img.recipe-photo, img.recipe-feature-image').forEach(
       if(!form.elements.confirmed.checked){message('Please confirm that you reviewed the dish name.',true);return;}
       var names=values();
       if(!names.localName&&!names.englishName){message('Enter a dish name.',true);return;}
+      if(notify.checked&&!form.elements.email.checkValidity()){form.elements.email.reportValidity();return;}
       saveButton.disabled=true;message('Saving your confirmed recipe request…');
       try{
         await post(Object.assign({phase:'confirm',reviewToken:token,userConfirmed:true,
-          originalLocalName:originalLocal,originalEnglishName:originalEnglish,website:form.elements.website.value},names));
+          originalLocalName:originalLocal,originalEnglishName:originalEnglish,website:form.elements.website.value,notify:notify.checked,email:notify.checked?form.elements.email.value.trim():''},names));
         form.reset();review.hidden=true;token='';
-        message('Thank you — your confirmed dish names have been submitted for addition to our recipe list.',false,true);
+        message('Your request is saved.'+(notify.checked?' We will email you when the recipe is published.':''),false,true);
       }catch(error){message(error.message||'Could not save the request.',true);}
       finally{saveButton.disabled=false;}
     });
