@@ -106,7 +106,7 @@ module.exports = async function handler(req, res) {
     if (phase === 'research') {
       const key = process.env.BRAVE_SEARCH_API_KEY || '';
       const secret = process.env.RECIPE_REQUEST_SIGNING_SECRET || '';
-      if (!key || !secret) return json(res, 503, { error: 'Recipe research is not configured yet. No request has been saved.' });
+      if (!key || !secret) return json(res, 503, { error: 'Automatic dish-name research is not configured. Please contact the site administrator. Nothing has been submitted.' });
 
       const query = [localName, englishName, 'traditional recipe dish'].filter(Boolean).join(' ');
       const search = await fetch('https://api.search.brave.com/res/v1/web/search?q=' +
@@ -154,8 +154,38 @@ module.exports = async function handler(req, res) {
         body.userConfirmed !== true) {
       return json(res, 400, { error: 'Research confirmation expired or does not match. Research again.' });
     }
-    await appendRequest(localName, englishName);
-    return json(res, 200, { ok: true });
+    const notify = body.notify === true;
+    const email = cleanText(body.email, 254).toLowerCase();
+    if (notify && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+      return json(res, 400, { error: 'Enter a valid email address for the recipe availability notice.' });
+    }
+    // Persist the queue before attempting any optional spreadsheet write.
+    const redisUrl = (process.env.UPSTASH_REDIS_REST_URL || '').replace(/\\/$/, '');
+    const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN || '';
+    if (!redisUrl || !redisToken) return json(res, 503, { error: 'Recipe request storage is not configured. Nothing has been saved.' });
+    const id = crypto.randomUUID();
+    const entry = { id, localName, englishName, email: notify ? email : '', notify,
+      createdAt: new Date().toISOString(), status: 'pending', notifiedAt: null };
+    const result = await fetch(redisUrl + '/pipeline', {
+      method: 'POST', headers: { Authorization: 'Bearer ' + redisToken, 'Content-Type': 'application/json' },
+      body: JSON.stringify([['SET', 'recipe:request:' + id, JSON.stringify(entry)],
+        ['SADD', 'recipe:requests:pending', id]])
+    });
+    if (!result.ok) throw new Error('Recipe request storage is unavailable. Please try again.');
+    const pipelineResult = await result.json();
+    if (!Array.isArray(pipelineResult) || pipelineResult.some(x => x.error)) {
+      throw new Error('Could not queue the recipe request.');
+    }
+    let sheetSynced = false;
+    try { await appendRequest(localName, englishName); sheetSynced = true; }
+    catch (e) { console.error('Recipe request sheet sync pending:', e.message); }
+    if (sheetSynced) {
+      entry.sheetSynced = true;
+      await fetch(redisUrl, { method: 'POST',
+        headers: { Authorization: 'Bearer ' + redisToken, 'Content-Type': 'application/json' },
+        body: JSON.stringify(['SET', 'recipe:request:' + id, JSON.stringify(entry)]) });
+    }
+    return json(res, 200, { ok: true, id, sheetSynced, notificationQueued: notify });
   } catch (error) {
     return json(res, 500, {
       error: error && error.message ? error.message : 'Could not save the recipe request.'
