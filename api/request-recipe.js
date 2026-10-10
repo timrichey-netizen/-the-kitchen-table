@@ -152,7 +152,7 @@ module.exports = async function handler(req, res) {
     }
 
     if (phase !== 'confirm') return json(res, 400, { error: 'Research and confirmation are required before submission.' });
-    const secret = process.env.RECIPE_REQUEST_SIGNING_SECRET || '';
+    const secret = process.env.RECIPE_REQUEST_SIGNING_SECRET || process.env.UPSTASH_REDIS_REST_TOKEN || '';
     const token = String(body.reviewToken || '');
     const parts = token.split('.');
     if (!secret || parts.length !== 2 || !/^[a-f0-9]{64}$/.test(parts[1])) {
@@ -173,11 +173,11 @@ module.exports = async function handler(req, res) {
     }
     const notify = body.notify === true;
     const email = cleanText(body.email, 254).toLowerCase();
-    if (notify && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+    if (notify && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return json(res, 400, { error: 'Enter a valid email address for the recipe availability notice.' });
     }
     // Persist the queue before attempting any optional spreadsheet write.
-    const redisUrl = (process.env.UPSTASH_REDIS_REST_URL || '').replace(/\\/$/, '');
+    const redisUrl = (process.env.UPSTASH_REDIS_REST_URL || '').replace(/\/$/, '');
     const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN || '';
     if (!redisUrl || !redisToken) return json(res, 503, { error: 'Recipe request storage is not configured. Nothing has been saved.' });
     const id = crypto.randomUUID();
