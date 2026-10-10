@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "sourceSpreadsheetId": "1oEtKwzuGu0uo1UFdrZM81hWjz4aM02CCjx99n8psi5Y",
+  "qcExceptions": [
+    {
+      "row": 4,
+      "recipe": "Vincisgrassi",
+      "publishedImageId": "1NV6Bp4rvljFGfSeHQ-pWnOXuO3nk9hba",
+      "sourceImageId": "1ZSc_22AkNQAygjWwd2x18ycLIGS4YXMK",
+      "qc": "REJECTED",
+      "reason": "Both show loose plated pasta instead of the layered baked dish; do not display either image. A verified replacement is required."
+    }
+  ]
+}
